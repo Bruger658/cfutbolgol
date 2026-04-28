@@ -1,56 +1,59 @@
 <x-layouts.base>
-    <main class="pt-20">
+     <main class="pt-16">
         <!-- Hero Section -->
-        <section class="relative h-[800px] min-h-[600px] flex items-center overflow-hidden">
+        <section class="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
             <div class="absolute inset-0 z-0">
-                <img class="w-full h-full object-cover" data-alt="Professional football stadium aerial view at sunset"
+                <img alt="Professional football stadium aerial view at sunset" class="w-full h-full object-cover"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoKTJZooUn_XY4iX3aHXUV5GFR8TDuSrAwxeCYVRM01XcYFJftHR_qjIwguyzAVqHLoxGgEHSWbFRWR2mYCF9ryfpx_bYZmX5Hhzyp3zNHjElhhBXxBLsvPLNRtYonq2dJ7aiAb0DfEuQBD4volMkvwbD_JBxwlWiOSPDZeyuy3a1h7rP1ZCKaNSZ5FcfoQ4_Ti8YnSnATHqdQSZ5LkRVdQrCHo5OhR4DamNNKzNj-pzq0b6AD8myD4BctpmJrtUrPLMjzTDEtSqI" />
-                <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/40 to-transparent"></div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-on-background/90 via-on-background/40 to-transparent">
+                </div>
             </div>
-            <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
-                <div class="max-w-2xl">
+            <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+                <div class="max-w-2xl space-y-6">
                     <span
-                        class="inline-block px-4 py-1 bg-brand-blue/20 text-brand-blue border border-brand-blue/30 rounded-full text-xs font-bold tracking-widest uppercase mb-6">Excelencia
+                        class="inline-block px-4 py-1 bg-primary/20 text-primary border border-primary/30 rounded-full text-xs font-bold tracking-widest uppercase">Excelencia
                         Deportiva</span>
-                    <h1 class="text-5xl md:text-7xl font-black text-white leading-tight mb-6">Formamos las Promesas del
+                    <h1 class="text-5xl md:text-7xl font-black text-on-primary leading-tight">Formamos las Promesas del
                         Mañana</h1>
-                    <p class="text-xl text-slate-200 mb-10 leading-relaxed">Únete a la academia líder en formación
-                        técnica y táctica. Entrenamientos de alto rendimiento para niños y jóvenes en el corazón del
-                        fútbol.</p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <!-- <button
-                            class="px-8 py-4 bg-brand-blue text-white font-bold rounded-xl shadow-xl shadow-brand-blue/20 hover:translate-y-[-2px] transition-all">Empieza
-                            tu Camino</button> -->
+                    <p class="text-xl text-secondary-container mb-10 leading-relaxed max-w-lg">Únete a la academia líder
+                        en formación técnica y táctica. Entrenamientos de alto rendimiento para niños y jóvenes en el
+                        corazón del fútbol.</p>
+                    <div class="flex flex-wrap gap-4">
                         <button
-                            class="px-8 py-4 bg-brand-blue text-white font-bold rounded-xl shadow-xl shadow-brand-blue/20 hover:translate-y-[-2px] transition-all">Ver
-                            Metodología</button>
+                            class="px-8 py-4 kinetic-gradient text-on-primary font-bold rounded-xl shadow-xl shadow-primary/20 hover:scale-105 transition-all"
+                            id="btn-metodologia">Ver Metodología</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Our History Section (Fondo Blanco) -->
-        <section class="py-24 bg-white" id="historia">
-            <div class="max-w-7xl mx-auto px-6 md:px-12">
+        <!-- Our History Section -->
+        <section class="py-24 bg-surface" id="historia">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-8">
+                    <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Historia
+                        </h1>
+                    <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
+                </div>
                 <div class="grid md:grid-cols-2 gap-16 items-center">
                     <div class="relative">
                         <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
-                            <img class="w-full h-full object-cover"
-                                data-alt="Historic black and white photo of youth soccer training"
+                            <img alt="Historic black and white photo of youth soccer training"
+                                class="w-full h-full object-cover"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKwzWPDqkhNcghKy3dKRNq9dL1Iby4htjcEABg859KzhOLBSyn2TxU_AbJDodc-iFy39tGHQQcqMWQlnI4c5mesrGNv09zaWesqowKsw-D5M0EHwIrgrDM7vrCxn57P6BE7m5QP4iWnRK9zruKtNreXK8iz-VcNXaTtDtIBf77V7hFgmFK1Mq858kLCId2OcTfL_QKfBB8XOH_KNXNv0hatCFanmKso82EKQ3udkU4mVf9Z5vP1niHHWwuG_G87-9IAprwIBDompw" />
                         </div>
-                        <div
-                            class="absolute -bottom-6 -right-6 bg-brand-blue p-8 rounded-2xl shadow-xl hidden lg:block">
-                            <p class="text-4xl font-black text-white">5+</p>
-                            <p class="text-white/80 font-medium">Años de Tradición</p>
+                        <div class="absolute -bottom-6 -right-6 bg-primary p-8 rounded-2xl shadow-xl hidden sm:block">
+                            <p class="text-4xl font-black text-on-primary">5+</p>
+                            <p class="text-on-primary/80 font-bold uppercase text-xs tracking-widest">Años de Tradición
+                            </p>
                         </div>
                     </div>
-                    <div>
-                        <h2 class="text-brand-blue font-bold tracking-widest uppercase text-sm mb-4">Nuestra Trayectoria
-                        </h2>
-                        <h3 class="text-4xl font-black text-slate-900 mb-8">Más que un Club, una Familia con Historia
-                        </h3>
-                        <div class="space-y-6 text-slate-600 text-lg leading-relaxed">
+                    <div class="space-y-6">
+                        <h2 class="text-primary font-bold tracking-widest uppercase text-sm">Nuestra Trayectoria</h2>
+                        <h3 class="text-4xl font-black text-on-surface leading-tight">Más que un Club, una Familia con
+                            Historia</h3>
+                        <div class="space-y-6 text-on-surface-variant text-lg leading-relaxed">
                             <p>Fundado con la visión de profesionalizar el talento local, el Centro Fútbol Gol ha sido
                                 el semillero de grandes atletas que hoy brillan en ligas internacionales.</p>
                             <p>Nuestra historia se escribe cada día en el césped, con valores de disciplina, respeto y
@@ -58,15 +61,13 @@
                                 una institución referente con tecnología deportiva de vanguardia.</p>
                         </div>
                         <div class="mt-10 grid grid-cols-2 gap-6">
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-brand-blue"
-                                    style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
-                                <span class="font-bold text-slate-900">5 Títulos</span>
+                            <div class="flex items-center gap-3 p-4 bg-primary/5 rounded-2xl border border-primary/10">
+                                <span class="material-symbols-outlined text-primary text-3xl">workspace_premium</span>
+                                <span class="font-bold text-on-surface">5 Títulos</span>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-brand-blue"
-                                    style="font-variation-settings: 'FILL' 1;">groups</span>
-                                <span class="font-bold text-slate-900">200+ Alumnos Activos</span>
+                            <div class="flex items-center gap-3 p-4 bg-primary/5 rounded-2xl border border-primary/10">
+                                <span class="material-symbols-outlined text-primary text-3xl">groups</span>
+                                <span class="font-bold text-on-surface">200+ Alumnos</span>
                             </div>
                         </div>
                     </div>
@@ -74,55 +75,61 @@
             </div>
         </section>
 
-        <!-- Categories Section (Azul Tenue) -->
+        <!-- Categories Section -->
         <section class="py-24 bg-brand-pale" id="equipos">
-            <div class="max-w-7xl mx-auto px-6 md:px-12">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-black text-slate-900">Nuestros Equipos</h2>
-                    <div class="h-1.5 w-24 bg-brand-blue mx-auto mt-4 rounded-full"></div>
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-8">
+                    <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Categorias
+                        </h1>
+                    <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="group cursor-pointer">
-                        <div class="relative aspect-square rounded-2xl overflow-hidden mb-4 shadow-md">
-                            <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                data-alt="Kids soccer team playing under 8"
+                    <!-- Edefi -->
+                    <div class="group cursor-pointer team-card">
+                        <div class="relative aspect-square rounded-2xl overflow-hidden mb-4 shadow-lg">
+                            <img alt="Kids soccer team playing under 8"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsYKPUZ_B6NP0tp6mcayaDp4vhxKDos5_aocuRfp_52wRpfz0mnzEHEXmQtIy94ZpdGTuUJAPyvXGHBGhaIa-YjKVpbl5fRdrwsFqvBUY-WIKStW1Zq4xlJSkesGzyGLBxkVrS1-QTXF6skPD783g2K269njEGRwVjjLyVo5KExTA5SpltCpIXY6TNFUfj7TvHfSZ9Xilyu74jwRKc9ey0wFN447Nw2N-dnj2zQXk01V3bxBNiMf0sd_Y0gxTAEu26GPQlrd5lzGU" />
                             <div
-                                class="absolute inset-0 bg-gradient-to-t from-brand-blue/80 to-transparent flex items-end p-6">
-                                <h4 class="text-white font-bold text-xl tracking-tight">Edefi</h4>
+                                class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent flex items-end p-6">
+                                <h4 class="text-on-primary font-black text-2xl tracking-tight">Edefi</h4>
                             </div>
                         </div>
                     </div>
-                    <div class="group cursor-pointer">
-                        <div class="relative aspect-square rounded-2xl overflow-hidden mb-4 shadow-md">
-                            <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                data-alt="Youth football match under 12"
+                    <!-- Bafi -->
+                    <div class="group cursor-pointer team-card">
+                        <div class="relative aspect-square rounded-2xl overflow-hidden mb-4 shadow-lg">
+                            <img alt="Youth football match under 12"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnYD4jGWZAP83qkVrPHYOp7MKhcTV5nhovzPYdIVSqcPuTtDHWUbEXfS1YK58_Ijk8OHVhgsyLG3vX2aokR8ILX9lUWNudtuFS-SttF4vY8_57ykHCFSv-XD-z5AknFuq2tbhHwOU9SFMFnp_d_YRvg8dgUOk74tjQYAR-83PIM4uKMESro_ePYrJM-2bEGF2-xHWTPEtSUXUiqeJWi6CBcEtbXk7wK0j8gHtAhAART3FTQTmZM3TaJr7R_aE5gUXefy2I_esTu8Y" />
                             <div
-                                class="absolute inset-0 bg-gradient-to-t from-brand-blue/80 to-transparent flex items-end p-6">
-                                <h4 class="text-white font-bold text-xl tracking-tight">Bafi</h4>
+                                class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent flex items-end p-6">
+                                <h4 class="text-on-primary font-black text-2xl tracking-tight">Bafi</h4>
                             </div>
                         </div>
                     </div>
-                    <div class="group cursor-pointer">
-                        <div class="relative aspect-square rounded-2xl overflow-hidden mb-4 shadow-md">
-                            <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                data-alt="Teenage soccer training under 16"
+                    <!-- Futsala -->
+                    <div class="group cursor-pointer team-card">
+                        <div class="relative aspect-square rounded-2xl overflow-hidden mb-4 shadow-lg">
+                            <img alt="Teenage soccer training under 16"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsmPvZ1HGuWflraI1_jLy94_KgUID09p9ntAUwH_U7E7f2YNBwHvmWNj9fmpbxei4micTee2ystcOWoHNDDNVgNo33janHplUAgQrM0bZ9K37crCFPI-4zEo9Ghv5zIQ9m6WSibKB3CPKoUm7EoI_tJBAOh3_6bchGRM6Wk2qDD6yLjk3fXkE1_cVsFdCPIkzTQhZC10sWbUUEe5YWYfz2-BDlLbIWixuPSBL08xSe5EL9goie3aqb0HfBTvSB3xdY050pprW36jY" />
                             <div
-                                class="absolute inset-0 bg-gradient-to-t from-brand-blue/80 to-transparent flex items-end p-6">
-                                <h4 class="text-white font-bold text-xl tracking-tight">Futsala</h4>
+                                class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent flex items-end p-6">
+                                <h4 class="text-on-primary font-black text-2xl tracking-tight">Futsala</h4>
                             </div>
                         </div>
                     </div>
-                    <div class="group cursor-pointer">
-                        <div class="relative aspect-square rounded-2xl overflow-hidden mb-4 shadow-md">
-                            <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                data-alt="Elite football training under 20"
+                    <!-- Femenino -->
+                    <div class="group cursor-pointer team-card">
+                        <div class="relative aspect-square rounded-2xl overflow-hidden mb-4 shadow-lg">
+                            <img alt="Elite football training under 20"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvSxRjp0ZjUZid9qKuaxkddlBBMkMuIdcRoxO_ug-OUPKA5sx3KiKkJQEnGpX316ueZe36GMB5M5PoTurUZzqbbsENxTvrTT3jLMEzepZXjxZASgqvgkDE7ofpctuypVs1cPeCupeMmNUw2xps8yXbJFkjTSO5zxiVbc7vwHn90lvhL5u6iQsc1bpomYRAxP2rUlN8ti9tFjTQNeBmd8iXWJbj5VoHg6iEaTImMGJokP0A6BsurcnRmJtKyj5pQmhIcyEHR_ImX70" />
                             <div
-                                class="absolute inset-0 bg-gradient-to-t from-brand-blue/80 to-transparent flex items-end p-6">
-                                <h4 class="text-white font-bold text-xl tracking-tight">Futsal Femenino</h4>
+                                class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent flex items-end p-6">
+                                <h4 class="text-on-primary font-black text-2xl tracking-tight leading-tight">Futsal
+                                    Femenino</h4>
                             </div>
                         </div>
                     </div>
@@ -130,158 +137,150 @@
             </div>
         </section>
 
-        <!-- Match Calendar Section (Fondo Blanco con Acentos Azules) -->
-        <section class="py-24 bg-white" id="calendario">
-            <div class="max-w-7xl mx-auto px-6 md:px-12">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
-                    <div>
-                        <h2 class="text-3xl font-black text-slate-900 border-l-4 border-brand-blue pl-4">Próximos
-                            Encuentros</h2>
-                        <p class="text-slate-600 mt-2">No te pierdas la acción de nuestros equipos</p>
-                    </div>
-                    
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Match Calendar Section -->
+        <section class="py-24 bg-surface pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto" id="calendario">
+            
+            <div class="mb-8">
+                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Calendario
+                    </h1>
+                <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-6">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <!-- Match Card 1 -->
                     <div
-                        class="bg-brand-pale p-6 rounded-2xl shadow-sm border border-brand-blue/10 hover:border-brand-blue/30 transition-all">
-                        <div class="flex justify-between items-center mb-6">
+                        class="bg-brand-pale p-8 rounded-3xl shadow-sm border border-primary/10 hover:border-primary/40 transition-all group">
+                        <div class="flex justify-between items-center mb-8">
                             <span
-                                class="text-[10px] font-black uppercase tracking-widest text-white bg-brand-blue px-2 py-0.5 rounded">Edefi</span>
-                            <span class="text-xs text-slate-500 font-medium">14 Oct</span>
+                                class="text-[10px] font-black uppercase tracking-widest text-on-primary bg-primary px-3 py-1 rounded-full">Edefi</span>
+                            <span class="text-xs text-outline font-bold">14 Oct</span>
                         </div>
-                        <div class="flex flex-col items-center gap-4 mb-6">
-                            <div class="flex items-center justify-between w-full">
-                                <div class="text-center w-1/3">
-                                    <div
-                                        class="w-12 h-12 bg-white rounded-full mx-auto mb-2 flex items-center justify-center font-bold text-brand-blue shadow-sm border border-brand-blue/10">
-                                        CFG</div>
-                                    <p class="text-xs font-bold truncate">CFG</p>
-                                </div>
-                                <span class="font-black text-brand-blue/30">VS</span>
-                                <div class="text-center w-1/3">
-                                    <div
-                                        class="w-12 h-12 bg-white rounded-full mx-auto mb-2 flex items-center justify-center font-bold text-slate-400 shadow-sm">
-                                        LFC</div>
-                                    <p class="text-xs font-bold truncate">Almafuerte</p>
-                                </div>
+                        <div class="flex items-center justify-between gap-2 mb-8">
+                            <div class="text-center flex-1">
+                                <div
+                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-primary shadow-sm border border-primary/10 text-xl group-hover:scale-110 transition-transform">
+                                    CFG</div>
+                                <p class="text-xs font-black uppercase tracking-tighter">CFG</p>
+                            </div>
+                            <span class="font-black text-primary/30 italic">VS</span>
+                            <div class="text-center flex-1">
+                                <div
+                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-outline shadow-sm text-xl group-hover:scale-110 transition-transform">
+                                    LFC</div>
+                                <p class="text-xs font-black uppercase tracking-tighter truncate">Almafuerte</p>
                             </div>
                         </div>
-                        <div class="space-y-2 border-t border-brand-blue/10 pt-4">
-                            <div class="flex items-center gap-2 text-xs text-slate-600 font-medium">
-                                <span class="material-symbols-outlined text-[16px] text-brand-blue">schedule</span>
+                        <div class="space-y-3 pt-6 border-t border-primary/10">
+                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
+                                <span class="material-symbols-outlined text-primary text-lg">schedule</span>
                                 10:30 AM
                             </div>
-                            <div class="flex items-center gap-2 text-xs text-slate-600 font-medium">
-                                <span class="material-symbols-outlined text-[16px] text-brand-blue">location_on</span>
+                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
+                                <span class="material-symbols-outlined text-primary text-lg">location_on</span>
                                 Sede Almafuerte
                             </div>
                         </div>
                     </div>
                     <!-- Match Card 2 -->
                     <div
-                        class="bg-brand-pale p-6 rounded-2xl shadow-sm border border-brand-blue/10 hover:border-brand-blue/30 transition-all">
-                        <div class="flex justify-between items-center mb-6">
+                        class="bg-brand-pale p-8 rounded-3xl shadow-sm border border-primary/10 hover:border-primary/40 transition-all group">
+                        <div class="flex justify-between items-center mb-8">
                             <span
-                                class="text-[10px] font-black uppercase tracking-widest text-white bg-brand-blue px-2 py-0.5 rounded">Bafi</span>
-                            <span class="text-xs text-slate-500 font-medium">15 Oct</span>
+                                class="text-[10px] font-black uppercase tracking-widest text-on-primary bg-primary px-3 py-1 rounded-full">Bafi</span>
+                            <span class="text-xs text-outline font-bold">15 Oct</span>
                         </div>
-                        <div class="flex flex-col items-center gap-4 mb-6">
-                            <div class="flex items-center justify-between w-full">
-                                <div class="text-center w-1/3">
-                                    <div
-                                        class="w-12 h-12 bg-white rounded-full mx-auto mb-2 flex items-center justify-center font-bold text-brand-blue shadow-sm border border-brand-blue/10">
-                                        CFG</div>
-                                    <p class="text-xs font-bold truncate">CFG</p>
-                                </div>
-                                <span class="font-black text-brand-blue/30">VS</span>
-                                <div class="text-center w-1/3">
-                                    <div
-                                        class="w-12 h-12 bg-white rounded-full mx-auto mb-2 flex items-center justify-center font-bold text-slate-400 shadow-sm">
-                                        DN</div>
-                                    <p class="text-xs font-bold truncate">Almafuerte</p>
-                                </div>
+                        <div class="flex items-center justify-between gap-2 mb-8">
+                            <div class="text-center flex-1">
+                                <div
+                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-primary shadow-sm border border-primary/10 text-xl group-hover:scale-110 transition-transform">
+                                    CFG</div>
+                                <p class="text-xs font-black uppercase tracking-tighter">CFG</p>
+                            </div>
+                            <span class="font-black text-primary/30 italic">VS</span>
+                            <div class="text-center flex-1">
+                                <div
+                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-outline shadow-sm text-xl group-hover:scale-110 transition-transform">
+                                    DN</div>
+                                <p class="text-xs font-black uppercase tracking-tighter truncate">Almafuerte</p>
                             </div>
                         </div>
-                        <div class="space-y-2 border-t border-brand-blue/10 pt-4">
-                            <div class="flex items-center gap-2 text-xs text-slate-600 font-medium">
-                                <span class="material-symbols-outlined text-[16px] text-brand-blue">schedule</span>
+                        <div class="space-y-3 pt-6 border-t border-primary/10">
+                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
+                                <span class="material-symbols-outlined text-primary text-lg">schedule</span>
                                 04:00 PM
                             </div>
-                            <div class="flex items-center gap-2 text-xs text-slate-600 font-medium">
-                                <span class="material-symbols-outlined text-[16px] text-brand-blue">location_on</span>
+                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
+                                <span class="material-symbols-outlined text-primary text-lg">location_on</span>
                                 Sede Almafuerte
                             </div>
                         </div>
                     </div>
                     <!-- Match Card 3 -->
                     <div
-                        class="bg-brand-pale p-6 rounded-2xl shadow-sm border border-brand-blue/10 hover:border-brand-blue/30 transition-all">
-                        <div class="flex justify-between items-center mb-6">
+                        class="bg-brand-pale p-8 rounded-3xl shadow-sm border border-primary/10 hover:border-primary/40 transition-all group">
+                        <div class="flex justify-between items-center mb-8">
                             <span
-                                class="text-[10px] font-black uppercase tracking-widest text-white bg-brand-blue px-2 py-0.5 rounded">Futsala</span>
-                            <span class="text-xs text-slate-500 font-medium">16 Oct</span>
+                                class="text-[10px] font-black uppercase tracking-widest text-on-primary bg-primary px-3 py-1 rounded-full">Futsala</span>
+                            <span class="text-xs text-outline font-bold">16 Oct</span>
                         </div>
-                        <div class="flex flex-col items-center gap-4 mb-6">
-                            <div class="flex items-center justify-between w-full">
-                                <div class="text-center w-1/3">
-                                    <div
-                                        class="w-12 h-12 bg-white rounded-full mx-auto mb-2 flex items-center justify-center font-bold text-brand-blue shadow-sm border border-brand-blue/10">
-                                        CFG</div>
-                                    <p class="text-xs font-bold truncate">CFG</p>
-                                </div>
-                                <span class="font-black text-brand-blue/30">VS</span>
-                                <div class="text-center w-1/3">
-                                    <div
-                                        class="w-12 h-12 bg-white rounded-full mx-auto mb-2 flex items-center justify-center font-bold text-slate-400 shadow-sm">
-                                        TIT</div>
-                                    <p class="text-xs font-bold truncate">Almafuerte</p>
-                                </div>
+                        <div class="flex items-center justify-between gap-2 mb-8">
+                            <div class="text-center flex-1">
+                                <div
+                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-primary shadow-sm border border-primary/10 text-xl group-hover:scale-110 transition-transform">
+                                    CFG</div>
+                                <p class="text-xs font-black uppercase tracking-tighter">CFG</p>
+                            </div>
+                            <span class="font-black text-primary/30 italic">VS</span>
+                            <div class="text-center flex-1">
+                                <div
+                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-outline shadow-sm text-xl group-hover:scale-110 transition-transform">
+                                    TIT</div>
+                                <p class="text-xs font-black uppercase tracking-tighter truncate">Almafuerte</p>
                             </div>
                         </div>
-                        <div class="space-y-2 border-t border-brand-blue/10 pt-4">
-                            <div class="flex items-center gap-2 text-xs text-slate-600 font-medium">
-                                <span class="material-symbols-outlined text-[16px] text-brand-blue">schedule</span>
+                        <div class="space-y-3 pt-6 border-t border-primary/10">
+                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
+                                <span class="material-symbols-outlined text-primary text-lg">schedule</span>
                                 07:15 PM
                             </div>
-                            <div class="flex items-center gap-2 text-xs text-slate-600 font-medium">
-                                <span class="material-symbols-outlined text-[16px] text-brand-blue">location_on</span>
+                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
+                                <span class="material-symbols-outlined text-primary text-lg">location_on</span>
                                 Sede Almafuerte
                             </div>
                         </div>
                     </div>
                     <!-- Match Card 4 -->
                     <div
-                        class="bg-brand-pale p-6 rounded-2xl shadow-sm border border-brand-blue/10 hover:border-brand-blue/30 transition-all">
-                        <div class="flex justify-between items-center mb-6">
+                        class="bg-brand-pale p-8 rounded-3xl shadow-sm border border-primary/10 hover:border-primary/40 transition-all group">
+                        <div class="flex justify-between items-center mb-8">
                             <span
-                                class="text-[10px] font-black uppercase tracking-widest text-white bg-brand-blue px-2 py-0.5 rounded">Futsal Femenino</span>
-                            <span class="text-xs text-slate-500 font-medium">17 Oct</span>
+                                class="text-[10px] font-black uppercase tracking-widest text-on-primary bg-primary px-3 py-1 rounded-full">Femenino</span>
+                            <span class="text-xs text-outline font-bold">17 Oct</span>
                         </div>
-                        <div class="flex flex-col items-center gap-4 mb-6">
-                            <div class="flex items-center justify-between w-full">
-                                <div class="text-center w-1/3">
-                                    <div
-                                        class="w-12 h-12 bg-white rounded-full mx-auto mb-2 flex items-center justify-center font-bold text-brand-blue shadow-sm border border-brand-blue/10">
-                                        CFG</div>
-                                    <p class="text-xs font-bold truncate">CFG</p>
-                                </div>
-                                <span class="font-black text-brand-blue/30">VS</span>
-                                <div class="text-center w-1/3">
-                                    <div
-                                        class="w-12 h-12 bg-white rounded-full mx-auto mb-2 flex items-center justify-center font-bold text-slate-400 shadow-sm">
-                                        AGL</div>
-                                    <p class="text-xs font-bold truncate">Almafuerte</p>
-                                </div>
+                        <div class="flex items-center justify-between gap-2 mb-8">
+                            <div class="text-center flex-1">
+                                <div
+                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-primary shadow-sm border border-primary/10 text-xl group-hover:scale-110 transition-transform">
+                                    CFG</div>
+                                <p class="text-xs font-black uppercase tracking-tighter">CFG</p>
+                            </div>
+                            <span class="font-black text-primary/30 italic">VS</span>
+                            <div class="text-center flex-1">
+                                <div
+                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-outline shadow-sm text-xl group-hover:scale-110 transition-transform">
+                                    AGL</div>
+                                <p class="text-xs font-black uppercase tracking-tighter truncate">Almafuerte</p>
                             </div>
                         </div>
-                        <div class="space-y-2 border-t border-brand-blue/10 pt-4">
-                            <div class="flex items-center gap-2 text-xs text-slate-600 font-medium">
-                                <span class="material-symbols-outlined text-[16px] text-brand-blue">schedule</span>
+                        <div class="space-y-3 pt-6 border-t border-primary/10">
+                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
+                                <span class="material-symbols-outlined text-primary text-lg">schedule</span>
                                 09:00 AM
                             </div>
-                            <div class="flex items-center gap-2 text-xs text-slate-600 font-medium">
-                                <span class="material-symbols-outlined text-[16px] text-brand-blue">location_on</span>
+                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
+                                <span class="material-symbols-outlined text-primary text-lg">location_on</span>
                                 Sede Almafuerte
                             </div>
                         </div>
@@ -291,112 +290,145 @@
         </section>
 
         <!-- Training Gallery (Carousel) -->
-        <section class="py-24 bg-brand-pale overflow-hidden">
-            <div class="max-w-7xl mx-auto px-6 md:px-12 mb-12 text-center">
-                <h2 class="text-3xl font-black text-slate-900">Galería</h2>
-                <p class="text-slate-600">Nuestra metodología en acción</p>
+        <section class="py-24 bg-brand-pale overflow-hidden pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto">
+            
+            <div class="mb-8">
+                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Galería de Fotos
+                    </h1>
+                <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
             </div>
-            <div class="relative max-w-4xl mx-auto px-12 group/carousel">
-                <div class="overflow-hidden rounded-3xl shadow-2xl bg-white aspect-[16/9]">
+
+            
+            <div class="relative max-w-5xl mx-auto px-12 group/carousel">
+                <div class="overflow-hidden rounded-3xl shadow-2xl bg-surface aspect-[16/9]">
                     <div class="carousel-track flex h-full">
-                        <div class="carousel-slide min-w-full h-full">
-                            <img class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
-                                data-alt="Close up of a soccer ball and cleats on grass"
+
+
+                        {{-- <div class="carousel-slide min-w-full h-full">
+                            <img alt="Close up of a soccer ball and cleats on grass"
+                                class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU9UkKgOSqgdkds1hzpQXrZVfWH1fDhtGwo7_H9sBmG6_2tTZwp5u7qR1szvtcLarnqTE1lwmj9EK6hDzc7OTMQGbJhxoqFO1IWJ60ypK7-rJ0p3gUgp5ReG7LQHo3An0sf4NX15CbC6leJmCFGJO81r62kf1W4rStnovIm6J8JBWdiRCi-laDKcYFJSpbRztZXcvzmGSFEC1-eAqmUqM-ss8-roA-0G3qz-n0ZOso1VMvaagMsOwsQg_VMJTL2LvAtiSOBlszCZg" />
                         </div>
                         <div class="carousel-slide min-w-full h-full">
-                            <img class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
-                                data-alt="Coach explaining tactics to young players"
+                            <img alt="Coach explaining tactics to young players"
+                                class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuC98y-BkYOf4Q1sUJwfeDialphQzK5rTtzrjbH3go0zdCikmtUcZrEo7HbcilqGfkAPMMqOpMxzPusSE047g_fpc46KxRqPSQw6enlvWPQzaD5tzmXm9zVgNg2MQk87cx4yZcZ_hsYbTNpmo0nMOJ_21Q_DvsVscXH-AGMZKY1zjOXs_VfBZfg4PA8klykrWwFZHRwmxdgLZN1eiBWtK42Qbo7xQQ_HGUOaRab2AVKz5cN6S8gTaX2GwM0gwz_TbLTJBdEYxCEavP4" />
                         </div>
                         <div class="carousel-slide min-w-full h-full">
-                            <img class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
-                                data-alt="Group of players celebrating a goal"
+                            <img alt="Group of players celebrating a goal"
+                                class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIPxWhEdW_VfyNQU5jS7ZFwJ7BZpgZT-cW0quRjfduPwS0iO_jbXEf-M-goSRZsPl0M_Z7-Q3FeJ44b24AVrDG0ORpRiBMo8zkdxlu79UKB1UjZBYU0pqT4y_BNRfRbakdfN-hbp9S45OYpgj0LCQvqoXcK1ekDsOD6JysD7zplW-SWUz5fw9Occd3odoyI6e1gDuM6zJZ0ERH8ktU8v3JSFC2xCui3l4D6lpT08-OFVPXDb902scWi18uiV3-fvvuJevRi9Uji78" />
                         </div>
                         <div class="carousel-slide min-w-full h-full">
-                            <img class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
-                                data-alt="Intense dribbling drill with cones"
+                            <img alt="Intense dribbling drill with cones"
+                                class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWEcAxIU4rRwqh7kLJ4mBhpUJcgEyYSb31zfZ-lEJTQH6lICQcrKzmtUMGCgA-O5mcAcuXpmizNZu3bFHur75Uy0jpoN1kD081InZD2ri18mHdKr4Dq-8jy2iaR3plNKUO5Bmi6GFBAPc6aSLgmSSUJ529FL0NpDfq3MiUMVkucpNSY7Q8YOw8KEf6XxMbO6QF0r-CAIEQfhDboYeIbjlT81v0vJFm1if-8e05ZZvf2WewKjxfbJ-x2UysXr_f8g-Bp7c9rWfumrM" />
-                        </div>
+                        </div> --}}
+                        @forelse ($galleryItems ?? [] as $item)
+                            <div class="carousel-slide min-w-full h-full">
+                                <img class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
+                                    alt="{{ $item->title }}" src="{{ asset('storage/' . $item->image_path) }}" />
+                            </div>
+                        @empty
+                            <div class="carousel-slide min-w-full h-full">
+                                <img class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
+                                    data-alt="Close up of a soccer ball and cleats on grass"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU9UkKgOSqgdkds1hzpQXrZVfWH1fDhtGwo7_H9sBmG6_2tTZwp5u7qR1szvtcLarnqTE1lwmj9EK6hDzc7OTMQGbJhxoqFO1IWJ60ypK7-rJ0p3gUgp5ReG7LQHo3An0sf4NX15CbC6leJmCFGJO81r62kf1W4rStnovIm6J8JBWdiRCi-laDKcYFJSpbRztZXcvzmGSFEC1-eAqmUqM-ss8-roA-0G3qz-n0ZOso1VMvaagMsOwsQg_VMJTL2LvAtiSOBlszCZg" />
+                            </div>
+                        @endforelse
                     </div>
                 </div>
                 <!-- Nav Buttons -->
                 <button
-                    class="carousel-button-left absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-brand-blue hover:text-white text-slate-900 w-12 h-12 rounded-full shadow-lg transition-all flex items-center justify-center border border-brand-blue/10">
-                    <span class="material-symbols-outlined">chevron_left</span>
+                    class="carousel-button-left absolute left-0 top-1/2 -translate-y-1/2 bg-surface/90 hover:bg-primary hover:text-on-primary text-on-surface w-14 h-14 rounded-full shadow-2xl transition-all flex items-center justify-center border border-primary/10">
+                    <span class="material-symbols-outlined text-2xl">chevron_left</span>
                 </button>
                 <button
-                    class="carousel-button-right absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-brand-blue hover:text-white text-slate-900 w-12 h-12 rounded-full shadow-lg transition-all flex items-center justify-center border border-brand-blue/10">
-                    <span class="material-symbols-outlined">chevron_right</span>
+                    class="carousel-button-right absolute right-0 top-1/2 -translate-y-1/2 bg-surface/90 hover:bg-primary hover:text-on-primary text-on-surface w-14 h-14 rounded-full shadow-2xl transition-all flex items-center justify-center border border-primary/10">
+                    <span class="material-symbols-outlined text-2xl">chevron_right</span>
                 </button>
                 <!-- Nav Dots -->
-                <div class="carousel-nav flex justify-center gap-3 mt-8">
-                    <button aria-label="Slide 1" class="w-2.5 h-2.5 rounded-full bg-brand-blue transition-all"></button>
+                <div class="carousel-nav flex justify-center gap-4 mt-10">
+                    {{-- <button aria-label="Slide 1" class="w-3 h-3 rounded-full bg-primary transition-all"></button>
                     <button aria-label="Slide 2"
-                        class="w-2.5 h-2.5 rounded-full bg-slate-300 transition-all hover:bg-brand-blue/50"></button>
+                        class="w-3 h-3 rounded-full bg-slate-300 transition-all hover:bg-primary/50"></button>
                     <button aria-label="Slide 3"
-                        class="w-2.5 h-2.5 rounded-full bg-slate-300 transition-all hover:bg-brand-blue/50"></button>
+                        class="w-3 h-3 rounded-full bg-slate-300 transition-all hover:bg-primary/50"></button>
                     <button aria-label="Slide 4"
-                        class="w-2.5 h-2.5 rounded-full bg-slate-300 transition-all hover:bg-brand-blue/50"></button>
+                        class="w-3 h-3 rounded-full bg-slate-300 transition-all hover:bg-primary/50"></button> --}}
+                    @php
+                        $slidesCount = max(($galleryItems ?? collect())->count(), 1);
+                    @endphp
+                    @for ($i = 0; $i < $slidesCount; $i++)
+                        <button aria-label="Slide {{ $i + 1 }}"
+                            class="w-2.5 h-2.5 rounded-full {{ $i === 0 ? 'bg-brand-blue' : 'bg-slate-300 hover:bg-brand-blue/50' }} transition-all"></button>
+                    @endfor
                 </div>
             </div>
         </section>
-        
-        <!-- Club News (Fondo Blanco) -->
-        <section class="py-24 bg-white" id="noticias">
-            <div class="max-w-7xl mx-auto px-6 md:px-12">
-                <h2
-                    class="text-3xl font-black text-slate-900 mb-12 text-center underline decoration-brand-blue decoration-4 underline-offset-8">
-                    Últimas Noticias</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+
+        <!-- Club News -->
+        <section class="py-24 bg-surface pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto" id="noticias">
+
+            <div class="mb-8">
+                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Noticias del Club
+                    </h1>
+                <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
+            </div>
+            <div class="max-w-7xl mx-auto px-6">
+               
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     <!-- News Card 1 -->
                     <div
-                        class="news-card-root bg-white rounded-3xl overflow-hidden flex flex-col shadow-lg hover:shadow-xl transition-all border border-brand-blue/10 group h-full">
-                        <div class="aspect-video overflow-hidden">
-                            <img class="news-img w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                data-alt="Corporate meeting in a modern sports facility"
+                        class="news-card-root bg-surface rounded-[2rem] overflow-hidden flex flex-col shadow-xl hover:shadow-2xl transition-all border border-primary/5 group h-full">
+                        <div class="aspect-video overflow-hidden relative">
+                            <img alt="Corporate meeting in a modern sports facility"
+                                class="news-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSRcWY_cuGEWkt31m15GoQrMvYQSJSJehJrXtPMdhh_fiCoPrWoV_DN_fl7trO7Ad2Q-ZC8g38OSype03Q14lSKaqWidt1yHGSuedopFORGJP3TXCkd8mb9h-PfR_PNLKeMRdy7S0nuetVPVi6SA_2bD34iXf_-hWqG5wC8mEpvHqRhXsWIjoyC0RjOgfA4L4_qneINRFqppypxSzc0TWQXKf0C55wxZAMmXBYNp4lfscPmGBwrpCsq8dnyz-aYbJ0rc6MaLBxpLs" />
+                            <div
+                                class="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest news-tag">
+                                Institucional</div>
                         </div>
-                        <div class="p-6 flex flex-col flex-grow">
-                            <span
-                                class="news-tag text-xs font-bold text-brand-blue mb-2 uppercase tracking-wider">Institucional</span>
-                            <h4 class="news-title text-xl font-black text-slate-900 mb-4 leading-tight">Nueva Alianza
-                                con Scouting Europeo</h4>
-                            <p class="text-slate-600 mb-6 line-clamp-3 text-sm">Firmamos un convenio estratégico para
-                                proyectar a nuestros mejores talentos a clubes profesionales en Europa con becas
-                                completas.</p>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <h4
+                                class="news-title text-2xl font-black text-on-surface mb-4 leading-tight group-hover:text-primary transition-colors">
+                                Nueva Alianza con Scouting Europeo</h4>
+                            <p class="text-on-surface-variant mb-8 line-clamp-3 text-sm leading-relaxed">Firmamos un
+                                convenio estratégico para proyectar a nuestros mejores talentos a clubes profesionales
+                                en Europa con becas completas.</p>
                             <div class="mt-auto">
-                                <a class="text-brand-blue font-bold flex items-center gap-2 hover:translate-x-2 transition-transform news-read-more text-sm"
+                                <a class="text-primary font-black flex items-center gap-2 hover:gap-4 transition-all news-read-more text-sm uppercase tracking-tighter"
                                     href="#">Leer más <span
-                                        class="material-symbols-outlined text-[18px]">open_in_new</span></a>
+                                        class="material-symbols-outlined text-[20px]">arrow_forward</span></a>
                             </div>
                         </div>
                     </div>
                     <!-- News Card 2 -->
                     <div
-                        class="news-card-root bg-white rounded-3xl overflow-hidden flex flex-col shadow-lg hover:shadow-xl transition-all border border-brand-blue/10 group h-full">
-                        <div class="aspect-video overflow-hidden">
-                            <img class="news-img w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                data-alt="Modern sports nutrition and performance tracking"
+                        class="news-card-root bg-surface rounded-[2rem] overflow-hidden flex flex-col shadow-xl hover:shadow-2xl transition-all border border-primary/5 group h-full">
+                        <div class="aspect-video overflow-hidden relative">
+                            <img alt="Modern sports nutrition and performance tracking"
+                                class="news-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-HaqivuJMb8v1-rP8Y5aRnJaVGZH4IptXoSIPZEDGAKGLJhd116wO6LLw9VJPol-8CiL_Q1obLF0LMRza_GuYoyvWs7pJdbaX42VZNFSBgbtzGo4nGNxNbG8eIUH6GoKxI7yRXcJIarsvYGhdPjZc5OpOar7u2O1W2mNEUnfL9cUiDwKlVaGe8rT3KtbgU6IpD2dfcxMxMZF15N0lrZz8WuanrQM9zdU4vyrGFCdNLSdBrC2GH7Zh4q7xeoVlhoKqc5WJRgluftk" />
+                            <div
+                                class="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest news-tag">
+                                Tecnología</div>
                         </div>
-                        <div class="p-6 flex flex-col flex-grow">
-                            <span
-                                class="news-tag text-xs font-bold text-brand-blue mb-2 uppercase tracking-wider">Entrenamiento</span>
-                            <h4 class="news-title text-xl font-black text-slate-900 mb-4 leading-tight">Incorporamos
-                                Tecnología de GPS</h4>
-                            <p class="text-slate-600 mb-6 line-clamp-3 text-sm">Todas nuestras categorías competitivas
-                                ahora cuentan con chalecos de monitoreo GPS para optimizar el rendimiento físico
-                                individual.</p>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <h4
+                                class="news-title text-2xl font-black text-on-surface mb-4 leading-tight group-hover:text-primary transition-colors">
+                                Incorporamos Tecnología de GPS</h4>
+                            <p class="text-on-surface-variant mb-8 line-clamp-3 text-sm leading-relaxed">Todas nuestras
+                                categorías competitivas ahora cuentan con chalecos de monitoreo GPS para optimizar el
+                                rendimiento físico individual.</p>
                             <div class="mt-auto">
-                                <a class="text-brand-blue font-bold flex items-center gap-2 hover:translate-x-2 transition-transform news-read-more text-sm"
+                                <a class="text-primary font-black flex items-center gap-2 hover:gap-4 transition-all news-read-more text-sm uppercase tracking-tighter"
                                     href="#">Leer más <span
-                                        class="material-symbols-outlined text-[18px]">open_in_new</span></a>
+                                        class="material-symbols-outlined text-[20px]">arrow_forward</span></a>
                             </div>
                         </div>
                     </div>
-                    <!-- News Card 3 -->
+                    <!-- News Card 3 (Placeholder for completeness) -->
                     <div
                         class="news-card-root bg-white rounded-3xl overflow-hidden flex flex-col shadow-lg hover:shadow-xl transition-all border border-brand-blue/10 group h-full">
                         <div class="aspect-video overflow-hidden">
@@ -418,14 +450,19 @@
                                         class="material-symbols-outlined text-[18px]">open_in_new</span></a>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div>                    
+                </div>        
             </div>
         </section>
 
-
-        <!-- Enrollment Form Section (Fondo Azul Tenue con Card Blanca) -->
-        <section class="py-16 bg-brand-pale" id="inscripcion">
+        <!-- Formulario -->
+        <section class="py-16 bg-brand-pale pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto" id="inscripcion">
+            <!-- Page Title -->
+            <div class="mb-8">
+                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Formulario de Inscripción
+                    </h1>
+                <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
+            </div>
             <div class="max-w-7xl mx-auto px-6 md:px-12">
                 <div
                     class="bg-white rounded-[2.5rem] overflow-hidden shadow-xl flex flex-col lg:flex-row min-h-[550px] border border-brand-blue/5">
@@ -502,69 +539,225 @@
                     </div>
                 </div>
             </div>
-        </section>        
-    
-
-    <!-- Locations (Sedes) Section -->
-    <section class="py-24 bg-white" id="sedes">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-black text-on-surface">Nuestras Sedes</h2>
-                <p class="text-on-surface-variant mt-2">Instalaciones de primer nivel cerca de ti</p>
+        </section> 
+        
+        <!-- Nuestras Sedes -->
+        <section class="pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto">
+            <!-- Page Title -->
+            <div class="mb-8">
+                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Nuestras
+                    Sedes</h1>
+                <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Sede Card 1 -->
-                <div class="bg-surface-container-low rounded-3xl overflow-hidden group border border-outline-variant">
-                    <div class="h-48 bg-slate-200 relative">
-                        <img class="w-full h-full object-cover" data-alt="Aerial map placeholder of sports complex"
-                            data-location="Sede Principal"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAI7RP2RMA40x6368UojVg8zU4hpjkRet84cuYJ6X2y0zmKwjCcwBC2wfypYP5MJ9PIvmaBmbszwXYauRB4TMOdyrMtzMibxgBWFFEfHQyBhx7I8_JcmQurEdOqjmJbVr9PjjkUjdiJlnZDemt7rVLwig9-qAqNIjHLZRa1Oy6sfM_jVPUUJc1_mEdziWfhcUZjvEVIiQfC8Tn9l-L_NaaSRRAy6ZBw5ORNT4smrxXCPhTIEnZqhibwaLsCvzznPDJxKHQTN_685w" />
+            <!-- Carousel Section -->
+            <section class="relative mb-12 group">
+                <div class="relative h-[280px] md:h-[450px] w-full rounded-2xl overflow-hidden shadow-2xl"
+                    id="hero-carousel">
+                    <!-- Slide 1 -->
+                    <div class="carousel-item active">
+                        <img class="w-full h-full object-cover"
+                            data-alt="wide angle cinematic shot of a professional football stadium at night with bright floodlights illuminating the emerald green turf"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxe5gzogAflXlHXB9finjwCa4aNVATErx84RMWSXSHBfYXc03tGxkj3q2-nD2rbV2u5g0AdDpJkpXGGcgceoiGI9UdnCJGSLJw-_Z2042Gg5HspoS_0OIcZglUsaUm2wtfb4sVqAs8xjARmTLmshMIHHLptP-U2q3aLxHBozz4Jk3PCtD00p6XlGBS-pLurJtNWrLhhJPh_tufFfgqcNnn7liFW9_1vJLLul9HrPEkSv6ToEcTUj0gIRtcWBweDHp-zsrdMJn_Tr07" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-transparent to-transparent flex flex-col justify-end p-8">
+                            <span
+                                class="inline-block bg-secondary text-white px-3 py-1 rounded-full text-xs font-bold font-lexend tracking-widest uppercase mb-4 self-start">Instalaciones
+                                Elite</span>
+                            <h2
+                                class="text-3xl md:text-5xl font-lexend font-black text-white leading-tight uppercase max-w-2xl">
+                                Donde nace el orgullo del club</h2>
+                        </div>
                     </div>
-                    <div class="p-8">
-                        <h4 class="text-xl font-bold mb-2">Sede Stylo(Principal)</h4>
-                        <p class="text-on-surface-variant text-sm mb-6">Int Julian 2800. Incluye 2 canchas
-                            sintéticas.</p>
-                        <button
-                            class="w-full py-3 border-2 border-primary text-primary font-bold rounded-xl group-hover:bg-primary group-hover:text-white transition-all flex items-center justify-center gap-2">
-                            <span class="material-symbols-outlined text-[18px]">directions</span> Cómo llegar
-                        </button>
+                    <!-- Slide 2 -->
+                    <div class="carousel-item">
+                        <img class="w-full h-full object-cover"
+                            data-alt="Close up of high quality football training equipment and balls on a pitch"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgVbmt_3Cjstob6-cg_lFftWMT30TWxbAzxrEJpaU-vZIh0qPNXRS8c_qSGWXx0tTnnrrSRznZJhdWyQELTjobDLpwF8DXAwuBY0Q2UjLHjArvmLED6xDuwl9K6cbY8MxszE_RPJCU8YDeZ-YTxYwT0sP3JHVJGChbBVcTIyT4V8mfAYdV2nC_B0jJu4nkUf0xwOnSEjnSQTVSIlSaf7ZUtkUVekc7svMOQoanJeRzp9Ji8Lp-qLLqoqZSmnW-Y35X1ox9Tkdh5Te4" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-transparent to-transparent flex flex-col justify-end p-8">
+                            <span
+                                class="inline-block bg-secondary text-white px-3 py-1 rounded-full text-xs font-bold font-lexend tracking-widest uppercase mb-4 self-start">Entrenamiento
+                                PRO</span>
+                            <h2
+                                class="text-3xl md:text-5xl font-lexend font-black text-white leading-tight uppercase max-w-2xl">
+                                Formando los cracks del mañana</h2>
+                        </div>
+                    </div>
+                    <!-- Navigation Dots -->
+                    <div class="absolute bottom-6 right-8 flex gap-2 z-10">
+                        <div class="dot w-8 h-1.5 rounded-full bg-white transition-all duration-300"></div>
+                        <div class="dot w-2 h-1.5 rounded-full bg-white/40 transition-all duration-300"></div>
                     </div>
                 </div>
-                <!-- Sede Card 2 -->
-                <div class="bg-surface-container-low rounded-3xl overflow-hidden group border border-outline-variant">
-                    <div class="h-48 bg-slate-200 relative">
-                        <img class="w-full h-full object-cover" data-alt="Satellite map view of soccer fields"
-                            data-location="Sede Sur"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6V0HoaEUoEsFdt4LNoxQptymiKtWpRw6vCzPlfDstneNltr1k7s1g5EYdHzcs9APuZzAvPTX3S0_937uDZtaSRA4WqV7QZpNy679xlmieei5_YDo9fxm2Dvmq_dtP_B29dB_Cu0BKnfQASXqGYeAjPksCm0aR71cDatLkX8yfdzxdOvv_FSclrkegOaMEta3zkJhQHAi_d4Q7to98QxLCp40kzbZjcZRszTwzgTxUpNygQWiikWmJK9e-x0UPqxoKh_YhUvKURaU" />
+            </section>
+            <!-- Middle Section Header -->
+            <div class="flex items-center justify-between mb-8">
+                <h3 class="text-2xl font-lexend font-bold text-on-background uppercase tracking-tight">Centros Deportivos
+                </h3>
+                <span class="material-symbols-outlined text-primary cursor-pointer"
+                    data-icon="filter_list">filter_list</span>
+            </div>
+            <!-- Sedes List / Bento Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Sede 1 -->
+                <div
+                    class="bg-surface-container-lowest rounded-3xl overflow-hidden group hover:translate-y-[-4px] transition-all duration-300">
+                    <div class="h-48 relative">
+                        <img class="w-full h-full object-cover"
+                            data-alt="Modern indoor football complex with artificial grass and bright industrial lighting"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgVbmt_3Cjstob6-cg_lFftWMT30TWxbAzxrEJpaU-vZIh0qPNXRS8c_qSGWXx0tTnnrrSRznZJhdWyQELTjobDLpwF8DXAwuBY0Q2UjLHjArvmLED6xDuwl9K6cbY8MxszE_RPJCU8YDeZ-YTxYwT0sP3JHVJGChbBVcTIyT4V8mfAYdV2nC_B0jJu4nkUf0xwOnSEjnSQTVSIlSaf7ZUtkUVekc7svMOQoanJeRzp9Ji8Lp-qLLqoqZSmnW-Y35X1ox9Tkdh5Te4" />
+                        <div
+                            class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold font-lexend uppercase">
+                            Abierto
+                        </div>
                     </div>
-                    <div class="p-8">
-                        <h4 class="text-xl font-bold mb-2">Sede Almafuerte</h4>
-                        <p class="text-on-surface-variant text-sm mb-6">Maximo Paz 800. 2 canchas de cemento.</p>
-                        
-                        <button
-                            class="w-full py-3 border-2 border-primary text-primary font-bold rounded-xl group-hover:bg-primary group-hover:text-white transition-all flex items-center justify-center gap-2">
-                            <span class="material-symbols-outlined text-[18px]">directions</span> Cómo llegar
-                        </button>
+                    <div class="p-6">
+                        <h4 class="text-2xl font-lexend font-extrabold text-primary mb-1 uppercase tracking-tighter">Sede
+                            Morón</h4>
+                        <p class="text-on-surface-variant text-sm mb-4 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+                            Cjal. Horacio Julián 1460
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <div
+                                class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
+                                <span class="material-symbols-outlined text-base"
+                                    data-icon="sports_soccer">sports_soccer</span>
+                                Canchas de 11
+                            </div>
+                            <div
+                                class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
+                                <span class="material-symbols-outlined text-base"
+                                    data-icon="fitness_center">fitness_center</span>
+                                Gimnasio
+                            </div>
+                            <div
+                                class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
+                                <span class="material-symbols-outlined text-base" data-icon="restaurant">restaurant</span>
+                                Buffet
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button
+                                class="flex-1 bg-gradient-to-r from-primary to-primary-container text-white py-3 rounded-xl font-lexend font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 active:scale-95 transition-all"
+                                onclick="openMap('Sede Morón', 'Cjal. Horacio Julián 1460, Morón')">
+                                <span class="material-symbols-outlined text-lg"
+                                    data-icon="sports_soccer">sports_soccer</span>
+                                Cómo llegar
+                            </button>
+                            <button
+                                class="w-12 h-12 bg-surface-container-high text-primary flex items-center justify-center rounded-xl active:scale-95 transition-all">
+                                <span class="material-symbols-outlined" data-icon="call">call</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <!-- Sede Card 3 -->
-                <div class="bg-surface-container-low rounded-3xl overflow-hidden group border border-outline-variant">
-                    <div class="h-48 bg-slate-200 relative">
-                        <img class="w-full h-full object-cover" data-alt="City map layout with markers"
-                            data-location="Sede Oriente"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhdyYFotBpmgzt9V84WDkyXqc4jAp1TuppgH0C6uy2qyl5jpUFUwDCP1SikQHfIwSQnliGACAZ_VAn09tgp0ZeiobBcyYlSh4epuzYi91WFP7FAAGwIoV4R_WS2RatRTh4Flbs7aIrMOn4X4lZWJC9HFTjOa7g4Hqdcm29-etw6TYkApHqFovj25HLbiOvpWii_GjXUK5ZrypOiLcISuJi5GI-WzD0Sw0rhTFAjujGpnT2-ckncceW7Lq3yEYj_oWNlEXJr5YqTpc" />
+                <!-- Sede 2 -->
+                <div
+                    class="bg-surface-container-lowest rounded-3xl overflow-hidden group hover:translate-y-[-4px] transition-all duration-300">
+                    <div class="h-48 relative">
+                        <img class="w-full h-full object-cover"
+                            data-alt="High-end aquatic center with Olympic swimming pool and glass architecture"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH_VbdqQcTYwUB_Of0Vk4zrSr_PmI54Ci55nOKfZZLp8m_2epq4S9orbjKY2ZZbQkL0U2anc55IgbYsVPJJBk2pkte12KPZHF2UCBtlh1CUwwry5Bih1M7-3wnyhrcdV9DGivIqEx1-qhe46flSoaeW5a5AM2Y1kOO9Wdk29x6_jWzJMRXNNceZojVb8_v4W1H7M3aXPj8JKxmHzAyaVHoPIOwcMVuQzXbILKeGMXLfFChEv6pAFd4NjeP3U3_M1UlHCOeWxnZkHnJ" />
+                        <div
+                            class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold font-lexend uppercase">
+                            Abierto
+                        </div>
                     </div>
-                    <div class="p-8">
-                        <h4 class="text-xl font-bold mb-2">Sede Ituzaingo</h4>
-                        <p class="text-on-surface-variant text-sm mb-6">Rivadavia 20000. 2 canchas de pasto sintetic</p>
-                        <button
-                            class="w-full py-3 border-2 border-primary text-primary font-bold rounded-xl group-hover:bg-primary group-hover:text-white transition-all flex items-center justify-center gap-2">
-                            <span class="material-symbols-outlined text-[18px]">directions</span> Cómo llegar
-                        </button>
+                    <div class="p-6">
+                        <h4 class="text-2xl font-lexend font-extrabold text-primary mb-1 uppercase tracking-tighter">Sede
+                            Castelar</h4>
+                        <p class="text-on-surface-variant text-sm mb-4 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+                            Gdor. Máximo Paz 680
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <div
+                                class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
+                                <span class="material-symbols-outlined text-base"
+                                    data-icon="sports_soccer">sports_soccer</span>
+                                Fútbol 5
+                            </div>
+                            <div
+                                class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
+                                <span class="material-symbols-outlined text-base" data-icon="pool">pool</span>
+                                Piscina
+                            </div>
+                            <div
+                                class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
+                                <span class="material-symbols-outlined text-base"
+                                    data-icon="local_parking">local_parking</span>
+                                Estacion
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button
+                                class="flex-1 bg-gradient-to-r from-primary to-primary-container text-white py-3 rounded-xl font-lexend font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 active:scale-95 transition-all"
+                                onclick="openMap('Sede Castelar', 'Gdor. Máximo Paz 680, Castelar')">
+                                <span class="material-symbols-outlined text-lg"
+                                    data-icon="sports_soccer">sports_soccer</span>
+                                Cómo llegar
+                            </button>
+                            <button
+                                class="w-12 h-12 bg-surface-container-high text-primary flex items-center justify-center rounded-xl active:scale-95 transition-all">
+                                <span class="material-symbols-outlined" data-icon="call">call</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sede 3 -->
+                <div
+                    class="bg-surface-container-lowest rounded-3xl overflow-hidden group hover:translate-y-[-4px] transition-all duration-300">
+                    <div class="h-48 relative">
+                        <img class="w-full h-full object-cover"
+                            data-alt="Modern administrative building for a sports club with sleek white facade and glass doors"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLsm9F3ylzysc81ldsuVxkUQLMFb2sdWWagTjyeQOJQ8LcrTAR_hit0eQLGdD-3MEapJE4xFzOkA2XvJsv0vx60dH1JYix8O33dSq_2y6dnHBgbkP-eNrNVsKjgez5IZVPzUXEumCjO8Pdfstm6_E0l-7k9AyBMCQtBg14zn1Kv68MT3GBQ2V_rlJEQMmYOjD0KWNecFSOIOLPF7X34x3E2b_rQzVXDZV-Dfbf9kMC9XW5uNDYuPEWXMv6GLwBZHHtZPADuipuogGw" />
+                        <div
+                            class="absolute top-4 right-4 bg-error-container text-on-error-container px-3 py-1 rounded-full text-xs font-bold font-lexend uppercase">
+                            Cierra Pronto
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-2xl font-lexend font-extrabold text-primary mb-1 uppercase tracking-tighter">Sede
+                            Ituzaingó</h4>
+                        <p class="text-on-surface-variant text-sm mb-4 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+                            Av. Rivadavia 22240
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <div
+                                class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
+                                <span class="material-symbols-outlined text-base" data-icon="grass">grass</span>
+                                Sintéticas
+                            </div>
+                            <div
+                                class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
+                                <span class="material-symbols-outlined text-base"
+                                    data-icon="meeting_room">meeting_room</span>
+                                Vestuarios
+                            </div>
+                            <div
+                                class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
+                                <span class="material-symbols-outlined text-base" data-icon="badge">badge</span>
+                                Sede
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button
+                                class="flex-1 bg-gradient-to-r from-primary to-primary-container text-white py-3 rounded-xl font-lexend font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 active:scale-95 transition-all"
+                                onclick="openMap('Sede Ituzaingó', 'Av. Rivadavia 22240, Ituzaingó')">
+                                <span class="material-symbols-outlined text-lg"
+                                    data-icon="sports_soccer">sports_soccer</span>
+                                Cómo llegar
+                            </button>
+                            <button
+                                class="w-12 h-12 bg-surface-container-high text-primary flex items-center justify-center rounded-xl active:scale-95 transition-all">
+                                <span class="material-symbols-outlined" data-icon="call">call</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     </main>
 </x-layouts.base>

@@ -9,6 +9,12 @@
                             <x-layouts.sidebar-link href="{{ route('dashboard') }}" icon='fas-house'
                                 :active="request()->routeIs('dashboard*')">Dashboard</x-layouts.sidebar-link>
 
+                            {{-- {{-- <x-layouts.sidebar-link href="{{ route('gallery-items.index') }}" icon='fas-images'
+                                :active="request()->routeIs('gallery*')">Gestión de galería</x-layouts.sidebar-link> --} --}}
+
+                            <x-layouts.sidebar-link href="{{ route('gallery-items.index') }}" icon='fas-image'
+                                :active="request()->routeIs('gallery-items*')">Gallery</x-layouts.sidebar-link>
+
                             <!-- Example two level -->
                             <x-layouts.sidebar-two-level-link-parent title="Example two level" icon="fas-house"
                                 :active="request()->routeIs('two-level*')">

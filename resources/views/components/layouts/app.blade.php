@@ -36,6 +36,30 @@
             window.localStorage.getItem('appearance') || 
             'system'
         )
+
+        const replaceViewImageLinksWithThumbnail = () => {
+            const viewImageLinks = Array.from(document.querySelectorAll('a'))
+                .filter((anchor) => anchor.textContent.trim().toLowerCase() === 'ver imagen' && anchor.href);
+
+            viewImageLinks.forEach((anchor) => {
+                const thumbnail = document.createElement('img');
+                thumbnail.src = anchor.href;
+                thumbnail.alt = 'Miniatura de imagen';
+                thumbnail.loading = 'lazy';
+                thumbnail.className = 'h-14 w-14 rounded-md object-cover border border-gray-200 dark:border-gray-700';
+
+                anchor.textContent = '';
+                anchor.appendChild(thumbnail);
+                anchor.classList.add('inline-block', 'hover:opacity-90', 'transition-opacity');
+                anchor.setAttribute('aria-label', 'Ver imagen completa');
+            });
+        };
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', replaceViewImageLinksWithThumbnail);
+        } else {
+            replaceViewImageLinksWithThumbnail();
+        }
     </script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -71,7 +95,9 @@
                 <div class="p-6">
                     <!-- Success Message -->
                     @session('status')
-                        <div x-data="{ showStatusMessage: true }" x-show="showStatusMessage"
+                        <div x-data="{ showStatusMessage: true }"
+                            x-init="setTimeout(() => showStatusMessage = false, 5000)"
+                            x-show="showStatusMessage"
                             x-transition:enter="transition ease-out duration-300"
                             x-transition:enter-start="opacity-0 transform -translate-y-2"
                             x-transition:enter-end="opacity-100 transform translate-y-0"

@@ -35,7 +35,8 @@
                     class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden mb-6">
                     <div class="p-6">
                         <!-- Profile Form -->
-                        <form class="max-w-md mb-10" action="{{ route('settings.password.update') }}" method="POST">
+                        {{-- <form class="max-w-md mb-10" action="{{ route('settings.password.update') }}" method="POST"> --}}
+                        <form class="w-full max-w-2xl mb-10" action="{{ route('settings.password.update') }}" method="POST">    
                             @csrf
                             @method('PUT')
                             <div class="mb-4">

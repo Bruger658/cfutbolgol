@@ -1,6 +1,7 @@
 <html class="light" lang="es">
 
 <head>
+
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Centro Fútbol Gol - Academia de Alto Rendimiento</title>
@@ -11,15 +12,129 @@
         rel="stylesheet" />
     <script id="tailwind-config">
         tailwind.config = {
+            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        'brand-blue': '#0d7ff2',
-                        'brand-pale': '#f0f9ff',
+                        "primary": "#0d7ff2",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#d1e4ff",
+                        "on-primary-container": "#001d36",
+                        "secondary": "#535f70",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#d7e3f7",
+                        "on-secondary-container": "#101c2b",
+                        "tertiary": "#6b5778",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#f2daff",
+                        "on-tertiary-container": "#251431",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "background": "#fdfcff",
+                        "on-background": "#1a1c1e",
+                        "surface": "#fdfcff",
+                        "on-surface": "#1a1c1e",
+                        "surface-variant": "#dfe3eb",
+                        "on-surface-variant": "#43474e",
+                        "outline": "#73777f",
+                        "brand-pale": "#f0f9ff"
+
+                        
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.5rem",
+                        "xl": "1rem",
+                        "2xl": "1.5rem",
+                        "3xl": "2rem",
+                        "full": "9999px"
+                        
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Lexend"],
+                        "label": ["Lexend"]
                     }
-                }
+                },
+            },
+        }
+    </script>
+
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .carousel-track {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #0d7ff2 0%, #0056b3 100%);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+
+
+        
+
+        h1,
+        h2,
+        h3,
+        .font-lexend {
+            font-family: 'Lexend', sans-serif;
+        }
+
+
+
+        /* Carousel animation */
+        @keyframes carousel-fade {
+
+            0%,
+            20% {
+                opacity: 1;
+            }
+
+            25%,
+            95% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
             }
         }
+
+        .carousel-item {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-item.active {
+            opacity: 1;
+        }
+
+        #map-modal.hidden {
+            display: none;
+        }
+
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Gallery & Carousel Logic
             const modal = document.getElementById('lightbox-modal');
@@ -29,7 +144,8 @@
             const nextLightbox = document.getElementById('next-lightbox');
 
             const track = document.querySelector('.carousel-track');
-            const slides = Array.from(track.children);
+            {{-- const slides = Array.from(track.children); --}}
+            const slides = Array.from(track.querySelectorAll('.gallery-items'));
             const nextButton = document.querySelector('.carousel-button-right');
             const prevButton = document.querySelector('.carousel-button-left');
             const dotsNav = document.querySelector('.carousel-nav');
@@ -40,9 +156,9 @@
 
             const updateCarousel = (targetIndex) => {
                 track.style.transform = `translateX(-${targetIndex * 100}%)`;
-                dots[currentSlideIndex].classList.remove('bg-brand-blue');
+                dots[currentSlideIndex].classList.remove('bg-primary');
                 dots[currentSlideIndex].classList.add('bg-slate-300');
-                dots[targetIndex].classList.add('bg-brand-blue');
+                dots[targetIndex].classList.add('bg-primary');
                 dots[targetIndex].classList.remove('bg-slate-300');
                 currentSlideIndex = targetIndex;
             };
@@ -120,8 +236,14 @@
             });
 
             closeBtn.addEventListener('click', closeModal);
-            prevLightbox.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
-            nextLightbox.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
+            prevLightbox.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navigateLightbox(-1);
+            });
+            nextLightbox.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navigateLightbox(1);
+            });
 
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) closeModal();
@@ -174,47 +296,135 @@
                 if (e.target === newsModal) closeNewsModal();
             });
 
+            // Methodology Modal Logic
+            const methodologyModal = document.getElementById('methodology-modal');
+            const btnMetodologia = document.getElementById('btn-metodologia');
+            const closeMethodology = document.getElementById('close-methodology');
+            const methodologyContainer = methodologyModal.querySelector('.modal-container');
+
+            const openMethodology = () => {
+                methodologyModal.classList.remove('hidden');
+                setTimeout(() => {
+                    methodologyModal.classList.add('opacity-100');
+                    methodologyContainer.classList.remove('scale-95');
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeMethodologyModal = () => {
+                methodologyModal.classList.remove('opacity-100');
+                methodologyContainer.classList.add('scale-95');
+                setTimeout(() => {
+                    methodologyModal.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = '';
+            };
+
+            if (btnMetodologia) btnMetodologia.addEventListener('click', openMethodology);
+            if (closeMethodology) closeMethodology.addEventListener('click', closeMethodologyModal);
+
+            methodologyModal.addEventListener('click', (e) => {
+                if (e.target === methodologyModal) closeMethodologyModal();
+            });
+
+            // Teams Modal Logic
+            const teamsModal = document.getElementById('teams-modal');
+            const closeTeamsBtn = document.getElementById('close-teams');
+            const teamsCards = document.querySelectorAll('.team-card');
+
+            const teamCategories = {
+                'Edefi': ['Categoría 2012', 'Categoría 2013', 'Categoría 2014', 'Categoría 2015', 'Categoría 2016', 'Categoría 2017'],
+                'Bafi': ['Sexta División', 'Séptima División', 'Octava División', 'Novena División', 'Primera División'],
+                'Futsala': ['Categoría 2008', 'Categoría 2009', 'Categoría 2010', 'Categoría 2011', 'Senior +35'],
+                'Futsal Femenino': ['Sub-14', 'Sub-16', 'Sub-18', 'Primera División', 'Veteranas']
+            };
+
+            const openTeamsModal = (teamName) => {
+                const modalTitle = document.getElementById('teams-modal-title');
+                const grid = document.getElementById('teams-categories-grid');
+
+                modalTitle.textContent = `Categorías ${teamName}`;
+                grid.innerHTML = '';
+
+                const categories = teamCategories[teamName] || ['Iniciación', 'Pre-competitivo', 'Competitivo'];
+
+                categories.forEach(cat => {
+                    const div = document.createElement('div');
+                    div.className = 'bg-brand-pale p-6 rounded-2xl border-l-4 border-primary shadow-sm hover:shadow-md transition-all';
+                    div.innerHTML = `<span class="font-black text-on-surface block">${cat}</span><p class="text-sm text-on-surface-variant mt-1">Días y horarios a coordinar según cupos disponibles.</p>`;
+                    grid.appendChild(div);
+                });
+
+                teamsModal.classList.remove('hidden');
+                setTimeout(() => {
+                    teamsModal.classList.add('opacity-100');
+                    teamsModal.querySelector('.modal-container').classList.remove('scale-95');
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeTeamsModal = () => {
+                teamsModal.classList.remove('opacity-100');
+                teamsModal.querySelector('.modal-container').classList.add('scale-95');
+                setTimeout(() => {
+                    teamsModal.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = '';
+            };
+
+            teamsCards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const teamName = card.querySelector('h4').textContent.trim();
+                    openTeamsModal(teamName);
+                });
+            });
+
+            if (closeTeamsBtn) closeTeamsBtn.addEventListener('click', closeTeamsModal);
+
+            teamsModal.addEventListener('click', (e) => {
+                if (e.target === teamsModal) closeTeamsModal();
+            });
+
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     if (!modal.classList.contains('hidden')) closeModal();
                     if (!newsModal.classList.contains('hidden')) closeNewsModal();
+                    if (!methodologyModal.classList.contains('hidden')) closeMethodologyModal();
+                    if (!teamsModal.classList.contains('hidden')) closeTeamsModal();
                 }
                 if (!modal.classList.contains('hidden')) {
                     if (e.key === 'ArrowLeft') navigateLightbox(-1);
                     if (e.key === 'ArrowRight') navigateLightbox(1);
                 }
             });
+
+            // Enrollment Form Logic
+            const enrollmentForm = document.getElementById('enrollment-form');
+            if (enrollmentForm) {
+                enrollmentForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('¡Inscripción enviada con éxito! Nos pondremos en contacto pronto.');
+                    enrollmentForm.reset();
+                });
+            }
         });
     </script>
-    <style>
-        body {
-            font-family: 'Lexend', sans-serif;
-        }
-
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-
-        .carousel-track {
-            transition: transform 0.5s ease-in-out;
-        }
-    </style>
 </head>
 
 
-<body class="bg-white text-slate-900 antialiased">
+<body class="bg-surface text-on-surface font-body antialiased"> 
     <!-- Lightbox Modal -->
     <div class="fixed inset-0 z-[100] bg-black/95 hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4"
         id="lightbox-modal">
-        <button class="absolute top-6 right-6 text-white hover:text-brand-blue transition-colors z-50"
-            id="close-lightbox">
+        <button class="absolute top-6 right-6 text-white hover:text-primary transition-colors z-50" id="close-lightbox">
             <span class="material-symbols-outlined text-4xl">close</span>
         </button>
-        <button class="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-brand-blue transition-colors"
+        <button class="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-primary transition-colors"
             id="prev-lightbox">
             <span class="material-symbols-outlined text-5xl">chevron_left</span>
         </button>
-        <button class="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-brand-blue transition-colors"
+        <button class="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-primary transition-colors"
             id="next-lightbox">
             <span class="material-symbols-outlined text-5xl">chevron_right</span>
         </button>
@@ -224,7 +434,7 @@
     <div class="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4"
         id="news-modal">
         <div
-            class="modal-container bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-[2rem] shadow-2xl relative transform scale-95 transition-transform duration-300">
+            class="modal-container bg-surface w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl relative transform scale-95 transition-transform duration-300">
             <button
                 class="absolute top-4 right-4 z-10 bg-white/80 hover:bg-white rounded-full p-2 text-slate-900 shadow-md transition-all"
                 id="close-news">
@@ -232,53 +442,141 @@
             </button>
             <img alt="" class="w-full h-64 object-cover" id="news-modal-img" src="" />
             <div class="p-8 md:p-12">
-                <span class="text-xs font-bold text-brand-blue tracking-widest uppercase mb-2 block"
+                <span class="text-xs font-bold text-primary tracking-widest uppercase mb-2 block"
                     id="news-modal-tag"></span>
-                <h3 class="text-3xl md:text-4xl font-black text-slate-900 mb-6 leading-tight" id="news-modal-title">
+                <h3 class="text-3xl md:text-4xl font-black text-on-surface mb-6 leading-tight" id="news-modal-title">
                 </h3>
-                <div class="text-slate-600 text-lg leading-relaxed space-y-4" id="news-modal-content"></div>
-                <div class="mt-10 pt-8 border-t border-slate-100 flex justify-between items-center">
+                <div class="text-on-surface-variant text-lg leading-relaxed space-y-4" id="news-modal-content"></div>
+                <div
+                    class="mt-10 pt-8 border-t border-surface-variant flex flex-wrap justify-between items-center gap-4">
                     <button
-                        class="px-8 py-3 bg-brand-blue text-white font-bold rounded-xl shadow-lg hover:shadow-brand-blue/20 transition-all">Contactar
+                        class="px-8 py-3 bg-primary text-on-primary font-bold rounded-xl shadow-lg hover:shadow-primary/20 transition-all">Contactar
                         por esta noticia</button>
                     <div class="flex gap-4">
                         <span
-                            class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-brand-blue">share</span>
+                            class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">share</span>
                         <span
-                            class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-brand-blue">bookmark</span>
+                            class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">bookmark</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Methodology Modal -->
+    <div class="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4"
+        id="methodology-modal">
+        <div
+            class="modal-container bg-surface w-full max-w-4xl max-h-[90vh] overflow-hidden rounded-[2.5rem] shadow-2xl relative transform scale-95 transition-transform duration-300 flex flex-col">
+            <button
+                class="absolute top-6 right-6 z-20 bg-white/80 hover:bg-white rounded-full p-2 text-slate-900 shadow-md transition-all"
+                id="close-methodology">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="p-8 md:p-12 overflow-y-auto">
+                <div class="mb-10 text-center">
+                    <h3 class="text-4xl md:text-5xl font-black text-on-surface leading-tight">Nuestra Metodología</h3>
+                    <div class="h-1.5 w-24 bg-primary mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-6 text-on-surface-variant text-lg leading-relaxed">
+                    <p>
+                        En <strong>Centro Fútbol Gol</strong>, nuestra metodología se fundamenta en un <strong>enfoque
+                            formativo integral</strong> que trasciende los límites del campo de juego. Entendemos que
+                        para formar a las promesas del mañana, debemos trabajar no solo en sus habilidades físicas, sino
+                        también en su carácter, disciplina y comprensión intelectual del deporte.
+                    </p>
+                    <p>
+                        Nuestro programa se divide en tres pilares fundamentales:
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="bg-brand-pale p-6 rounded-2xl border-l-4 border-primary">
+                            <span class="font-black text-on-surface block mb-1">Desarrollo Integral:</span>
+                            Fomentamos valores de respeto, trabajo en equipo y resiliencia, preparando a nuestros
+                            jóvenes para los desafíos dentro y fuera de la cancha.
+                        </li>
+                        <li class="bg-brand-pale p-6 rounded-2xl border-l-4 border-primary">
+                            <span class="font-black text-on-surface block mb-1">Técnica Individual:</span>
+                            Utilizamos ejercicios de alta repetición y situaciones de juego real para perfeccionar el
+                            control, el regate y la precisión, asegurando que cada jugador domine los fundamentos
+                            técnicos básicos.
+                        </li>
+                        <li class="bg-brand-pale p-6 rounded-2xl border-l-4 border-primary">
+                            <span class="font-black text-on-surface block mb-1">Táctica Colectiva:</span>
+                            A través del análisis de juego y ejercicios posicionales, enseñamos a los deportistas a
+                            interpretar el juego, ocupar espacios de manera inteligente y tomar decisiones rápidas bajo
+                            presión.
+                        </li>
+                    </ul>
+                    <p>
+                        Gracias a la incorporación de tecnología de vanguardia y un cuerpo técnico altamente calificado,
+                        garantizamos un proceso de aprendizaje evolutivo adaptado a cada etapa del crecimiento
+                        deportivo.
+                    </p>
+                </div>
+                <div class="mt-10 flex justify-center">
+                    <button
+                        class="px-10 py-4 bg-primary text-on-primary font-bold rounded-xl shadow-lg hover:shadow-primary/20 transition-all hover:scale-105"
+                        onclick="document.getElementById('close-methodology').click()">Entendido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Teams Modal -->
+    <div class="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4"
+        id="teams-modal">
+        <div
+            class="modal-container bg-surface w-full max-w-4xl max-h-[90vh] overflow-hidden rounded-[2.5rem] shadow-2xl relative transform scale-95 transition-transform duration-300 flex flex-col">
+            <button
+                class="absolute top-6 right-6 z-20 bg-white/80 hover:bg-white rounded-full p-2 text-slate-900 shadow-md transition-all"
+                id="close-teams">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="p-8 md:p-12 overflow-y-auto no-scrollbar">
+                <div class="mb-10 text-center">
+                    <h3 class="text-4xl md:text-5xl font-black text-on-surface leading-tight" id="teams-modal-title">
+                    </h3>
+                    <div class="h-1.5 w-24 bg-primary mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4" id="teams-categories-grid">
+                    <!-- Categories will be injected here -->
+                </div>
+                <div class="mt-12 flex flex-col items-center gap-6">
+                    <p class="text-on-surface-variant text-center max-w-xl">Nuestras categorías están diseñadas para
+                        brindar una formación específica acorde a la edad y el nivel competitivo del deportista.</p>
+                    <button
+                        class="px-10 py-4 bg-primary text-on-primary font-bold rounded-xl shadow-lg hover:shadow-primary/20 transition-all hover:scale-105"
+                        onclick="document.getElementById('close-teams').click()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- TopNavBar -->
-    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
-        <div class="flex justify-between items-center px-6 md:px-12 py-4 max-w-screen-2xl mx-auto">
+    <nav class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md border-b border-surface-variant shadow-sm">
+        <div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
             <div class="flex items-center gap-3">
-                <img alt="Centro Fútbol Gol Logo" class="w-auto object-contain h-12"
-                    src="images/cfg.png"
-                    style="background: transparent; border: none;" />
-                <span class="text-xl font-black text-[#0d7ff2] uppercase tracking-tighter hidden sm:block">Centro Fútbol
-                    Gol</span>
+                <span class="material-symbols-outlined text-primary text-3xl">sports_soccer</span>
+                <span class="text-xl font-black text-primary uppercase tracking-tighter">Centro Fútbol Gol</span>
             </div>
             <div class="hidden lg:flex items-center gap-8">
-                <a class="text-slate-600 hover:text-brand-blue transition-colors font-medium text-sm tracking-tight"
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="#historia">Historia</a>
-                <a class="text-slate-600 hover:text-brand-blue transition-colors font-medium text-sm tracking-tight"
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="#equipos">Equipos</a>
-                <a class="text-slate-600 hover:text-brand-blue transition-colors font-medium text-sm tracking-tight"
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="#calendario">Calendario</a>
-                <a class="text-slate-600 hover:text-brand-blue transition-colors font-medium text-sm tracking-tight"
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="#noticias">Noticias</a>
-                <a class="text-slate-600 hover:text-brand-blue transition-colors font-medium text-sm tracking-tight"
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="#inscripcion">Inscripción</a>
-                <a class="text-slate-600 hover:text-brand-blue transition-colors font-medium text-sm tracking-tight"
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="#sedes">Sedes</a>
             </div>
-            <button
-                class="bg-[#0d7ff2] text-white px-6 py-2.5 rounded-lg font-bold text-sm hover:bg-blue-600 transition-all active:scale-95">
-                CFG
-            </button>
+            <div class="flex items-center gap-4">
+                <button
+                    class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-bold text-sm hover:scale-105 transition-all active:scale-95 shadow-md shadow-primary/20">CFG</button>
+                <button class="lg:hidden text-on-surface">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
         </div>
     </nav>
 

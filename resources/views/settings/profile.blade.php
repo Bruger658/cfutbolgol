@@ -33,7 +33,9 @@
                     class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden mb-6">
                     <div class="p-6">
                         <!-- Profile Form -->
-                        <form class="max-w-md mb-10" action="{{ route('settings.profile.update') }}" method="POST">
+                        
+                        {{-- <form class="max-w-md mb-10" action="{{ route('settings.profile.update') }}" method="POST"> --}}
+                        <form class="w-full max-w-2xl mb-10" action="{{ route('settings.profile.update') }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="mb-4">
@@ -59,11 +61,14 @@
                             <p class="text-gray-600 dark:text-gray-400 mb-4">
                                 {{ __('Delete your account and all of its resources') }}
                             </p>
-                            <form action="{{ route('settings.profile.destroy') }}" method="POST"
-                                onsubmit="return confirm('{{ __('Are you sure you want to delete your account?') }}')">
+
+                            <form action="{{ route('settings.profile.destroy') }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <x-button type="danger">{{ __('Delete account') }}</x-button>
+                                <button type="button" id="open-delete-account-modal"
+                                    class="text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors flex items-center justify-center cursor-pointer bg-red-600 hover:bg-red-700 focus:ring-red-500">
+                                    {{ __('Delete account') }}
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -71,4 +76,62 @@
             </div>
         </div>
     </div>
+
+    <div class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 px-4" id="delete-account-modal"
+        aria-hidden="true">
+        <div class="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-800">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ __('Delete account') }}</h3>
+            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                {{ __('Are you sure you want to delete your account?') }}
+            </p>
+            <div class="mt-6 flex justify-end gap-3">
+                <button type="button" id="cancel-delete-account"
+                    class="rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">
+                    {{ __('Cancel') }}
+                </button>
+                <button type="button" id="confirm-delete-account"
+                    class="text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors flex items-center justify-center cursor-pointer bg-red-600 hover:bg-red-700 focus:ring-red-500">
+                    {{ __('Delete account') }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('delete-account-modal');
+            const form = document.getElementById('delete-account-form');
+            const openButton = document.getElementById('open-delete-account-modal');
+            const cancelButton = document.getElementById('cancel-delete-account');
+            const confirmButton = document.getElementById('confirm-delete-account');
+
+            if (!modal || !form || !openButton || !cancelButton || !confirmButton) {
+                return;
+            }
+
+            const closeModal = () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                modal.setAttribute('aria-hidden', 'true');
+            };
+
+            const openModal = () => {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                modal.setAttribute('aria-hidden', 'false');
+            };
+
+            openButton.addEventListener('click', openModal);
+            cancelButton.addEventListener('click', closeModal);
+            modal.addEventListener('click', event => {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+
+            confirmButton.addEventListener('click', () => {
+                form.submit();
+            });
+        });
+    </script>
 </x-layouts.app>
