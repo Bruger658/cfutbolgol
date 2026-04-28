@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GalleryItem;
+use App\Models\GalleryItems;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -10,8 +10,9 @@ class HomeController extends Controller
     public function index(): View
     {
         return view('index', [
-            'galleryItems' => GalleryItem::query()
-                ->where('is_active', true)
+            // 'galleryItems' => GalleryItem::query()
+            //     ->where('is_active', true)
+            'galleryItems' => GalleryItems::query()
                 ->latest()
                 ->get(),
         ]);

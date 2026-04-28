@@ -143,23 +143,26 @@
             const prevLightbox = document.getElementById('prev-lightbox');
             const nextLightbox = document.getElementById('next-lightbox');
 
-            const track = document.querySelector('.carousel-track');
-            {{-- const slides = Array.from(track.children); --}}
-            const slides = Array.from(track.querySelectorAll('.gallery-items'));
+            const track = document.querySelector('.carousel-track');            
             const nextButton = document.querySelector('.carousel-button-right');
             const prevButton = document.querySelector('.carousel-button-left');
             const dotsNav = document.querySelector('.carousel-nav');
-            const dots = Array.from(dotsNav.children);
+            const dots = dotsNav ? Array.from(dotsNav.children) : [];
+            
 
             let currentSlideIndex = 0;
             let autoPlayTimer;
 
             const updateCarousel = (targetIndex) => {
                 track.style.transform = `translateX(-${targetIndex * 100}%)`;
-                dots[currentSlideIndex].classList.remove('bg-primary');
-                dots[currentSlideIndex].classList.add('bg-slate-300');
-                dots[targetIndex].classList.add('bg-primary');
-                dots[targetIndex].classList.remove('bg-slate-300');
+                if (dots[currentSlideIndex]) {
+                    dots[currentSlideIndex].classList.remove('bg-primary');
+                    dots[currentSlideIndex].classList.add('bg-slate-300');
+                }
+                if (dots[targetIndex]) {
+                    dots[targetIndex].classList.add('bg-primary');
+                    dots[targetIndex].classList.remove('bg-slate-300');
+                }
                 currentSlideIndex = targetIndex;
             };
 
@@ -173,15 +176,22 @@
                 updateCarousel(targetIndex);
             };
 
-            nextButton.addEventListener('click', () => {
-                moveToNextSlide();
-                resetAutoPlay();
-            });
+            if (nextButton) {
+                nextButton.addEventListener('click', () => {
+                    moveToNextSlide();
+                    resetAutoPlay();
+                });
+            }
 
-            prevButton.addEventListener('click', () => {
-                moveToPrevSlide();
-                resetAutoPlay();
-            });
+            if (prevButton) {
+                prevButton.addEventListener('click', () => {
+                    moveToPrevSlide();
+                    resetAutoPlay();
+                });
+            }
+
+
+
 
             dots.forEach((dot, index) => {
                 dot.addEventListener('click', () => {
@@ -190,6 +200,7 @@
                 });
             });
 
+          
             const startAutoPlay = () => {
                 autoPlayTimer = setInterval(moveToNextSlide, 5000);
             };
@@ -199,7 +210,13 @@
                 startAutoPlay();
             };
 
-            startAutoPlay();
+
+
+            if (track && slides.length > 1) {
+                startAutoPlay();
+            }         
+
+            
 
             // Lightbox Logic
             const openModal = (index) => {
@@ -231,23 +248,36 @@
                 modalImg.src = img.src;
             };
 
+
             slides.forEach((slide, index) => {
-                slide.querySelector('img').addEventListener('click', () => openModal(index));
+                const img = slide.querySelector('img');
+                if (img) {
+                    img.addEventListener('click', () => openModal(index));
+                }
             });
 
-            closeBtn.addEventListener('click', closeModal);
-            prevLightbox.addEventListener('click', (e) => {
-                e.stopPropagation();
-                navigateLightbox(-1);
-            });
-            nextLightbox.addEventListener('click', (e) => {
-                e.stopPropagation();
-                navigateLightbox(1);
-            });
 
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) closeModal();
-            });
+            if (closeBtn) closeBtn.addEventListener('click', closeModal);
+            if (prevLightbox) {
+                prevLightbox.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    navigateLightbox(-1);
+                });
+            }
+            if (nextLightbox) {
+                nextLightbox.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    navigateLightbox(1);
+                });
+            }
+
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
+                });
+            }           
+
+           
 
             // News Modal Logic
             const newsModal = document.getElementById('news-modal');

@@ -327,7 +327,7 @@
                         @forelse ($galleryItems ?? [] as $item)
                             <div class="carousel-slide min-w-full h-full">
                                 <img class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
-                                    alt="{{ $item->title }}" src="{{ asset('storage/' . $item->image_path) }}" />
+                                    alt="{{ $item->title }}" src="{{ asset('storage/' . $item->image_url) }}" />
                             </div>
                         @empty
                             <div class="carousel-slide min-w-full h-full">
@@ -361,7 +361,7 @@
                     @endphp
                     @for ($i = 0; $i < $slidesCount; $i++)
                         <button aria-label="Slide {{ $i + 1 }}"
-                            class="w-2.5 h-2.5 rounded-full {{ $i === 0 ? 'bg-brand-blue' : 'bg-slate-300 hover:bg-brand-blue/50' }} transition-all"></button>
+                            class="w-2.5 h-2.5 rounded-full {{ $i === 0 ? 'bg-primary' : 'bg-slate-300 hover:bg-primary/50' }} transition-all"></button>
                     @endfor
                 </div>
             </div>
