@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 320" role="img" aria-labelledby="title desc">
+  <title id="title">Logo Centro Fútbol Gol</title>
+  <desc id="desc">Escudo azul y blanco con iniciales CFG</desc>
+  <rect width="220" height="320" rx="24" fill="#f3f4f6"/>
+  <path d="M25 70h170v140c0 55-35 80-85 100-50-20-85-45-85-100V70z" fill="#1d4ed8"/>
+  <path d="M110 70h85v140c0 55-35 80-85 100V70z" fill="#ffffff"/>
+  <text x="37" y="195" font-size="110" font-family="Arial Black, Arial, sans-serif" fill="#ffffff">f</text>
+  <text x="122" y="220" font-size="90" font-family="Arial Black, Arial, sans-serif" fill="#1e3a8a">G</text>
+  <text x="110" y="45" text-anchor="middle" font-size="28" font-family="Arial, sans-serif" font-weight="700" fill="#1e3a8a">Centro Fútbol Gol</text>
+  <circle cx="110" cy="16" r="10" fill="#1e3a8a"/>
+</svg>

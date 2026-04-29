@@ -466,23 +466,35 @@
             <div class="max-w-7xl mx-auto px-6 md:px-12">
                 <div
                     class="bg-white rounded-[2.5rem] overflow-hidden shadow-xl flex flex-col lg:flex-row min-h-[550px] border border-brand-blue/5">
-                    <!-- Inspiring Image Column -->
-                    <div class="lg:w-2/5 relative hidden lg:block overflow-hidden">
-                        <img alt="Soccer player training on pitch" class="absolute inset-0 w-full h-full object-cover"
-                            src="images/cfg.png" />
-                        <div class="absolute inset-0 bg-brand-blue/40 mix-blend-multiply"></div>
-                        <div class="absolute bottom-10 left-10 right-10 text-white z-10">
-                            <p class="text-2xl font-black leading-tight">El primer paso para ser profesional comienza
-                                aquí.</p>
-                            <div class="h-1.5 w-12 bg-white mt-4 rounded-full"></div>
+                    <!-- Logo Column -->
+                    <div class="lg:w-2/5 relative hidden lg:flex overflow-hidden bg-gradient-to-br from-brand-pale to-white border-r border-brand-blue/10">
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(30,64,175,0.06),_transparent_65%)]"></div>
+                        <div class="relative z-10 flex h-full w-full flex-col items-center justify-center px-8 py-12 text-center">
+                            <div class="w-full max-w-[260px] rounded-3xl bg-white/90 p-6 shadow-2xl shadow-brand-blue/10">
+                                <img alt="Logo Centro Fútbol Gol" class="mx-auto w-full max-w-[180px] object-contain"
+                                    src="/images/logo-cfg.svg" />
+                            </div>
+                            <p class="mt-8 text-2xl font-black leading-tight text-brand-blue">El primer paso para ser profesional comienza aquí.</p>
+                            <div class="h-1.5 w-12 bg-brand-blue mt-4 rounded-full"></div>
+
                         </div>
                     </div>
+
+
                     <!-- Form Column -->
                     <div class="lg:w-3/5 p-8 md:p-12 flex flex-col justify-center">
                         <div class="max-w-xl mx-auto w-full">
                             <h2 class="text-3xl font-black text-slate-900 mb-2">Inscripción Online</h2>
                             <p class="text-slate-500 mb-8">Completa el formulario y nuestro equipo técnico te contactará
                                 para una prueba de nivel.</p>
+                           
+                            <div
+                                class="mb-8 rounded-2xl overflow-hidden border border-slate-200 shadow-sm lg:hidden">
+                                <img alt="Niño con balón sonriendo en entrenamiento"
+                                    class="w-full h-40 object-cover"
+                                    src="https://images.unsplash.com/photo-1570498839593-e565b39455fc?auto=format&fit=crop&w=1200&q=80" />
+                            </div>
+                           
                             <form action="#" class="space-y-5">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                     <div class="space-y-1.5">
@@ -526,7 +538,7 @@
                                     </select>
                                 </div>
                                 <button
-                                    class="w-full py-4 bg-brand-blue text-white font-black rounded-xl shadow-xl shadow-brand-blue/20 hover:bg-blue-600 transition-all mt-4"
+                                   class="w-full py-4 bg-primary text-on-primary font-black rounded-xl border border-primary/20 shadow-xl shadow-primary/20 hover:bg-primary/90 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/30 transition-all mt-4"
                                     type="submit">
                                     Enviar Solicitud
                                 </button>
@@ -605,7 +617,7 @@
                     <div class="h-48 relative">
                         <img class="w-full h-full object-cover"
                             data-alt="Modern indoor football complex with artificial grass and bright industrial lighting"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgVbmt_3Cjstob6-cg_lFftWMT30TWxbAzxrEJpaU-vZIh0qPNXRS8c_qSGWXx0tTnnrrSRznZJhdWyQELTjobDLpwF8DXAwuBY0Q2UjLHjArvmLED6xDuwl9K6cbY8MxszE_RPJCU8YDeZ-YTxYwT0sP3JHVJGChbBVcTIyT4V8mfAYdV2nC_B0jJu4nkUf0xwOnSEjnSQTVSIlSaf7ZUtkUVekc7svMOQoanJeRzp9Ji8Lp-qLLqoqZSmnW-Y35X1ox9Tkdh5Te4" />
+                            src="{{ asset('images/sede-moron.jpg') }}" />
                         <div
                             class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold font-lexend uppercase">
                             Abierto
@@ -658,7 +670,7 @@
                     <div class="h-48 relative">
                         <img class="w-full h-full object-cover"
                             data-alt="High-end aquatic center with Olympic swimming pool and glass architecture"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH_VbdqQcTYwUB_Of0Vk4zrSr_PmI54Ci55nOKfZZLp8m_2epq4S9orbjKY2ZZbQkL0U2anc55IgbYsVPJJBk2pkte12KPZHF2UCBtlh1CUwwry5Bih1M7-3wnyhrcdV9DGivIqEx1-qhe46flSoaeW5a5AM2Y1kOO9Wdk29x6_jWzJMRXNNceZojVb8_v4W1H7M3aXPj8JKxmHzAyaVHoPIOwcMVuQzXbILKeGMXLfFChEv6pAFd4NjeP3U3_M1UlHCOeWxnZkHnJ" />
+                            src="{{ asset('images/sede-moron.jpg') }}" />
                         <div
                             class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold font-lexend uppercase">
                             Abierto
@@ -688,12 +700,12 @@
                                 <span class="material-symbols-outlined text-base"
                                     data-icon="local_parking">local_parking</span>
                                 Estacion
-                            </div>
+                            </div>                            
                         </div>
                         <div class="flex gap-2">
                             <button
                                 class="flex-1 bg-gradient-to-r from-primary to-primary-container text-white py-3 rounded-xl font-lexend font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 active:scale-95 transition-all"
-                                onclick="openMap('Sede Castelar', 'Gdor. Máximo Paz 680, Castelar')">
+                               onclick="openCastelarMapModal()">
                                 <span class="material-symbols-outlined text-lg"
                                     data-icon="sports_soccer">sports_soccer</span>
                                 Cómo llegar
@@ -711,7 +723,7 @@
                     <div class="h-48 relative">
                         <img class="w-full h-full object-cover"
                             data-alt="Modern administrative building for a sports club with sleek white facade and glass doors"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLsm9F3ylzysc81ldsuVxkUQLMFb2sdWWagTjyeQOJQ8LcrTAR_hit0eQLGdD-3MEapJE4xFzOkA2XvJsv0vx60dH1JYix8O33dSq_2y6dnHBgbkP-eNrNVsKjgez5IZVPzUXEumCjO8Pdfstm6_E0l-7k9AyBMCQtBg14zn1Kv68MT3GBQ2V_rlJEQMmYOjD0KWNecFSOIOLPF7X34x3E2b_rQzVXDZV-Dfbf9kMC9XW5uNDYuPEWXMv6GLwBZHHtZPADuipuogGw" />
+                            src="{{ asset('images/aserradero.jpg') }}" />
                         <div
                             class="absolute top-4 right-4 bg-error-container text-on-error-container px-3 py-1 rounded-full text-xs font-bold font-lexend uppercase">
                             Cierra Pronto

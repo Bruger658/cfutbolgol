@@ -135,6 +135,18 @@
     </style>
 
     <script>
+
+        window.openMap = (venueName, address) => {
+            const query = encodeURIComponent(address);
+            const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${query}`;
+            const opened = window.open(googleMapsUrl, '_blank', 'noopener,noreferrer');
+
+            if (!opened) {
+                window.location.href = googleMapsUrl;
+            }
+        };
+
+
         document.addEventListener('DOMContentLoaded', () => {
             // Gallery & Carousel Logic
             const modal = document.getElementById('lightbox-modal');
@@ -143,7 +155,8 @@
             const prevLightbox = document.getElementById('prev-lightbox');
             const nextLightbox = document.getElementById('next-lightbox');
 
-            const track = document.querySelector('.carousel-track');            
+            const track = document.querySelector('.carousel-track');
+            const slides = track ? Array.from(track.children) : [];          
             const nextButton = document.querySelector('.carousel-button-right');
             const prevButton = document.querySelector('.carousel-button-left');
             const dotsNav = document.querySelector('.carousel-nav');
@@ -154,6 +167,9 @@
             let autoPlayTimer;
 
             const updateCarousel = (targetIndex) => {
+                if (!track || slides.length === 0) {
+                    return;
+                }
                 track.style.transform = `translateX(-${targetIndex * 100}%)`;
                 if (dots[currentSlideIndex]) {
                     dots[currentSlideIndex].classList.remove('bg-primary');
@@ -167,11 +183,17 @@
             };
 
             const moveToNextSlide = () => {
+                  if (slides.length <= 1) {
+                    return;
+                }
                 const targetIndex = (currentSlideIndex + 1) % slides.length;
                 updateCarousel(targetIndex);
             };
 
             const moveToPrevSlide = () => {
+                 if (slides.length <= 1) {
+                    return;
+                }
                 const targetIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
                 updateCarousel(targetIndex);
             };
@@ -207,7 +229,9 @@
 
             const resetAutoPlay = () => {
                 clearInterval(autoPlayTimer);
-                startAutoPlay();
+                if (slides.length > 1) {
+                    startAutoPlay();
+                }
             };
 
 
@@ -220,6 +244,9 @@
 
             // Lightbox Logic
             const openModal = (index) => {
+                if (!modal || !modalImg || slides.length === 0) {
+                    return;
+                }
                 currentSlideIndex = index;
                 const img = slides[index].querySelector('img');
                 modalImg.src = img.src;
@@ -233,6 +260,9 @@
             };
 
             const closeModal = () => {
+                if (!modal || !modalImg) {
+                    return;
+                }
                 modal.classList.add('opacity-0');
                 modal.classList.remove('opacity-100');
                 setTimeout(() => {
@@ -243,6 +273,9 @@
             };
 
             const navigateLightbox = (direction) => {
+                if (!modalImg || slides.length === 0) {
+                    return;
+                }
                 currentSlideIndex = (currentSlideIndex + direction + slides.length) % slides.length;
                 const img = slides[currentSlideIndex].querySelector('img');
                 modalImg.src = img.src;
@@ -271,11 +304,14 @@
                 });
             }
 
-            if (modal) {
+            {{-- if (modal) {
                 modal.addEventListener('click', (e) => {
                     if (e.target === modal) closeModal();
                 });
-            }           
+            }            --}}
+
+
+
 
            
 
@@ -416,12 +452,60 @@
                 if (e.target === teamsModal) closeTeamsModal();
             });
 
+
+
+
+             // Map Modal Logic
+            const mapModal = document.getElementById('map-modal');
+            const closeMapBtn = document.getElementById('close-map');
+            const mapTitle = document.getElementById('map-modal-title');
+            const mapAddress = document.getElementById('map-modal-address');
+            const mapFrame = document.getElementById('map-frame');
+
+            window.openMap = (venueName, address) => {
+                if (!mapModal || !mapFrame || !mapTitle || !mapAddress) return;
+
+                mapTitle.textContent = venueName;
+                mapAddress.textContent = address;
+                mapFrame.src = `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
+
+                mapModal.classList.remove('hidden');
+                setTimeout(() => {
+                    mapModal.classList.add('opacity-100');
+                    mapModal.querySelector('.modal-container').classList.remove('scale-95');
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeMapModal = () => {
+                if (!mapModal || !mapFrame) return;
+
+                mapModal.classList.remove('opacity-100');
+                mapModal.querySelector('.modal-container').classList.add('scale-95');
+                setTimeout(() => {
+                    mapModal.classList.add('hidden');
+                    mapFrame.src = '';
+                }, 300);
+                document.body.style.overflow = '';
+            };
+
+            if (closeMapBtn) closeMapBtn.addEventListener('click', closeMapModal);
+            if (mapModal) {
+                mapModal.addEventListener('click', (e) => {
+                    if (e.target === mapModal) closeMapModal();
+                });
+            }
+
+
+
+
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     if (!modal.classList.contains('hidden')) closeModal();
                     if (!newsModal.classList.contains('hidden')) closeNewsModal();
                     if (!methodologyModal.classList.contains('hidden')) closeMethodologyModal();
                     if (!teamsModal.classList.contains('hidden')) closeTeamsModal();
+                    if (mapModal && !mapModal.classList.contains('hidden')) closeMapModal();
                 }
                 if (!modal.classList.contains('hidden')) {
                     if (e.key === 'ArrowLeft') navigateLightbox(-1);
@@ -579,6 +663,31 @@
             </div>
         </div>
     </div>
+
+    <!-- Map Modal -->
+    <div class="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4"
+        id="map-modal">
+        <div
+            class="modal-container bg-surface w-full max-w-4xl max-h-[90vh] overflow-hidden rounded-[2.5rem] shadow-2xl relative transform scale-95 transition-transform duration-300 flex flex-col">
+            <button
+                class="absolute top-6 right-6 z-20 bg-white/80 hover:bg-white rounded-full p-2 text-slate-900 shadow-md transition-all"
+                id="close-map">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="p-8 md:p-10 flex flex-col gap-6 overflow-y-auto no-scrollbar">
+                <div class="pr-10">
+                    <h3 class="text-3xl md:text-4xl font-black text-on-surface leading-tight" id="map-modal-title">Cómo llegar</h3>
+                    <p class="text-on-surface-variant mt-2" id="map-modal-address"></p>
+                </div>
+                <div class="w-full h-[420px] rounded-2xl overflow-hidden border border-surface-variant/40">
+                    <iframe class="w-full h-full" id="map-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        title="Mapa de la sede"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- TopNavBar -->
     <nav class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md border-b border-surface-variant shadow-sm">
         <div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
