@@ -387,7 +387,8 @@
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSRcWY_cuGEWkt31m15GoQrMvYQSJSJehJrXtPMdhh_fiCoPrWoV_DN_fl7trO7Ad2Q-ZC8g38OSype03Q14lSKaqWidt1yHGSuedopFORGJP3TXCkd8mb9h-PfR_PNLKeMRdy7S0nuetVPVi6SA_2bD34iXf_-hWqG5wC8mEpvHqRhXsWIjoyC0RjOgfA4L4_qneINRFqppypxSzc0TWQXKf0C55wxZAMmXBYNp4lfscPmGBwrpCsq8dnyz-aYbJ0rc6MaLBxpLs" />
                             <div
                                 class="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest news-tag">
-                                Institucional</div>
+                                Institucional
+                            </div>
                         </div>
                         <div class="p-8 flex flex-col flex-grow">
                             <h4
@@ -412,8 +413,9 @@
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-HaqivuJMb8v1-rP8Y5aRnJaVGZH4IptXoSIPZEDGAKGLJhd116wO6LLw9VJPol-8CiL_Q1obLF0LMRza_GuYoyvWs7pJdbaX42VZNFSBgbtzGo4nGNxNbG8eIUH6GoKxI7yRXcJIarsvYGhdPjZc5OpOar7u2O1W2mNEUnfL9cUiDwKlVaGe8rT3KtbgU6IpD2dfcxMxMZF15N0lrZz8WuanrQM9zdU4vyrGFCdNLSdBrC2GH7Zh4q7xeoVlhoKqc5WJRgluftk" />
                             <div
                                 class="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest news-tag">
-                                Tecnología</div>
-                        </div>
+                                Tecnología
+                            </div>
+                         </div>
                         <div class="p-8 flex flex-col flex-grow">
                             <h4
                                 class="news-title text-2xl font-black text-on-surface mb-4 leading-tight group-hover:text-primary transition-colors">
@@ -433,8 +435,12 @@
                         class="news-card-root bg-white rounded-3xl overflow-hidden flex flex-col shadow-lg hover:shadow-xl transition-all border border-brand-blue/10 group h-full">
                         <div class="aspect-video overflow-hidden">
                             <img class="news-img w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                data-alt="Soccer player conditioning and training"
+                                data-alt="Soccer player conditioning and training"                                
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU9UkKgOSqgdkds1hzpQXrZVfWH1fDhtGwo7_H9sBmG6_2tTZwp5u7qR1szvtcLarnqTE1lwmj9EK6hDzc7OTMQGbJhxoqFO1IWJ60ypK7-rJ0p3gUgp5ReG7LQHo3An0sf4NX15CbC6leJmCFGJO81r62kf1W4rStnovIm6J8JBWdiRCi-laDKcYFJSpbRztZXcvzmGSFEC1-eAqmUqM-ss8-roA-0G3qz-n0ZOso1VMvaagMsOwsQg_VMJTL2LvAtiSOBlszCZg" />
+                            {{-- <div
+                                class="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest news-tag">
+                                Tecnología
+                            </div> --}}
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
                             <span
@@ -445,10 +451,9 @@
                                 de semana en el torneo más importante del país buscando revalidar el título obtenido.
                             </p>
                             <div class="mt-auto">
-                                <a class="text-brand-blue font-bold flex items-center gap-2 hover:translate-x-2 transition-transform news-read-more text-sm"
+                                <a class="text-primary font-black flex items-center gap-2 hover:gap-4 transition-all news-read-more text-sm uppercase tracking-tighter"
                                     href="#">Leer más <span
-                                        class="material-symbols-outlined text-[18px]">open_in_new</span></a>
-                            </div>
+                                        class="material-symbols-outlined text-[20px]">arrow_forward</span></a>
                         </div>
                     </div>                    
                 </div>        
