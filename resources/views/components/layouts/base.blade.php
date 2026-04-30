@@ -732,14 +732,11 @@
                     profesional y valores integrales para las nuevas generaciones.</p>
                 <div class="flex gap-4">
                     <a class="w-10 h-10 bg-white shadow-sm rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"
-                        href="#"><span class="material-symbols-outlined text-sm"
-                            style="font-variation-settings: 'FILL' 1;">social_leaderboard</span></a>
+                        href="#" aria-label="Instagram">@svg('fab-instagram', 'w-4 h-4')</a>
                     <a class="w-10 h-10 bg-white shadow-sm rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"
-                        href="#"><span class="material-symbols-outlined text-sm"
-                            style="font-variation-settings: 'FILL' 1;">play_circle</span></a>
+                        href="#" aria-label="WhatsApp">@svg('fab-whatsapp', 'w-4 h-4')</a>
                     <a class="w-10 h-10 bg-white shadow-sm rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"
-                        href="#"><span class="material-symbols-outlined text-sm"
-                            style="font-variation-settings: 'FILL' 1;">share</span></a>
+                        href="#" aria-label="Facebook">@svg('fab-facebook-f', 'w-4 h-4')</a>
                 </div>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-12">
@@ -756,20 +753,7 @@
                                 href="#">Calendario</a></li>
                     </ul>
                 </div>
-
-                <!-- <div>
-                    <h5 class="text-on-surface font-black text-sm uppercase tracking-widest mb-6">Ayuda</h5>
-                    <ul class="space-y-4">
-                        <li><a class="text-slate-500 hover:text-blue-700 underline-offset-4 hover:underline text-sm transition-all"
-                                href="#">Privacidad</a></li>
-                        <li><a class="text-slate-500 hover:text-blue-700 underline-offset-4 hover:underline text-sm transition-all"
-                                href="#">Términos</a></li>
-                        <li><a class="text-slate-500 hover:text-blue-700 underline-offset-4 hover:underline text-sm transition-all"
-                                href="#">Contacto</a></li>
-                        <li><a class="text-slate-500 hover:text-blue-700 underline-offset-4 hover:underline text-sm transition-all"
-                                href="#">Soporte</a></li>
-                    </ul>
-                </div> -->
+               
 
                 <div class="col-span-2 md:col-span-1">
                     <h5 class="text-on-surface font-black text-sm uppercase tracking-widest mb-6">Contáctanos</h5>
@@ -786,11 +770,11 @@
             class="border-t border-slate-200 px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-4 max-w-7xl mx-auto">
             <p class="font-lex text-xs md:text-sm text-slate-500">© 2024 Centro Fútbol Gol. Todos los derechos
                 reservados.</p>
-            <div class="flex gap-6">
+            {{-- <div class="flex gap-6">
                 <span class="text-blue-600 font-semibold text-xs">Fútbol Base</span>
                 <span class="text-blue-600 font-semibold text-xs">Alto Rendimiento</span>
                 <span class="text-blue-600 font-semibold text-xs">Valores</span>
-            </div>
+            </div> --}}
         </div>
     </footer>
 </body>

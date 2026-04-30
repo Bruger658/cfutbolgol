@@ -128,3 +128,8 @@
 .dark .custom-file-input:active::before {
     background: #4b5563;
 }
+
+/* Slightly larger Material Symbols for better legibility */
+.material-symbols-outlined {
+    font-size: 1.25rem;
+}

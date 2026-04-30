@@ -611,6 +611,7 @@
             </div>
             <!-- Sedes List / Bento Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
                 <!-- Sede 1 -->
                 <div
                     class="bg-surface-container-lowest rounded-3xl overflow-hidden group hover:translate-y-[-4px] transition-all duration-300">
@@ -635,13 +636,12 @@
                                 class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
                                 <span class="material-symbols-outlined text-base"
                                     data-icon="sports_soccer">sports_soccer</span>
-                                Canchas de 11
+                                Fútbol 5 y 7
                             </div>
                             <div
                                 class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
-                                <span class="material-symbols-outlined text-base"
-                                    data-icon="fitness_center">fitness_center</span>
-                                Gimnasio
+                                <span class="material-symbols-outlined" data-icon="meeting_room">meeting_room</span>
+                                SUM
                             </div>
                             <div
                                 class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
@@ -652,15 +652,12 @@
                         <div class="flex gap-2">
                             <button
                                 class="flex-1 bg-gradient-to-r from-primary to-primary-container text-white py-3 rounded-xl font-lexend font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 active:scale-95 transition-all"
-                                onclick="openMap('Sede Morón', 'Cjal. Horacio Julián 1460, Morón')">
+                                 onclick="openMap('Sede  Moron', 'Cjal. Horacio Julián 1460, Morón')">
                                 <span class="material-symbols-outlined text-lg"
                                     data-icon="sports_soccer">sports_soccer</span>
                                 Cómo llegar
                             </button>
-                            <button
-                                class="w-12 h-12 bg-surface-container-high text-primary flex items-center justify-center rounded-xl active:scale-95 transition-all">
-                                <span class="material-symbols-outlined" data-icon="call">call</span>
-                            </button>
+                            
                         </div>
                     </div>
                 </div>
@@ -670,7 +667,7 @@
                     <div class="h-48 relative">
                         <img class="w-full h-full object-cover"
                             data-alt="High-end aquatic center with Olympic swimming pool and glass architecture"
-                            src="{{ asset('images/sede-moron.jpg') }}" />
+                            src="{{ asset('images/almafuerte.jpg') }}" />
                         <div
                             class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold font-lexend uppercase">
                             Abierto
@@ -692,28 +689,24 @@
                             </div>
                             <div
                                 class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
-                                <span class="material-symbols-outlined text-base" data-icon="pool">pool</span>
-                                Piscina
+                                <span class="material-symbols-outlined text-base" data-icon="restaurant">restaurant</span>
+                                Buffet
                             </div>
                             <div
                                 class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
-                                <span class="material-symbols-outlined text-base"
-                                    data-icon="local_parking">local_parking</span>
-                                Estacion
+                               <span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+                                Gimnasio
                             </div>                            
                         </div>
                         <div class="flex gap-2">
                             <button
-                                class="flex-1 bg-gradient-to-r from-primary to-primary-container text-white py-3 rounded-xl font-lexend font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 active:scale-95 transition-all"
-                               onclick="openCastelarMapModal()">
+                               class="flex-1 bg-gradient-to-r from-primary to-primary-container text-white py-3 rounded-xl font-lexend font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 active:scale-95 transition-all"
+                                onclick="openMap('Sede Castelar', 'Gdor. Máximo Paz 680, Castelar')">
                                 <span class="material-symbols-outlined text-lg"
                                     data-icon="sports_soccer">sports_soccer</span>
                                 Cómo llegar
                             </button>
-                            <button
-                                class="w-12 h-12 bg-surface-container-high text-primary flex items-center justify-center rounded-xl active:scale-95 transition-all">
-                                <span class="material-symbols-outlined" data-icon="call">call</span>
-                            </button>
+                            
                         </div>
                     </div>
                 </div>
@@ -725,8 +718,8 @@
                             data-alt="Modern administrative building for a sports club with sleek white facade and glass doors"
                             src="{{ asset('images/aserradero.jpg') }}" />
                         <div
-                            class="absolute top-4 right-4 bg-error-container text-on-error-container px-3 py-1 rounded-full text-xs font-bold font-lexend uppercase">
-                            Cierra Pronto
+                            class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold font-lexend uppercase">
+                            Abierto
                         </div>
                     </div>
                     <div class="p-6">
@@ -739,19 +732,19 @@
                         <div class="flex flex-wrap gap-2 mb-6">
                             <div
                                 class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
-                                <span class="material-symbols-outlined text-base" data-icon="grass">grass</span>
-                                Sintéticas
-                            </div>
-                            <div
-                                class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
                                 <span class="material-symbols-outlined text-base"
-                                    data-icon="meeting_room">meeting_room</span>
-                                Vestuarios
+                                    data-icon="sports_soccer">sports_soccer</span>
+                                Fútbol 5 y 7
                             </div>
                             <div
                                 class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
-                                <span class="material-symbols-outlined text-base" data-icon="badge">badge</span>
-                                Sede
+                                <span class="material-symbols-outlined text-base" data-icon="restaurant">restaurant</span>
+                                Buffet
+                            </div>
+                            <div
+                                class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
+                               <span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+                                Gimnasio
                             </div>
                         </div>
                         <div class="flex gap-2">
@@ -762,10 +755,7 @@
                                     data-icon="sports_soccer">sports_soccer</span>
                                 Cómo llegar
                             </button>
-                            <button
-                                class="w-12 h-12 bg-surface-container-high text-primary flex items-center justify-center rounded-xl active:scale-95 transition-all">
-                                <span class="material-symbols-outlined" data-icon="call">call</span>
-                            </button>
+                            
                         </div>
                     </div>
                 </div>
