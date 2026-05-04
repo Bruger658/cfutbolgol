@@ -6,76 +6,55 @@ use App\Models\GalleryItems;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Storage;
-
 
 class GalleryItemController extends Controller
 {
     public function index(): View
     {
-        return view('gallery-items.index', [
-            'galleryItems' => GalleryItems::query()->latest()->paginate(10),
-        ]);
+        $items = GalleryItems::query()->latest()->get();
+
+        return view('gallery_items.index', compact('items'));
     }
 
     public function create(): View
     {
-        return view('gallery-items.create');
+        return view('gallery_items.create', [
+            'galleryItem' => new GalleryItems(['is_active' => true]),
+        ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string'],
-            'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp,gif', 'max:4096'],
+            'image_path' => ['required', 'string', 'max:255'],
+            'is_active' => ['nullable', 'boolean'],
         ]);
 
-        $path = $request->file('image')->store('gallery-items', 'public');
+        $data['is_active'] = $request->boolean('is_active');
 
-        GalleryItems::create([
-            'title' => $data['title'],
-            'description' => $data['description'] ?? null,
-            'image_url' => $path,
-        ]);
+        GalleryItems::create($data);
 
-        return redirect()->route('gallery-items.index')->with('success', 'Imagen creada correctamente.');
+        return redirect()->route('gallery-items.index');
     }
 
     public function edit(GalleryItems $galleryItem): View
     {
-        return view('gallery-items.edit', [
-            'galleryItem' => $galleryItem,
-        ]);
+        return view('gallery_items.edit', compact('galleryItem'));
     }
 
     public function update(Request $request, GalleryItems $galleryItem): RedirectResponse
     {
-        $validated = $request->validate([
+        $data = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,gif', 'max:4096'],
-            'description' => ['nullable', 'string'],
+            'image_path' => ['required', 'string', 'max:255'],
+            'is_active' => ['nullable', 'boolean'],
         ]);
 
-        if ($request->hasFile('image')) {
-            if (!empty($galleryItem->image_url) && Storage::disk('public')->exists($galleryItem->image_url)) {
-                Storage::disk('public')->delete($galleryItem->image_url);
-            }
+        $data['is_active'] = $request->boolean('is_active');
 
-            $validated['image_url'] = $request->file('image')->store('gallery-items', 'public');
-        }
+        $galleryItem->update($data);
 
-        unset($validated['image']);
-
-        $galleryItem->update($validated);
-
-        return to_route('gallery-items.index')->with('status', 'Elemento actualizado correctamente.');
-    }
-
-    public function destroy(GalleryItems $galleryItem): RedirectResponse
-    {
-        $galleryItem->delete();
-
-        return to_route('gallery-items.index')->with('status', 'Elemento eliminado correctamente.');
+        return redirect()->route('gallery-items.index');
     }
 }

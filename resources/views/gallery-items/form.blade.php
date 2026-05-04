@@ -1,9 +1,11 @@
+@include('gallery-items.form')
+
 @php
     $isEditing = isset($galleryItem);
 @endphp
 
 <div class="space-y-5">
-    <div>
+    {{-- <div>
         <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Título</label>
         <input id="title" name="title" type="text" value="{{ old('title', $galleryItem->title ?? '') }}"
             class="w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 focus:border-blue-500 focus:ring-blue-500"
@@ -11,7 +13,7 @@
         @error('title')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
         @enderror
-    </div>
+    </div> --}}
 
     {{-- <div>
         <label for="image_url" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">URL de imagen</label>
@@ -22,6 +24,18 @@
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
         @enderror
     </div> --}}
+
+    <div>
+        <label for="title" class="block text-sm font-medium text-gray-700">Título</label>
+        <input
+            id="title"
+            name="title"
+            type="text"
+            value="{{ old('title', $galleryItem->title) }}"
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+            required
+        >
+    </div>
 
      <div class="mb-4">
         <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Imagen</label>
@@ -47,14 +61,20 @@
         @enderror
     </div>
 
-    <div>
-        <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descripción</label>
-        <textarea id="description" name="description" rows="4"
-            class="w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 focus:border-blue-500 focus:ring-blue-500">{{ old('description', $galleryItem->description ?? '') }}</textarea>
-        @error('description')
-            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-        @enderror
+    <div class="flex items-center gap-2">
+        <input
+            id="is_active"
+            name="is_active"
+            type="checkbox"
+            value="1"
+            @checked(old('is_active', $galleryItem->is_active))
+            class="rounded border-gray-300"
+        >
+        <label for="is_active" class="text-sm font-medium text-gray-700">
+            Activa (visible en galería)
+        </label>
     </div>
+
 </div>
 
 <div class="mt-6 flex items-center gap-3">

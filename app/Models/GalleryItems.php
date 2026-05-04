@@ -11,7 +11,11 @@ class GalleryItems extends Model
 
     protected $fillable = [
         'title',
-        'image_url',
-        'description',
+        'image_path',
+        'is_active',
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
     ];
 }

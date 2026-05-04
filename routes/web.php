@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/appearance', [Settings\AppearanceController::class, 'edit'])->name('settings.appearance.edit');
     Route::put('settings/appearance', [Settings\AppearanceController::class, 'update'])->name('settings.appearance.update');
 
-    Route::resource('gallery-items', GalleryItemController::class)->except(['show']);
+    Route::resource('gallery-items', GalleryItemController::class)->except(['show', 'destroy']);
 
     // Route::get('gallery-items', [GalleryItemController::class, 'index'])->name('gallery-items.index');
     // Route::get('gallery-items/create', [GalleryItemController::class, 'create'])->name('gallery-items.create');

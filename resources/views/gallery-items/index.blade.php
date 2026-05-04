@@ -1,4 +1,4 @@
-<x-layouts.app>
+{{-- <x-layouts.app>
     <div class="space-y-6">
         <div class="flex items-center justify-between">
             <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Gallery Items</h1>
@@ -61,5 +61,43 @@
         <div>
             {{ $galleryItems->links() }}
         </div>
+    </div>
+</x-layouts.app> --}}
+
+
+@include('gallery-items.index')
+<x-layouts.app :title="__('Galería')">
+    <div class="mx-auto max-w-5xl p-6">
+        <div class="mb-6 flex items-center justify-between">
+            <h1 class="text-2xl font-semibold">Galería</h1>
+            <a href="{{ route('gallery-items.create') }}" class="rounded bg-blue-600 px-4 py-2 text-white">Nueva foto</a>
+        </div>
+
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 text-left">Título</th>
+                    <th class="px-4 py-2 text-left">Ruta</th>
+                    <th class="px-4 py-2 text-left">Estado</th>
+                    <th class="px-4 py-2 text-left">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                @forelse ($items as $item)
+                    <tr>
+                        <td class="px-4 py-2">{{ $item->title }}</td>
+                        <td class="px-4 py-2">{{ $item->image_path }}</td>
+                        <td class="px-4 py-2">{{ $item->is_active ? 'Activa' : 'Inactiva' }}</td>
+                        <td class="px-4 py-2">
+                            <a href="{{ route('gallery-items.edit', $item) }}" class="text-blue-600">Editar</a>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" class="px-4 py-6 text-center text-gray-500">No hay fotos cargadas.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
 </x-layouts.app>
