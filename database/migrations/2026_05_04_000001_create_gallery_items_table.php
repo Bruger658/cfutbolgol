@@ -11,8 +11,8 @@ return new class extends Migration
         Schema::create('gallery_items', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('image_url', 2048);
-            $table->text('description')->nullable();
+            $table->string('image_path', 2048);
+            $table->boolean('is_active')->default(false);            
             $table->timestamps();
         });
     }

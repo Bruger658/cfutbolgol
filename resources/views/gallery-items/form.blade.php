@@ -3,7 +3,34 @@
 @endphp
 
 <div class="space-y-5">
+
     <div>
+        <label for="title" class="block text-sm font-medium text-gray-700">Título</label>
+        <input id="title" name="title" type="text" value="{{ old('title', $galleryItem->title ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+        <input id="title" name="title" type="text" value="{{ old('title', $galleryItem->title ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+    </div>
+
+    <div class="mb-4">
+        <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Imagen</label>
+        <input type="file" name="image" id="image" accept="image/*" class="mt-1 block w-full rounded-md border-gray-300" @if(!$isEditing) required @endif>
+        @error('image')
+            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div class="flex items-center gap-2">
+        <input id="is_active" name="is_active" type="checkbox" value="1" @checked(old('is_active', $galleryItem->is_active ?? true)) class="rounded border-gray-300">
+        <label for="is_active" class="text-sm font-medium text-gray-700">Publicada</label>
+    </div>
+
+    <div class="mt-6 flex items-center gap-3">
+        <button type="submit" class="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 transition-colors">{{ $isEditing ? 'Actualizar' : 'Guardar' }}</button>
+        <a href="{{ route('gallery-items.index') }}" class="text-sm text-gray-600 hover:text-gray-900">Cancelar</a>
+    </div>
+
+
+
+    {{-- <div>
         <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Título</label>
         <input id="title" name="title" type="text" value="{{ old('title', $galleryItem->title ?? '') }}"
             class="w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 focus:border-blue-500 focus:ring-blue-500"
@@ -11,7 +38,7 @@
         @error('title')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
         @enderror
-    </div>
+    </div> --}}
 
     {{-- <div>
         <label for="image_url" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">URL de imagen</label>
@@ -23,7 +50,7 @@
         @enderror
     </div> --}}
 
-     <div class="mb-4">
+    {{-- <div class="mb-4">
         <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Imagen</label>
         <input
             type="file"
@@ -54,18 +81,18 @@
         @error('description')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
         @enderror
-    </div>
-</div>
+    </div>--}}
+</div> 
 
-<div class="mt-6 flex items-center gap-3">
+{{-- <div class="mt-6 flex items-center gap-3">
     <button type="submit" class="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 transition-colors">
         {{ $isEditing ? 'Actualizar' : 'Guardar' }}
     </button>
     <a href="{{ route('gallery-items.index') }}" class="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100">Cancelar</a>
-</div>
+</div> --}}
 
 
-<script>
+{{-- <script>
     (() => {
         const MAX_UPLOAD_SIZE_BYTES = 2 * 1024 * 1024;
         const MAX_DIMENSION = 2200;
@@ -154,6 +181,6 @@
             }
         });
     })();
-</script>
+</script> --}}
 
 

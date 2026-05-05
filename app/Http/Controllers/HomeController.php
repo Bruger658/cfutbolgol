@@ -13,6 +13,7 @@ class HomeController extends Controller
             // 'galleryItems' => GalleryItem::query()
             //     ->where('is_active', true)
             'galleryItems' => GalleryItems::query()
+                ->where('is_active', true)
                 ->latest()
                 ->get(),
         ]);
