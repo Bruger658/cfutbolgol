@@ -3,11 +3,9 @@
 @endphp
 
 <div class="space-y-5">
-
     <div>
-        <label for="title" class="block text-sm font-medium text-gray-700">Título</label>
-        <input id="title" name="title" type="text" value="{{ old('title', $galleryItem->title ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
-        <input id="title" name="title" type="text" value="{{ old('title', $galleryItem->title ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+        <label for="title" class="block text-sm font-medium text-white-700">Título</label>
+        <input id="title" name="title" type="text" value="{{ old('title', $galleryItem->title ?? '') }}" class="mt-1 block w-full rounded-md border-white-900  shadow-sm" required>
     </div>
 
     <div class="mb-4">
@@ -18,9 +16,18 @@
         @enderror
     </div>
 
-    <div class="flex items-center gap-2">
-        <input id="is_active" name="is_active" type="checkbox" value="1" @checked(old('is_active', $galleryItem->is_active ?? true)) class="rounded border-gray-300">
-        <label for="is_active" class="text-sm font-medium text-gray-700">Publicada</label>
+     <div class="flex items-center gap-2">
+        <input
+            id="is_active"
+            name="is_active"
+            type="checkbox"
+            value="1"
+            @checked(old('is_active', $galleryItem->is_active))
+            class="rounded border-gray-300"
+        >
+        <label for="is_active" class="text-sm font-medium text-gray-700">
+            Activa (visible en galería)
+        </label>
     </div>
 
     <div class="mt-6 flex items-center gap-3">
@@ -28,61 +35,12 @@
         <a href="{{ route('gallery-items.index') }}" class="text-sm text-gray-600 hover:text-gray-900">Cancelar</a>
     </div>
 
-
-
-    {{-- <div>
-        <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Título</label>
-        <input id="title" name="title" type="text" value="{{ old('title', $galleryItem->title ?? '') }}"
-            class="w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 focus:border-blue-500 focus:ring-blue-500"
-            required>
-        @error('title')
-            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-        @enderror
-    </div> --}}
-
-    {{-- <div>
-        <label for="image_url" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">URL de imagen</label>
-        <input id="image_url" name="image_url" type="url" value="{{ old('image_url', $galleryItem->image_url ?? '') }}"
-            class="w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 focus:border-blue-500 focus:ring-blue-500"
-            required>
-        @error('image_url')
-            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-        @enderror
-    </div> --}}
-
-    {{-- <div class="mb-4">
-        <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Imagen</label>
-        <input
-            type="file"
-            name="image"
-            id="image"
-            accept="image/*"
-            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100"
-            @if(!$isEditing) required @endif
-        >
-        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400" id="image-upload-help">
-            Si la imagen es muy pesada, se reduce automáticamente antes de subirla para evitar errores de carga.
-        </p>
-        <p class="mt-1 text-xs text-emerald-600 dark:text-emerald-400 hidden" id="image-upload-status"></p>
-        <div id="image-preview-wrapper" class="mt-3 hidden">
-            <p class="mb-1 text-xs text-gray-500 dark:text-gray-400">Vista previa:</p>
-            <img id="image-preview" alt="Vista previa de la imagen seleccionada"
-                class="h-40 w-full max-w-md rounded-md border border-gray-200 object-cover dark:border-gray-700">
-        </div>
-        @error('image')
-            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-        @enderror
-    </div>
-
-    <div>
-        <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descripción</label>
-        <textarea id="description" name="description" rows="4"
-            class="w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 focus:border-blue-500 focus:ring-blue-500">{{ old('description', $galleryItem->description ?? '') }}</textarea>
-        @error('description')
-            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-        @enderror
-    </div>--}}
+   
 </div> 
+
+    
+
+
 
 {{-- <div class="mt-6 flex items-center gap-3">
     <button type="submit" class="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 transition-colors">
@@ -92,7 +50,7 @@
 </div> --}}
 
 
-{{-- <script>
+ <script>
     (() => {
         const MAX_UPLOAD_SIZE_BYTES = 2 * 1024 * 1024;
         const MAX_DIMENSION = 2200;
@@ -181,6 +139,4 @@
             }
         });
     })();
-</script> --}}
-
-
+</script>

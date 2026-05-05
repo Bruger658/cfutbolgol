@@ -6,14 +6,14 @@ use App\Models\GalleryItems;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Storage;
 
 
 class GalleryItemController extends Controller
 {
     public function index(): View
     {
-       return view('gallery-items.index', ['items' => $items]);
+        $items = GalleryItems::query()->latest()->get();
+        return view('gallery-items.index', compact('items'));
     }
 
     public function create(): View
@@ -27,18 +27,20 @@ class GalleryItemController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'image' => ['required', 'image', 'max:5120'],
+            'image' => ['required', 'image', 'max:4096'],
             'is_active' => ['nullable', 'boolean'],
         ]);
 
-        // $path = $request->file('image')->store('gallery-items', 'public');
-
-        $data['image_path'] = $request->file('image')->store('gallery', 'public');
+      
         $data['is_active'] = $request->boolean('is_active');
-        unset($data['image']);
+        $data['image_path'] = $request->file('image')->store('gallery', 'public');
 
-
-        GalleryItems::create($data);
+        
+        GalleryItems::create([
+            'title' => $data['title'],
+            'image_path' => $data['image_path'],
+            'is_active' => $data['is_active'],
+        ]);
 
         return redirect()->route('gallery-items.index')->with('success', 'Imagen creada correctamente.');
     }
@@ -46,36 +48,34 @@ class GalleryItemController extends Controller
 
     public function edit(GalleryItems $galleryItem): View
     {
-       return view('gallery-items.edit', compact('galleryItem'));
+       return view('gallery-items.index', compact('galleryItem'));
     }
 
     public function update(Request $request, GalleryItems $galleryItem): RedirectResponse
     {
-        $validated = $request->validate([
+        $data = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'image' => ['nullable', 'image', 'max:5120'],
+            'image' => ['nullable', 'image', 'max:4096'],
             'is_active' => ['nullable', 'boolean'],
         ]);
 
-        if ($request->hasFile('image')) {
-            if (!empty($galleryItem->image_url) && Storage::disk('public')->exists($galleryItem->image_url)) {
-                Storage::disk('public')->delete($galleryItem->image_url);
-            }
-
-            $validated['image_url'] = $request->file('image')->store('gallery-items', 'public');
+       
+         if ($request->hasFile('image')) {
+            $galleryItem->image_path = $request->file('image')->store('gallery', 'public');
         }
 
-        unset($validated['image']);
+        $galleryItem->title = $data['title'];
+        $galleryItem->is_active = $request->boolean('is_active');
+        $galleryItem->save();
 
-        $galleryItem->update($validated);
-
-        return to_route('gallery-items.index')->with('status', 'Elemento actualizado correctamente.');
+        return redirect()->route('gallery-items.index');        
     }
 
-    // public function destroy(GalleryItems $galleryItem): RedirectResponse
-    // {
-    //     $galleryItem->delete();
+    public function destroy(GalleryItems $galleryItem): RedirectResponse
+    {
+        $galleryItem->delete();
 
-    //     return to_route('gallery-items.index')->with('status', 'Elemento eliminado correctamente.');
-    // }
+        return redirect()->route('gallery-items.index');
+    }
+
 }

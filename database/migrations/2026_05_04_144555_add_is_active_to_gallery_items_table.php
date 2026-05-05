@@ -6,29 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::table('gallery_items', function (Blueprint $table) {
-            if (Schema::hasColumn('gallery_items', 'description')) {
-                $table->dropColumn('description');
+            if (! Schema::hasColumn('gallery_items', 'is_active')) {
+                $table->boolean('is_active')->default(true)->after('image_path');
             }
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('gallery_items', function (Blueprint $table) {
-            // Ajustá el tipo de dato si no era 'text' (ej. string)
-            if (! Schema::hasColumn('gallery_items', 'description')) {
-                $table->text('description')->nullable();
+            if (Schema::hasColumn('gallery_items', 'is_active')) {
+                $table->dropColumn('is_active');
             }
         });
     }
 };
-
