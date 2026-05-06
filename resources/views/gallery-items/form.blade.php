@@ -1,5 +1,27 @@
 @php
     $isEditing = isset($galleryItem);
+
+     $toBytes = static function (string $value): int {
+        $value = trim($value);
+        if ($value === '') {
+            return 0;
+        }
+
+        $number = (float) $value;
+        $unit = strtolower(substr($value, -1));
+
+        return match ($unit) {
+            'g' => (int) ($number * 1024 * 1024 * 1024),
+            'm' => (int) ($number * 1024 * 1024),
+            'k' => (int) ($number * 1024),
+            default => (int) $number,
+        };
+    };
+
+    $serverUploadLimitBytes = min($toBytes((string) ini_get('upload_max_filesize')), $toBytes((string) ini_get('post_max_size')));
+    $appUploadLimitBytes = 20 * 1024 * 1024;
+    $maxUploadSizeBytes = min($serverUploadLimitBytes, $appUploadLimitBytes);
+    $maxUploadSizeMb = round($maxUploadSizeBytes / 1024 / 1024, 1);
 @endphp
 
 <div class="space-y-5">
@@ -12,10 +34,15 @@
         <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Imagen</label>
         <input type="file" name="image" id="image" accept="image/*" class="mt-1 block w-full rounded-md border-gray-300" @if(!$isEditing) required @endif>
         
-        <p class="mt-1 text-xs text-gray-500">Se aceptan imágenes de hasta 20 MB. Si pesa más, se optimiza automáticamente antes de subir.</p>
+        <p class="mt-1 text-xs text-gray-500">Se aceptan imágenes de hasta {{ $maxUploadSizeMb }} MB (límite del servidor). Si pesa más, se optimiza automáticamente antes de subir.</p>
         <p id="image-upload-status" class="mt-1 hidden text-sm text-blue-600"></p>
-        <div id="image-preview-wrapper" class="mt-3 hidden">
-            <img id="image-preview" alt="Vista previa" class="max-h-64 rounded-md border border-gray-200 object-contain" />
+        <div id="image-preview-wrapper" class="mt-3 {{ $isEditing && !empty($galleryItem->image_path) ? '' : 'hidden' }}">
+            <img
+                id="image-preview"
+                alt="Vista previa"
+                src="{{ $isEditing && !empty($galleryItem->image_path) ? asset('storage/' . $galleryItem->image_path) : '' }}"
+                class="max-h-64 rounded-md border border-gray-200 object-contain"
+            />
         </div>
         @error('image')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -45,7 +72,7 @@
 
  <script>
     (() => {
-        const MAX_UPLOAD_SIZE_BYTES = 20 * 1024 * 1024;
+        const MAX_UPLOAD_SIZE_BYTES = @json($maxUploadSizeBytes);
         const MAX_DIMENSION = 2400;
         const JPEG_QUALITY = 0.82;
 

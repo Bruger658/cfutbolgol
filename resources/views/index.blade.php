@@ -327,7 +327,7 @@
                         @forelse ($galleryItems ?? [] as $item)
                             <div class="carousel-slide min-w-full h-full">
                                 <img class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
-                                    alt="{{ $item->title }}" src="{{ asset('storage/' . $item->image_url) }}" />
+                                    alt="{{ $item->title }}" src="{{ asset('storage/' . $item->image_path) }}" />
                             </div>
                         @empty
                             <div class="carousel-slide min-w-full h-full">
