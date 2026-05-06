@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('gallery-items', GalleryItemController::class)->except(['show']);
 
+    Route::view('noticias', 'noticias.noticias')->name('noticias');
     // Route::get('gallery-items', [GalleryItemController::class, 'index'])->name('gallery-items.index');
     // Route::get('gallery-items/create', [GalleryItemController::class, 'create'])->name('gallery-items.create');
     // Route::post('gallery-items', [GalleryItemController::class, 'store'])->name('gallery-items.store');

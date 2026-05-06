@@ -385,10 +385,10 @@
                             <img alt="Corporate meeting in a modern sports facility"
                                 class="news-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSRcWY_cuGEWkt31m15GoQrMvYQSJSJehJrXtPMdhh_fiCoPrWoV_DN_fl7trO7Ad2Q-ZC8g38OSype03Q14lSKaqWidt1yHGSuedopFORGJP3TXCkd8mb9h-PfR_PNLKeMRdy7S0nuetVPVi6SA_2bD34iXf_-hWqG5wC8mEpvHqRhXsWIjoyC0RjOgfA4L4_qneINRFqppypxSzc0TWQXKf0C55wxZAMmXBYNp4lfscPmGBwrpCsq8dnyz-aYbJ0rc6MaLBxpLs" />
-                            <div
+                            {{-- <div
                                 class="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest news-tag">
                                 Institucional
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="p-8 flex flex-col flex-grow">
                             <h4
@@ -404,6 +404,7 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- News Card 2 -->
                     <div
                         class="news-card-root bg-surface rounded-[2rem] overflow-hidden flex flex-col shadow-xl hover:shadow-2xl transition-all border border-primary/5 group h-full">
@@ -411,10 +412,10 @@
                             <img alt="Modern sports nutrition and performance tracking"
                                 class="news-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-HaqivuJMb8v1-rP8Y5aRnJaVGZH4IptXoSIPZEDGAKGLJhd116wO6LLw9VJPol-8CiL_Q1obLF0LMRza_GuYoyvWs7pJdbaX42VZNFSBgbtzGo4nGNxNbG8eIUH6GoKxI7yRXcJIarsvYGhdPjZc5OpOar7u2O1W2mNEUnfL9cUiDwKlVaGe8rT3KtbgU6IpD2dfcxMxMZF15N0lrZz8WuanrQM9zdU4vyrGFCdNLSdBrC2GH7Zh4q7xeoVlhoKqc5WJRgluftk" />
-                            <div
+                            {{-- <div
                                 class="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest news-tag">
                                 Tecnología
-                            </div>
+                            </div> --}}
                          </div>
                         <div class="p-8 flex flex-col flex-grow">
                             <h4
