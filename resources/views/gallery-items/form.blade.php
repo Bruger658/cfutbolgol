@@ -11,6 +11,12 @@
     <div class="mb-4">
         <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Imagen</label>
         <input type="file" name="image" id="image" accept="image/*" class="mt-1 block w-full rounded-md border-gray-300" @if(!$isEditing) required @endif>
+        
+        <p class="mt-1 text-xs text-gray-500">Se aceptan imágenes de hasta 20 MB. Si pesa más, se optimiza automáticamente antes de subir.</p>
+        <p id="image-upload-status" class="mt-1 hidden text-sm text-blue-600"></p>
+        <div id="image-preview-wrapper" class="mt-3 hidden">
+            <img id="image-preview" alt="Vista previa" class="max-h-64 rounded-md border border-gray-200 object-contain" />
+        </div>
         @error('image')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
         @enderror
@@ -33,27 +39,14 @@
     <div class="mt-6 flex items-center gap-3">
         <button type="submit" class="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 transition-colors">{{ $isEditing ? 'Actualizar' : 'Guardar' }}</button>
         <a href="{{ route('gallery-items.index') }}" class="text-sm text-gray-600 hover:text-gray-900">Cancelar</a>
-    </div>
-
-   
+    </div>   
 </div> 
-
-    
-
-
-
-{{-- <div class="mt-6 flex items-center gap-3">
-    <button type="submit" class="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 transition-colors">
-        {{ $isEditing ? 'Actualizar' : 'Guardar' }}
-    </button>
-    <a href="{{ route('gallery-items.index') }}" class="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100">Cancelar</a>
-</div> --}}
 
 
  <script>
     (() => {
-        const MAX_UPLOAD_SIZE_BYTES = 2 * 1024 * 1024;
-        const MAX_DIMENSION = 2200;
+        const MAX_UPLOAD_SIZE_BYTES = 20 * 1024 * 1024;
+        const MAX_DIMENSION = 2400;
         const JPEG_QUALITY = 0.82;
 
         const fileInput = document.getElementById('image');
@@ -61,19 +54,29 @@
         const previewWrapper = document.getElementById('image-preview-wrapper');
         const preview = document.getElementById('image-preview');
 
-        if (!fileInput || !status || !previewWrapper || !preview) {
+        if (!fileInput) {
             return;
         }
 
         const showStatus = (message) => {
-            status.textContent = message;
-            status.classList.remove('hidden');
+             if (!status) {
+                return;
+            }
+
+        status.textContent = message;
+        status.classList.remove('hidden');
         };
 
         const showPreview = (blob) => {
+            if (!preview || !previewWrapper) {
+                return;
+            }
+
             preview.src = URL.createObjectURL(blob);
             previewWrapper.classList.remove('hidden');
         };
+
+
 
         const convertImage = async (file) => {
             const imageBitmap = await createImageBitmap(file);
