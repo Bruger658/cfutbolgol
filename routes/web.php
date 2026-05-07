@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('gallery-items', GalleryItemController::class)->except(['show']);
 
-    Route::resource('publications', PublicationController::class)->except(['show', 'destroy']);
+Route::resource('publications', PublicationController::class)->except(['show']);
     Route::get('noticias', [PublicationController::class, 'index'])->name('noticias');
     
  

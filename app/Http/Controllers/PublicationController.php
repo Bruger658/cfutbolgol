@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Publication;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class PublicationController extends Controller
@@ -86,4 +87,17 @@ class PublicationController extends Controller
 
         return back()->with('status', 'Publicación actualizada correctamente.');
     }
-}
+    
+    public function destroy(Publication $publication): RedirectResponse
+        {
+            if ($publication->image_path) {
+                Storage::disk('public')->delete($publication->image_path);
+            }
+
+            $publication->delete();
+
+            return redirect()
+                ->route('noticias')
+                ->with('status', 'Publicación eliminada correctamente.');
+        }
+    }

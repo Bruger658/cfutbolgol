@@ -23,7 +23,17 @@
                         <td class="px-4 py-2">{{ $publication->title }}</td>
                         <td class="px-4 py-2">{{ str_replace('_', ' ', $publication->category) }}</td>
                         <td class="px-4 py-2">{{ $publication->is_active ? 'Sí' : 'No' }}</td>
-                        <td class="px-4 py-2"><a class="text-blue-600" href="{{ route('publications.edit', $publication) }}">Editar</a></td>
+                        <td class="px-4 py-2">
+                            <div class="flex items-center gap-3">
+                                <a class="text-blue-600" href="{{ route('publications.edit', $publication) }}">Editar</a>
+
+                                <form action="{{ route('publications.destroy', $publication) }}" method="POST" onsubmit="return confirm('¿Seguro que deseas eliminar esta noticia?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:text-red-700">Borrar</button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                 @empty
                     <tr><td colspan="4" class="px-4 py-6 text-center text-gray-500">Sin noticias cargadas.</td></tr>
