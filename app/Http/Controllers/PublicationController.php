@@ -8,17 +8,26 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PublicationController extends Controller
-{
+{ public function index(): View
+    {
+        $publications = Publication::query()->latest()->paginate(12);
+
+        return view('noticias.noticias', compact('publications'));
+    }
+
+
     public function create(): View
     {
-        return view('publications.create');
+         return view('noticias.create');
     }
 
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
+            'category' => ['required', 'in:institucional,edefi,bafi,futsala,futsal_femenino'],
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
+            'excerpt' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string'],
             'image' => ['required', 'image', 'max:4096'],
             'published_at' => ['nullable', 'date'],
             'is_active' => ['nullable', 'boolean'],
@@ -28,8 +37,11 @@ class PublicationController extends Controller
         $isActive = (bool) ($validated['is_active'] ?? false);
 
         $publication = Publication::create([
+            'category' => $validated['category'],
             'title' => $validated['title'],
-            'description' => $validated['description'],
+            'excerpt' => $validated['excerpt'],
+            'content' => $validated['content'],
+            'description' => $validated['content'],
             'image_path' => $imagePath,
             'published_at' => $isActive ? ($validated['published_at'] ?? now()->toDateString()) : null,
             'is_active' => $isActive,
@@ -42,14 +54,16 @@ class PublicationController extends Controller
 
     public function edit(Publication $publication): View
     {
-        return view('publications.edit', compact('publication'));
+        return view('noticias.edit', compact('publication'));
     }
 
     public function update(Request $request, Publication $publication): RedirectResponse
     {
         $validated = $request->validate([
+            'category' => ['required', 'in:institucional,edefi,bafi,futsala,futsal_femenino'],
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
+            'excerpt' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string'],
             'image' => ['nullable', 'image', 'max:4096'],
             'published_at' => ['nullable', 'date'],
             'is_active' => ['nullable', 'boolean'],
@@ -61,8 +75,11 @@ class PublicationController extends Controller
 
         $isActive = (bool) ($validated['is_active'] ?? false);
 
+        $publication->category = $validated['category'];
         $publication->title = $validated['title'];
-        $publication->description = $validated['description'];
+        $publication->excerpt = $validated['excerpt'];
+        $publication->content = $validated['content'];
+        $publication->description = $validated['content'];
         $publication->published_at = $isActive ? ($validated['published_at'] ?? now()->toDateString()) : null;
         $publication->is_active = $isActive;
         $publication->save();

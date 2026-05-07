@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GalleryItemController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\Settings;
 use Illuminate\Support\Facades\Route;
 
@@ -29,10 +30,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('gallery-items', GalleryItemController::class)->except(['show']);
 
-    Route::view('noticias', 'noticias.noticias')->name('noticias');
-    // Route::get('gallery-items', [GalleryItemController::class, 'index'])->name('gallery-items.index');
-    // Route::get('gallery-items/create', [GalleryItemController::class, 'create'])->name('gallery-items.create');
-    // Route::post('gallery-items', [GalleryItemController::class, 'store'])->name('gallery-items.store');
+    Route::resource('publications', PublicationController::class)->except(['show', 'destroy']);
+    Route::get('noticias', [PublicationController::class, 'index'])->name('noticias');
+    
  
 });
 

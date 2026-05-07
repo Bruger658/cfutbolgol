@@ -10,7 +10,10 @@ class Publication extends Model
     use HasFactory;
 
     protected $fillable = [
+        'category',
         'title',
+        'excerpt',
+        'content',
         'description',
         'image_path',
         'published_at',

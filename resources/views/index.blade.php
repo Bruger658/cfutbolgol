@@ -369,94 +369,29 @@
 
         <!-- Club News -->
         <section class="py-24 bg-surface pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto" id="noticias">
-
             <div class="mb-8">
-                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Noticias del Club
-                    </h1>
+                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Noticias del Club</h1>
                 <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
             </div>
             <div class="max-w-7xl mx-auto px-6">
                
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <!-- News Card 1 -->
-                    <div
-                        class="news-card-root bg-surface rounded-[2rem] overflow-hidden flex flex-col shadow-xl hover:shadow-2xl transition-all border border-primary/5 group h-full">
-                        <div class="aspect-video overflow-hidden relative">
-                            <img alt="Corporate meeting in a modern sports facility"
-                                class="news-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSRcWY_cuGEWkt31m15GoQrMvYQSJSJehJrXtPMdhh_fiCoPrWoV_DN_fl7trO7Ad2Q-ZC8g38OSype03Q14lSKaqWidt1yHGSuedopFORGJP3TXCkd8mb9h-PfR_PNLKeMRdy7S0nuetVPVi6SA_2bD34iXf_-hWqG5wC8mEpvHqRhXsWIjoyC0RjOgfA4L4_qneINRFqppypxSzc0TWQXKf0C55wxZAMmXBYNp4lfscPmGBwrpCsq8dnyz-aYbJ0rc6MaLBxpLs" />
-                            {{-- <div
-                                class="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest news-tag">
-                                Institucional
-                            </div> --}}
-                        </div>
-                        <div class="p-8 flex flex-col flex-grow">
-                            <h4
-                                class="news-title text-2xl font-black text-on-surface mb-4 leading-tight group-hover:text-primary transition-colors">
-                                Nueva Alianza con Scouting Europeo</h4>
-                            <p class="text-on-surface-variant mb-8 line-clamp-3 text-sm leading-relaxed">Firmamos un
-                                convenio estratégico para proyectar a nuestros mejores talentos a clubes profesionales
-                                en Europa con becas completas.</p>
-                            <div class="mt-auto">
-                                <a class="text-primary font-black flex items-center gap-2 hover:gap-4 transition-all news-read-more text-sm uppercase tracking-tighter"
-                                    href="#">Leer más <span
-                                        class="material-symbols-outlined text-[20px]">arrow_forward</span></a>
+                    @foreach (($publications ?? collect()) as $publication)
+                        <div class="news-card-root bg-surface rounded-[2rem] overflow-hidden flex flex-col shadow-xl hover:shadow-2xl transition-all border border-primary/5 group h-full"
+                             data-full-text="{{ e($publication->content) }}">
+                            <div class="aspect-video overflow-hidden relative">
+                                <img alt="{{ $publication->title }}" class="news-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="{{ asset('storage/' . $publication->image_path) }}" />
+                                <div class="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest news-tag">{{ str_replace('_', ' ', $publication->category) }}</div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- News Card 2 -->
-                    <div
-                        class="news-card-root bg-surface rounded-[2rem] overflow-hidden flex flex-col shadow-xl hover:shadow-2xl transition-all border border-primary/5 group h-full">
-                        <div class="aspect-video overflow-hidden relative">
-                            <img alt="Modern sports nutrition and performance tracking"
-                                class="news-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-HaqivuJMb8v1-rP8Y5aRnJaVGZH4IptXoSIPZEDGAKGLJhd116wO6LLw9VJPol-8CiL_Q1obLF0LMRza_GuYoyvWs7pJdbaX42VZNFSBgbtzGo4nGNxNbG8eIUH6GoKxI7yRXcJIarsvYGhdPjZc5OpOar7u2O1W2mNEUnfL9cUiDwKlVaGe8rT3KtbgU6IpD2dfcxMxMZF15N0lrZz8WuanrQM9zdU4vyrGFCdNLSdBrC2GH7Zh4q7xeoVlhoKqc5WJRgluftk" />
-                            {{-- <div
-                                class="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest news-tag">
-                                Tecnología
-                            </div> --}}
-                         </div>
-                        <div class="p-8 flex flex-col flex-grow">
-                            <h4
-                                class="news-title text-2xl font-black text-on-surface mb-4 leading-tight group-hover:text-primary transition-colors">
-                                Incorporamos Tecnología de GPS</h4>
-                            <p class="text-on-surface-variant mb-8 line-clamp-3 text-sm leading-relaxed">Todas nuestras
-                                categorías competitivas ahora cuentan con chalecos de monitoreo GPS para optimizar el
-                                rendimiento físico individual.</p>
-                            <div class="mt-auto">
-                                <a class="text-primary font-black flex items-center gap-2 hover:gap-4 transition-all news-read-more text-sm uppercase tracking-tighter"
-                                    href="#">Leer más <span
-                                        class="material-symbols-outlined text-[20px]">arrow_forward</span></a>
+                            <div class="p-8 flex flex-col flex-grow">
+                                <h4 class="news-title text-2xl font-black text-on-surface mb-4 leading-tight group-hover:text-primary transition-colors">{{ $publication->title }}</h4>
+                                <p class="text-on-surface-variant mb-8 line-clamp-3 text-sm leading-relaxed">{{ $publication->excerpt }}</p>
+                                <div class="mt-auto">
+                                    <a class="text-primary font-black flex items-center gap-2 hover:gap-4 transition-all news-read-more text-sm uppercase tracking-tighter" href="#">Leer más <span class="material-symbols-outlined text-[20px]">arrow_forward</span></a>
+                                </div> 
                             </div>
-                        </div>
-                    </div>
-                    <!-- News Card 3 (Placeholder for completeness) -->
-                    <div
-                        class="news-card-root bg-white rounded-3xl overflow-hidden flex flex-col shadow-lg hover:shadow-xl transition-all border border-brand-blue/10 group h-full">
-                        <div class="aspect-video overflow-hidden">
-                            <img class="news-img w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                data-alt="Soccer player conditioning and training"                                
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU9UkKgOSqgdkds1hzpQXrZVfWH1fDhtGwo7_H9sBmG6_2tTZwp5u7qR1szvtcLarnqTE1lwmj9EK6hDzc7OTMQGbJhxoqFO1IWJ60ypK7-rJ0p3gUgp5ReG7LQHo3An0sf4NX15CbC6leJmCFGJO81r62kf1W4rStnovIm6J8JBWdiRCi-laDKcYFJSpbRztZXcvzmGSFEC1-eAqmUqM-ss8-roA-0G3qz-n0ZOso1VMvaagMsOwsQg_VMJTL2LvAtiSOBlszCZg" />
-                            {{-- <div
-                                class="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest news-tag">
-                                Tecnología
-                            </div> --}}
-                        </div>
-                        <div class="p-6 flex flex-col flex-grow">
-                            <span
-                                class="news-tag text-xs font-bold text-brand-blue mb-2 uppercase tracking-wider">Competición</span>
-                            <h4 class="news-title text-xl font-black text-slate-900 mb-4 leading-tight">Iniciamos Torneo
-                                Nacional</h4>
-                            <p class="text-slate-600 mb-6 line-clamp-3 text-sm">Nuestra categoría Sub-16 debuta este fin
-                                de semana en el torneo más importante del país buscando revalidar el título obtenido.
-                            </p>
-                            <div class="mt-auto">
-                                <a class="text-primary font-black flex items-center gap-2 hover:gap-4 transition-all news-read-more text-sm uppercase tracking-tighter"
-                                    href="#">Leer más <span
-                                        class="material-symbols-outlined text-[20px]">arrow_forward</span></a>
-                        </div>
-                    </div>                    
+                        </div>                 
+                    @endforeach  
                 </div>        
             </div>
         </section>

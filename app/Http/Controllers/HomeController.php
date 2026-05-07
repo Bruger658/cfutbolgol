@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GalleryItems;
+use App\Models\Publication;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -16,6 +17,11 @@ class HomeController extends Controller
                 ->where('is_active', true)
                 ->latest()
                 ->get(),
+            'publications' => Publication::query()
+                ->where('is_active', true)
+                ->latest('published_at')
+                ->take(6)
+                ->get(),    
         ]);
     }
 }

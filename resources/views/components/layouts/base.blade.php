@@ -351,7 +351,7 @@
                         tag: card.querySelector('.news-tag').textContent,
                         title: card.querySelector('.news-title').textContent,
                         image: card.querySelector('.news-img').src,
-                        fullText: `<p class="mb-4">Este es el artículo completo sobre <strong>${card.querySelector('.news-title').textContent}</strong>. En Centro Fútbol Gol estamos comprometidos con el desarrollo integral de nuestros deportistas.</p><p class="mb-4">Nuestra nueva iniciativa busca fortalecer los pilares fundamentales de la formación deportiva, integrando procesos de vanguardia que permiten a cada niño y joven alcanzar su máximo potencial. Contamos con un equipo interdisciplinario que supervisa cada etapa del crecimiento futbolístico.</p><p>A través de estas actualizaciones, reafirmamos nuestro liderazgo como la academia referente en la región, brindando oportunidades únicas de proyección nacional e internacional para nuestros talentos más destacados.</p>`
+                        fullText: (card.dataset.fullText || '').replace(/\n/g, '<br>')
                     };
                     openNewsModal(newsData);
                 });
