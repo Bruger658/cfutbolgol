@@ -34,10 +34,10 @@
                             
                             <div class="flex items-center gap-3">
                                 <a href="{{ route('gallery-items.edit', $item) }}" class="text-blue-600">Editar</a>
-                                <form action="{{ route('gallery-items.destroy', $item) }}" method="POST" onsubmit="return confirm('¿Seguro que deseas borrar esta foto?');">
+                                <form action="{{ route('gallery-items.destroy', $item) }}" method="POST" data-confirm-delete data-confirm-message="¿Seguro que deseas borrar esta foto?">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-600">Borrar</button>
+                                    <button type="submit" class="rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700">Borrar</button>
                                 </form>
                             </div>
                         </td>
