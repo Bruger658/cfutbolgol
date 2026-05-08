@@ -383,12 +383,12 @@
                                 <div class="space-y-1.5">
                                     <label class="text-sm font-bold text-slate-700 ml-1">Categoría de Interés</label>
                                     <select
-                                        class="w-full px-5 py-3 rounded-xl border-slate-200 focus:ring-brand-blue focus:border-brand-blue transition-all">
-                                        <option>Selecciona una opción</option>
-                                        <option>Edefi</option>
-                                        <option>Bafi</option>
-                                        <option>Futsala</option>
-                                        <option>Futsal Femenino</option>
+                                        class="w-full px-5 py-3 rounded-xl border-slate-200 bg-primary text-on-primary focus:ring-brand-blue focus:border-brand-blue transition-all" style="background-color:#0b1730;color:#ffffff;">
+                                        <option style="background-color:#0b1730;color:#ffffff;">Selecciona una opción</option>
+                                        <option style="background-color:#0b1730;color:#ffffff;">Edefi</option>
+                                        <option style="background-color:#0b1730;color:#ffffff;">Bafi</option>
+                                        <option style="background-color:#0b1730;color:#ffffff;">Futsala</option>
+                                        <option style="background-color:#0b1730;color:#ffffff;">Futsal Femenino</option>    
                                     </select>
                                 </div>
                                 <button

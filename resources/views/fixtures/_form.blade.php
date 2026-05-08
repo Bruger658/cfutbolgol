@@ -3,10 +3,10 @@
 <div class="space-y-4">
     <div>
         <label>Categoría</label>
-        <select name="category" class="w-full border rounded p-2" required>
+         <select name="category" class="w-full border rounded p-2 bg-primary text-on-primary" style="background-color:#0b1730;color:#ffffff;border-color:#94a3b8;" required>
             @foreach($categories as $value => $label)
-                <option value="{{ $value }}" @selected(old('category', $fixture->category ?? 'edefi') === $value)>{{ $label }}</option>
-            @endforeach
+                <option value="{{ $value }}" style="background-color:#0b1730;color:#ffffff;" @selected(old('category', $fixture->category ?? 'edefi') === $value)>{{ $label }}</option>
+            @endforeach            
         </select>
     </div>
 
