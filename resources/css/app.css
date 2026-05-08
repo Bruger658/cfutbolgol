@@ -133,3 +133,12 @@
 .material-symbols-outlined {
     font-size: 1.25rem;
 }
+
+/* Improve calendar icon visibility on date/time fields in dark mode */
+.dark input[type="date"]::-webkit-calendar-picker-indicator,
+.dark input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+.dark input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(1.4);
+    opacity: 0.95;
+    cursor: pointer;
+}

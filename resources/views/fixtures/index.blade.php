@@ -18,7 +18,7 @@
                     <td class="px-4 py-2">{{ $fixture->weekday }} - {{ $fixture->fixture_date->format('d/m/Y') }} {{ \Illuminate\Support\Carbon::parse($fixture->match_time)->format('H:i') }}</td>
                     <td class="px-4 py-2">{{ $fixture->venue_name }}</td>
                     <td class="px-4 py-2"><a class="text-blue-600" href="{{ route('fixtures.edit', $fixture) }}">Editar</a>
-                    <form action="{{ route('fixtures.destroy', $fixture) }}" method="POST" class="inline" onsubmit="return confirm('¿Eliminar fixture?')">@csrf @method('DELETE')<button class="text-red-600 ml-2">Borrar</button></form></td>
+                    <form action="{{ route('fixtures.destroy', $fixture) }}" method="POST" class="inline" data-confirm-delete data-confirm-message="¿Seguro que deseas borrar este fixture?">@csrf @method('DELETE')<button class="text-red-600 ml-2">Borrar</button></form></td>
                 </tr>
             @empty
                 <tr><td colspan="5" class="px-4 py-6 text-center text-gray-500">Sin fixtures cargados.</td></tr>

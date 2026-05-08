@@ -37,7 +37,14 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label>Hora</label><input type="time" name="match_time" class="w-full border rounded p-2" value="{{ old('match_time', $fixture->match_time ? \Illuminate\Support\Carbon::parse($fixture->match_time)->format('H:i') : '') }}" required></div>
-        <div><label>Día de la semana</label><input name="weekday" class="w-full border rounded p-2" value="{{ old('weekday', $fixture->weekday ?? '') }}" placeholder="Ej: Sábado" required></div>
+        <div>
+            <label>Día de la semana</label>
+            <select name="weekday" class="w-full border rounded p-2 bg-primary text-on-primary" style="background-color:#0b1730;color:#ffffff;border-color:#94a3b8;" required>
+                @foreach(['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'] as $day)
+                    <option value="{{ $day }}" style="background-color:#0b1730;color:#ffffff;" @selected(old('weekday', $fixture->weekday ?? '') === $day)>{{ $day }}</option>
+                @endforeach
+            </select>
+        </div>
     </div>
 
      <div>
