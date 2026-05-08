@@ -148,145 +148,58 @@
             
             <div class="max-w-7xl mx-auto px-6">
                 
+
+
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Match Card 1 -->
-                    <div
-                        class="bg-brand-pale p-8 rounded-3xl shadow-sm border border-primary/10 hover:border-primary/40 transition-all group">
-                        <div class="flex justify-between items-center mb-8">
-                            <span
-                                class="text-[10px] font-black uppercase tracking-widest text-on-primary bg-primary px-3 py-1 rounded-full">Edefi</span>
-                            <span class="text-xs text-outline font-bold">14 Oct</span>
-                        </div>
-                        <div class="flex items-center justify-between gap-2 mb-8">
-                            <div class="text-center flex-1">
-                                <div
-                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-primary shadow-sm border border-primary/10 text-xl group-hover:scale-110 transition-transform">
-                                    CFG</div>
-                                <p class="text-xs font-black uppercase tracking-tighter">CFG</p>
+                    <!-- Match Card -->
+                    
+                                @forelse($fixtures as $fixture)
+                        <div
+                            class="bg-brand-pale p-8 rounded-3xl shadow-sm border border-primary/10 hover:border-primary/40 transition-all group">
+                            <div class="flex justify-between items-center mb-8">
+                                <span
+                                    class="text-[10px] font-black uppercase tracking-widest text-on-primary bg-primary px-3 py-1 rounded-full">{{ $fixture->category }}</span>
+                                <span class="text-xs text-outline font-bold">{{ $fixture->fixture_date?->format('d M') }}</span>
                             </div>
-                            <span class="font-black text-primary/30 italic">VS</span>
-                            <div class="text-center flex-1">
-                                <div
-                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-outline shadow-sm text-xl group-hover:scale-110 transition-transform">
-                                    LFC</div>
-                                <p class="text-xs font-black uppercase tracking-tighter truncate">Almafuerte</p>
+                            <div class="flex items-center justify-between gap-2 mb-8">
+                                <div class="text-center flex-1">
+                                    <img class="w-14 h-14 rounded-full object-cover mx-auto mb-3 border border-primary/10 shadow-sm"
+                                        src="{{ asset('storage/' . $fixture->home_team_badge_path) }}"
+                                        alt="Escudo {{ $fixture->home_team_name }}">
+                                    <p class="text-xs font-black uppercase tracking-tighter truncate">{{ $fixture->home_team_name }}</p>
+                                </div>
+                                <span class="font-black text-primary/30 italic">VS</span>
+                                <div class="text-center flex-1">
+                                    <img class="w-14 h-14 rounded-full object-cover mx-auto mb-3 border border-primary/10 shadow-sm"
+                                        src="{{ asset('storage/' . $fixture->away_team_badge_path) }}"
+                                        alt="Escudo {{ $fixture->away_team_name }}">
+                                    <p class="text-xs font-black uppercase tracking-tighter truncate">{{ $fixture->away_team_name }}</p>
+                                </div>                           
                             </div>
-                        </div>
-                        <div class="space-y-3 pt-6 border-t border-primary/10">
-                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
-                                <span class="material-symbols-outlined text-primary text-lg">schedule</span>
-                                10:30 AM
-                            </div>
-                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
-                                <span class="material-symbols-outlined text-primary text-lg">location_on</span>
-                                Sede Almafuerte
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Match Card 2 -->
-                    <div
-                        class="bg-brand-pale p-8 rounded-3xl shadow-sm border border-primary/10 hover:border-primary/40 transition-all group">
-                        <div class="flex justify-between items-center mb-8">
-                            <span
-                                class="text-[10px] font-black uppercase tracking-widest text-on-primary bg-primary px-3 py-1 rounded-full">Bafi</span>
-                            <span class="text-xs text-outline font-bold">15 Oct</span>
-                        </div>
-                        <div class="flex items-center justify-between gap-2 mb-8">
-                            <div class="text-center flex-1">
-                                <div
-                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-primary shadow-sm border border-primary/10 text-xl group-hover:scale-110 transition-transform">
-                                    CFG</div>
-                                <p class="text-xs font-black uppercase tracking-tighter">CFG</p>
-                            </div>
-                            <span class="font-black text-primary/30 italic">VS</span>
-                            <div class="text-center flex-1">
-                                <div
-                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-outline shadow-sm text-xl group-hover:scale-110 transition-transform">
-                                    DN</div>
-                                <p class="text-xs font-black uppercase tracking-tighter truncate">Almafuerte</p>
+
+                            <div class="space-y-3 pt-6 border-t border-primary/10">
+                                <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
+                                    <span class="material-symbols-outlined text-primary text-lg">schedule</span>
+                                    {{ \Illuminate\Support\Carbon::parse($fixture->match_time)->format('h:i A') }}
+                                </div>
+                                <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
+                                    <span class="material-symbols-outlined text-primary text-lg">location_on</span>
+                                    {{ $fixture->venue_name }}
+                                </div>
                             </div>
                         </div>
-                        <div class="space-y-3 pt-6 border-t border-primary/10">
-                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
-                                <span class="material-symbols-outlined text-primary text-lg">schedule</span>
-                                04:00 PM
-                            </div>
-                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
-                                <span class="material-symbols-outlined text-primary text-lg">location_on</span>
-                                Sede Almafuerte
-                            </div>
+
+                    @empty
+                        <div class="col-span-full text-center text-on-surface-variant py-10">
+                                Aún no hay fixtures cargados.
                         </div>
-                    </div>
-                    <!-- Match Card 3 -->
-                    <div
-                        class="bg-brand-pale p-8 rounded-3xl shadow-sm border border-primary/10 hover:border-primary/40 transition-all group">
-                        <div class="flex justify-between items-center mb-8">
-                            <span
-                                class="text-[10px] font-black uppercase tracking-widest text-on-primary bg-primary px-3 py-1 rounded-full">Futsala</span>
-                            <span class="text-xs text-outline font-bold">16 Oct</span>
-                        </div>
-                        <div class="flex items-center justify-between gap-2 mb-8">
-                            <div class="text-center flex-1">
-                                <div
-                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-primary shadow-sm border border-primary/10 text-xl group-hover:scale-110 transition-transform">
-                                    CFG</div>
-                                <p class="text-xs font-black uppercase tracking-tighter">CFG</p>
-                            </div>
-                            <span class="font-black text-primary/30 italic">VS</span>
-                            <div class="text-center flex-1">
-                                <div
-                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-outline shadow-sm text-xl group-hover:scale-110 transition-transform">
-                                    TIT</div>
-                                <p class="text-xs font-black uppercase tracking-tighter truncate">Almafuerte</p>
-                            </div>
-                        </div>
-                        <div class="space-y-3 pt-6 border-t border-primary/10">
-                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
-                                <span class="material-symbols-outlined text-primary text-lg">schedule</span>
-                                07:15 PM
-                            </div>
-                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
-                                <span class="material-symbols-outlined text-primary text-lg">location_on</span>
-                                Sede Almafuerte
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Match Card 4 -->
-                    <div
-                        class="bg-brand-pale p-8 rounded-3xl shadow-sm border border-primary/10 hover:border-primary/40 transition-all group">
-                        <div class="flex justify-between items-center mb-8">
-                            <span
-                                class="text-[10px] font-black uppercase tracking-widest text-on-primary bg-primary px-3 py-1 rounded-full">Femenino</span>
-                            <span class="text-xs text-outline font-bold">17 Oct</span>
-                        </div>
-                        <div class="flex items-center justify-between gap-2 mb-8">
-                            <div class="text-center flex-1">
-                                <div
-                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-primary shadow-sm border border-primary/10 text-xl group-hover:scale-110 transition-transform">
-                                    CFG</div>
-                                <p class="text-xs font-black uppercase tracking-tighter">CFG</p>
-                            </div>
-                            <span class="font-black text-primary/30 italic">VS</span>
-                            <div class="text-center flex-1">
-                                <div
-                                    class="w-14 h-14 bg-surface rounded-full mx-auto mb-3 flex items-center justify-center font-black text-outline shadow-sm text-xl group-hover:scale-110 transition-transform">
-                                    AGL</div>
-                                <p class="text-xs font-black uppercase tracking-tighter truncate">Almafuerte</p>
-                            </div>
-                        </div>
-                        <div class="space-y-3 pt-6 border-t border-primary/10">
-                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
-                                <span class="material-symbols-outlined text-primary text-lg">schedule</span>
-                                09:00 AM
-                            </div>
-                            <div class="flex items-center gap-3 text-xs font-bold text-on-surface-variant">
-                                <span class="material-symbols-outlined text-primary text-lg">location_on</span>
-                                Sede Almafuerte
-                            </div>
-                        </div>
-                    </div>
+                         @endforelse
+                </div>
                 </div>
             </div>
+
+                    
         </section>
 
         <!-- Training Gallery (Carousel) -->

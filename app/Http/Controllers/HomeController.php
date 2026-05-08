@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fixture;
 use App\Models\GalleryItems;
 use App\Models\Publication;
 use Illuminate\View\View;
@@ -21,6 +22,12 @@ class HomeController extends Controller
                 ->where('is_active', true)
                 ->latest('published_at')
                 ->take(6)
+                ->get(),
+            'fixtures' => Fixture::query()
+                ->where('is_active', true)
+                ->orderBy('fixture_date')
+                ->orderBy('match_time')
+                ->take(4)
                 ->get(),    
         ]);
     }

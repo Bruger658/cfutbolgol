@@ -40,7 +40,13 @@
         <div><label>Día de la semana</label><input name="weekday" class="w-full border rounded p-2" value="{{ old('weekday', $fixture->weekday ?? '') }}" placeholder="Ej: Sábado" required></div>
     </div>
 
-    <div><label>Sede</label><input name="venue_name" class="w-full border rounded p-2" value="{{ old('venue_name', $fixture->venue_name ?? 'Almafuerte y Stylo') }}" required></div>
+     <div>
+        <label>Sede</label>
+        <select name="venue_name" class="w-full border rounded p-2" required>
+            <option value="Almafuerte" @selected(old('venue_name', $fixture->venue_name ?? 'Almafuerte') === 'Almafuerte')>Almafuerte</option>
+            <option value="Stylo" @selected(old('venue_name', $fixture->venue_name ?? 'Almafuerte') === 'Stylo')>Stylo</option>
+        </select>
+    </div>
     <div><label><input type="checkbox" name="is_home_venue" value="1" @checked(old('is_home_venue', $fixture->is_home_venue ?? true))> Local en Almafuerte y Stylo (desmarca si es visitante)</label></div>
     <div><label><input type="checkbox" name="is_active" value="1" @checked(old('is_active', $fixture->is_active ?? true))> Activo</label></div>
 
