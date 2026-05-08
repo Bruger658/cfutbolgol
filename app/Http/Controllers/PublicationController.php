@@ -9,17 +9,30 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class PublicationController extends Controller
-{ public function index(): View
+{ 
+    public function index(): View
     {
         $publications = Publication::query()->latest()->paginate(12);
 
         return view('noticias.noticias', compact('publications'));
     }
 
+     public function noticias(): View
+    {
+        return $this->index();
+    }
+
+
 
     public function create(): View
     {
-         return view('noticias.create');
+        $venues = ['Sede Morón', 'Sede Castelar', 'Sede Ituzaingó'];
+
+        return view('noticias.create', [
+            'venues' => $venues,
+            'currentVenue' => old('venue', ''),
+            'isCustomVenue' => false,
+        ]);
     }
 
     public function store(Request $request): RedirectResponse
@@ -28,6 +41,8 @@ class PublicationController extends Controller
             'category' => ['required', 'in:institucional,edefi,bafi,futsala,futsal_femenino'],
             'title' => ['required', 'string', 'max:255'],
             'excerpt' => ['required', 'string', 'max:255'],
+            'venue' => ['required', 'string', 'max:120'],
+            'custom_venue' => ['nullable', 'string', 'max:255', 'required_if:venue,nueva'],
             'content' => ['required', 'string'],
             'image' => ['required', 'image', 'max:4096'],
             'published_at' => ['nullable', 'date'],
@@ -38,9 +53,11 @@ class PublicationController extends Controller
         $isActive = (bool) ($validated['is_active'] ?? false);
 
         $publication = Publication::create([
-            'category' => $validated['category'],
+            'category' => $validated['category'],            
             'title' => $validated['title'],
             'excerpt' => $validated['excerpt'],
+            'venue' => $validated['venue'],
+            'custom_venue' => $validated['venue'] === 'nueva' ? $validated['custom_venue'] : null,
             'content' => $validated['content'],
             'description' => $validated['content'],
             'image_path' => $imagePath,
@@ -55,7 +72,15 @@ class PublicationController extends Controller
 
     public function edit(Publication $publication): View
     {
-        return view('noticias.edit', compact('publication'));
+        $venues = ['Sede Morón', 'Sede Castelar', 'Sede Ituzaingó'];
+        $currentVenue = old('venue', $publication->venue ?? '');
+
+        return view('noticias.edit', [
+            'publication' => $publication,
+            'venues' => $venues,
+            'currentVenue' => $currentVenue,
+            'isCustomVenue' => $currentVenue !== '' && ! in_array($currentVenue, $venues, true),
+        ]);
     }
 
     public function update(Request $request, Publication $publication): RedirectResponse
@@ -64,6 +89,8 @@ class PublicationController extends Controller
             'category' => ['required', 'in:institucional,edefi,bafi,futsala,futsal_femenino'],
             'title' => ['required', 'string', 'max:255'],
             'excerpt' => ['required', 'string', 'max:255'],
+            'venue' => ['required', 'in:almafuerte,stylo,nueva'],
+            'custom_venue' => ['nullable', 'string', 'max:255', 'required_if:venue,nueva'],
             'content' => ['required', 'string'],
             'image' => ['nullable', 'image', 'max:4096'],
             'published_at' => ['nullable', 'date'],
@@ -79,6 +106,8 @@ class PublicationController extends Controller
         $publication->category = $validated['category'];
         $publication->title = $validated['title'];
         $publication->excerpt = $validated['excerpt'];
+         $publication->venue = $validated['venue'];
+        $publication->custom_venue = $validated['venue'] === 'nueva' ? $validated['custom_venue'] : null;
         $publication->content = $validated['content'];
         $publication->description = $validated['content'];
         $publication->published_at = $isActive ? ($validated['published_at'] ?? now()->toDateString()) : null;
@@ -97,7 +126,7 @@ class PublicationController extends Controller
             $publication->delete();
 
             return redirect()
-                ->route('noticias')
+                ->route('publications.index')
                 ->with('status', 'Publicación eliminada correctamente.');
         }
     }

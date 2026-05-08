@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\GalleryItemController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublicationController;
@@ -12,15 +13,10 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-// Route::get('/', function () {    
-//     return view('index');
-// })->name('index');    
+     
 
-Route::middleware(['auth'])->group(function () {       
-
-   
+Route::middleware(['auth'])->group(function () {   
     Route::get('settings/profile', [Settings\ProfileController::class, 'edit'])->name('settings.profile.edit');
-    
     Route::put('settings/profile', [Settings\ProfileController::class, 'update'])->name('settings.profile.update');
     Route::delete('settings/profile', [Settings\ProfileController::class, 'destroy'])->name('settings.profile.destroy');
     Route::get('settings/password', [Settings\PasswordController::class, 'edit'])->name('settings.password.edit');
@@ -30,10 +26,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('gallery-items', GalleryItemController::class)->except(['show']);
 
-Route::resource('publications', PublicationController::class)->except(['show']);
-    Route::get('noticias', [PublicationController::class, 'index'])->name('noticias');
     
- 
+
+    
+    
+    Route::get('noticias', [PublicationController::class, 'noticias'])->name('noticias');
+    
+    Route::resource('publications', PublicationController::class)->except(['show']);
+    Route::get('noticias', [PublicationController::class, 'index'])->name('noticias');
+    Route::get('noticias', [PublicationController::class, 'index'])->name('noticias.noticias');
+    
+    Route::resource('fixtures', FixtureController::class)->except(['show']);
+    Route::get('fixture', [FixtureController::class, 'index'])->name('fixture');
 });
 
 

@@ -9,17 +9,16 @@
                             <x-layouts.sidebar-link href="{{ route('dashboard') }}" icon='fas-house'
                                 :active="request()->routeIs('dashboard*')">Dashboard</x-layouts.sidebar-link>
 
-                            {{-- {{-- <x-layouts.sidebar-link href="{{ route('gallery-items.index') }}" icon='fas-images'
-                                :active="request()->routeIs('gallery*')">Gestión de galería</x-layouts.sidebar-link> --} --}}
-
+                           
                             <x-layouts.sidebar-link href="{{ route('gallery-items.index') }}" icon='fas-image'
                                 :active="request()->routeIs('gallery-items*')">Gallery</x-layouts.sidebar-link>
 
                             
-                            <x-layouts.sidebar-link href="{{ route('noticias') }}" icon='fas-newspaper'
-                                :active="request()->routeIs('noticias')">Noticias</x-layouts.sidebar-link>
+                            <x-layouts.sidebar-link href="{{ route('publications.index') }}" icon='fas-newspaper'
+                                :active="request()->routeIs('publications*')">Noticias</x-layouts.sidebar-link>
     
-
+                             <x-layouts.sidebar-link href="{{ route('fixture') }}" icon='fas-calendar-days'
+                                :active="request()->routeIs('fixtures*') || request()->routeIs('fixture')">Fixture</x-layouts.sidebar-link>
                             
                         </ul>
                     </nav>

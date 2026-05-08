@@ -13,6 +13,8 @@ class Publication extends Model
         'category',
         'title',
         'excerpt',
+        'venue',
+        'custom_venue',
         'content',
         'description',
         'image_path',

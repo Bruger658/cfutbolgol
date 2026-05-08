@@ -13,6 +13,8 @@ return new class extends Migration
             $table->string('category', 40);
             $table->string('title');
             $table->string('excerpt', 255);
+             $table->string('venue', 40)->default('almafuerte');
+            $table->string('custom_venue')->nullable();
             $table->text('content');
             $table->text('description')->nullable();
             $table->string('image_path');

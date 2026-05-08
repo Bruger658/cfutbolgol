@@ -5,7 +5,8 @@
                 <h1 class="text-2xl font-semibold">Noticias</h1>
                 <p class="text-on-surface-variant">Gestiona las noticias que se muestran en la portada.</p>
             </div>
-            <a href="{{ route('publications.create') }}" class="rounded bg-blue-600 px-4 py-2 text-white">Nueva noticia</a>
+            {{-- <a href="{{ route('publications.create') }}" class="rounded bg-blue-600 px-4 py-2 text-white">Nueva noticia</a> --}}
+            <a href="{{ url('/publications/create') }}" class="rounded bg-blue-600 px-4 py-2 text-white">Nueva noticia</a>
         </div>
 
         <table class="min-w-full divide-y divide-gray-200">
@@ -27,7 +28,7 @@
                             <div class="flex items-center gap-3">
                                 <a class="text-blue-600" href="{{ route('publications.edit', $publication) }}">Editar</a>
 
-                                <form action="{{ route('publications.destroy', $publication) }}" method="POST" onsubmit="return confirm('¿Seguro que deseas eliminar esta noticia?');">
+                                <form action="{{ route('publications.destroy', $publication) }}" method="POST" data-confirm-delete data-confirm-message="¿Seguro que deseas eliminar esta noticia?">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600 hover:text-red-700">Borrar</button>
