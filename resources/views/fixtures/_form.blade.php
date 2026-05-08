@@ -42,10 +42,19 @@
 
      <div>
         <label>Sede</label>
-        <select name="venue_name" class="w-full border rounded p-2" required>
-            <option value="Almafuerte" @selected(old('venue_name', $fixture->venue_name ?? 'Almafuerte') === 'Almafuerte')>Almafuerte</option>
-            <option value="Stylo" @selected(old('venue_name', $fixture->venue_name ?? 'Almafuerte') === 'Stylo')>Stylo</option>
-        </select>
+        <input
+            name="venue_name"
+            list="fixture-venues"
+            class="w-full border rounded p-2"
+            value="{{ old('venue_name', $fixture->venue_name ?? 'Almafuerte') }}"
+            placeholder="Escribí o elegí una sede"
+            required
+        >
+        <datalist id="fixture-venues">
+            <option value="Almafuerte"></option>
+            <option value="Stylo"></option>
+        </datalist>
+        <p class="mt-1 text-xs text-on-surface-variant">Podés ingresar una sede nueva para partidos de local o visitante.</p>
     </div>
     <div><label><input type="checkbox" name="is_home_venue" value="1" @checked(old('is_home_venue', $fixture->is_home_venue ?? true))> Local en Almafuerte y Stylo (desmarca si es visitante)</label></div>
     <div><label><input type="checkbox" name="is_active" value="1" @checked(old('is_active', $fixture->is_active ?? true))> Activo</label></div>
