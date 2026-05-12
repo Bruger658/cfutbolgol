@@ -3,6 +3,7 @@
 use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\GalleryItemController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\Settings;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('noticias', [PublicationController::class, 'index'])->name('noticias.noticias');
     
     Route::resource('fixtures', FixtureController::class)->except(['show']);
+    Route::resource('members', MemberController::class)->except(['show']);
     Route::get('fixture', [FixtureController::class, 'index'])->name('fixture');
 });
 

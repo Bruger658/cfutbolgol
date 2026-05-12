@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Publication;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
-class PublicationController extends Controller
+class PublicationController extends Controller    
 { 
+    private const VENUES = ['Sede Morón', 'Sede Castelar', 'Sede Ituzaingó'];
+
     public function index(): View
     {
         $publications = Publication::query()->latest()->paginate(12);
@@ -26,7 +29,7 @@ class PublicationController extends Controller
 
     public function create(): View
     {
-        $venues = ['Sede Morón', 'Sede Castelar', 'Sede Ituzaingó'];
+        $venues = self::VENUES;
 
         return view('noticias.create', [
             'venues' => $venues,
@@ -89,7 +92,7 @@ class PublicationController extends Controller
             'category' => ['required', 'in:institucional,edefi,bafi,futsala,futsal_femenino'],
             'title' => ['required', 'string', 'max:255'],
             'excerpt' => ['required', 'string', 'max:255'],
-            'venue' => ['required', 'in:almafuerte,stylo,nueva'],
+            'venue' => ['required', 'string', 'max:120', Rule::in(array_merge(self::VENUES, ['nueva']))],
             'custom_venue' => ['nullable', 'string', 'max:255', 'required_if:venue,nueva'],
             'content' => ['required', 'string'],
             'image' => ['nullable', 'image', 'max:4096'],
