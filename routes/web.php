@@ -31,11 +31,11 @@ Route::middleware(['auth'])->group(function () {
 
     
     
-    Route::get('noticias', [PublicationController::class, 'noticias'])->name('noticias');
+    // Route::get('noticias', [PublicationController::class, 'noticias'])->name('noticias');
     
     Route::resource('publications', PublicationController::class)->except(['show']);
-    Route::get('noticias', [PublicationController::class, 'index'])->name('noticias');
-    Route::get('noticias', [PublicationController::class, 'index'])->name('noticias.noticias');
+    Route::get('noticias', [PublicationController::class, 'index'])->name('noticias.index');
+    // Route::get('noticias', [PublicationController::class, 'index'])->name('noticias.noticias');
     
     Route::resource('fixtures', FixtureController::class)->except(['show']);
     Route::resource('members', MemberController::class)->except(['show']);

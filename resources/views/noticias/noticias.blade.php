@@ -6,7 +6,7 @@
                 <p class="text-on-surface-variant">Gestiona las noticias que se muestran en la portada.</p>
             </div>
             {{-- <a href="{{ route('publications.create') }}" class="rounded bg-blue-600 px-4 py-2 text-white">Nueva noticia</a> --}}
-            <a href="{{ url('/publications/create') }}" class="rounded bg-blue-600 px-4 py-2 text-white">Nueva noticia</a>
+            <a href="{{ route('publications.create') }}" class="rounded bg-blue-600 px-4 py-2 text-white">Nueva noticia</a>
         </div>
 
         <table class="min-w-full divide-y divide-gray-200">

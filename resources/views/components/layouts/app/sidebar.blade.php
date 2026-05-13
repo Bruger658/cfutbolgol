@@ -14,8 +14,12 @@
                                 :active="request()->routeIs('gallery-items*')">Gallery</x-layouts.sidebar-link>
 
                             
-                            <x-layouts.sidebar-link href="{{ route('publications.index') }}" icon='fas-newspaper'
-                                :active="request()->routeIs('publications*')">Noticias</x-layouts.sidebar-link>
+                            {{-- <x-layouts.sidebar-link href="{{ route('publications.index') }}" icon='fas-newspaper'
+                                :active="request()->routeIs('publications*')">Noticias</x-layouts.sidebar-link> --}}
+
+                                <x-layouts.sidebar-link href="{{ route('publications.index') }}" icon='fas-newspaper'
+                                    :active="request()->routeIs('publications*') || request()->routeIs('noticias.index')">Noticias
+                                </x-layouts.sidebar-link>
     
                              <x-layouts.sidebar-link href="{{ route('fixture') }}" icon='fas-calendar-days'
                                 :active="request()->routeIs('fixtures*') || request()->routeIs('fixture')">Fixture</x-layouts.sidebar-link>

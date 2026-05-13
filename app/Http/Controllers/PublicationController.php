@@ -20,10 +20,10 @@ class PublicationController extends Controller
         return view('noticias.noticias', compact('publications'));
     }
 
-     public function noticias(): View
-    {
-        return $this->index();
-    }
+    //  public function noticias(): View
+    // {
+    //     return $this->index();
+    // }
 
 
 
@@ -117,7 +117,8 @@ class PublicationController extends Controller
         $publication->is_active = $isActive;
         $publication->save();
 
-        return back()->with('status', 'Publicación actualizada correctamente.');
+        // return back()->with('status', 'Publicación actualizada correctamente.');
+        return redirect()->route('publications.index')->with('status', 'Publicación actualizada correctamente.');
     }
     
     public function destroy(Publication $publication): RedirectResponse

@@ -23,7 +23,7 @@
 
 
     <div class="flex items-center gap-3">
-        <button type="submit" class="rounded bg-blue-600 px-4 py-2 text-white">Guardar</button>
+        <button class="rounded bg-blue-600 px-4 py-2 text-white">Guardar</button>
         <a href="{{ route('publications.index') }}" class="text-sm text-on-surface-variant hover:text-on-surface">Cancelar</a>
     </div>
 </div>
