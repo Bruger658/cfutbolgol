@@ -24,6 +24,9 @@
                              <x-layouts.sidebar-link href="{{ route('fixture') }}" icon='fas-calendar-days'
                                 :active="request()->routeIs('fixtures*') || request()->routeIs('fixture')">Fixture</x-layouts.sidebar-link>
 
+                            <x-layouts.sidebar-link href="{{ route('events.index') }}" icon='fas-calendar'
+                                :active="request()->routeIs('events*')">Calendario</x-layouts.sidebar-link>
+                                
                             <x-layouts.sidebar-link href="{{ route('members.index') }}" icon='fas-users'
                                 :active="request()->routeIs('members*')">Socios</x-layouts.sidebar-link>
                             

@@ -1,15 +1,14 @@
 <x-layouts.base>
-     <main class="pt-16">
+    <main class="pt-16">
         <!-- Hero Section -->
-        <section class="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
+        <section class="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
             <div class="absolute inset-0 z-0">
                 <img alt="Professional football stadium aerial view at sunset" class="w-full h-full object-cover"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoKTJZooUn_XY4iX3aHXUV5GFR8TDuSrAwxeCYVRM01XcYFJftHR_qjIwguyzAVqHLoxGgEHSWbFRWR2mYCF9ryfpx_bYZmX5Hhzyp3zNHjElhhBXxBLsvPLNRtYonq2dJ7aiAb0DfEuQBD4volMkvwbD_JBxwlWiOSPDZeyuy3a1h7rP1ZCKaNSZ5FcfoQ4_Ti8YnSnATHqdQSZ5LkRVdQrCHo5OhR4DamNNKzNj-pzq0b6AD8myD4BctpmJrtUrPLMjzTDEtSqI" />
-                <div
-                    class="absolute inset-0 bg-gradient-to-r from-on-background/90 via-on-background/40 to-transparent">
+                <div class="absolute inset-0 bg-gradient-to-r from-on-background/90 via-on-background/40 to-transparent">
                 </div>
             </div>
-            <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+           <div class="relative z-10 max-w-7xl mx-auto px-6 w-full h-full flex items-center">
                 <div class="max-w-2xl space-y-6">
                     <span
                         class="inline-block px-4 py-1 bg-primary/20 text-primary border border-primary/30 rounded-full text-xs font-bold tracking-widest uppercase">Excelencia
@@ -32,8 +31,9 @@
         <section class="py-24 bg-surface" id="historia">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="mb-8">
-                    <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Historia
-                        </h1>
+                    <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">
+                        Historia
+                    </h1>
                     <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
                 </div>
                 <div class="grid md:grid-cols-2 gap-16 items-center">
@@ -79,8 +79,9 @@
         <section class="py-24 bg-brand-pale" id="equipos">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="mb-8">
-                    <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Categorias
-                        </h1>
+                    <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">
+                        Categorias
+                    </h1>
                     <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -139,43 +140,47 @@
 
         <!-- Match Calendar Section -->
         <section class="py-24 bg-surface pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto" id="calendario">
-            
+
             <div class="mb-8">
-                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Calendario
-                    </h1>
+                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">
+                    Calendario
+                </h1>
                 <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
             </div>
-            
+
             <div class="max-w-7xl mx-auto px-6">
-                
+
 
 
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <!-- Match Card -->
-                    
-                                @forelse($fixtures as $fixture)
+
+                    @forelse($fixtures as $fixture)
                         <div
                             class="bg-brand-pale p-8 rounded-3xl shadow-sm border border-primary/10 hover:border-primary/40 transition-all group">
                             <div class="flex justify-between items-center mb-8">
                                 <span
                                     class="text-[10px] font-black uppercase tracking-widest text-on-primary bg-primary px-3 py-1 rounded-full">{{ $fixture->category }}</span>
-                                <span class="text-xs text-outline font-bold">{{ $fixture->fixture_date?->format('d M') }}</span>
+                                <span
+                                    class="text-xs text-outline font-bold">{{ $fixture->fixture_date?->format('d M') }}</span>
                             </div>
                             <div class="flex items-center justify-between gap-2 mb-8">
                                 <div class="text-center flex-1">
                                     <img class="w-14 h-14 rounded-full object-cover mx-auto mb-3 border border-primary/10 shadow-sm"
                                         src="{{ asset('storage/' . $fixture->home_team_badge_path) }}"
                                         alt="Escudo {{ $fixture->home_team_name }}">
-                                    <p class="text-xs font-black uppercase tracking-tighter truncate">{{ $fixture->home_team_name }}</p>
+                                    <p class="text-xs font-black uppercase tracking-tighter truncate">
+                                        {{ $fixture->home_team_name }}</p>
                                 </div>
                                 <span class="font-black text-primary/30 italic">VS</span>
                                 <div class="text-center flex-1">
                                     <img class="w-14 h-14 rounded-full object-cover mx-auto mb-3 border border-primary/10 shadow-sm"
                                         src="{{ asset('storage/' . $fixture->away_team_badge_path) }}"
                                         alt="Escudo {{ $fixture->away_team_name }}">
-                                    <p class="text-xs font-black uppercase tracking-tighter truncate">{{ $fixture->away_team_name }}</p>
-                                </div>                           
+                                    <p class="text-xs font-black uppercase tracking-tighter truncate">
+                                        {{ $fixture->away_team_name }}</p>
+                                </div>
                             </div>
 
                             <div class="space-y-3 pt-6 border-t border-primary/10">
@@ -192,26 +197,56 @@
 
                     @empty
                         <div class="col-span-full text-center text-on-surface-variant py-10">
-                                Aún no hay fixtures cargados.
+                            Aún no hay fixtures cargados.
                         </div>
-                         @endforelse
+                    @endforelse
                 </div>
-                </div>
-            </div>
 
-                    
+        </section>
+        <div class="mt-10 bg-surface rounded-2xl border border-primary/10 p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-2xl font-black text-primary">Agenda de eventos</h3>
+                <a href="{{ route('events.index') }}" class="text-sm font-bold text-primary underline">Ver calendario
+                    mensual/semanal/diario</a>
+            </div>
+            @auth
+                <a href="{{ route('events.create') }}"
+                    class="inline-block mb-4 px-4 py-2 bg-primary text-on-primary rounded-lg font-bold">Crear evento</a>
+            @else
+                <p class="text-sm text-on-surface-variant mb-4">Inicia sesión para crear y gestionar eventos.</p>
+            @endauth
+
+            <div class="space-y-3">
+                @forelse($events as $event)
+                    <div
+                        class="p-4 rounded-xl bg-brand-pale border border-primary/10 flex items-start justify-between gap-3">
+                        <div>
+                            <p class="font-bold text-on-surface">{{ $event->title }}</p>
+                            <p class="text-xs text-on-surface-variant">{{ $event->starts_at->format('d/m/Y H:i') }}
+                            </p>
+                            <p class="text-sm text-on-surface-variant">{{ $event->description }}</p>
+                        </div>
+                    </div>
+                @empty
+                    <p class="text-on-surface-variant">No hay eventos pendientes.</p>
+                @endforelse
+            </div>
+        </div>
+
+
         </section>
 
         <!-- Training Gallery (Carousel) -->
         <section class="py-24 bg-brand-pale overflow-hidden pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto">
-            
+
             <div class="mb-8">
-                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Galería de Fotos
-                    </h1>
+                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">
+                    Galería de Fotos
+                </h1>
                 <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
             </div>
 
-            
+
             <div class="relative max-w-5xl mx-auto px-12 group/carousel">
                 <div class="overflow-hidden rounded-3xl shadow-2xl bg-surface aspect-[16/9]">
                     <div class="carousel-track flex h-full">
@@ -283,29 +318,39 @@
         <!-- Club News -->
         <section class="py-24 bg-surface pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto" id="noticias">
             <div class="mb-8">
-                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Noticias del Club</h1>
+                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">
+                    Noticias del Club</h1>
                 <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
             </div>
             <div class="max-w-7xl mx-auto px-6">
-               
+
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    @foreach (($publications ?? collect()) as $publication)
+                    @foreach ($publications ?? collect() as $publication)
                         <div class="news-card-root bg-surface rounded-[2rem] overflow-hidden flex flex-col shadow-xl hover:shadow-2xl transition-all border border-primary/5 group h-full"
-                             data-full-text="{{ e($publication->content) }}">
+                            data-full-text="{{ e($publication->content) }}">
                             <div class="aspect-video overflow-hidden relative">
-                                <img alt="{{ $publication->title }}" class="news-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="{{ asset('storage/' . $publication->image_path) }}" />
-                                <div class="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest news-tag">{{ str_replace('_', ' ', $publication->category) }}</div>
+                                <img alt="{{ $publication->title }}"
+                                    class="news-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    src="{{ asset('storage/' . $publication->image_path) }}" />
+                                <div
+                                    class="absolute top-4 left-4 bg-primary text-on-primary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest news-tag">
+                                    {{ str_replace('_', ' ', $publication->category) }}</div>
                             </div>
                             <div class="p-8 flex flex-col flex-grow">
-                                <h4 class="news-title text-2xl font-black text-on-surface mb-4 leading-tight group-hover:text-primary transition-colors">{{ $publication->title }}</h4>
-                                <p class="text-on-surface-variant mb-8 line-clamp-3 text-sm leading-relaxed">{{ $publication->excerpt }}</p>
+                                <h4
+                                    class="news-title text-2xl font-black text-on-surface mb-4 leading-tight group-hover:text-primary transition-colors">
+                                    {{ $publication->title }}</h4>
+                                <p class="text-on-surface-variant mb-8 line-clamp-3 text-sm leading-relaxed">
+                                    {{ $publication->excerpt }}</p>
                                 <div class="mt-auto">
-                                    <a class="text-primary font-black flex items-center gap-2 hover:gap-4 transition-all news-read-more text-sm uppercase tracking-tighter" href="#">Leer más <span class="material-symbols-outlined text-[20px]">arrow_forward</span></a>
-                                </div> 
+                                    <a class="text-primary font-black flex items-center gap-2 hover:gap-4 transition-all news-read-more text-sm uppercase tracking-tighter"
+                                        href="#">Leer más <span
+                                            class="material-symbols-outlined text-[20px]">arrow_forward</span></a>
+                                </div>
                             </div>
-                        </div>                 
-                    @endforeach  
-                </div>        
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </section>
 
@@ -313,22 +358,29 @@
         <section class="py-16 bg-brand-pale pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto" id="inscripcion">
             <!-- Page Title -->
             <div class="mb-8">
-                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Formulario de Inscripción
-                    </h1>
+                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">
+                    Formulario de Inscripción
+                </h1>
                 <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
             </div>
             <div class="max-w-7xl mx-auto px-6 md:px-12">
                 <div
                     class="bg-white rounded-[2.5rem] overflow-hidden shadow-xl flex flex-col lg:flex-row min-h-[550px] border border-brand-blue/5">
                     <!-- Logo Column -->
-                    <div class="lg:w-2/5 relative hidden lg:flex overflow-hidden bg-gradient-to-br from-brand-pale to-white border-r border-brand-blue/10">
-                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(30,64,175,0.06),_transparent_65%)]"></div>
-                        <div class="relative z-10 flex h-full w-full flex-col items-center justify-center px-8 py-12 text-center">
-                            <div class="w-full max-w-[260px] rounded-3xl bg-white/90 p-6 shadow-2xl shadow-brand-blue/10">
+                    <div
+                        class="lg:w-2/5 relative hidden lg:flex overflow-hidden bg-gradient-to-br from-brand-pale to-white border-r border-brand-blue/10">
+                        <div
+                            class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(30,64,175,0.06),_transparent_65%)]">
+                        </div>
+                        <div
+                            class="relative z-10 flex h-full w-full flex-col items-center justify-center px-8 py-12 text-center">
+                            <div
+                                class="w-full max-w-[260px] rounded-3xl bg-white/90 p-6 shadow-2xl shadow-brand-blue/10">
                                 <img alt="Logo Centro Fútbol Gol" class="mx-auto w-full max-w-[180px] object-contain"
                                     src="/images/logo-cfg.svg" />
                             </div>
-                            <p class="mt-8 text-2xl font-black leading-tight text-brand-blue">El primer paso para ser profesional comienza aquí.</p>
+                            <p class="mt-8 text-2xl font-black leading-tight text-brand-blue">El primer paso para ser
+                                profesional comienza aquí.</p>
                             <div class="h-1.5 w-12 bg-brand-blue mt-4 rounded-full"></div>
 
                         </div>
@@ -339,16 +391,15 @@
                     <div class="lg:w-3/5 p-8 md:p-12 flex flex-col justify-center">
                         <div class="max-w-xl mx-auto w-full">
                             <h2 class="text-3xl font-black text-slate-900 mb-2">Inscripción Online</h2>
-                            <p class="text-slate-500 mb-8">Completa el formulario y nuestro equipo técnico te contactará
+                            <p class="text-slate-500 mb-8">Completa el formulario y nuestro equipo técnico te
+                                contactará
                                 para una prueba de nivel.</p>
-                           
-                            <div
-                                class="mb-8 rounded-2xl overflow-hidden border border-slate-200 shadow-sm lg:hidden">
-                                <img alt="Niño con balón sonriendo en entrenamiento"
-                                    class="w-full h-40 object-cover"
+
+                            <div class="mb-8 rounded-2xl overflow-hidden border border-slate-200 shadow-sm lg:hidden">
+                                <img alt="Niño con balón sonriendo en entrenamiento" class="w-full h-40 object-cover"
                                     src="https://images.unsplash.com/photo-1570498839593-e565b39455fc?auto=format&fit=crop&w=1200&q=80" />
                             </div>
-                           
+
                             <form action="#" class="space-y-5">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                     <div class="space-y-1.5">
@@ -358,7 +409,8 @@
                                             placeholder="Ej. Juan Pérez" type="text" />
                                     </div>
                                     <div class="space-y-1.5">
-                                        <label class="text-sm font-bold text-slate-700 ml-1">Fecha de Nacimiento</label>
+                                        <label class="text-sm font-bold text-slate-700 ml-1">Fecha de
+                                            Nacimiento</label>
                                         <input
                                             class="w-full px-5 py-3 rounded-xl border-slate-200 focus:ring-brand-blue focus:border-brand-blue transition-all"
                                             type="date" />
@@ -383,16 +435,19 @@
                                 <div class="space-y-1.5">
                                     <label class="text-sm font-bold text-slate-700 ml-1">Categoría de Interés</label>
                                     <select
-                                        class="w-full px-5 py-3 rounded-xl border-slate-200 bg-primary text-on-primary focus:ring-brand-blue focus:border-brand-blue transition-all" style="background-color:#0b1730;color:#ffffff;">
-                                        <option style="background-color:#0b1730;color:#ffffff;">Selecciona una opción</option>
+                                        class="w-full px-5 py-3 rounded-xl border-slate-200 bg-primary text-on-primary focus:ring-brand-blue focus:border-brand-blue transition-all"
+                                        style="background-color:#0b1730;color:#ffffff;">
+                                        <option style="background-color:#0b1730;color:#ffffff;">Selecciona una opción
+                                        </option>
                                         <option style="background-color:#0b1730;color:#ffffff;">Edefi</option>
                                         <option style="background-color:#0b1730;color:#ffffff;">Bafi</option>
                                         <option style="background-color:#0b1730;color:#ffffff;">Futsala</option>
-                                        <option style="background-color:#0b1730;color:#ffffff;">Futsal Femenino</option>    
+                                        <option style="background-color:#0b1730;color:#ffffff;">Futsal Femenino
+                                        </option>
                                     </select>
                                 </div>
                                 <button
-                                   class="w-full py-4 bg-primary text-on-primary font-black rounded-xl border border-primary/20 shadow-xl shadow-primary/20 hover:bg-primary/90 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/30 transition-all mt-4"
+                                    class="w-full py-4 bg-primary text-on-primary font-black rounded-xl border border-primary/20 shadow-xl shadow-primary/20 hover:bg-primary/90 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/30 transition-all mt-4"
                                     type="submit">
                                     Enviar Solicitud
                                 </button>
@@ -405,13 +460,14 @@
                     </div>
                 </div>
             </div>
-        </section> 
-        
+        </section>
+
         <!-- Nuestras Sedes -->
         <section class="pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto">
             <!-- Page Title -->
             <div class="mb-8">
-                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Nuestras
+                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">
+                    Nuestras
                     Sedes</h1>
                 <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
             </div>
@@ -458,7 +514,8 @@
             </section>
             <!-- Middle Section Header -->
             <div class="flex items-center justify-between mb-8">
-                <h3 class="text-2xl font-lexend font-bold text-on-background uppercase tracking-tight">Centros Deportivos
+                <h3 class="text-2xl font-lexend font-bold text-on-background uppercase tracking-tight">Centros
+                    Deportivos
                 </h3>
                 <span class="material-symbols-outlined text-primary cursor-pointer"
                     data-icon="filter_list">filter_list</span>
@@ -479,7 +536,8 @@
                         </div>
                     </div>
                     <div class="p-6">
-                        <h4 class="text-2xl font-lexend font-extrabold text-primary mb-1 uppercase tracking-tighter">Sede
+                        <h4 class="text-2xl font-lexend font-extrabold text-primary mb-1 uppercase tracking-tighter">
+                            Sede
                             Morón</h4>
                         <p class="text-on-surface-variant text-sm mb-4 flex items-center gap-1">
                             <span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
@@ -499,19 +557,20 @@
                             </div>
                             <div
                                 class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
-                                <span class="material-symbols-outlined text-base" data-icon="restaurant">restaurant</span>
+                                <span class="material-symbols-outlined text-base"
+                                    data-icon="restaurant">restaurant</span>
                                 Buffet
                             </div>
                         </div>
                         <div class="flex gap-2">
                             <button
                                 class="flex-1 bg-gradient-to-r from-primary to-primary-container text-white py-3 rounded-xl font-lexend font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 active:scale-95 transition-all"
-                                 onclick="openMap('Sede  Moron', 'Cjal. Horacio Julián 1460, Morón')">
+                                onclick="openMap('Sede  Moron', 'Cjal. Horacio Julián 1460, Morón')">
                                 <span class="material-symbols-outlined text-lg"
                                     data-icon="sports_soccer">sports_soccer</span>
                                 Cómo llegar
                             </button>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -528,7 +587,8 @@
                         </div>
                     </div>
                     <div class="p-6">
-                        <h4 class="text-2xl font-lexend font-extrabold text-primary mb-1 uppercase tracking-tighter">Sede
+                        <h4 class="text-2xl font-lexend font-extrabold text-primary mb-1 uppercase tracking-tighter">
+                            Sede
                             Castelar</h4>
                         <p class="text-on-surface-variant text-sm mb-4 flex items-center gap-1">
                             <span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
@@ -543,24 +603,26 @@
                             </div>
                             <div
                                 class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
-                                <span class="material-symbols-outlined text-base" data-icon="restaurant">restaurant</span>
+                                <span class="material-symbols-outlined text-base"
+                                    data-icon="restaurant">restaurant</span>
                                 Buffet
                             </div>
                             <div
                                 class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
-                               <span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+                                <span class="material-symbols-outlined"
+                                    data-icon="fitness_center">fitness_center</span>
                                 Gimnasio
-                            </div>                            
+                            </div>
                         </div>
                         <div class="flex gap-2">
                             <button
-                               class="flex-1 bg-gradient-to-r from-primary to-primary-container text-white py-3 rounded-xl font-lexend font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 active:scale-95 transition-all"
+                                class="flex-1 bg-gradient-to-r from-primary to-primary-container text-white py-3 rounded-xl font-lexend font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 active:scale-95 transition-all"
                                 onclick="openMap('Sede Castelar', 'Gdor. Máximo Paz 680, Castelar')">
                                 <span class="material-symbols-outlined text-lg"
                                     data-icon="sports_soccer">sports_soccer</span>
                                 Cómo llegar
                             </button>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -577,7 +639,8 @@
                         </div>
                     </div>
                     <div class="p-6">
-                        <h4 class="text-2xl font-lexend font-extrabold text-primary mb-1 uppercase tracking-tighter">Sede
+                        <h4 class="text-2xl font-lexend font-extrabold text-primary mb-1 uppercase tracking-tighter">
+                            Sede
                             Ituzaingó</h4>
                         <p class="text-on-surface-variant text-sm mb-4 flex items-center gap-1">
                             <span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
@@ -592,12 +655,14 @@
                             </div>
                             <div
                                 class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
-                                <span class="material-symbols-outlined text-base" data-icon="restaurant">restaurant</span>
+                                <span class="material-symbols-outlined text-base"
+                                    data-icon="restaurant">restaurant</span>
                                 Buffet
                             </div>
                             <div
                                 class="flex items-center gap-1 bg-surface-container-high px-3 py-1.5 rounded-xl text-[10px] font-bold text-on-surface-variant uppercase">
-                               <span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+                                <span class="material-symbols-outlined"
+                                    data-icon="fitness_center">fitness_center</span>
                                 Gimnasio
                             </div>
                         </div>
@@ -609,7 +674,7 @@
                                     data-icon="sports_soccer">sports_soccer</span>
                                 Cómo llegar
                             </button>
-                            
+
                         </div>
                     </div>
                 </div>

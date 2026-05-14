@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\GalleryItemController;
 use App\Http\Controllers\HomeController;
@@ -38,6 +39,8 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('noticias', [PublicationController::class, 'index'])->name('noticias.noticias');
     
     Route::resource('fixtures', FixtureController::class)->except(['show']);
+     Route::resource('events', EventController::class)->except(['show']);
+    Route::patch('events/{event}/toggle', [EventController::class, 'toggle'])->name('events.toggle');
     Route::resource('members', MemberController::class)->except(['show']);
     Route::get('fixture', [FixtureController::class, 'index'])->name('fixture');
 });

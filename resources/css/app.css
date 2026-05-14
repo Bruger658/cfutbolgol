@@ -142,3 +142,19 @@
     opacity: 0.95;
     cursor: pointer;
 }
+
+/* Better contrast for warning/yellow action buttons */
+button.bg-yellow-100,
+button.bg-yellow-200,
+button.bg-yellow-300,
+button.bg-amber-100,
+button.bg-amber-200,
+button.bg-amber-300,
+a.bg-yellow-100,
+a.bg-yellow-200,
+a.bg-yellow-300,
+a.bg-amber-100,
+a.bg-amber-200,
+a.bg-amber-300 {
+    color: #111827;
+}

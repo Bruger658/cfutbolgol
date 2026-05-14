@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\Fixture;
 use App\Models\GalleryItems;
 use App\Models\Publication;
@@ -28,7 +29,12 @@ class HomeController extends Controller
                 ->orderBy('fixture_date')
                 ->orderBy('match_time')
                 ->take(4)
-                ->get(),    
+                ->get(),   
+            'events' => Event::query()
+                ->where('is_completed', false)
+                ->orderBy('starts_at')
+                ->take(8)
+                ->get(),     
         ]);
     }
 }
