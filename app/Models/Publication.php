@@ -12,9 +12,7 @@ class Publication extends Model
     protected $fillable = [
         'category',
         'title',
-        'excerpt',
-        'venue',
-        'custom_venue',
+        'excerpt',        
         'content',
         'description',
         'image_path',

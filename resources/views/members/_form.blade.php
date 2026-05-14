@@ -19,11 +19,11 @@
                 </label>
                 <select id="category" name="category"
                     class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 focus:border-blue-500 focus:ring-blue-500">
-                    <option value="" disabled selected>Elegir categoría</option>
-                    <option value="edefi">Edefi</option>
-                    <option value="bafi">Bafi</option>
-                    <option value="futsala">Futsala</option>
-                    <option value="femenino">Femenino</option>
+                    <option value="" disabled @selected(old('category', $member->category ?? '') === '')>Elegir categoría</option>
+                    <option value="edefi" @selected(old('category', $member->category ?? '') === 'edefi')>Edefi</option>
+                    <option value="bafi" @selected(old('category', $member->category ?? '') === 'bafi')>Bafi</option>
+                    <option value="futsala" @selected(old('category', $member->category ?? '') === 'futsala')>Futsala</option>
+                    <option value="femenino" @selected(old('category', $member->category ?? '') === 'femenino')>Femenino</option>
                 </select>
             </div>
         
