@@ -18,10 +18,12 @@ class Member extends Model
         'city',
         'phone',
         'responsible_adult_phone',
+        'paid_months',
         'is_up_to_date',
     ];
 
     protected $casts = [
+        'paid_months' => 'array',
         'is_up_to_date' => 'boolean',
     ];
 }

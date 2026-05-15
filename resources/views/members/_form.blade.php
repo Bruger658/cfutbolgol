@@ -40,8 +40,30 @@
 
     <div><label>Teléfono adulto responsable (opcional)</label><input name="responsible_adult_phone" class="w-full border rounded p-2" value="{{ old('responsible_adult_phone', $member->responsible_adult_phone ?? '') }}"></div>
 
-    <div><label><input type="checkbox" name="is_up_to_date" value="1" @checked(old('is_up_to_date', $member->is_up_to_date ?? true))> Está al día con las cuotas</label></div>
+    {{-- <div><label><input type="checkbox" name="is_up_to_date" value="1" @checked(old('is_up_to_date', $member->is_up_to_date ?? true))> Está al día con las cuotas</label></div> --}}
+    @php
+        $selectedPaidMonths = collect(old('paid_months', $member->paid_months ?? []))
+            ->map(fn ($month) => (int) $month)
+            ->all();
+        $months = [
+            1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril', 5 => 'Mayo', 6 => 'Junio',
+            7 => 'Julio', 8 => 'Agosto', 9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre',
+        ];
+    @endphp
 
+    <div>
+        <label class="block mb-2">Meses pagos</label>
+        <p class="text-sm text-gray-500 mb-2">Marcá los meses abonados. El sistema calcula automáticamente si está al día.</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+            @foreach($months as $monthNumber => $monthName)
+                <label class="inline-flex items-center gap-2">
+                    <input type="checkbox" name="paid_months[]" value="{{ $monthNumber }}" @checked(in_array($monthNumber, $selectedPaidMonths, true))>
+                    <span>{{ $monthName }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
+    
     <div class="flex items-center gap-3">
         <button class="rounded bg-blue-600 px-4 py-2 text-white">Guardar</button>
         <a href="{{ route('members.index') }}" class="text-sm text-on-surface-variant hover:text-on-surface">Cancelar</a>

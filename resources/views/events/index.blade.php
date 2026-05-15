@@ -18,6 +18,11 @@
                 <div class="flex gap-2">
                     <form method="POST" action="{{ route('events.toggle', $event) }}">@csrf @method('PATCH')<button class="text-xs px-2 py-1 rounded {{ $event->is_completed ? 'bg-green-100' : 'bg-yellow-100' }}">{{ $event->is_completed ? 'Reactivar' : 'Marcar hecho' }}</button></form>
                     <a href="{{ route('events.edit', $event) }}" class="text-blue-600">Editar</a>
+                    <form action="{{ route('events.destroy', $event) }}" method="POST" data-confirm-delete data-confirm-message="¿Seguro que deseas borrar este evento?">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-600 hover:text-red-700">Borrar</button>
+                    </form>
                 </div>
             </div>
             @empty
