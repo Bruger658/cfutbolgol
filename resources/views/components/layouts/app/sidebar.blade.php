@@ -14,12 +14,10 @@
                                 :active="request()->routeIs('gallery-items*')">Gallery</x-layouts.sidebar-link>
 
                             
-                            {{-- <x-layouts.sidebar-link href="{{ route('publications.index') }}" icon='fas-newspaper'
-                                :active="request()->routeIs('publications*')">Noticias</x-layouts.sidebar-link> --}}
-
-                                <x-layouts.sidebar-link href="{{ route('publications.index') }}" icon='fas-newspaper'
-                                    :active="request()->routeIs('publications*') || request()->routeIs('noticias.index')">Noticias
-                                </x-layouts.sidebar-link>
+                            
+                            <x-layouts.sidebar-link href="{{ route('publications.index') }}" icon='fas-newspaper'
+                                :active="request()->routeIs('publications*') || request()->routeIs('noticias.index')">Noticias
+                            </x-layouts.sidebar-link>
     
                              <x-layouts.sidebar-link href="{{ route('fixture') }}" icon='fas-calendar-days'
                                 :active="request()->routeIs('fixtures*') || request()->routeIs('fixture')">Fixture</x-layouts.sidebar-link>
@@ -30,6 +28,8 @@
                             <x-layouts.sidebar-link href="{{ route('members.index') }}" icon='fas-users'
                                 :active="request()->routeIs('members*')">Socios</x-layouts.sidebar-link>
                             
+                             <x-layouts.sidebar-link href="{{ route('products.index') }}" icon='fas-shirt'
+                                :active="request()->routeIs('products*')">Tienda</x-layouts.sidebar-link>
                         </ul>
                     </nav>
                 </div>

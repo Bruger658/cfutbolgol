@@ -13,21 +13,28 @@ class MemberController extends Controller
     {
         // $members = Member::query()->latest()->paginate(15);
         $search = trim((string) $request->string('search'));
+        $showOnlyDebtors = $request->boolean('only_debtors');
 
-       $members = Member::query()
+        $members = Member::query()            
             ->when($search !== '', function ($query) use ($search) {
-                $query->where(function ($subQuery) use ($search) {
+                //  $terms = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY);
+
+                
+                    $query->where(function ($subQuery) use ($search) {
                     $subQuery->where('first_name', 'like', "%{$search}%")
                         ->orWhere('last_name', 'like', "%{$search}%")
                         ->orWhere('document_number', 'like', "%{$search}%")
                         ->orWhere('category', 'like', "%{$search}%");
                 });
             })
+            ->when($showOnlyDebtors, function ($query) {
+                $query->where('is_up_to_date', false);    
+            })
             ->latest()
             ->paginate(15)
             ->withQueryString();
 
-        return view('members.index', compact('members', 'search'));
+        return view('members.index', compact('members', 'search', 'showOnlyDebtors'));
     }
 
     public function create(): View
