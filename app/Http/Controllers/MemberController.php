@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MembersExport;
 use App\Models\Member;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\View\View;
 
 class MemberController extends Controller
@@ -15,27 +17,50 @@ class MemberController extends Controller
         $search = trim((string) $request->string('search'));
         $showOnlyDebtors = $request->boolean('only_debtors');
 
-        $members = Member::query()            
-            ->when($search !== '', function ($query) use ($search) {
-                //  $terms = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY);
+        // $members = Member::query()            
+        //     ->when($search !== '', function ($query) use ($search) {
+        //         //  $terms = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY);
 
                 
-                    $query->where(function ($subQuery) use ($search) {
-                    $subQuery->where('first_name', 'like', "%{$search}%")
-                        ->orWhere('last_name', 'like', "%{$search}%")
-                        ->orWhere('document_number', 'like', "%{$search}%")
-                        ->orWhere('category', 'like', "%{$search}%");
-                });
-            })
-            ->when($showOnlyDebtors, function ($query) {
-                $query->where('is_up_to_date', false);    
-            })
+        //             $query->where(function ($subQuery) use ($search) {
+        //             $subQuery->where('first_name', 'like', "%{$search}%")
+        //                 ->orWhere('last_name', 'like', "%{$search}%")
+        //                 ->orWhere('document_number', 'like', "%{$search}%")
+        //                 ->orWhere('category', 'like', "%{$search}%");
+        //         });
+        //     })
+        //     ->when($showOnlyDebtors, function ($query) {
+        //         $query->where('is_up_to_date', false);    
+        //     })
+        $members = $this->membersQueryFromRequest($request)
             ->latest()
             ->paginate(15)
             ->withQueryString();
 
         return view('members.index', compact('members', 'search', 'showOnlyDebtors'));
     }
+
+    public function exportExcel(Request $request)
+    {
+        $members = $this->membersQueryFromRequest($request)->latest()->get();
+        $export = new MembersExport($members);
+
+        $fileName = 'socios_'.now()->format('Ymd_His').'.csv';
+
+        return Response::streamDownload(function () use ($export) {
+            echo $export->toCsv();
+        }, $fileName, [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+        ]);
+    }
+
+    public function exportPdf(Request $request): View
+    {
+        $members = $this->membersQueryFromRequest($request)->latest()->get();
+
+        return view('members.exports.pdf', compact('members'));
+    }
+
 
     public function create(): View
     {
@@ -76,6 +101,25 @@ class MemberController extends Controller
         $member->delete();
 
         return redirect()->route('members.index')->with('status', 'Socia eliminada correctamente.');
+    }
+
+    private function membersQueryFromRequest(Request $request)
+    {
+        $search = trim((string) $request->string('search'));
+        $showOnlyDebtors = $request->boolean('only_debtors');
+
+        return Member::query()
+            ->when($search !== '', function ($query) use ($search) {
+                $query->where(function ($subQuery) use ($search) {
+                    $subQuery->where('first_name', 'like', "%{$search}%")
+                        ->orWhere('last_name', 'like', "%{$search}%")
+                        ->orWhere('document_number', 'like', "%{$search}%")
+                        ->orWhere('category', 'like', "%{$search}%");
+                });
+            })
+            ->when($showOnlyDebtors, function ($query) {
+                $query->where('is_up_to_date', false);
+            });
     }
 
     private function validateMember(Request $request): array

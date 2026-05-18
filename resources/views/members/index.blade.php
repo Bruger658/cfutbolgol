@@ -5,7 +5,12 @@
                 <h1 class="text-2xl font-semibold">Socios</h1>
                 <p class="text-on-surface-variant">Listado principal con número de socio, nombre y estado de cuotas.</p>
             </div>
-            <a href="{{ route('members.create') }}" class="rounded bg-blue-600 px-4 py-2 text-white">Nueva socio</a>
+            {{-- <a href="{{ route('members.create') }}" class="rounded bg-blue-600 px-4 py-2 text-white">Nueva socio</a> --}}
+            <div class="flex items-center gap-2">
+                <a href="{{ route('members.export.excel', request()->query()) }}" class="rounded bg-emerald-600 px-4 py-2 text-white">Exportar Excel</a>
+                <a href="{{ route('members.export.pdf', request()->query()) }}" target="_blank" class="rounded bg-slate-700 px-4 py-2 text-white">Exportar PDF</a>
+                <a href="{{ route('members.create') }}" class="rounded bg-blue-600 px-4 py-2 text-white">Nueva socio</a>
+            </div>
         </div>
 
         <div class="mb-6 rounded-3xl border border-outline/30 bg-surface p-5 shadow-sm">

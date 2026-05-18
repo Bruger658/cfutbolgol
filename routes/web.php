@@ -42,6 +42,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('fixtures', FixtureController::class)->except(['show']);
     Route::resource('events', EventController::class)->except(['show']);
     Route::patch('events/{event}/toggle', [EventController::class, 'toggle'])->name('events.toggle');
+    Route::get('members-export/excel', [MemberController::class, 'exportExcel'])->name('members.export.excel');
+    Route::get('members-export/pdf', [MemberController::class, 'exportPdf'])->name('members.export.pdf');
     Route::resource('members', MemberController::class)->except(['show']);
     Route::get('fixture', [FixtureController::class, 'index'])->name('fixture');
     Route::resource('products', ProductController::class)->except(['show']);
