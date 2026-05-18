@@ -37,7 +37,7 @@ class Member extends Model
             ->values()
             ->all();
 
-        $expectedMonths = range(1, 12);
+        $expectedMonths = range(1, now()->month);
 
         return array_values(array_diff($expectedMonths, $paidMonths));
     }
