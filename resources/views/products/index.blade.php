@@ -21,6 +21,13 @@
                             <span class="text-xl font-extrabold text-slate-900">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
                             <span class="text-sm {{ $product->stock > 0 ? 'text-green-700' : 'text-red-600' }}">Stock: {{ $product->stock }}</span>
                         </div>
+                        <form method="POST" action="{{ route('products.checkout.store', $product) }}" class="pt-2 space-y-2">
+                            @csrf
+                            <label class="text-sm text-gray-700">Cantidad</label>
+                            <input type="number" name="quantity" min="1" max="{{ $product->stock }}" value="1" class="w-20 rounded border-gray-300 text-sm">
+                            <button type="submit" class="text-sm px-3 py-1 rounded bg-sky-600 text-white hover:bg-sky-700 transition-colors">Pagar con Mercado Libre</button>
+                        </form>
+
                         <div class="flex items-center gap-2 pt-2">
                             <a href="{{ route('products.edit', $product) }}" class="text-sm px-3 py-1 rounded bg-green-600 text-white hover:bg-green-700 transition-colors">Editar</a>
                             <form method="POST" action="{{ route('products.destroy', $product) }}" data-confirm-delete data-confirm-message="¿Seguro que deseas eliminar este producto?">

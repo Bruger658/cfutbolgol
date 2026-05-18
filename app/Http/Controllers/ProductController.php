@@ -50,7 +50,8 @@ class ProductController extends Controller
             $data['image_url'] = Storage::url($imagePath);
         }
 
-        Product::create($data);
+        // Product::create($data);
+        $product->update($data);
 
         return redirect()->route('products.index')->with('status', 'Producto actualizado correctamente.');
     }
