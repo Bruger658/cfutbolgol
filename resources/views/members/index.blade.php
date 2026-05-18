@@ -72,8 +72,15 @@
                         @else
                             No
                             <div class="text-xs text-red-600 mt-1">
-                                Debe: {{ collect($member->missing_months)->map(fn ($month) => \Carbon\Carbon::create()->month($month)->translatedFormat('F'))->implode(', ') }}
-                            </div>
+                                @php
+                                    $monthNamesEs = [
+                                        1 => 'enero', 2 => 'febrero', 3 => 'marzo', 4 => 'abril',
+                                        5 => 'mayo', 6 => 'junio', 7 => 'julio', 8 => 'agosto',
+                                        9 => 'septiembre', 10 => 'octubre', 11 => 'noviembre', 12 => 'diciembre',
+                                    ];
+                                @endphp
+                                Debe: {{ collect($member->missing_months)->map(fn ($month) => $monthNamesEs[$month] ?? (string) $month)->implode(', ') }}  
+                            </div> 
                         @endif
                     </td>
                     <td class="px-4 py-2"><a class="text-blue-600" href="{{ route('members.edit', $member) }}">Editar</a>
