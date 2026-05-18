@@ -13,7 +13,7 @@
                             <x-layouts.sidebar-link href="{{ route('gallery-items.index') }}" icon='fas-image'
                                 :active="request()->routeIs('gallery-items*')">Gallery</x-layouts.sidebar-link>
 
-                            
+                                                    
                             
                             <x-layouts.sidebar-link href="{{ route('publications.index') }}" icon='fas-newspaper'
                                 :active="request()->routeIs('publications*') || request()->routeIs('noticias.index')">Noticias

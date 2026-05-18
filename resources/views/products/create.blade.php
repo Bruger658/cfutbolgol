@@ -12,7 +12,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('products.store') }}" class="space-y-5">
+        <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data" class="space-y-5">
             @csrf
             @include('products._form')
             <div class="flex items-center gap-3">

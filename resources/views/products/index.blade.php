@@ -15,15 +15,15 @@
                     <img src="{{ $product->image_url ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=900&q=80' }}" alt="{{ $product->name }}" class="w-full h-48 object-cover">
                     <div class="p-4 space-y-2">
                         <p class="text-xs uppercase tracking-wide text-gray-500">{{ $product->category }}</p>
-                        <h2 class="text-lg font-semibold">{{ $product->name }}</h2>
+                        <h2 class="text-lg font-semibold text-slate-900">{{ $product->name }}</h2>
                         <p class="text-sm text-gray-600">{{ $product->description }}</p>
                         <div class="flex items-center justify-between pt-2">
-                            <span class="text-xl font-bold">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
+                            <span class="text-xl font-extrabold text-slate-900">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
                             <span class="text-sm {{ $product->stock > 0 ? 'text-green-700' : 'text-red-600' }}">Stock: {{ $product->stock }}</span>
                         </div>
                         <div class="flex items-center gap-2 pt-2">
-                            <a href="{{ route('products.edit', $product) }}" class="text-sm px-3 py-1 rounded border">Editar</a>
-                            <form method="POST" action="{{ route('products.destroy', $product) }}" onsubmit="return confirm('¿Eliminar producto?')">
+                            <a href="{{ route('products.edit', $product) }}" class="text-sm px-3 py-1 rounded bg-green-600 text-white hover:bg-green-700 transition-colors">Editar</a>
+                            <form method="POST" action="{{ route('products.destroy', $product) }}" data-confirm-delete data-confirm-message="¿Seguro que deseas eliminar este producto?">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-sm px-3 py-1 rounded border border-red-300 text-red-600">Eliminar</button>

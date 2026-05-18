@@ -12,7 +12,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('products.update', $product) }}" class="space-y-5">
+        <form method="POST" action="{{ route('products.update', $product) }}" enctype="multipart/form-data" class="space-y-5">
             @csrf
             @method('PUT')
             @include('products._form')

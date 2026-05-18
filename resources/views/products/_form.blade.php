@@ -22,8 +22,12 @@
     </div>
 
     <div>
-        <label class="block text-sm font-medium mb-1">URL de la foto</label>
-        <input type="url" name="image_url" value="{{ old('image_url', $product->image_url) }}" class="w-full rounded border px-3 py-2" placeholder="https://...">
+        <label class="block text-sm font-medium mb-1">Foto del producto</label>
+        <input type="file" name="image" accept="image/*" class="w-full rounded border px-3 py-2">
+        @if ($product->image_url)
+            <p class="mt-2 text-xs text-gray-600">Imagen actual:</p>
+            <img src="{{ $product->image_url }}" alt="Imagen actual de {{ $product->name }}" class="mt-1 h-24 w-24 rounded object-cover">
+        @endif
     </div>
 
     <div class="grid sm:grid-cols-2 gap-4">
