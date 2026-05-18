@@ -103,7 +103,7 @@ class MemberController extends Controller
         return redirect()->route('members.index')->with('status', 'Socia eliminada correctamente.');
     }
 
-    private function membersQueryFromRequest(Request $request)
+     private function membersQueryFromRequest(Request $request)
     {
         $search = trim((string) $request->string('search'));
         $showOnlyDebtors = $request->boolean('only_debtors');
@@ -121,6 +121,7 @@ class MemberController extends Controller
                 $query->where('is_up_to_date', false);
             });
     }
+
 
     private function validateMember(Request $request): array
     {

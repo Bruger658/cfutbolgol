@@ -26,4 +26,19 @@ class Member extends Model
         'paid_months' => 'array',
         'is_up_to_date' => 'boolean',
     ];
+
+
+ public function getMissingMonthsAttribute(): array
+    {
+        $paidMonths = collect($this->paid_months ?? [])
+            ->map(fn ($month) => (int) $month)
+            ->filter(fn (int $month) => $month >= 1 && $month <= 12)
+            ->unique()
+            ->values()
+            ->all();
+
+        $expectedMonths = range(1, 12);
+
+        return array_values(array_diff($expectedMonths, $paidMonths));
+    }
 }
