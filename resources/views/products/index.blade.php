@@ -23,8 +23,8 @@
                         </div>
                         <form method="POST" action="{{ route('products.checkout.store', $product) }}" class="pt-2 space-y-2">
                             @csrf
-                            <label class="text-sm text-gray-700">Cantidad</label>
-                            <input type="number" name="quantity" min="1" max="{{ $product->stock }}" value="1" class="w-20 rounded border-gray-300 text-sm">
+                            <label class="text-sm font-medium text-slate-900">Cantidad</label>
+                            <input type="number" name="quantity" min="1" max="{{ $product->stock }}" value="1" class="w-20 rounded border-gray-400 bg-white text-sm font-medium text-slate-900">
                             <button type="submit" class="text-sm px-3 py-1 rounded bg-sky-600 text-white hover:bg-sky-700 transition-colors">Pagar con Mercado Libre</button>
                         </form>
 
