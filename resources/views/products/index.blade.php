@@ -15,6 +15,7 @@
                     <img src="{{ $product->image_url ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=900&q=80' }}" alt="{{ $product->name }}" class="w-full h-48 object-cover">
                     <div class="p-4 space-y-2">
                         <p class="text-xs uppercase tracking-wide text-gray-500">{{ $product->category }}</p>
+                        <p class="text-xs uppercase tracking-wide text-gray-500">Talle: {{ $product->size ?? 'Sin talle' }}</p>
                         <h2 class="text-lg font-semibold text-slate-900">{{ $product->name }}</h2>
                         <p class="text-sm text-gray-600">{{ $product->description }}</p>
                         <div class="flex items-center justify-between pt-2">

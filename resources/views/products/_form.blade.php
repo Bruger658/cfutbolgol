@@ -16,9 +16,17 @@
         </select>
     </div>
 
-    <div>
-        <label class="block text-sm font-medium mb-1">Descripción</label>
-        <textarea name="description" rows="4" class="w-full rounded border px-3 py-2" required>{{ old('description', $product->description) }}</textarea>
+   <div>
+        <label class="block text-sm font-medium mb-1">Talle</label>
+        <select name="size" class="w-full rounded border px-3 py-2" required>
+            <option value="" disabled @selected(! old('size', $product->size ?? null))>Elegir talle</option>
+            @php
+                $sizes = ['8', '10', '12', '14', '16', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+            @endphp
+            @foreach ($sizes as $size)
+                <option value="{{ $size }}" @selected(old('size', $product->size ?? null) === $size)>{{ $size }}</option>
+            @endforeach
+        </select>
     </div>
 
     <div>

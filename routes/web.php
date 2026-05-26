@@ -39,6 +39,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('publications', PublicationController::class)->except(['show']);
     Route::get('noticias', [PublicationController::class, 'index'])->name('noticias.index');
     // Route::get('noticias', [PublicationController::class, 'index'])->name('noticias.noticias');
+
+    Route::get('/tienda', [TiendaController::class, 'index'])->name('tienda');
     
     Route::resource('fixtures', FixtureController::class)->except(['show']);
     Route::resource('events', EventController::class)->except(['show']);

@@ -202,39 +202,8 @@
                     @endforelse
                 </div>
 
-        </section>
-        <div class="mt-10 bg-surface rounded-2xl border border-primary/10 p-6">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-2xl font-black text-primary">Agenda de eventos</h3>
-                <a href="{{ route('events.index') }}" class="text-sm font-bold text-primary underline">Ver calendario
-                    mensual/semanal/diario</a>
-            </div>
-            @auth
-                <a href="{{ route('events.create') }}"
-                    class="inline-block mb-4 px-4 py-2 bg-primary text-on-primary rounded-lg font-bold">Crear evento</a>
-            @else
-                <p class="text-sm text-on-surface-variant mb-4">Inicia sesión para crear y gestionar eventos.</p>
-            @endauth
-
-            <div class="space-y-3">
-                @forelse($events as $event)
-                    <div
-                        class="p-4 rounded-xl bg-brand-pale border border-primary/10 flex items-start justify-between gap-3">
-                        <div>
-                            <p class="font-bold text-on-surface">{{ $event->title }}</p>
-                            <p class="text-xs text-on-surface-variant">{{ $event->starts_at->format('d/m/Y H:i') }}
-                            </p>
-                            <p class="text-sm text-on-surface-variant">{{ $event->description }}</p>
-                        </div>
-                    </div>
-                @empty
-                    <p class="text-on-surface-variant">No hay eventos pendientes.</p>
-                @endforelse
-            </div>
-        </div>
-
-
-        </section>
+        </section>       
+        
 
         <!-- Training Gallery (Carousel) -->
         <section class="py-24 bg-brand-pale overflow-hidden pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto">
@@ -251,27 +220,6 @@
                 <div class="overflow-hidden rounded-3xl shadow-2xl bg-surface aspect-[16/9]">
                     <div class="carousel-track flex h-full">
 
-
-                        {{-- <div class="carousel-slide min-w-full h-full">
-                            <img alt="Close up of a soccer ball and cleats on grass"
-                                class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU9UkKgOSqgdkds1hzpQXrZVfWH1fDhtGwo7_H9sBmG6_2tTZwp5u7qR1szvtcLarnqTE1lwmj9EK6hDzc7OTMQGbJhxoqFO1IWJ60ypK7-rJ0p3gUgp5ReG7LQHo3An0sf4NX15CbC6leJmCFGJO81r62kf1W4rStnovIm6J8JBWdiRCi-laDKcYFJSpbRztZXcvzmGSFEC1-eAqmUqM-ss8-roA-0G3qz-n0ZOso1VMvaagMsOwsQg_VMJTL2LvAtiSOBlszCZg" />
-                        </div>
-                        <div class="carousel-slide min-w-full h-full">
-                            <img alt="Coach explaining tactics to young players"
-                                class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC98y-BkYOf4Q1sUJwfeDialphQzK5rTtzrjbH3go0zdCikmtUcZrEo7HbcilqGfkAPMMqOpMxzPusSE047g_fpc46KxRqPSQw6enlvWPQzaD5tzmXm9zVgNg2MQk87cx4yZcZ_hsYbTNpmo0nMOJ_21Q_DvsVscXH-AGMZKY1zjOXs_VfBZfg4PA8klykrWwFZHRwmxdgLZN1eiBWtK42Qbo7xQQ_HGUOaRab2AVKz5cN6S8gTaX2GwM0gwz_TbLTJBdEYxCEavP4" />
-                        </div>
-                        <div class="carousel-slide min-w-full h-full">
-                            <img alt="Group of players celebrating a goal"
-                                class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIPxWhEdW_VfyNQU5jS7ZFwJ7BZpgZT-cW0quRjfduPwS0iO_jbXEf-M-goSRZsPl0M_Z7-Q3FeJ44b24AVrDG0ORpRiBMo8zkdxlu79UKB1UjZBYU0pqT4y_BNRfRbakdfN-hbp9S45OYpgj0LCQvqoXcK1ekDsOD6JysD7zplW-SWUz5fw9Occd3odoyI6e1gDuM6zJZ0ERH8ktU8v3JSFC2xCui3l4D6lpT08-OFVPXDb902scWi18uiV3-fvvuJevRi9Uji78" />
-                        </div>
-                        <div class="carousel-slide min-w-full h-full">
-                            <img alt="Intense dribbling drill with cones"
-                                class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWEcAxIU4rRwqh7kLJ4mBhpUJcgEyYSb31zfZ-lEJTQH6lICQcrKzmtUMGCgA-O5mcAcuXpmizNZu3bFHur75Uy0jpoN1kD081InZD2ri18mHdKr4Dq-8jy2iaR3plNKUO5Bmi6GFBAPc6aSLgmSSUJ529FL0NpDfq3MiUMVkucpNSY7Q8YOw8KEf6XxMbO6QF0r-CAIEQfhDboYeIbjlT81v0vJFm1if-8e05ZZvf2WewKjxfbJ-x2UysXr_f8g-Bp7c9rWfumrM" />
-                        </div> --}}
                         @forelse ($galleryItems ?? [] as $item)
                             <div class="carousel-slide min-w-full h-full">
                                 <img class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-700"
@@ -297,13 +245,7 @@
                 </button>
                 <!-- Nav Dots -->
                 <div class="carousel-nav flex justify-center gap-4 mt-10">
-                    {{-- <button aria-label="Slide 1" class="w-3 h-3 rounded-full bg-primary transition-all"></button>
-                    <button aria-label="Slide 2"
-                        class="w-3 h-3 rounded-full bg-slate-300 transition-all hover:bg-primary/50"></button>
-                    <button aria-label="Slide 3"
-                        class="w-3 h-3 rounded-full bg-slate-300 transition-all hover:bg-primary/50"></button>
-                    <button aria-label="Slide 4"
-                        class="w-3 h-3 rounded-full bg-slate-300 transition-all hover:bg-primary/50"></button> --}}
+                   
                     @php
                         $slidesCount = max(($galleryItems ?? collect())->count(), 1);
                     @endphp
@@ -351,6 +293,52 @@
                         </div>
                     @endforeach
                 </div>
+            </div>
+        </section>
+
+        <!-- Tienda -->
+        <section class="pt-10 pb-24 px-4 md:px-8 max-w-7xl mx-auto" id="tienda">
+            <div class="mb-8">
+                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Tienda</h1>
+                <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                @forelse ($featuredProducts ?? collect() as $product)
+                    <article class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-lg border border-primary/10">
+                        <img class="w-full h-52 object-cover"
+                            src="{{ $product->image_url ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=80' }}"
+                            alt="{{ $product->name }}">
+                        <div class="p-6 space-y-3">
+                            <h2 class="text-2xl font-black text-primary">{{ $product->name }}</h2>
+                            <p class="text-sm font-bold uppercase tracking-wider text-on-surface-variant">
+                                Talle: {{ $product->category ?: 'Único' }}
+                            </p>
+                            <p class="text-sm text-on-surface-variant">{{ $product->description }}</p>
+                            <div class="flex items-center justify-between pt-2">
+                                <span class="text-xl font-black text-on-surface">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
+                                <span class="text-sm font-bold text-on-surface-variant">Stock: {{ $product->stock }}</span>
+                            </div>
+                            <form method="POST" action="{{ route('products.checkout.store', $product) }}" class="pt-2">
+                                @csrf
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="w-full text-sm px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700 transition-colors font-bold">
+                                    Pagar con Mercado Pago
+                                </button>
+                            </form>
+                        </div>
+                    </article>
+                @empty
+                    <p class="text-on-surface-variant">Próximamente vamos a publicar productos en la tienda.</p>
+                @endforelse
+            </div>
+
+            <div class="mt-8">
+                <a href="{{ route('tienda') }}"
+                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-bold uppercase tracking-wide">
+                    Ver tienda completa
+                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                </a>
             </div>
         </section>
 
