@@ -22,6 +22,7 @@
                         <button
                             class="px-8 py-4 kinetic-gradient text-on-primary font-bold rounded-xl shadow-xl shadow-primary/20 hover:scale-105 transition-all"
                             id="btn-metodologia">Ver Metodología</button>
+                           
                     </div>
                 </div>
             </div>
@@ -334,13 +335,101 @@
             </div>
 
             <div class="mt-8">
-                <a href="{{ route('products.index') }}"
+                <button id="open-full-store" type="button"
                     class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-bold uppercase tracking-wide">
                     Ver tienda completa
                     <span class="material-symbols-outlined text-lg">arrow_forward</span>
-                </a>
+                </button>
+            </div>
+
+            <div id="full-store-card" class="hidden mt-10 bg-surface-container-lowest border border-primary/10 rounded-3xl p-6 md:p-8 shadow-xl">
+                <div class="flex items-center justify-between gap-4 mb-6">
+                    <h2 class="text-3xl font-black text-primary uppercase tracking-tight">Tienda completa</h2>
+                    <button id="close-full-store" type="button" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-200 text-slate-800 hover:bg-slate-300">Cerrar</button>
+                </div>
+
+                <div id="store-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @forelse ($storeProducts ?? collect() as $product)
+                        <article class="store-product bg-white rounded-2xl overflow-hidden shadow border border-primary/10">
+                            <img class="w-full h-44 object-cover"
+                                src="{{ $product->image_url ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=80' }}"
+                                alt="{{ $product->name }}">
+                            <div class="p-4 space-y-2">
+                                <h3 class="text-lg font-black text-primary">{{ $product->name }}</h3>
+                                <p class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Talle: {{ $product->category ?: 'Único' }}</p>
+                                <p class="text-sm text-on-surface-variant line-clamp-2">{{ $product->description }}</p>
+                                <div class="flex items-center justify-between pt-1">
+                                    <span class="text-base font-black text-on-surface">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
+                                    <span class="text-xs font-bold text-on-surface-variant">Stock: {{ $product->stock }}</span>
+                                </div>
+                            </div>
+                        </article>
+                    @empty
+                        <p class="text-on-surface-variant">No hay productos disponibles en este momento.</p>
+                    @endforelse
+                </div>
+
+                <div id="store-pagination" class="mt-6 flex items-center justify-center gap-2"></div>
             </div>
         </section>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const openBtn = document.getElementById('open-full-store');
+                const closeBtn = document.getElementById('close-full-store');
+                const storeCard = document.getElementById('full-store-card');
+                const pagination = document.getElementById('store-pagination');
+                const products = Array.from(document.querySelectorAll('.store-product'));
+                const productsPerPage = 12;
+                let currentPage = 1;
+
+                const renderPage = (page) => {
+                    const totalPages = Math.max(1, Math.ceil(products.length / productsPerPage));
+                    currentPage = Math.min(Math.max(1, page), totalPages);
+
+                    products.forEach((product, index) => {
+                        const start = (currentPage - 1) * productsPerPage;
+                        const end = start + productsPerPage;
+                        product.classList.toggle('hidden', !(index >= start && index < end));
+                    });
+
+                    if (!pagination) return;
+                    pagination.innerHTML = '';
+
+                    const prev = document.createElement('button');
+                    prev.textContent = 'Anterior';
+                    prev.className = 'px-3 py-1.5 rounded-lg text-sm font-semibold bg-slate-200 disabled:opacity-40';
+                    prev.disabled = currentPage === 1;
+                    prev.onclick = () => renderPage(currentPage - 1);
+                    pagination.appendChild(prev);
+
+                    for (let i = 1; i <= totalPages; i++) {
+                        const btn = document.createElement('button');
+                        btn.textContent = String(i);
+                        btn.className = `px-3 py-1.5 rounded-lg text-sm font-bold ${i === currentPage ? 'bg-primary text-white' : 'bg-slate-100 text-slate-700'}`;
+                        btn.onclick = () => renderPage(i);
+                        pagination.appendChild(btn);
+                    }
+
+                    const next = document.createElement('button');
+                    next.textContent = 'Siguiente';
+                    next.className = 'px-3 py-1.5 rounded-lg text-sm font-semibold bg-slate-200 disabled:opacity-40';
+                    next.disabled = currentPage === totalPages;
+                    next.onclick = () => renderPage(currentPage + 1);
+                    pagination.appendChild(next);
+                };
+
+                openBtn?.addEventListener('click', () => {
+                    storeCard?.classList.remove('hidden');
+                    renderPage(1);
+                    storeCard?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+
+                closeBtn?.addEventListener('click', () => {
+                    storeCard?.classList.add('hidden');
+                });
+            });
+        </script>
 
         <!-- Formulario -->
         <section class="py-16 bg-brand-pale pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto" id="inscripcion">

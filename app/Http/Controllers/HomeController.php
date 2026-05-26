@@ -40,6 +40,10 @@ class HomeController extends Controller
                 ->where('stock', '>', 0)
                 ->latest()
                 ->take(3)
+               ->get(),
+            'storeProducts' => Product::query()
+                ->where('stock', '>', 0)
+                ->latest()
                 ->get(),    
         ]);
     }
