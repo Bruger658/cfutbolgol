@@ -334,7 +334,7 @@
             </div>
 
             <div class="mt-8">
-                <a href="{{ route('tienda') }}"
+                <a href="{{ route('products.index') }}"
                     class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-bold uppercase tracking-wide">
                     Ver tienda completa
                     <span class="material-symbols-outlined text-lg">arrow_forward</span>

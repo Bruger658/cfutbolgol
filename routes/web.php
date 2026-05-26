@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductCheckoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\Settings;
+use App\Http\Controllers\TiendaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -16,6 +17,8 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+Route::get('/tienda', [TiendaController::class, 'index'])->name('tienda');    
 
      
 
@@ -40,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('noticias', [PublicationController::class, 'index'])->name('noticias.index');
     // Route::get('noticias', [PublicationController::class, 'index'])->name('noticias.noticias');
 
-    Route::get('/tienda', [TiendaController::class, 'index'])->name('tienda');
+    Route::get('/tienda', [ProductController::class, 'index'])->name('products.index');
     
     Route::resource('fixtures', FixtureController::class)->except(['show']);
     Route::resource('events', EventController::class)->except(['show']);

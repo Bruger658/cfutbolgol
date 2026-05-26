@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Fixture;
 use App\Models\GalleryItems;
+use App\Models\Product;
 use App\Models\Publication;
 use Illuminate\View\View;
 
@@ -34,7 +35,12 @@ class HomeController extends Controller
                 ->where('is_completed', false)
                 ->orderBy('starts_at')
                 ->take(8)
-                ->get(),     
+                 ->get(),
+            'featuredProducts' => Product::query()
+                ->where('stock', '>', 0)
+                ->latest()
+                ->take(3)
+                ->get(),    
         ]);
     }
 }

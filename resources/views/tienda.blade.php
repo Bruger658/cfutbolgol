@@ -1,5 +1,3 @@
--1
-
 <x-layouts.base>
     <main class="pt-20 pb-24 px-4 md:px-8 max-w-7xl mx-auto">
         <div class="mb-8">
