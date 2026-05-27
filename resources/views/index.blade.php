@@ -342,8 +342,8 @@
                 </button>
             </div>
 
-            <div id="full-store-card" class="hidden mt-10 bg-surface-container-lowest border border-primary/10 rounded-3xl p-6 md:p-8 shadow-xl">
-                <div class="flex items-center justify-between gap-4 mb-6">
+                <div id="full-store-overlay" class="hidden fixed inset-0 z-50 bg-white/85 backdrop-blur-sm p-4 md:p-8 overflow-y-auto">
+                <div id="full-store-card" class="mx-auto my-8 w-full max-w-6xl bg-surface-container-lowest border border-primary/10 rounded-3xl p-6 md:p-8 shadow-2xl">
                     <h2 class="text-3xl font-black text-primary uppercase tracking-tight">Tienda completa</h2>
                     <button id="close-full-store" type="button" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-200 text-slate-800 hover:bg-slate-300">Cerrar</button>
                 </div>
@@ -370,13 +370,15 @@
                 </div>
 
                 <div id="store-pagination" class="mt-6 flex items-center justify-center gap-2"></div>
-            </div>
+                </div>
+            </div>    
         </section>
 
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const openBtn = document.getElementById('open-full-store');
                 const closeBtn = document.getElementById('close-full-store');
+                const storeOverlay = document.getElementById('full-store-overlay');
                 const storeCard = document.getElementById('full-store-card');
                 const pagination = document.getElementById('store-pagination');
                 const products = Array.from(document.querySelectorAll('.store-product'));
@@ -398,7 +400,7 @@
 
                     const prev = document.createElement('button');
                     prev.textContent = 'Anterior';
-                    prev.className = 'px-3 py-1.5 rounded-lg text-sm font-semibold bg-slate-200 disabled:opacity-40';
+                    prev.className = 'px-3 py-1.5 rounded-lg text-sm font-semibold bg-slate-200 text-slate-800 disabled:opacity-40';
                     prev.disabled = currentPage === 1;
                     prev.onclick = () => renderPage(currentPage - 1);
                     pagination.appendChild(prev);
@@ -421,12 +423,32 @@
 
                 openBtn?.addEventListener('click', () => {
                     storeCard?.classList.remove('hidden');
-                    renderPage(1);
-                    storeCard?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.body.classList.remove('overflow-hidden');
                 });
 
+                 storeCard?.addEventListener('click', (event) => {
+                    if (event.target === storeCard) {
+                        storeCard.classList.add('hidden');
+                        document.body.classList.remove('overflow-hidden');
+                    }
+                });
+
+                document.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape' && storeCard && !storeCard.classList.contains('hidden')) {
+                        storeCard.classList.add('hidden');
+                        document.body.classList.remove('overflow-hidden');
+                    }
+                });
+               
+
                 closeBtn?.addEventListener('click', () => {
-                    storeCard?.classList.add('hidden');
+                    storeOverlay?.classList.add('hidden');
+                });
+
+                storeOverlay?.addEventListener('click', (event) => {
+                    if (event.target === storeOverlay) {
+                        storeOverlay.classList.add('hidden');
+                    }
                 });
             });
         </script>
