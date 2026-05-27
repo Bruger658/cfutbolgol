@@ -52,7 +52,7 @@
                 <button id="close-full-store-page" type="button" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-200 text-slate-800 hover:bg-slate-300">Cerrar</button>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @forelse ($products as $product)
                     <article class="bg-white rounded-2xl overflow-hidden shadow border border-primary/10">
                         <img class="w-full h-52 object-cover"
@@ -81,8 +81,8 @@
                 @endforelse
             </div>
 
-            <div class="mt-10">
-                {{ $products->links() }}
+            <div class="mt-10 rounded-2xl border border-primary/10 bg-white/95 p-4 shadow-sm">
+                {{ $products->onEachSide(1)->links() }}
             </div>
         </div>
 

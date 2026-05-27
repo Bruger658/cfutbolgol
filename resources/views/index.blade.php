@@ -422,33 +422,31 @@
                 };
 
                 openBtn?.addEventListener('click', () => {
-                    storeCard?.classList.remove('hidden');
-                    document.body.classList.remove('overflow-hidden');
+                   storeOverlay?.classList.remove('hidden');
+                    document.body.classList.add('overflow-hidden');
+                    renderPage(1);
                 });
 
-                 storeCard?.addEventListener('click', (event) => {
-                    if (event.target === storeCard) {
-                        storeCard.classList.add('hidden');
+                 storeOverlay?.addEventListener('click', (event) => {
+                    if (event.target === storeOverlay) {
+                        storeOverlay.classList.add('hidden');
                         document.body.classList.remove('overflow-hidden');
                     }
                 });
 
                 document.addEventListener('keydown', (event) => {
-                    if (event.key === 'Escape' && storeCard && !storeCard.classList.contains('hidden')) {
-                        storeCard.classList.add('hidden');
-                        document.body.classList.remove('overflow-hidden');
+                    if (event.key === 'Escape' && storeOverlay && !storeOverlay.classList.contains('hidden')) {
+                        storeOverlay.classList.add('hidden');
+                        document.body.classList.remove('overflow-hidden');                        
                     }
                 });
                
 
                 closeBtn?.addEventListener('click', () => {
                     storeOverlay?.classList.add('hidden');
-                });
 
-                storeOverlay?.addEventListener('click', (event) => {
-                    if (event.target === storeOverlay) {
-                        storeOverlay.classList.add('hidden');
-                    }
+                    document.body.classList.remove('overflow-hidden');
+                
                 });
             });
         </script>
