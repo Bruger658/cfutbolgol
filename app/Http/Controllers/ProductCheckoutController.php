@@ -11,6 +11,12 @@ use Illuminate\View\View;
 
 class ProductCheckoutController extends Controller
 {
+
+    public function prepare(Product $product): View
+    {
+        return view('products.prepare-checkout', compact('product'));
+    }
+    
     public function store(Request $request, Product $product): RedirectResponse
     {
         $validated = $request->validate([
@@ -35,8 +41,7 @@ class ProductCheckoutController extends Controller
 
         $product->decrement('stock', $validated['quantity']);
 
-        return redirect()->route('products.checkout.show', $order)
-            ->with('status', 'Orden creada. Continúa el pago en Mercado Libre.');
+       return redirect()->away($order->checkout_url);
     }
 
     public function show(ProductOrder $order): View

@@ -53,7 +53,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('members', MemberController::class)->except(['show']);
     Route::get('fixture', [FixtureController::class, 'index'])->name('fixture');
     Route::resource('products', ProductController::class)->except(['show']);
-     Route::post('products/{product}/checkout', [ProductCheckoutController::class, 'store'])->name('products.checkout.store');
+    Route::get('products/{product}/checkout/prepare', [ProductCheckoutController::class, 'prepare'])->name('products.checkout.prepare');
+    Route::post('products/{product}/checkout', [ProductCheckoutController::class, 'store'])->name('products.checkout.store');
     Route::get('products/checkout/{order}', [ProductCheckoutController::class, 'show'])->name('products.checkout.show');
 });
 

@@ -320,13 +320,9 @@
                                 <span class="text-xl font-black text-on-surface">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
                                 <span class="text-sm font-bold text-on-surface-variant">Stock: {{ $product->stock }}</span>
                             </div>
-                            <form method="POST" action="{{ route('products.checkout.store', $product) }}" class="pt-2">
-                                @csrf
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="w-full text-sm px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700 transition-colors font-bold">
-                                    Pagar con Mercado Pago
-                                </button>
-                            </form>
+                            <a href="{{ route('products.checkout.prepare', $product) }}" class="block w-full text-center text-sm px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700 transition-colors font-bold">
+                                Pagar con Mercado Pago
+                            </a>
                         </div>
                     </article>
                 @empty
@@ -344,9 +340,11 @@
 
                 <div id="full-store-overlay" class="hidden fixed inset-0 z-50 bg-white/85 backdrop-blur-sm p-4 md:p-8 overflow-y-auto">
                 <div id="full-store-card" class="mx-auto my-8 w-full max-w-6xl bg-surface-container-lowest border border-primary/10 rounded-3xl p-6 md:p-8 shadow-2xl">
-                    <h2 class="text-3xl font-black text-primary uppercase tracking-tight">Tienda completa</h2>
-                    <button id="close-full-store" type="button" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-200 text-slate-800 hover:bg-slate-300">Cerrar</button>
-                </div>
+                    <div class="flex items-center justify-between gap-4 mb-6">
+                        <h2 class="text-3xl font-black text-primary uppercase tracking-tight">Tienda completa</h2>
+                        <button id="close-full-store" type="button" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-200 text-slate-800 hover:bg-slate-300">Cerrar</button>
+                    </div>
+
 
                 <div id="store-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @forelse ($storeProducts ?? collect() as $product)

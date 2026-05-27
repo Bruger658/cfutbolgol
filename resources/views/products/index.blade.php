@@ -22,12 +22,9 @@
                             <span class="text-xl font-extrabold text-slate-900">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
                             <span class="text-sm {{ $product->stock > 0 ? 'text-green-700' : 'text-red-600' }}">Stock: {{ $product->stock }}</span>
                         </div>
-                        <form method="POST" action="{{ route('products.checkout.store', $product) }}" class="pt-2 space-y-2">
-                            @csrf
-                            <label class="text-sm font-medium text-slate-900">Cantidad</label>
-                            <input type="number" name="quantity" min="1" max="{{ $product->stock }}" value="1" class="w-20 rounded border-gray-400 bg-white text-sm font-medium text-slate-900">
-                            <button type="submit" class="text-sm px-3 py-1 rounded bg-sky-600 text-white hover:bg-sky-700 transition-colors">Pagar con Mercado Libre</button>
-                        </form>
+                        <a href="{{ route('products.checkout.prepare', $product) }}" class="block w-full text-center text-sm px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700 transition-colors font-bold">
+                            Pagar con Mercado Pago
+                        </a>
 
                         <div class="flex items-center gap-2 pt-2">
                             <a href="{{ route('products.edit', $product) }}" class="text-sm px-3 py-1 rounded bg-green-600 text-white hover:bg-green-700 transition-colors">Editar</a>
