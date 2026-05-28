@@ -19,7 +19,15 @@ class ProductOrder extends Model
         'status',
         'payment_provider',
         'provider_reference',
-        'checkout_url',
+        'provider_payment_id',
+        'checkout_url','paid_at',
+    ];
+
+    protected $casts = [
+        'quantity' => 'integer',
+        'unit_price' => 'decimal:2',
+        'total_price' => 'decimal:2',
+        'paid_at' => 'datetime',
     ];
 
     public function product(): BelongsTo

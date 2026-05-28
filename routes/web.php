@@ -5,7 +5,7 @@ use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\GalleryItemController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MemberController;
-// use App\Http\Controllers\ProductCheckoutController;
+use App\Http\Controllers\ProductCheckoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\Settings;
@@ -18,7 +18,14 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::get('/tienda', [TiendaController::class, 'index'])->name('tienda');    
+Route::get('/tienda', [TiendaController::class, 'index'])->name('tienda');
+Route::get('products/{product}/checkout/prepare', [ProductCheckoutController::class, 'prepare'])->name('products.checkout.prepare');
+Route::post('products/{product}/checkout', [ProductCheckoutController::class, 'store'])->name('products.checkout.store');
+Route::get('products/checkout/{order}', [ProductCheckoutController::class, 'show'])->name('products.checkout.show');
+Route::get('products/checkout/{order}/success', [ProductCheckoutController::class, 'success'])->name('products.checkout.success');
+Route::get('products/checkout/{order}/failure', [ProductCheckoutController::class, 'failure'])->name('products.checkout.failure');
+Route::get('products/checkout/{order}/pending', [ProductCheckoutController::class, 'pending'])->name('products.checkout.pending');
+Route::post('mercado-pago/webhook', [ProductCheckoutController::class, 'webhook'])->name('products.checkout.webhook');  
 
      
 

@@ -2,7 +2,7 @@
     <main class="pt-24 pb-20 px-4 md:px-8 max-w-3xl mx-auto">
         <div class="rounded-3xl border border-primary/20 bg-white shadow-xl p-6 md:p-8">
             <h1 class="text-3xl font-black text-primary uppercase tracking-tight">Preparar compra</h1>
-            <p class="mt-2 text-sm text-on-surface-variant">Revisá tu producto antes de ir al checkout de Mercado Pago.</p>
+            <p class="mt-2 text-sm text-on-surface-variant">Revisá tu producto antes de ir al checkout seguro de Mercado Pago.</p>
 
             @if ($errors->any())
                 <div class="mt-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700">
@@ -16,6 +16,7 @@
                     alt="{{ $product->name }}">
                 <div class="space-y-2">
                     <p class="text-xs uppercase tracking-wider text-on-surface-variant">{{ $product->category }}</p>
+                    <p class="text-xs uppercase tracking-wider text-on-surface-variant">Talle: {{ $product->size ?? 'Sin talle' }}</p>
                     <h2 class="text-2xl font-black text-primary">{{ $product->name }}</h2>
                     <p class="text-sm text-on-surface-variant">{{ $product->description }}</p>
                     <p class="text-sm font-bold">Stock disponible: {{ $product->stock }}</p>
@@ -31,12 +32,12 @@
                         class="w-24 rounded-lg border-slate-300">
                 </div>
 
-                <div class="rounded-2xl border border-primary/10 bg-brand-pale p-4 text-sm">
-                    Al confirmar, se creará la orden y se descontará el stock automáticamente.
+                <div class="rounded-2xl border border-primary/10 bg-brand-pale p-4 text-sm text-on-surface-variant">
+                    Al confirmar, te vamos a redirigir a Mercado Pago. El stock se descuenta cuando el pago queda aprobado.
                 </div>
 
                 <button type="submit" class="w-full rounded-xl bg-sky-600 px-4 py-3 text-white font-bold hover:bg-sky-700 transition-colors">
-                    Confirmar y continuar al pago
+                    Pagar con Mercado Pago
                 </button>
             </form>
         </div>
