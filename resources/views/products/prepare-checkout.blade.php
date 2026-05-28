@@ -39,6 +39,9 @@
                 <button type="submit" class="w-full rounded-xl bg-sky-600 px-4 py-3 text-white font-bold hover:bg-sky-700 transition-colors">
                     Pagar con Mercado Pago
                 </button>
+                 <a href="{{ route('index') }}" class="block w-full rounded-xl border border-primary/20 px-4 py-3 text-center font-bold text-primary hover:bg-primary hover:text-white transition-colors">
+                    Cancelar e ir al inicio
+                </a>
             </form>
         </div>
     </main>

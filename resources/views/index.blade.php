@@ -313,16 +313,14 @@
                         <div class="p-6 space-y-3">
                             <h2 class="text-2xl font-black text-primary">{{ $product->name }}</h2>
                             <p class="text-sm font-bold uppercase tracking-wider text-on-surface-variant">
-                                Talle: {{ $product->category ?: 'Único' }}
+                               Talle: {{ $product->size ?: 'Único' }}
                             </p>
                             <p class="text-sm text-on-surface-variant">{{ $product->description }}</p>
                             <div class="flex items-center justify-between pt-2">
                                 <span class="text-xl font-black text-on-surface">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
                                 <span class="text-sm font-bold text-on-surface-variant">Stock: {{ $product->stock }}</span>
                             </div>
-                            {{-- <a href="{{ route('products.checkout.prepare', $product) }}" class="block w-full text-center text-sm px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700 transition-colors font-bold">
-                                Pagar con Mercado Pago
-                            </a> --}}
+                            @include('products._checkout-actions', ['product' => $product])
                         </div>
                     </article>
                 @empty
@@ -354,12 +352,13 @@
                                 alt="{{ $product->name }}">
                             <div class="p-4 space-y-2">
                                 <h3 class="text-lg font-black text-primary">{{ $product->name }}</h3>
-                                <p class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Talle: {{ $product->category ?: 'Único' }}</p>
+                                <p class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Talle: {{ $product->size ?: 'Único' }}</p>
                                 <p class="text-sm text-on-surface-variant line-clamp-2">{{ $product->description }}</p>
                                 <div class="flex items-center justify-between pt-1">
                                     <span class="text-base font-black text-on-surface">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
                                     <span class="text-xs font-bold text-on-surface-variant">Stock: {{ $product->stock }}</span>
                                 </div>
+                                @include('products._checkout-actions', ['product' => $product])
                             </div>
                         </article>
                     @empty
