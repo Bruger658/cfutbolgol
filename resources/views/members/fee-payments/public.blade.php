@@ -83,7 +83,7 @@
                                 <p class="mt-2 text-emerald-700 font-semibold">El jugador figura al día en el backend.</p>
                             </div>
                         @else
-                            <form method="POST" action="{{ route('fees.public.store', $selectedMember) }}" class="mt-8 space-y-6">
+                            <form method="POST" action="{{ route('fees.mercado-pago.store', $selectedMember) }}" class="mt-8 space-y-6">
                                 @csrf
                                 <div class="overflow-hidden rounded-3xl border border-blue-100">
                                     <table class="w-full text-sm">
@@ -116,6 +116,10 @@
                                     <p class="text-sm font-black text-red-600">{{ $message }}</p>
                                 @enderror
 
+                                @error('mercado_pago')
+                                    <p class="text-sm font-black text-red-600">{{ $message }}</p>
+                                @enderror
+
                                 <div class="rounded-3xl bg-blue-50 p-5 text-right border border-blue-100">
                                     <p class="text-sm font-black uppercase tracking-wide text-primary">Total a pagar</p>
                                     <p class="text-4xl font-black text-on-surface">${{ number_format($paymentSummary['total'], 0, ',', '.') }}</p>
@@ -124,9 +128,10 @@
                                     @endif
                                 </div>
 
-                                <button type="submit" class="w-full rounded-3xl bg-emerald-600 px-6 py-5 text-lg font-black uppercase tracking-wide text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-700">
-                                    Confirmar y enviar pago al backend
+                                <button type="submit" class="w-full rounded-3xl bg-sky-600 px-6 py-5 text-lg font-black uppercase tracking-wide text-white shadow-lg shadow-sky-600/25 transition hover:bg-sky-700">
+                                    Mercado Pago
                                 </button>
+                                <p class="text-center text-sm font-semibold text-on-surface-variant">Al aprobarse el pago, Mercado Pago avisará al backend y la cuota quedará marcada como paga en socios.</p>
                             </form>
                         @endif
                     @endif

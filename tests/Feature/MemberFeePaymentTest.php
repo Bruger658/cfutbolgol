@@ -1,12 +1,15 @@
 <?php
 
 use App\Models\Member;
+use App\Models\MemberFeePayment;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
+use function Pest\Laravel\postJson;
 
 beforeEach(function () {
     config([
@@ -118,4 +121,102 @@ it('receives a public fee payment and updates the backend member record', functi
 
     expect($member->paid_months)->toBe([1, 2, 3, 4, 5]);
     expect($member->is_up_to_date)->toBeTrue();
+});
+
+it('creates a Mercado Pago checkout for selected public fee months', function () {
+    Carbon::setTestNow('2026-05-09 10:00:00');
+    config(['services.mercado_pago.access_token' => 'test-token']);
+
+    Http::fake([
+        'api.mercadopago.com/checkout/preferences' => Http::response([
+            'id' => 'preference-123',
+            'init_point' => 'https://mercadopago.test/checkout/preference-123',
+        ]),
+    ]);
+
+    $member = Member::create([
+        'first_name' => 'Nina',
+        'last_name' => 'Perez',
+        'category' => 'infantiles',
+        'document_number' => '33111222',
+        'address' => 'Calle 40',
+        'city' => 'Moron',
+        'phone' => '444444',
+        'responsible_adult_phone' => null,
+        'paid_months' => [1, 2, 3, 4],
+        'is_up_to_date' => false,
+    ]);
+
+    $response = post(route('fees.mercado-pago.store', $member), [
+        'months' => [5],
+    ]);
+
+    $response->assertRedirect('https://mercadopago.test/checkout/preference-123');
+
+    $feePayment = MemberFeePayment::first();
+
+    expect($feePayment)->not->toBeNull();
+    expect($feePayment->member_id)->toBe($member->id);
+    expect($feePayment->months)->toBe([5]);
+    expect((float) $feePayment->total_amount)->toBe(35000.0);
+    expect($feePayment->status)->toBe('pending');
+    expect($feePayment->provider_reference)->toBe('preference-123');
+
+    Http::assertSent(function ($request) use ($feePayment) {
+        return $request->url() === 'https://api.mercadopago.com/checkout/preferences'
+            && $request['external_reference'] === (string) $feePayment->id
+            && $request['notification_url'] === route('fees.mercado-pago.webhook')
+            && $request['back_urls']['success'] === route('fees.mercado-pago.success', $feePayment);
+    });
+});
+
+it('marks member fee months as paid when Mercado Pago webhook reports approval', function () {
+    Carbon::setTestNow('2026-05-09 10:00:00');
+    config(['services.mercado_pago.access_token' => 'test-token']);
+
+    $member = Member::create([
+        'first_name' => 'Valen',
+        'last_name' => 'Lopez',
+        'category' => 'juveniles',
+        'document_number' => '34111222',
+        'address' => 'Calle 50',
+        'city' => 'Haedo',
+        'phone' => '555555',
+        'responsible_adult_phone' => null,
+        'paid_months' => [1, 2, 3, 4],
+        'is_up_to_date' => false,
+    ]);
+
+    $feePayment = MemberFeePayment::create([
+        'member_id' => $member->id,
+        'months' => [5],
+        'base_amount' => 35000,
+        'surcharge_amount' => 0,
+        'total_amount' => 35000,
+        'status' => 'pending',
+        'payment_provider' => 'mercado_pago',
+    ]);
+
+    Http::fake([
+        'api.mercadopago.com/v1/payments/123456' => Http::response([
+            'id' => 123456,
+            'status' => 'approved',
+            'external_reference' => (string) $feePayment->id,
+        ]),
+    ]);
+
+    $response = postJson(route('fees.mercado-pago.webhook'), [
+        'data' => ['id' => 123456],
+    ]);
+
+    $response->assertOk();
+
+    $member->refresh();
+    $feePayment->refresh();
+
+    expect($member->paid_months)->toBe([1, 2, 3, 4, 5]);
+    expect($member->is_up_to_date)->toBeTrue();
+    expect($feePayment->status)->toBe('paid');
+    expect($feePayment->provider_payment_id)->toBe('123456');
+    expect($feePayment->paid_at)->not->toBeNull();
 });

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Member extends Model
 {
@@ -27,8 +28,13 @@ class Member extends Model
         'is_up_to_date' => 'boolean',
     ];
 
+    public function feePayments(): HasMany
+    {
+        return $this->hasMany(MemberFeePayment::class);
+    }
 
- public function getMissingMonthsAttribute(): array
+
+    public function getMissingMonthsAttribute(): array
     {
         $paidMonths = collect($this->paid_months ?? [])
             ->map(fn ($month) => (int) $month)

@@ -22,6 +22,11 @@ Route::view('dashboard', 'dashboard')
 Route::get('/tienda', [TiendaController::class, 'index'])->name('tienda');
 Route::get('products/{product}/checkout/prepare', [ProductCheckoutController::class, 'prepare'])->name('products.checkout.prepare');
 Route::get('/pagar-cuota', [MemberFeePaymentController::class, 'publicIndex'])->name('fees.public.index');
+Route::post('/pagar-cuota/{member}/mercado-pago', [MemberFeePaymentController::class, 'mercadoPagoStore'])->name('fees.mercado-pago.store');
+Route::get('/pagar-cuota/mercado-pago/{feePayment}/success', [MemberFeePaymentController::class, 'mercadoPagoSuccess'])->name('fees.mercado-pago.success');
+Route::get('/pagar-cuota/mercado-pago/{feePayment}/failure', [MemberFeePaymentController::class, 'mercadoPagoFailure'])->name('fees.mercado-pago.failure');
+Route::get('/pagar-cuota/mercado-pago/{feePayment}/pending', [MemberFeePaymentController::class, 'mercadoPagoPending'])->name('fees.mercado-pago.pending');
+Route::post('/mercado-pago/cuotas/webhook', [MemberFeePaymentController::class, 'mercadoPagoWebhook'])->name('fees.mercado-pago.webhook');
 Route::post('/pagar-cuota/{member}', [MemberFeePaymentController::class, 'publicStore'])->name('fees.public.store');
 Route::post('products/{product}/checkout', [ProductCheckoutController::class, 'store'])->name('products.checkout.store');
 Route::get('products/checkout/{order}', [ProductCheckoutController::class, 'show'])->name('products.checkout.show');
