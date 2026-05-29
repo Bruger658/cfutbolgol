@@ -21,6 +21,8 @@ Route::view('dashboard', 'dashboard')
 
 Route::get('/tienda', [TiendaController::class, 'index'])->name('tienda');
 Route::get('products/{product}/checkout/prepare', [ProductCheckoutController::class, 'prepare'])->name('products.checkout.prepare');
+Route::get('/pagar-cuota', [MemberFeePaymentController::class, 'publicIndex'])->name('fees.public.index');
+Route::post('/pagar-cuota/{member}', [MemberFeePaymentController::class, 'publicStore'])->name('fees.public.store');
 Route::post('products/{product}/checkout', [ProductCheckoutController::class, 'store'])->name('products.checkout.store');
 Route::get('products/checkout/{order}', [ProductCheckoutController::class, 'show'])->name('products.checkout.show');
 Route::get('products/checkout/{order}/success', [ProductCheckoutController::class, 'success'])->name('products.checkout.success');

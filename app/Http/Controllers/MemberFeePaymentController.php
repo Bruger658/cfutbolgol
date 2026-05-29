@@ -49,7 +49,59 @@ class MemberFeePaymentController extends Controller
         ]);
     }
 
+    public function publicIndex(Request $request): View
+    {
+        $search = trim((string) $request->string('search'));
+        $selectedMember = $request->filled('member')
+            ? Member::find($request->integer('member'))
+            : null;
+
+        $members = collect();
+
+        if ($search !== '') {
+            $members = $this->searchMembers($search)->limit(8)->get();
+
+            if ($members->count() === 1) {
+                $selectedMember = $members->first();
+            }
+        }
+
+        return view('members.fee-payments.public', [
+            'search' => $search,
+            'members' => $members,
+            'selectedMember' => $selectedMember,
+            'paymentSummary' => $selectedMember ? $this->paymentSummary($selectedMember) : null,
+        ]);
+    }
+
+    public function publicStore(Request $request, Member $member): RedirectResponse
+    {
+        $result = $this->registerPayment($request, $member);
+
+        if ($result instanceof RedirectResponse) {
+            return $result;
+        }
+
+        return redirect()
+            ->route('fees.public.index', ['member' => $member->id])
+            ->with('status', 'Recibimos el pago de cuota para '.$member->first_name.' '.$member->last_name.'. Total: $'.number_format($result['total'], 0, ',', '.'));
+    }
+
     public function store(Request $request, Member $member): RedirectResponse
+    {
+        $result = $this->registerPayment($request, $member);
+
+        if ($result instanceof RedirectResponse) {
+            return $result;
+        }
+
+        return redirect()
+            ->route('members.fee-payments.index', ['member' => $member->id])
+            ->with('status', 'Pago de cuota registrado para '.$member->first_name.' '.$member->last_name.'. Total: $'.number_format($result['total'], 0, ',', '.'));
+    }
+
+    private function registerPayment(Request $request, Member $member): array|RedirectResponse
+    // public function store(Request $request, Member $member): RedirectResponse
     {
         $validated = $request->validate([
             'months' => ['required', 'array', 'min:1'],
@@ -84,11 +136,7 @@ class MemberFeePaymentController extends Controller
             'is_up_to_date' => empty($this->missingMonthsFrom($paidMonths)),
         ]);
 
-        $summary = $this->paymentSummaryForMonths($monthsToPay);
-
-        return redirect()
-            ->route('members.fee-payments.index', ['member' => $member->id])
-            ->with('status', 'Pago de cuota registrado para '.$member->first_name.' '.$member->last_name.'. Total: $'.number_format($summary['total'], 0, ',', '.'));
+        return $this->paymentSummaryForMonths($monthsToPay);
     }
 
     private function searchMembers(string $search)
@@ -122,7 +170,7 @@ class MemberFeePaymentController extends Controller
 
     private function paymentSummaryForMonths(array $months): array
     {
-        $monthlyFee = (int) config('membership.monthly_fee', 10000);
+       $monthlyFee = (int) config('membership.monthly_fee', 35000);
         $surchargePercentage = (int) config('membership.late_surcharge_percentage', 10);
         $surchargeApplies = now()->day > (int) config('membership.late_surcharge_starts_after_day', 10);
 

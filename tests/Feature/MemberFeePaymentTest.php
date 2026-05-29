@@ -4,9 +4,13 @@ use App\Models\Member;
 use App\Models\User;
 use Carbon\Carbon;
 
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
+
 beforeEach(function () {
     config([
-        'membership.monthly_fee' => 10000,
+        'membership.monthly_fee' => 35000,
         'membership.late_surcharge_percentage' => 10,
         'membership.late_surcharge_starts_after_day' => 10,
     ]);
@@ -38,9 +42,9 @@ it('shows member data and late surcharge after day ten', function () {
     $response->assertOk();
     $response->assertSee('Mario Suarez');
     $response->assertSee('Mayo');
-    $response->assertSee('$10.000');
-    $response->assertSee('$1.000');
-    $response->assertSee('$11.000');
+    $response->assertSee('$35.000');
+    $response->assertSee('$3.500');
+    $response->assertSee('$38.500');
 });
 
 it('registers selected fee months using the existing paid months field', function () {
@@ -65,6 +69,49 @@ it('registers selected fee months using the existing paid months field', functio
     ]);
 
     $response->assertRedirect(route('members.fee-payments.index', ['member' => $member->id]));
+    $response->assertSessionHas('status');
+
+    $member->refresh();
+
+    expect($member->paid_months)->toBe([1, 2, 3, 4, 5]);
+    expect($member->is_up_to_date)->toBeTrue();
+});
+
+it('shows the public payment link in the website navigation', function () {
+    $response = get(route('index'));
+
+    $response->assertOk();
+    $response->assertSee('Pagar cuota');
+    $response->assertSee(route('fees.public.index'), false);
+});
+
+it('receives a public fee payment and updates the backend member record', function () {
+    Carbon::setTestNow('2026-05-09 10:00:00');
+
+    $member = Member::create([
+        'first_name' => 'Sofia',
+        'last_name' => 'Gomez',
+        'category' => 'futsala',
+        'document_number' => '35111222',
+        'address' => 'Calle 30',
+        'city' => 'Castelar',
+        'phone' => '333333',
+        'responsible_adult_phone' => null,
+        'paid_months' => [1, 2, 3, 4],
+        'is_up_to_date' => false,
+    ]);
+
+    $response = get(route('fees.public.index', ['search' => '35111222']));
+
+    $response->assertOk();
+    $response->assertSee('Sofia Gomez');
+    $response->assertSee('Mayo');
+
+    $response = post(route('fees.public.store', $member), [
+        'months' => [5],
+    ]);
+
+    $response->assertRedirect(route('fees.public.index', ['member' => $member->id]));
     $response->assertSessionHas('status');
 
     $member->refresh();
