@@ -110,11 +110,24 @@ class MemberController extends Controller
 
         return Member::query()
             ->when($search !== '', function ($query) use ($search) {
-                $query->where(function ($subQuery) use ($search) {
-                    $subQuery->where('first_name', 'like', "%{$search}%")
+                $terms = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+
+                $query->where(function ($subQuery) use ($search, $terms) {
+                    if (ctype_digit($search)) {
+                        $subQuery->orWhere('id', (int) $search);
+                    }
+
+                    $subQuery->orWhere('first_name', 'like', "%{$search}%")
                         ->orWhere('last_name', 'like', "%{$search}%")
                         ->orWhere('document_number', 'like', "%{$search}%")
                         ->orWhere('category', 'like', "%{$search}%");
+
+                    foreach ($terms as $term) {
+                        $subQuery->orWhere('first_name', 'like', "%{$term}%")
+                            ->orWhere('last_name', 'like', "%{$term}%")
+                            ->orWhere('document_number', 'like', "%{$term}%")
+                            ->orWhere('category', 'like', "%{$term}%");
+                    }    
                 });
             })
             ->when($showOnlyDebtors, function ($query) {

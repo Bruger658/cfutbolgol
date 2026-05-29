@@ -9,6 +9,7 @@
             <div class="flex items-center gap-2">
                 <a href="{{ route('members.export.excel', request()->query()) }}" class="rounded bg-emerald-600 px-4 py-2 text-white">Exportar Excel</a>
                 <a href="{{ route('members.export.pdf', request()->query()) }}" target="_blank" class="rounded bg-slate-700 px-4 py-2 text-white">Exportar PDF</a>
+                <a href="{{ route('members.fee-payments.index') }}" class="rounded bg-emerald-600 px-4 py-2 font-bold text-white shadow-lg shadow-emerald-600/20">Pagar cuota</a>
                 <a href="{{ route('members.create') }}" class="rounded bg-blue-600 px-4 py-2 text-white">Nueva socio</a>
             </div>
         </div>
@@ -83,8 +84,11 @@
                             </div> 
                         @endif
                     </td>
-                    <td class="px-4 py-2"><a class="text-blue-600" href="{{ route('members.edit', $member) }}">Editar</a>
-                    <form action="{{ route('members.destroy', $member) }}" method="POST" class="inline" data-confirm-delete data-confirm-message="¿Seguro que deseas borrar esta socia?">@csrf @method('DELETE')<button class="text-red-600 ml-2">Borrar</button></form></td>
+                    <td class="px-4 py-2">
+                        <a class="text-emerald-600 font-semibold" href="{{ route('members.fee-payments.index', ['member' => $member->id]) }}">Pagar cuota</a>
+                        <a class="text-blue-600 ml-2" href="{{ route('members.edit', $member) }}">Editar</a>
+                        <form action="{{ route('members.destroy', $member) }}" method="POST" class="inline" data-confirm-delete data-confirm-message="¿Seguro que deseas borrar esta socia?">@csrf @method('DELETE')<button class="text-red-600 ml-2">Borrar</button></form>
+                    </td>
                 </tr>
             @empty
                 <tr><td colspan="5" class="px-4 py-6 text-center text-gray-500">Sin socias cargadas.</td></tr>

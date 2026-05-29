@@ -708,8 +708,8 @@
                     href="#sedes">Sedes</a>
             </div>
             <div class="flex items-center gap-4">
-                <button
-                    class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-bold text-sm hover:scale-105 transition-all active:scale-95 shadow-md shadow-primary/20">CFG</button>
+                
+                    
                 <button class="lg:hidden text-on-surface">
                     <span class="material-symbols-outlined">menu</span>
                 </button>

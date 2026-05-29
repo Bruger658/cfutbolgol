@@ -13,8 +13,15 @@
             <div class="ml-4 font-semibold text-xl text-blue-600 dark:text-blue-400">{{ config('app.name') }}</div>
         </div>
 
-        <!-- Right side: Theme toggle, Search, notifications, profile -->
+        <!-- Right side: highlighted fee payment, theme toggle, notifications, profile -->
         <div class="flex items-center space-x-4">
+            <a href="{{ route('members.fee-payments.index') }}"
+                class="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-4 py-2 text-sm font-black text-white shadow-lg shadow-emerald-600/30 transition hover:-translate-y-0.5 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <span class="hidden sm:inline">Pagar cuota</span>
+            </a>
             <!-- Theme Toggle -->
             <div x-data="{ open: false }" class="relative">
                 <button @click="open = !open"

@@ -5,6 +5,7 @@ use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\GalleryItemController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MemberFeePaymentController;
 use App\Http\Controllers\ProductCheckoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublicationController;
@@ -57,12 +58,11 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('events/{event}/toggle', [EventController::class, 'toggle'])->name('events.toggle');
     Route::get('members-export/excel', [MemberController::class, 'exportExcel'])->name('members.export.excel');
     Route::get('members-export/pdf', [MemberController::class, 'exportPdf'])->name('members.export.pdf');
+    Route::get('members/fee-payments', [MemberFeePaymentController::class, 'index'])->name('members.fee-payments.index');
+    Route::post('members/{member}/fee-payments', [MemberFeePaymentController::class, 'store'])->name('members.fee-payments.store');
     Route::resource('members', MemberController::class)->except(['show']);
     Route::get('fixture', [FixtureController::class, 'index'])->name('fixture');
-    Route::resource('products', ProductController::class)->except(['show']);
-    // Route::get('products/{product}/checkout/prepare', [ProductCheckoutController::class, 'prepare'])->name('products.checkout.prepare');
-    // Route::post('products/{product}/checkout', [ProductCheckoutController::class, 'store'])->name('products.checkout.store');
-    // Route::get('products/checkout/{order}', [ProductCheckoutController::class, 'show'])->name('products.checkout.show');
+    Route::resource('products', ProductController::class)->except(['show']);    
 });
 
 
