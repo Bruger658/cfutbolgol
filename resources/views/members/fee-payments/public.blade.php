@@ -29,6 +29,12 @@
                         </div>
                     </form>
 
+                    <a href="{{ route('index') }}" class="mt-4 inline-flex items-center justify-center gap-2 rounded-2xl border border-blue-100 bg-white px-6 py-4 font-black uppercase tracking-wide text-primary shadow-sm transition hover:border-primary hover:bg-primary/10">
+                        <span class="material-symbols-outlined text-base">arrow_back</span>
+                        Cancelar
+                    </a>
+
+
                     @if(session('status'))
                         <div class="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-800 font-bold">
                             {{ session('status') }}
@@ -127,10 +133,17 @@
                                         <p class="mt-1 text-sm font-semibold text-on-surface-variant">Incluye recargo del {{ $paymentSummary['surcharge_percentage'] }}% por pago fuera de término.</p>
                                     @endif
                                 </div>
+                               
+                                <div class="grid gap-3 sm:grid-cols-2">
+                                    <a href="{{ route('index') }}" class="flex items-center justify-center gap-2 rounded-3xl border border-blue-100 bg-white px-6 py-5 text-lg font-black uppercase tracking-wide text-primary shadow-sm transition hover:border-primary hover:bg-primary/10">
+                                        <span class="material-symbols-outlined text-base">arrow_back</span>
+                                        Cancelar
+                                    </a>
+                                    <button type="submit" class="rounded-3xl bg-sky-600 px-6 py-5 text-lg font-black uppercase tracking-wide text-white shadow-lg shadow-sky-600/25 transition hover:bg-sky-700">
+                                        Mercado Pago
+                                    </button>
+                                </div>
 
-                                <button type="submit" class="w-full rounded-3xl bg-sky-600 px-6 py-5 text-lg font-black uppercase tracking-wide text-white shadow-lg shadow-sky-600/25 transition hover:bg-sky-700">
-                                    Mercado Pago
-                                </button>
                                 <p class="text-center text-sm font-semibold text-on-surface-variant">Al aprobarse el pago, Mercado Pago avisará al backend y la cuota quedará marcada como paga en socios.</p>
                             </form>
                         @endif
