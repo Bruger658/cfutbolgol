@@ -8,8 +8,7 @@
             {{-- <a href="{{ route('members.create') }}" class="rounded bg-blue-600 px-4 py-2 text-white">Nueva socio</a> --}}
             <div class="flex items-center gap-2">
                 <a href="{{ route('members.export.excel', request()->query()) }}" class="rounded bg-emerald-600 px-4 py-2 text-white">Exportar Excel</a>
-                <a href="{{ route('members.export.pdf', request()->query()) }}" target="_blank" class="rounded bg-slate-700 px-4 py-2 text-white">Exportar PDF</a>
-                <a href="{{ route('members.fee-payments.index') }}" class="rounded bg-emerald-600 px-4 py-2 font-bold text-white shadow-lg shadow-emerald-600/20">Pagar cuota</a>
+                <a href="{{ route('members.export.pdf', request()->query()) }}" target="_blank" class="rounded bg-slate-700 px-4 py-2 text-white">Exportar PDF</a>                
                 <a href="{{ route('members.create') }}" class="rounded bg-blue-600 px-4 py-2 text-white">Nueva socio</a>
             </div>
         </div>

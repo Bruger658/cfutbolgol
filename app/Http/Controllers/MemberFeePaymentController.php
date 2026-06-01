@@ -446,15 +446,16 @@ class MemberFeePaymentController extends Controller
 
     private function paymentSummaryForMonths(array $months): array
     {
-       $monthlyFee = (int) config('membership.monthly_fee', 35000);
+        $monthlyFee = (int) config('membership.monthly_fee', 35000);
         $surchargePercentage = (int) config('membership.late_surcharge_percentage', 10);
-        $surchargeApplies = now()->day > (int) config('membership.late_surcharge_starts_after_day', 10);
+        $surchargeStartsAfterDay = (int) config('membership.late_surcharge_starts_after_day', 10);
 
         $rows = collect($months)
             ->map(fn ($month) => (int) $month)
             ->unique()
             ->sort()
-            ->map(function (int $month) use ($monthlyFee, $surchargePercentage, $surchargeApplies) {
+            ->map(function (int $month) use ($monthlyFee, $surchargePercentage, $surchargeStartsAfterDay) {
+                $surchargeApplies = $this->surchargeAppliesForMonth($month, $surchargeStartsAfterDay);
                 $surcharge = $surchargeApplies ? (int) round($monthlyFee * ($surchargePercentage / 100)) : 0;
 
                 return [
@@ -470,10 +471,17 @@ class MemberFeePaymentController extends Controller
         return [
             'monthly_fee' => $monthlyFee,
             'surcharge_percentage' => $surchargePercentage,
-            'surcharge_applies' => $surchargeApplies,
+            'surcharge_applies' => $rows->contains(fn (array $row) => $row['surcharge_amount'] > 0),
             'months' => $rows,
             'total' => $rows->sum('total'),
         ];
+    }
+
+     private function surchargeAppliesForMonth(int $month, int $startsAfterDay): bool
+    {
+        $dueDate = Carbon::create(now()->year, $month, $startsAfterDay)->endOfDay();
+
+        return now()->greaterThan($dueDate);
     }
 
     private function missingMonthsFrom(array $paidMonths): array

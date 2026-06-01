@@ -50,6 +50,34 @@ it('shows member data and late surcharge after day ten', function () {
     $response->assertSee('$38.500');
 });
 
+it('adds late surcharge only to previous months when the current month is still before day eleven', function () {
+    Carbon::setTestNow('2026-06-01 10:00:00');
+    $user = User::factory()->create();
+
+    $member = Member::create([
+        'first_name' => 'German',
+        'last_name' => 'Spitaleri',
+        'category' => 'futsala',
+        'document_number' => '53710678',
+        'address' => 'Calle 15',
+        'city' => 'Moron',
+        'phone' => '111222',
+        'responsible_adult_phone' => null,
+        'paid_months' => [1, 2, 3, 4],
+        'is_up_to_date' => false,
+    ]);
+
+    $response = actingAs($user)->get(route('members.fee-payments.index', ['search' => (string) $member->id]));
+
+    $response->assertOk();
+    $response->assertSee('German Spitaleri');
+    $response->assertSee('Mayo');
+    $response->assertSee('Junio');
+    $response->assertSeeInOrder(['Mayo', '$35.000', '$3.500', '$38.500']);
+    $response->assertSeeInOrder(['Junio', '$35.000', '$0', '$35.000']);
+    $response->assertSee('$73.500');
+});
+
 it('registers selected fee months using the existing paid months field', function () {
     Carbon::setTestNow('2026-05-09 10:00:00');
     $user = User::factory()->create();
