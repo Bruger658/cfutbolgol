@@ -240,7 +240,6 @@ class MemberFeePaymentController extends Controller
     }
 
     private function registerPayment(Request $request, Member $member): array|RedirectResponse
-    // public function store(Request $request, Member $member): RedirectResponse
     {
         $validated = $request->validate([
             'months' => ['required', 'array', 'min:1'],

@@ -43,14 +43,13 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product): RedirectResponse
     {
-       $data = $this->validateProduct($request);
+        $data = $this->validateProduct($request);
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('products', 'public');
             $data['image_url'] = Storage::url($imagePath);
         }
 
-        // Product::create($data);
         $product->update($data);
 
         return redirect()->route('products.index')->with('status', 'Producto actualizado correctamente.');
@@ -79,10 +78,5 @@ class ProductController extends Controller
         $data['description'] = $data['description'] ?? '';
 
         return $data;
-    }
-
-    private function isStoredImage(?string $imageUrl): bool
-    {
-        return $imageUrl !== null && str_starts_with($imageUrl, '/storage/');
-    }
+    }   
 }

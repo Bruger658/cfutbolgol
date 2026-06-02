@@ -9,20 +9,17 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class PublicationController extends Controller    
-{ 
-    
+{     
     public function index(): View
     {
         $publications = Publication::query()->latest()->paginate(12);
 
         return view('noticias.noticias', compact('publications'));
-    }  
-
-
+    } 
 
     public function create(): View
     {
-         return view('noticias.create');
+        return view('noticias.create');
     }
 
     public function store(Request $request): RedirectResponse
@@ -41,7 +38,7 @@ class PublicationController extends Controller
         $isActive = (bool) ($validated['is_active'] ?? false);
 
         $publication = Publication::create([
-            'category' => $validated['category'],            
+            'category' => $validated['category'],           
             'title' => $validated['title'],
             'excerpt' => $validated['excerpt'],
             'content' => $validated['content'],
@@ -92,21 +89,20 @@ class PublicationController extends Controller
         $publication->published_at = $isActive ? ($validated['published_at'] ?? now()->toDateString()) : null;
         $publication->is_active = $isActive;
         $publication->save();
-
-        // return back()->with('status', 'Publicación actualizada correctamente.');
+       
         return redirect()->route('publications.index')->with('status', 'Publicación actualizada correctamente.');
     }
     
     public function destroy(Publication $publication): RedirectResponse
-        {
+         {
             if ($publication->image_path) {
                 Storage::disk('public')->delete($publication->image_path);
             }
 
             $publication->delete();
 
-            return redirect()
-                ->route('publications.index')
-                ->with('status', 'Publicación eliminada correctamente.');
-        }
+           return redirect()
+            ->route('publications.index')
+            ->with('status', 'Publicación eliminada correctamente.');
     }
+}

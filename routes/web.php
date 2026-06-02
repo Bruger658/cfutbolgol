@@ -49,15 +49,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('gallery-items', GalleryItemController::class)->except(['show']);
 
     
-
-    
-    
-    // Route::get('noticias', [PublicationController::class, 'noticias'])->name('noticias');
-    
     Route::resource('publications', PublicationController::class)->except(['show']);
     Route::get('noticias', [PublicationController::class, 'index'])->name('noticias.index');
-    // Route::get('noticias', [PublicationController::class, 'index'])->name('noticias.noticias');
-
+   
     Route::get('/tienda', [ProductController::class, 'index'])->name('products.index');
     
     Route::resource('fixtures', FixtureController::class)->except(['show']);

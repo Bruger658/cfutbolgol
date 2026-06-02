@@ -11,27 +11,11 @@ use Illuminate\View\View;
 
 class MemberController extends Controller
 {
-    public function index(Request $request): View
-    {
-        // $members = Member::query()->latest()->paginate(15);
+    public function index(Request $request): View    {
+        
         $search = trim((string) $request->string('search'));
         $showOnlyDebtors = $request->boolean('only_debtors');
-
-        // $members = Member::query()            
-        //     ->when($search !== '', function ($query) use ($search) {
-        //         //  $terms = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY);
-
-                
-        //             $query->where(function ($subQuery) use ($search) {
-        //             $subQuery->where('first_name', 'like', "%{$search}%")
-        //                 ->orWhere('last_name', 'like', "%{$search}%")
-        //                 ->orWhere('document_number', 'like', "%{$search}%")
-        //                 ->orWhere('category', 'like', "%{$search}%");
-        //         });
-        //     })
-        //     ->when($showOnlyDebtors, function ($query) {
-        //         $query->where('is_up_to_date', false);    
-        //     })
+       
         $members = $this->membersQueryFromRequest($request)
             ->latest()
             ->paginate(15)
@@ -69,8 +53,6 @@ class MemberController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $data = $this->validateMember($request);
-        // $data['is_up_to_date'] = $request->boolean('is_up_to_date');
         $data['paid_months'] = $this->sanitizePaidMonths($request->input('paid_months', []));
         $data['is_up_to_date'] = empty($this->getMissingMonths($data['paid_months']));
 
@@ -147,13 +129,12 @@ class MemberController extends Controller
             'city' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:40'],
             'responsible_adult_phone' => ['nullable', 'string', 'max:40'],
-            // 'is_up_to_date' => ['nullable', 'boolean'],
             'paid_months' => ['nullable', 'array'],
             'paid_months.*' => ['integer', 'between:1,12'],
         ]);
     }
 
-     private function sanitizePaidMonths(array $paidMonths): array
+    private function sanitizePaidMonths(array $paidMonths): array
     {
         return collect($paidMonths)
             ->map(fn ($month) => (int) $month)

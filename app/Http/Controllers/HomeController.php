@@ -14,8 +14,6 @@ class HomeController extends Controller
     public function index(): View
     {
         return view('index', [
-            // 'galleryItems' => GalleryItem::query()
-            //     ->where('is_active', true)
             'galleryItems' => GalleryItems::query()
                 ->where('is_active', true)
                 ->latest()
@@ -35,12 +33,12 @@ class HomeController extends Controller
                 ->where('is_completed', false)
                 ->orderBy('starts_at')
                 ->take(8)
-                 ->get(),
+                ->get(),
             'featuredProducts' => Product::query()
                 ->where('stock', '>', 0)
                 ->latest()
                 ->take(3)
-               ->get(),
+                ->get(),
             'storeProducts' => Product::query()
                 ->where('stock', '>', 0)
                 ->latest()
