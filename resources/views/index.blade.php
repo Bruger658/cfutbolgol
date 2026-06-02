@@ -557,7 +557,7 @@
         </section>
 
         <!-- Nuestras Sedes -->
-        <section class="pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto">
+       <section class="pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto scroll-mt-20" id="sedes">
             <!-- Page Title -->
             <div class="mb-8">
                 <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">

@@ -697,16 +697,16 @@
             </div>
             <div class="hidden lg:flex items-center gap-8">
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="#historia">Historia</a>
+                    href="{{ route('index') }}#historia">Historia</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="#equipos">Equipos</a>                
+                    href="{{ route('index') }}#equipos">Equipos</a>             
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="#noticias">Noticias</a>
+                    href="{{ route('index') }}#noticias">Noticias</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="#inscripcion">Inscripción</a>
+                    href="{{ route('index') }}#inscripcion">Inscripción</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="#sedes">Sedes</a>
-                    <a class="inline-flex items-center rounded-full bg-primary px-4 py-2 text-on-primary shadow-lg shadow-primary/20 hover:bg-blue-700 transition-colors font-black text-sm tracking-tight uppercase"
+                    href="{{ route('index') }}#sedes">Sedes</a>
+                <a class="inline-flex items-center rounded-full bg-primary px-4 py-2 text-on-primary shadow-lg shadow-primary/20 hover:bg-blue-700 transition-colors font-black text-sm tracking-tight uppercase"
                     href="{{ route('fees.public.index') }}">Pagar cuota</a>
             </div>
             <div class="flex items-center gap-4">
