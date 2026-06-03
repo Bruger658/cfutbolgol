@@ -28,6 +28,9 @@
                             <x-layouts.sidebar-link href="{{ route('members.index') }}" icon='fas-users'
                                 :active="request()->routeIs('members*')">Socios</x-layouts.sidebar-link>
                             
+                            <x-layouts.sidebar-link href="{{ route('enrollment-requests.index') }}" icon='fas-clipboard-list'
+                                :active="request()->routeIs('enrollment-requests*')">Inscripciones</x-layouts.sidebar-link>
+                                
                              <x-layouts.sidebar-link href="{{ route('products.index') }}" icon='fas-shirt'
                                 :active="request()->routeIs('products*')">Tienda</x-layouts.sidebar-link>
                         </ul>

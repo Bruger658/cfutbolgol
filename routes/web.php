@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EnrollmentRequestController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\GalleryItemController;
@@ -20,6 +21,7 @@ Route::view('dashboard', 'dashboard')
     ->name('dashboard');
 
 Route::get('/tienda', [TiendaController::class, 'index'])->name('tienda');
+Route::post('/inscripciones', [EnrollmentRequestController::class, 'store'])->name('enrollment-requests.store');
 Route::get('products/{product}/checkout/prepare', [ProductCheckoutController::class, 'prepare'])->name('products.checkout.prepare');
 Route::get('/pagar-cuota', [MemberFeePaymentController::class, 'publicIndex'])->name('fees.public.index');
 Route::post('/pagar-cuota/{member}/mercado-pago', [MemberFeePaymentController::class, 'mercadoPagoStore'])->name('fees.mercado-pago.store');
@@ -56,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::resource('fixtures', FixtureController::class)->except(['show']);
     Route::resource('events', EventController::class)->except(['show']);
+    Route::resource('enrollment-requests', EnrollmentRequestController::class)->only(['index', 'update', 'destroy']);
     Route::patch('events/{event}/toggle', [EventController::class, 'toggle'])->name('events.toggle');
     Route::get('members-export/excel', [MemberController::class, 'exportExcel'])->name('members.export.excel');
     Route::get('members-export/pdf', [MemberController::class, 'exportPdf'])->name('members.export.pdf');

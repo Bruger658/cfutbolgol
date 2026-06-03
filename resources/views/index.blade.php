@@ -494,50 +494,66 @@
                                     src="https://images.unsplash.com/photo-1570498839593-e565b39455fc?auto=format&fit=crop&w=1200&q=80" />
                             </div>
 
-                            <form action="#" class="space-y-5">
+                            @if (session('enrollment_status'))
+                                <div class="mb-6 rounded-2xl border border-green-200 bg-green-50 px-5 py-4 text-sm font-semibold text-green-800">
+                                    {{ session('enrollment_status') }}
+                                </div>
+                            @endif
+
+                            @if ($errors->any())
+                                <div class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-800">
+                                    <p class="font-bold">Revisá los datos del formulario:</p>
+                                    <ul class="mt-2 list-disc pl-5">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                            <form id="enrollment-form" method="POST" action="{{ route('enrollment-requests.store') }}" class="space-y-5">
+                                @csrf
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                    <div class="space-y-1.5">
-                                        <label class="text-sm font-bold text-slate-700 ml-1">Nombre del Jugador</label>
-                                        <input
-                                            class="w-full px-5 py-3 rounded-xl border-slate-200 focus:ring-brand-blue focus:border-brand-blue transition-all"
+                                    <div class="space-y-1.5">                                    
+                                        <label for="player_name" class="text-sm font-bold text-slate-700 ml-1">Nombre del Jugador</label>
+                                        <input id="player_name" name="player_name" value="{{ old('player_name') }}" required
+                                         class="w-full px-5 py-3 rounded-xl border-slate-200 focus:ring-brand-blue focus:border-brand-blue transition-all"
                                             placeholder="Ej. Juan Pérez" type="text" />
                                     </div>
                                     <div class="space-y-1.5">
-                                        <label class="text-sm font-bold text-slate-700 ml-1">Fecha de
+                                        <label for="birth_date" class="text-sm font-bold text-slate-700 ml-1">Fecha de
                                             Nacimiento</label>
-                                        <input
+                                        <input id="birth_date" name="birth_date" value="{{ old('birth_date') }}" required
                                             class="w-full px-5 py-3 rounded-xl border-slate-200 focus:ring-brand-blue focus:border-brand-blue transition-all"
                                             type="date" />
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                     <div class="space-y-1.5">
-                                        <label class="text-sm font-bold text-slate-700 ml-1">Correo del
+                                        <label for="guardian_email" class="text-sm font-bold text-slate-700 ml-1">Correo del
                                             Acudiente</label>
-                                        <input
+                                        <input id="guardian_email" name="guardian_email" value="{{ old('guardian_email') }}" required
                                             class="w-full px-5 py-3 rounded-xl border-slate-200 focus:ring-brand-blue focus:border-brand-blue transition-all"
                                             placeholder="correo@ejemplo.com" type="email" />
                                     </div>
                                     <div class="space-y-1.5">
-                                        <label class="text-sm font-bold text-slate-700 ml-1">Teléfono de
+                                        <label for="contact_phone" class="text-sm font-bold text-slate-700 ml-1">Teléfono de
                                             Contacto</label>
-                                        <input
+                                        <input id="contact_phone" name="contact_phone" value="{{ old('contact_phone') }}" required
                                             class="w-full px-5 py-3 rounded-xl border-slate-200 focus:ring-brand-blue focus:border-brand-blue transition-all"
-                                            placeholder="+57 300 000 0000" type="tel" />
+                                            placeholder="+54 11 0000 0000" type="tel" />
                                     </div>
                                 </div>
                                 <div class="space-y-1.5">
-                                    <label class="text-sm font-bold text-slate-700 ml-1">Categoría de Interés</label>
-                                    <select
+                                    <label for="category" class="text-sm font-bold text-slate-700 ml-1">Categoría de Interés</label>
+                                    <select id="category" name="category" required                                    
                                         class="w-full px-5 py-3 rounded-xl border-slate-200 bg-primary text-on-primary focus:ring-brand-blue focus:border-brand-blue transition-all"
                                         style="background-color:#0b1730;color:#ffffff;">
-                                        <option style="background-color:#0b1730;color:#ffffff;">Selecciona una opción
+                                        <option value="" style="background-color:#0b1730;color:#ffffff;">Selecciona una opción
                                         </option>
-                                        <option style="background-color:#0b1730;color:#ffffff;">Edefi</option>
-                                        <option style="background-color:#0b1730;color:#ffffff;">Bafi</option>
-                                        <option style="background-color:#0b1730;color:#ffffff;">Futsala</option>
-                                        <option style="background-color:#0b1730;color:#ffffff;">Futsal Femenino
-                                        </option>
+                                        @foreach (['Edefi', 'Bafi', 'Futsala', 'Futsal Femenino'] as $category)
+                                            <option value="{{ $category }}" @selected(old('category') === $category) style="background-color:#0b1730;color:#ffffff;">{{ $category }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <button

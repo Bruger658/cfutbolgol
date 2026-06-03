@@ -513,15 +513,7 @@
                 }
             });
 
-            // Enrollment Form Logic
-            const enrollmentForm = document.getElementById('enrollment-form');
-            if (enrollmentForm) {
-                enrollmentForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    alert('¡Inscripción enviada con éxito! Nos pondremos en contacto pronto.');
-                    enrollmentForm.reset();
-                });
-            }
+            
         });
     </script>
 </head>

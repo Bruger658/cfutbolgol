@@ -41,4 +41,9 @@ return [
         'currency' => env('MERCADO_PAGO_CURRENCY', 'ARS'),
     ],
 
+    'enrollment' => [
+        'club_email' => env('ENROLLMENT_CLUB_EMAIL', env('MAIL_FROM_ADDRESS')),
+        'club_whatsapp' => env('ENROLLMENT_CLUB_WHATSAPP', '541144567890'),
+    ],
+
 ];
