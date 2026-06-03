@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MemberFeePaymentController;
 use App\Http\Controllers\ProductCheckoutController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\Settings;
@@ -22,6 +23,10 @@ Route::view('dashboard', 'dashboard')
 
 Route::get('/tienda', [TiendaController::class, 'index'])->name('tienda');
 Route::post('/inscripciones', [EnrollmentRequestController::class, 'store'])->name('enrollment-requests.store');
+Route::get('/carrito', [CartController::class, 'show'])->name('cart.show');
+Route::post('/carrito/{product}', [CartController::class, 'store'])->name('cart.store');
+Route::patch('/carrito/{product}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/carrito/{product}', [CartController::class, 'destroy'])->name('cart.destroy');
 Route::get('products/{product}/checkout/prepare', [ProductCheckoutController::class, 'prepare'])->name('products.checkout.prepare');
 Route::get('/pagar-cuota', [MemberFeePaymentController::class, 'publicIndex'])->name('fees.public.index');
 Route::post('/pagar-cuota/{member}/mercado-pago', [MemberFeePaymentController::class, 'mercadoPagoStore'])->name('fees.mercado-pago.store');

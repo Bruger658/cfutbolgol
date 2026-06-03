@@ -46,4 +46,8 @@ return [
         'club_whatsapp' => env('ENROLLMENT_CLUB_WHATSAPP', '541144567890'),
     ],
 
+    'store' => [
+        'whatsapp_phone' => env('STORE_WHATSAPP_PHONE'),
+    ],
+
 ];

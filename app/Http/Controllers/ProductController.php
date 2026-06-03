@@ -70,12 +70,20 @@ class ProductController extends Controller
             'size' => ['required', 'in:8,10,12,14,16,S,M,L,XL,XXL,XXXL'],
             'description' => ['nullable', 'string', 'max:2000'],
             'image_url' => ['nullable', 'url', 'max:2048'],
+            'gallery_images_text' => ['nullable', 'string', 'max:4000'],
             'image' => ['nullable', 'image', 'max:4096'],
             'price' => ['required', 'numeric', 'min:0'],
             'stock' => ['required', 'integer', 'min:0'],
         ]);
 
         $data['description'] = $data['description'] ?? '';
+        $data['gallery_images'] = collect(preg_split('/\r\n|\r|\n/', $data['gallery_images_text'] ?? ''))
+            ->map(fn (string $url) => trim($url))
+            ->filter()
+            ->values()
+            ->all();
+
+        unset($data['gallery_images_text']);
 
         return $data;
     }   

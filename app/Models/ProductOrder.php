@@ -18,9 +18,11 @@ class ProductOrder extends Model
         'total_price',
         'status',
         'payment_provider',
+        'delivery_method',
         'provider_reference',
         'provider_payment_id',
-        'checkout_url','paid_at',
+        'checkout_url',
+        'paid_at',
     ];
 
     protected $casts = [

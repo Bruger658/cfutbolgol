@@ -29,6 +29,7 @@ class ProductCheckoutController extends Controller
     {
         $validated = $request->validate([
             'quantity' => ['required', 'integer', 'min:1'],
+            'delivery_method' => ['nullable', 'in:shipping,pickup'],
         ]);
 
         if ($validated['quantity'] > $product->stock) {
@@ -51,6 +52,7 @@ class ProductCheckoutController extends Controller
             'total_price' => (float) $product->price * $validated['quantity'],
             'status' => 'pending',
             'payment_provider' => 'mercado_pago',
+            'delivery_method' => ['nullable', 'in:shipping,pickup'],
         ]);
 
         try {
@@ -190,6 +192,7 @@ class ProductCheckoutController extends Controller
                 'metadata' => [
                     'order_id' => $order->id,
                     'product_id' => $product->id,
+                    'delivery_method' => $order->delivery_method,
                 ],
             ]);
     }

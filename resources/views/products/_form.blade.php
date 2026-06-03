@@ -38,6 +38,12 @@
         @endif
     </div>
 
+     <div>
+        <label class="block text-sm font-medium mb-1">Galería de imágenes</label>
+        <textarea name="gallery_images_text" rows="3" class="w-full rounded border px-3 py-2" placeholder="Pegá una URL por línea para sumar fotos del producto">{{ old('gallery_images_text', collect($product->gallery_images ?? [])->implode("\n")) }}</textarea>
+        <p class="mt-1 text-xs text-gray-500">La foto principal se carga arriba; estas URLs se muestran como galería adicional en la tienda.</p>
+    </div>
+
     <div class="grid sm:grid-cols-2 gap-4">
         <div>
             <label class="block text-sm font-medium mb-1">Precio</label>

@@ -1,127 +1,127 @@
 <x-layouts.base>
     <main class="pt-20 pb-24 px-4 md:px-8 max-w-7xl mx-auto">
-        <div class="mb-8">
-            <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Tienda</h1>
-            <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
+        <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Tienda</h1>
+                <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
+                <a href="{{ route('index') }}" class="mt-4 inline-flex items-center text-sm font-medium text-sky-700 hover:text-sky-900">← Volver a la página principal</a>
+            </div>
+            <a href="{{ route('cart.show') }}" class="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3 font-black uppercase tracking-wide text-on-primary shadow-lg hover:bg-sky-700">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                Carrito
+                @if ($cartCount > 0)
+                    <span class="rounded-full bg-white px-2 py-0.5 text-xs text-primary">{{ $cartCount }}</span>
+                @endif
+            </a>
         </div>
 
-        <div class="mt-4">
-            <a href="{{ route('index') }}" class="inline-flex items-center text-sm font-medium text-sky-700 hover:text-sky-900">← Volver a la página principal</a>
-        </div>
+        @if (session('status'))
+            <div class="mt-6 rounded-2xl border border-green-200 bg-green-50 p-4 text-sm font-semibold text-green-700">{{ session('status') }}</div>
+        @endif
+        
+        @if ($errors->any())
+            <div class="mt-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm font-semibold text-red-700">{{ $errors->first() }}</div>
+        @endif
 
-        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            @forelse ($products->take(3) as $product)
-                <article class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-lg border border-primary/10">
-                    <img class="w-full h-52 object-cover"
-                        src="{{ $product->image_url ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=80' }}"
-                        alt="{{ $product->name }}">
-                    <div class="p-6 space-y-3">
-                        <p class="text-xs uppercase tracking-wider text-on-surface-variant">{{ $product->category }}</p>
-                        <p class="text-xs uppercase tracking-wider text-on-surface-variant">Talle: {{ $product->size ?? 'Sin talle' }}</p>
-                        <h2 class="text-2xl font-black text-primary">{{ $product->name }}</h2>
-                        <p class="text-sm text-on-surface-variant">{{ $product->description }}</p>
-                        <div class="flex items-center justify-between pt-2">
-                            <span class="text-xl font-black text-on-surface">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
-                            <span class="text-sm font-bold {{ $product->stock > 0 ? 'text-green-700' : 'text-red-600' }}">Stock: {{ $product->stock }}</span>
-                        </div>
-                        {{-- <form method="POST" action="{{ route('products.checkout.store', $product) }}" class="space-y-2">
-                            @csrf
-                            <input type="hidden" name="quantity" value="1">
-                            <button type="submit" class="block w-full text-center text-sm px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700 transition-colors font-bold">
-                                Comprar con Mercado Pago
-                            </button>
-                            <a href="{{ route('products.checkout.prepare', $product) }}" class="block w-full text-center text-xs text-sky-700 hover:text-sky-900 font-semibold">
-                                Elegir cantidad
-                            </a>
-                        </form> --}}
-                        <div class="space-y-2">
-                            <a href="{{ route('products.checkout.prepare', $product) }}" class="block w-full text-center text-sm px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700 transition-colors font-bold">
-                                Comprar con Mercado Pago
-                            </a>
-                            <a href="{{ route('products.checkout.prepare', $product) }}" class="block w-full text-center text-xs text-sky-700 hover:text-sky-900 font-semibold">
-                                Elegir cantidad
-                            </a>
-                        {{-- @include('products._checkout-actions', ['product' => $product]) --}}
-                        </div>
+        <section class="mt-10 rounded-3xl border border-primary/10 bg-surface-container-lowest p-5 shadow-lg">
+            <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+                <div>
+                    <p class="text-xs font-black uppercase tracking-[0.25em] text-secondary">Encontrá tu equipo</p>
+                    <h2 class="text-3xl font-black uppercase tracking-tight text-primary">Filtros de tienda</h2>
+                </div>
+                <form method="GET" action="{{ route('tienda') }}" class="grid gap-3 sm:grid-cols-3 lg:min-w-[680px]">
+                    <label class="block text-sm font-bold text-on-surface">
+                        Categoría
+                        <select name="category" class="mt-1 w-full rounded-xl border-primary/20 text-sm">
+                            <option value="">Todas</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category }}" @selected(request('category') === $category)>{{ $category }}</option>
+                            @endforeach
+                        </select>
+                    </label>
+                    <label class="block text-sm font-bold text-on-surface">
+                        Talle
+                        <select name="size" class="mt-1 w-full rounded-xl border-primary/20 text-sm">
+                            <option value="">Todos</option>
+                            @foreach ($sizes as $size)
+                                <option value="{{ $size }}" @selected(request('size') === $size)>{{ $size }}</option>
+                            @endforeach
+                        </select>
+                    </label>
+                    <div class="flex items-end gap-2">
+                        <button type="submit" class="flex-1 rounded-xl bg-primary px-4 py-2.5 text-sm font-black text-on-primary hover:bg-sky-700">Filtrar</button>
+                        <a href="{{ route('tienda') }}" class="rounded-xl border border-primary/20 px-4 py-2.5 text-sm font-black text-primary hover:bg-primary hover:text-white">Limpiar</a>
                     </div>
-                </article>
-            @empty
-                <p class="text-on-surface-variant">No hay productos disponibles en este momento.</p>
-            @endforelse
-        </div>
+                </form>
+            </div>
+        </section>
 
-        <div class="mt-8">
-            <button id="open-full-store-page" type="button"
-                class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-bold uppercase tracking-wide">
-                Ver tienda completa
-                <span class="material-symbols-outlined text-lg">arrow_forward</span>
-            </button>
-        </div>
-
-        <div id="full-store-page-card" class="hidden mt-10 bg-surface-container-lowest border border-primary/10 rounded-3xl p-6 md:p-8 shadow-xl">
-            <div class="flex items-center justify-between gap-4 mb-6">
-                <h2 class="text-3xl font-black text-primary uppercase tracking-tight">Tienda completa</h2>
-                <button id="close-full-store-page" type="button" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-200 text-slate-800 hover:bg-slate-300">Cerrar</button>
+        <section class="mt-10">
+            <div class="mb-5 flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-black uppercase tracking-[0.25em] text-secondary">Selección CFG</p>
+                    <h2 class="text-3xl font-black uppercase tracking-tight text-primary">Productos destacados</h2>
+                </div>
             </div>
 
-             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"> 
                 @forelse ($products as $product)
-                    <article class="bg-white rounded-2xl overflow-hidden shadow border border-primary/10">
-                        <img class="w-full h-52 object-cover"
-                            src="{{ $product->image_url ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=80' }}"
-                            alt="{{ $product->name }}">
-                        <div class="p-6 space-y-3">
-                            <p class="text-xs uppercase tracking-wider text-on-surface-variant">{{ $product->category }}</p>
-                            <p class="text-xs uppercase tracking-wider text-on-surface-variant">Talle: {{ $product->size ?? 'Sin talle' }}</p>
-                            <h2 class="text-2xl font-black text-primary">{{ $product->name }}</h2>
-                            <p class="text-sm text-on-surface-variant">{{ $product->description }}</p>
-                            <div class="flex items-center justify-between pt-2">
-                                <span class="text-xl font-black text-on-surface">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
-                                <span class="text-sm font-bold {{ $product->stock > 0 ? 'text-green-700' : 'text-red-600' }}">Stock: {{ $product->stock }}</span>
+                    <article class="overflow-hidden rounded-3xl border border-primary/10 bg-white shadow-lg">
+                        <div class="relative">
+                            <img class="h-56 w-full object-cover" src="{{ $product->gallery->first() ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=80' }}" alt="{{ $product->name }}">
+                            @if ($product->store_labels)
+                                <div class="absolute left-3 top-3 flex flex-wrap gap-2">
+                                    @foreach ($product->store_labels as $label)
+                                        <span class="rounded-full px-3 py-1 text-xs font-black uppercase shadow {{ $label['class'] }}">{{ $label['text'] }}</span>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+                                <span class="rounded-full bg-brand-pale px-3 py-1">{{ $product->category }}</span>
+                                <span class="rounded-full bg-slate-100 px-3 py-1">Talle: {{ $product->size ?? 'Sin talle' }}</span>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-black text-primary">{{ $product->name }}</h3>
+                                <p class="mt-2 line-clamp-3 text-sm text-on-surface-variant">{{ $product->description }}</p>
                             </div>
 
+                            @if ($product->gallery->count() > 1)
+                                <div class="grid grid-cols-4 gap-2" aria-label="Galería de {{ $product->name }}">
+                                    @foreach ($product->gallery->take(4) as $image)
+                                        <a href="{{ $image }}" target="_blank" rel="noopener" class="block overflow-hidden rounded-xl border border-primary/10">
+                                            <img src="{{ $image }}" alt="Imagen de {{ $product->name }}" class="h-16 w-full object-cover transition-transform hover:scale-105">
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @endif
 
-                           {{-- <form method="POST" action="{{ route('products.checkout.store', $product) }}" class="space-y-2">
-                                @csrf
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="block w-full text-center text-sm px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700 transition-colors font-bold">
-                                    Comprar con Mercado Pago
-                                </button>
-                                <a href="{{ route('products.checkout.prepare', $product) }}" class="block w-full text-center text-xs text-sky-700 hover:text-sky-900 font-semibold">
-                                    Elegir cantidad
-                                </a>
-                            </form> --}}
-                             @include('products._checkout-actions', ['product' => $product])
+                            <div class="flex items-center justify-between border-t border-primary/10 pt-4">
+                                <span class="text-2xl font-black text-on-surface">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
+                                <span class="text-sm font-black {{ $product->stock <= 3 ? 'text-amber-700' : 'text-green-700' }}">Stock: {{ $product->stock }}</span>
+                            </div>
+                            </div>
+                            <div class="grid gap-2">
+                                <form method="POST" action="{{ route('cart.store', $product) }}" class="flex gap-2">
+                                    @csrf
+                                    <input type="number" name="quantity" value="1" min="1" max="{{ $product->stock }}" class="w-20 rounded-xl border-primary/20 text-sm">
+                                    <button type="submit" class="flex-1 rounded-xl bg-slate-900 px-4 py-2 text-sm font-black text-white hover:bg-slate-700">Agregar al carrito</button>
+                                </form>
+                                <a href="{{ route('products.checkout.prepare', $product) }}" class="block w-full rounded-xl bg-sky-600 px-4 py-2.5 text-center text-sm font-black text-white transition-colors hover:bg-sky-700">Comprar con Mercado Pago</a>
+                                <p class="text-center text-xs font-semibold text-on-surface-variant">También podés elegir “Retiro en sede” antes de pagar.</p>
+                            </div> 
                         </div>
                     </article>
                 @empty
-                    <p class="text-on-surface-variant">No hay productos disponibles en este momento.</p>
+                    <p class="text-on-surface-variant">No hay productos disponibles con esos filtros.</p>
                 @endforelse
             </div>
 
-            <div class="mt-10 rounded-2xl border border-primary/10 bg-white/95 p-4 shadow-sm">
-                {{ $products->onEachSide(1)->links() }}
+            <div class="mt-8">
+                {{ $products->links() }}
             </div>
-        </div>
-
-        <div class="pt-6">
-            <a href="{{ route('index') }}" class="inline-flex items-center text-sm font-medium text-sky-700 hover:text-sky-900">← Volver a la página principal</a>
-        </div>
+        </section>
     </main>
-    <script>    
-        document.addEventListener('DOMContentLoaded', () => {
-            const openBtn = document.getElementById('open-full-store-page');
-            const closeBtn = document.getElementById('close-full-store-page');
-            const storeCard = document.getElementById('full-store-page-card');
-
-            openBtn?.addEventListener('click', () => {
-                storeCard?.classList.remove('hidden');
-                storeCard?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-
-            closeBtn?.addEventListener('click', () => {
-                storeCard?.classList.add('hidden');
-            });
-        });
-    </script>
+    
 </x-layouts.base>    
