@@ -691,7 +691,9 @@
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="{{ route('index') }}#historia">Historia</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="{{ route('index') }}#equipos">Equipos</a>             
+                    href="{{ route('index') }}#equipos">Equipos</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
+                    href="{{ route('index') }}#staff-tecnico">Profes</a>            
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="{{ route('index') }}#noticias">Noticias</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
@@ -735,14 +737,17 @@
                 <div>
                     <h5 class="text-on-surface font-black text-sm uppercase tracking-widest mb-6">Navegación</h5>
                     <ul class="space-y-4">
+                         <li><a class="text-slate-500 hover:text-blue-700 underline-offset-4 hover:underline text-sm transition-all"
+                                href="{{ route('index') }}">Inicio</a></li>
+
                         <li><a class="text-slate-500 hover:text-blue-700 underline-offset-4 hover:underline text-sm transition-all"
-                                href="#">Inicio</a></li>
+                                href="{{ route('index') }}#historia">Historia</a></li>
                         <li><a class="text-slate-500 hover:text-blue-700 underline-offset-4 hover:underline text-sm transition-all"
-                                href="#">Historia</a></li>
+                                href="{{ route('index') }}#equipos">Equipos</a></li>
                         <li><a class="text-slate-500 hover:text-blue-700 underline-offset-4 hover:underline text-sm transition-all"
-                                href="#">Equipos</a></li>
+                                href="{{ route('index') }}#staff-tecnico">Profes</a></li>
                         <li><a class="text-slate-500 hover:text-blue-700 underline-offset-4 hover:underline text-sm transition-all"
-                                href="#">Calendario</a></li>
+                                href="{{ route('index') }}#calendario">Calendario</a></li>
                     </ul>
                 </div>
                
