@@ -519,7 +519,7 @@
 </head>
 
 
-<body class="bg-surface text-on-surface font-body antialiased"> 
+<body class="bg-surface text-on-surface font-body antialiased">
     <!-- Lightbox Modal -->
     <div class="fixed inset-0 z-[100] bg-black/95 hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4"
         id="lightbox-modal">
@@ -692,6 +692,8 @@
                     href="{{ route('index') }}#historia">Historia</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="{{ route('index') }}#equipos">Equipos</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
+                    href="{{ route('index') }}#staff">Staff</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="{{ route('index') }}#staff-tecnico">Profes</a>            
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"

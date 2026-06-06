@@ -7,6 +7,7 @@ use App\Models\Fixture;
 use App\Models\GalleryItems;
 use App\Models\Product;
 use App\Models\Publication;
+use App\Models\Staff;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -42,6 +43,11 @@ class HomeController extends Controller
             'storeProducts' => Product::query()
                 ->where('stock', '>', 0)
                 ->latest()
+                ->get(),
+            'staffMembers' => Staff::query()
+                ->where('is_active', true)
+                ->orderBy('display_order')
+                ->orderBy('name')
                 ->get(),    
         ]);
     }

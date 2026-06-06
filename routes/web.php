@@ -12,6 +12,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\Settings;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TiendaController;
 use Illuminate\Support\Facades\Route;
 
@@ -63,6 +64,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::resource('fixtures', FixtureController::class)->except(['show']);
     Route::resource('events', EventController::class)->except(['show']);
+    Route::resource('staff', StaffController::class)->except(['show']);
     Route::resource('enrollment-requests', EnrollmentRequestController::class)->only(['index', 'update', 'destroy']);
     Route::patch('events/{event}/toggle', [EventController::class, 'toggle'])->name('events.toggle');
     Route::get('members-export/excel', [MemberController::class, 'exportExcel'])->name('members.export.excel');

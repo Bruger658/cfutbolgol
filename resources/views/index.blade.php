@@ -21,8 +21,7 @@
                     <div class="flex flex-wrap gap-4">
                         <button
                             class="px-8 py-4 kinetic-gradient text-on-primary font-bold rounded-xl shadow-xl shadow-primary/20 hover:scale-105 transition-all"
-                            id="btn-metodologia">Ver Metodología</button>
-                           
+                            id="btn-metodologia">Ver Metodología</button>                           
                     </div>
                 </div>
             </div>
@@ -291,7 +290,62 @@
                     @endforelse
                 </div>
 
-        </section>       
+        </section> 
+
+        <!-- Staff Section -->
+        <section class="py-24 bg-surface px-4 md:px-8 max-w-7xl mx-auto" id="staff">
+            <div class="mb-8">
+                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">
+                    Staff
+                </h1>
+                <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
+                <p class="mt-4 max-w-2xl text-on-surface-variant text-lg">
+                    Conocé al equipo técnico y administrativo que acompaña la formación deportiva y humana de nuestros jugadores.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                @forelse($staffMembers ?? collect() as $member)
+                    <article class="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-primary/5 hover:-translate-y-1 hover:shadow-2xl transition-all">
+                        <div class="h-72 bg-primary/10">
+                            @if($member->photo_path)
+                                <img class="h-full w-full object-cover" src="{{ asset('storage/' . $member->photo_path) }}" alt="Foto de {{ $member->name }}">
+                            @else
+                                <div class="flex h-full w-full items-center justify-center bg-primary/10">
+                                    <span class="material-symbols-outlined text-primary text-7xl">person</span>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="p-6 space-y-3">
+                            @if($member->category)
+                                <span class="inline-flex rounded-full bg-secondary/20 px-3 py-1 text-xs font-black uppercase tracking-widest text-primary">{{ $member->category }}</span>
+                            @endif
+                            <div>
+                                <h2 class="text-2xl font-black text-primary">{{ $member->name }}</h2>
+                                <p class="font-bold text-on-surface-variant">{{ $member->role }}</p>
+                            </div>
+                            @if($member->bio)
+                                <p class="text-sm leading-relaxed text-on-surface-variant">{{ $member->bio }}</p>
+                            @endif
+                            @if($member->email || $member->phone)
+                                <div class="space-y-2 border-t border-primary/10 pt-4 text-sm text-on-surface-variant">
+                                    @if($member->email)
+                                        <p class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">mail</span>{{ $member->email }}</p>
+                                    @endif
+                                    @if($member->phone)
+                                        <p class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">call</span>{{ $member->phone }}</p>
+                                    @endif
+                                </div>
+                            @endif
+                        </div>
+                    </article>
+                @empty
+                    <div class="col-span-full rounded-3xl border border-primary/10 bg-white p-10 text-center text-on-surface-variant">
+                        Aún no hay integrantes del staff cargados.
+                    </div>
+                @endforelse
+            </div>
+        </section>      
         
 
         <!-- Training Gallery (Carousel) -->
@@ -522,7 +576,7 @@
                 document.addEventListener('keydown', (event) => {
                     if (event.key === 'Escape' && storeOverlay && !storeOverlay.classList.contains('hidden')) {
                         storeOverlay.classList.add('hidden');
-                        document.body.classList.remove('overflow-hidden');                        
+                        document.body.classList.remove('overflow-hidden');                      
                     }
                 });
                
