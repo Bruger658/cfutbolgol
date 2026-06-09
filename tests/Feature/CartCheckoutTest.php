@@ -114,3 +114,50 @@ it('marks every cart order as paid and decrements stock through the webhook', fu
         ->and($shirt->fresh()->stock)->toBe(2)
         ->and($shorts->fresh()->stock)->toBe(2);
 });
+
+it('adds every checked product to the cart with its selected quantity', function () {
+    $shirt = cartProduct();
+    $shorts = cartProduct([
+        'name' => 'Short CFG',
+        'price' => 9000,
+        'stock' => 5,
+    ]);
+
+    $this->post(route('cart.store-many'), [
+        'selected_products' => [$shirt->id, $shorts->id],
+        'quantities' => [
+            $shirt->id => 2,
+            $shorts->id => 3,
+        ],
+    ])->assertRedirect(route('cart.show'))
+        ->assertSessionHas('cart.'.$shirt->id, 2)
+        ->assertSessionHas('cart.'.$shorts->id, 3);
+
+    $this->get(route('cart.show'))
+        ->assertOk()
+        ->assertSee('Productos seleccionados')
+        ->assertSee('$57.000,00')
+        ->assertSee('Cancelar compra y vaciar carrito');
+});
+
+it('requires at least one checked product', function () {
+    $this->from(route('tienda'))
+        ->post(route('cart.store-many'), [
+            'selected_products' => [],
+        ])
+        ->assertRedirect(route('tienda'))
+        ->assertSessionHasErrors('selected_products');
+});
+
+it('can cancel the purchase and clear the cart before payment', function () {
+    $product = cartProduct();
+
+    $this->withSession([
+        'cart' => [$product->id => 2],
+        'pending_cart_checkout' => 'checkout-reference',
+    ])->delete(route('cart.clear'))
+        ->assertRedirect(route('tienda'))
+        ->assertSessionMissing('cart')
+        ->assertSessionMissing('pending_cart_checkout')
+        ->assertSessionHas('status', 'Cancelaste la compra y vaciaste el carrito.');
+});
