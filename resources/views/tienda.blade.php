@@ -2,11 +2,15 @@
     <main class="pt-20 pb-24 px-4 md:px-8 max-w-7xl mx-auto">
         <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
-                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Tienda</h1>
+                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Tienda
+                </h1>
                 <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
-                <a href="{{ route('index') }}" class="mt-4 inline-flex items-center text-sm font-medium text-sky-700 hover:text-sky-900">← Volver a la página principal</a>
+                <a href="{{ route('index') }}"
+                    class="mt-4 inline-flex items-center text-sm font-medium text-sky-700 hover:text-sky-900">← Volver a
+                    la página principal</a>
             </div>
-            <a href="{{ route('cart.show') }}" class="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3 font-black uppercase tracking-wide text-on-primary shadow-lg hover:bg-sky-700">
+            <a href="{{ route('cart.show') }}"
+                class="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3 font-black uppercase tracking-wide text-on-primary shadow-lg hover:bg-sky-700">
                 <span class="material-symbols-outlined">shopping_cart</span>
                 Carrito
                 @if ($cartCount > 0)
@@ -16,11 +20,13 @@
         </div>
 
         @if (session('status'))
-            <div class="mt-6 rounded-2xl border border-green-200 bg-green-50 p-4 text-sm font-semibold text-green-700">{{ session('status') }}</div>
+            <div class="mt-6 rounded-2xl border border-green-200 bg-green-50 p-4 text-sm font-semibold text-green-700">
+                {{ session('status') }}</div>
         @endif
-        
+
         @if ($errors->any())
-            <div class="mt-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm font-semibold text-red-700">{{ $errors->first() }}</div>
+            <div class="mt-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm font-semibold text-red-700">
+                {{ $errors->first() }}</div>
         @endif
 
         <section class="mt-10 rounded-3xl border border-primary/10 bg-surface-container-lowest p-5 shadow-lg">
@@ -35,7 +41,8 @@
                         <select name="category" class="mt-1 w-full rounded-xl border-primary/20 text-sm">
                             <option value="">Todas</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category }}" @selected(request('category') === $category)>{{ $category }}</option>
+                                <option value="{{ $category }}" @selected(request('category') === $category)>{{ $category }}
+                                </option>
                             @endforeach
                         </select>
                     </label>
@@ -44,30 +51,54 @@
                         <select name="size" class="mt-1 w-full rounded-xl border-primary/20 text-sm">
                             <option value="">Todos</option>
                             @foreach ($sizes as $size)
-                                <option value="{{ $size }}" @selected(request('size') === $size)>{{ $size }}</option>
+                                <option value="{{ $size }}" @selected(request('size') === $size)>{{ $size }}
+                                </option>
                             @endforeach
                         </select>
                     </label>
                     <div class="flex items-end gap-2">
-                        <button type="submit" class="flex-1 rounded-xl bg-primary px-4 py-2.5 text-sm font-black text-on-primary hover:bg-sky-700">Filtrar</button>
-                        <a href="{{ route('tienda') }}" class="rounded-xl border border-primary/20 px-4 py-2.5 text-sm font-black text-primary hover:bg-primary hover:text-white">Limpiar</a>
+                        <button type="submit"
+                            class="flex-1 rounded-xl bg-primary px-4 py-2.5 text-sm font-black text-on-primary hover:bg-sky-700">Filtrar</button>
+                        <a href="{{ route('tienda') }}"
+                            class="rounded-xl border border-primary/20 px-4 py-2.5 text-sm font-black text-primary hover:bg-primary hover:text-white">Limpiar</a>
                     </div>
                 </form>
             </div>
         </section>
 
+        <form id="bulk-cart-form" method="POST" action="{{ route('cart.store-many') }}">
+            @csrf
+        </form>
+
         <section class="mt-10">
-            <div class="mb-5 flex items-center justify-between">
+            <div class="mb-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                     <p class="text-xs font-black uppercase tracking-[0.25em] text-secondary">Selección CFG</p>
                     <h2 class="text-3xl font-black uppercase tracking-tight text-primary">Productos destacados</h2>
+                    <p class="mt-2 text-sm text-on-surface-variant">Tildá uno o varios productos, elegí las cantidades y
+                        agregalos juntos.</p>
                 </div>
+                <button id="add-selected-products" form="bulk-cart-form" type="submit"
+                    class="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3 font-black text-on-primary shadow-lg transition hover:bg-sky-700 disabled:cursor-not-allowed disabled:opacity-50">
+                    <span class="material-symbols-outlined">add_shopping_cart</span>
+                    <span>Agregar seleccionados</span>
+                    <span id="selected-products-count"
+                        class="hidden rounded-full bg-white px-2 py-0.5 text-xs text-primary">0</span>
+                </button>
             </div>
 
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 @forelse ($products as $product)
-                    <article class="overflow-hidden rounded-3xl border border-primary/10 bg-white shadow-lg">
+                    <article data-product-card
+                        class="overflow-hidden rounded-3xl border border-primary/10 bg-white shadow-lg transition duration-200">
                         <div class="relative">
+                            <label
+                                class="absolute right-3 top-3 z-10 flex cursor-pointer items-center gap-2 rounded-full bg-white/95 px-3 py-2 text-sm font-black text-primary shadow-lg">
+                                <input form="bulk-cart-form" data-product-checkbox type="checkbox"
+                                    name="selected_products[]" value="{{ $product->id }}" @checked(in_array($product->id, old('selected_products', [])))
+                                    class="h-5 w-5 rounded border-primary/30 text-primary focus:ring-primary">
+                                Tildar
+                            </label>
                             <img class="h-56 w-full object-cover"
                                 src="{{ $product->gallery->first() ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=80' }}"
                                 alt="{{ $product->name }}">
@@ -81,9 +112,10 @@
                             @endif
                         </div>
                         <div class="p-6 space-y-4">
-                            <div class="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+                            <div
+                                class="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant">
                                 <span class="rounded-full bg-brand-pale px-3 py-1">{{ $product->category }}</span>
-                                 <span class="rounded-full bg-slate-100 px-3 py-1">Talle:
+                                <span class="rounded-full bg-slate-100 px-3 py-1">Talle:
                                     {{ $product->size ?? 'Sin talle' }}</span>
                             </div>
                             <div>
@@ -111,20 +143,26 @@
                                     class="text-sm font-black {{ $product->stock <= 3 ? 'text-amber-700' : 'text-green-700' }}">Stock:
                                     {{ $product->stock }}</span>
                             </div>
-                            <div class="grid gap-2">
-                                <form method="POST" action="{{ route('cart.store', $product) }}" class="flex gap-2">
+                            <div class="grid gap-3">
+                                <label
+                                    class="flex items-center justify-between rounded-2xl border border-primary/10 bg-brand-pale px-4 py-3 text-sm font-black text-primary">
+                                    Cantidad para el carrito
+                                    <input form="bulk-cart-form" type="number" name="quantities[{{ $product->id }}]"
+                                        value="{{ old('quantities.' . $product->id, 1) }}" min="1"
+                                        max="{{ $product->stock }}" aria-label="Cantidad de {{ $product->name }}"
+                                        class="w-20 rounded-xl border-primary/20 bg-white text-sm">
+                                </label>
+                                <form method="POST" action="{{ route('cart.store', $product) }}">
                                     @csrf
-                                     <input type="number" name="quantity" value="1" min="1"
-                                        max="{{ $product->stock }}" class="w-20 rounded-xl border-primary/20 text-sm">
+                                    <input type="hidden" name="quantity" value="1">
                                     <button type="submit"
-                                        class="flex-1 rounded-xl bg-slate-900 px-4 py-2 text-sm font-black text-white hover:bg-slate-700">Agregar
-                                        al carrito</button>
+                                        class="w-full rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-black text-white hover:bg-slate-700">
+                                        Agregar 1 al carrito
+                                    </button>
                                 </form>
                                 <a href="{{ route('products.checkout.prepare', $product) }}"
                                     class="block w-full rounded-xl bg-sky-600 px-4 py-2.5 text-center text-sm font-black text-white transition-colors hover:bg-sky-700">Comprar
-                                    con Mercado Pago</a>
-                                <p class="text-center text-xs font-semibold text-on-surface-variant">También podés
-                                    elegir “Retiro en sede” antes de pagar.</p>
+                                    sólo este producto</a>
                             </div>
                         </div>
                     </article>
@@ -138,5 +176,31 @@
             </div>
         </section>
     </main>
-    
-</x-layouts.base>    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkboxes = Array.from(document.querySelectorAll('[data-product-checkbox]'));
+            const submitButton = document.getElementById('add-selected-products');
+            const countBadge = document.getElementById('selected-products-count');
+
+            const refreshSelection = () => {
+                const selected = checkboxes.filter((checkbox) => checkbox.checked);
+
+                checkboxes.forEach((checkbox) => {
+                    const card = checkbox.closest('[data-product-card]');
+                    card?.classList.toggle('ring-4', checkbox.checked);
+                    card?.classList.toggle('ring-sky-400', checkbox.checked);
+                });
+
+                if (submitButton && countBadge) {
+                    submitButton.disabled = selected.length === 0;
+                    countBadge.textContent = selected.length;
+                    countBadge.classList.toggle('hidden', selected.length === 0);
+                }
+            };
+
+            checkboxes.forEach((checkbox) => checkbox.addEventListener('change', refreshSelection));
+            refreshSelection();
+        });
+    </script>
+</x-layouts.base>
