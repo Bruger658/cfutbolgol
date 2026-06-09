@@ -2,7 +2,7 @@
     <main class="pt-24 pb-20 px-4 md:px-8 max-w-5xl mx-auto">
         <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-               <h1 class="text-4xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Carrito
+                <h1 class="text-4xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Carrito
                 </h1>
                 <p class="mt-2 text-sm text-on-surface-variant">Revisá las cantidades, elegí la forma de entrega y pagá
                     todo junto de forma segura.</p>
@@ -10,7 +10,7 @@
             <a href="{{ route('tienda') }}"
                 class="rounded-xl border border-primary/20 px-4 py-3 text-center font-bold text-primary hover:bg-primary hover:text-white">Seguir
                 comprando</a>
-        </div>        
+        </div>
 
         @if (session('status'))
             <div class="mb-6 rounded-2xl border border-green-200 bg-green-50 p-4 text-sm font-semibold text-green-700">
@@ -67,11 +67,11 @@
                                     </form>
 
                                     <div class="flex flex-wrap gap-2">
-                                        
+
                                         <form method="POST" action="{{ route('cart.destroy', $product) }}">
                                             @csrf
                                             @method('DELETE')
-                                           <button type="submit"
+                                            <button type="submit"
                                                 class="rounded-xl border border-red-200 px-3 py-2 text-sm font-bold text-red-600">Quitar</button>
                                         </form>
                                     </div>
@@ -83,12 +83,19 @@
 
                 <aside class="h-fit rounded-3xl border border-primary/10 bg-brand-pale p-6 shadow-lg">
                     <p class="text-xs font-black uppercase tracking-[0.25em] text-secondary">Resumen</p>
-                    <div class="mt-4 flex items-center justify-between border-b border-primary/10 pb-4">
-                        <span class="font-bold">Total estimado</span>
-                        <span class="text-2xl font-black text-primary">${{ number_format($total, 2, ',', '.') }}</span>
+                    <div class="mt-4 space-y-3 border-b border-primary/10 pb-4">
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="font-bold">Productos seleccionados</span>
+                            <span class="font-black text-primary">{{ $itemCount }}</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold">Total</span>
+                            <span
+                                class="text-2xl font-black text-primary">${{ number_format($total, 2, ',', '.') }}</span>
+                        </div>
                     </div>
 
-                     <form method="POST" action="{{ route('cart.checkout') }}" class="mt-5 space-y-4">
+                    <form method="POST" action="{{ route('cart.checkout') }}" class="mt-5 space-y-4">
                         @csrf
                         <fieldset>
                             <legend class="text-sm font-black text-primary">¿Cómo querés recibir tu compra?</legend>
@@ -118,11 +125,21 @@
                     </form>
                     <div class="mt-4 space-y-2 text-xs text-on-surface-variant">
                         <p>Vas a realizar un único pago por todos los productos.</p>
-                        <p>El stock se descuenta cuando Mercado Pago aprueba la operación.</p>                    
+                        <p>El stock se descuenta cuando Mercado Pago aprueba la operación.</p>
                     </div>
                     <a href="{{ route('tienda') }}"
                         class="mt-4 block rounded-xl border border-primary/20 px-4 py-3 text-center font-black text-primary hover:bg-primary hover:text-white">Agregar
                         más productos</a>
+                    <form method="POST" action="{{ route('cart.clear') }}" class="mt-3"
+                        onsubmit="return confirm('¿Querés cancelar esta compra y vaciar todo el carrito?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            class="w-full rounded-xl border border-red-200 bg-white px-4 py-3 font-black text-red-600 hover:bg-red-50">
+                            Cancelar compra y vaciar carrito
+                        </button>
+                    </form>
+                </aside>
             </div>
         @endif
     </main>
