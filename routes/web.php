@@ -25,6 +25,7 @@ Route::view('dashboard', 'dashboard')
 Route::get('/tienda', [TiendaController::class, 'index'])->name('tienda');
 Route::post('/inscripciones', [EnrollmentRequestController::class, 'store'])->name('enrollment-requests.store');
 Route::get('/carrito', [CartController::class, 'show'])->name('cart.show');
+Route::post('/carrito/checkout', [ProductCheckoutController::class, 'storeCart'])->name('cart.checkout');
 Route::post('/carrito/{product}', [CartController::class, 'store'])->name('cart.store');
 Route::patch('/carrito/{product}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/carrito/{product}', [CartController::class, 'destroy'])->name('cart.destroy');

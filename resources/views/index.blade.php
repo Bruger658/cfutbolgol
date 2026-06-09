@@ -764,6 +764,87 @@
                     </div>
                 </div>
             </section>
+            
+            <!-- Training Schedules -->
+            <div class="mb-12 overflow-hidden rounded-3xl border border-primary/10 bg-surface-container-lowest shadow-sm">
+                <div class="flex flex-col gap-4 border-b border-primary/10 bg-primary/5 p-6 md:flex-row md:items-center md:justify-between">
+                    <div>
+                        <p class="mb-2 text-xs font-black uppercase tracking-[0.2em] text-secondary">Entrenamientos</p>
+                        <h3 class="text-2xl font-lexend font-black uppercase tracking-tight text-primary">
+                            Horarios por categoría y sede
+                        </h3>
+                        <p class="mt-2 text-sm text-on-surface-variant">
+                            Consultá dónde y cuándo entrena cada categoría.
+                        </p>
+                    </div>
+                    <span class="material-symbols-outlined self-start rounded-2xl bg-secondary p-3 text-on-secondary md:self-auto"
+                        data-icon="calendar_month" aria-hidden="true">calendar_month</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full min-w-[640px] text-left" aria-label="Horarios de entrenamiento por categoría y sede">
+                        <thead class="bg-surface-container-high text-xs font-black uppercase tracking-widest text-on-surface-variant">
+                            <tr>
+                                <th class="px-6 py-4" scope="col">Categoría</th>
+                                <th class="px-6 py-4" scope="col">Sede</th>
+                                <th class="px-6 py-4" scope="col">Días</th>
+                                <th class="px-6 py-4" scope="col">Horario</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-primary/10 text-sm text-on-surface">
+                            <tr class="transition-colors hover:bg-primary/5">
+                                <th class="px-6 py-5 font-black text-primary" scope="row">Edefi</th>
+                                <td class="px-6 py-5 font-bold">Castelar</td>
+                                <td class="px-6 py-5">Martes y Jueves</td>
+                                <td class="px-6 py-5">
+                                    <span class="inline-flex items-center gap-2 rounded-full bg-secondary-container px-3 py-1.5 font-black text-on-secondary-container">
+                                        <span class="material-symbols-outlined text-base" aria-hidden="true">schedule</span>
+                                        18:00
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="transition-colors hover:bg-primary/5">
+                                <th class="px-6 py-5 font-black text-primary" scope="row">Futsal femenino</th>
+                                <td class="px-6 py-5 font-bold">Castelar</td>
+                                <td class="px-6 py-5">Martes y jueves</td>
+                                <td class="px-6 py-5">
+                                    <span class="inline-flex items-center gap-2 rounded-full bg-secondary-container px-3 py-1.5 font-black text-on-secondary-container">
+                                        <span class="material-symbols-outlined text-base" aria-hidden="true">schedule</span>
+                                        20:00
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="transition-colors hover:bg-primary/5">
+                                <th class="px-6 py-5 font-black text-primary" scope="row">Futsala</th>
+                                <td class="px-6 py-5 font-bold">Ituzaingo</td>
+                                <td class="px-6 py-5">Martes y jueves</td>
+                                <td class="px-6 py-5">
+                                    <span class="inline-flex items-center gap-2 rounded-full bg-secondary-container px-3 py-1.5 font-black text-on-secondary-container">
+                                        <span class="material-symbols-outlined text-base" aria-hidden="true">schedule</span>
+                                        20:00
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="transition-colors hover:bg-primary/5">
+                                <th class="px-6 py-5 font-black text-primary" scope="row">Bafi</th>
+                                <td class="px-6 py-5 font-bold">Castelar</td>
+                                <td class="px-6 py-5">Lunes, Miércoles y Viernes</td>
+                                <td class="px-6 py-5">
+                                    <span class="inline-flex items-center gap-2 rounded-full bg-secondary-container px-3 py-1.5 font-black text-on-secondary-container">
+                                        <span class="material-symbols-outlined text-base" aria-hidden="true">schedule</span>
+                                        19:00
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+
+
             <!-- Middle Section Header -->
             <div class="flex items-center justify-between mb-8">
                 <h3 class="text-2xl font-lexend font-bold text-on-background uppercase tracking-tight">Centros

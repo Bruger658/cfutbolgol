@@ -64,15 +64,18 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"> 
+            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 @forelse ($products as $product)
                     <article class="overflow-hidden rounded-3xl border border-primary/10 bg-white shadow-lg">
                         <div class="relative">
-                            <img class="h-56 w-full object-cover" src="{{ $product->gallery->first() ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=80' }}" alt="{{ $product->name }}">
+                            <img class="h-56 w-full object-cover"
+                                src="{{ $product->gallery->first() ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=80' }}"
+                                alt="{{ $product->name }}">
                             @if ($product->store_labels)
                                 <div class="absolute left-3 top-3 flex flex-wrap gap-2">
                                     @foreach ($product->store_labels as $label)
-                                        <span class="rounded-full px-3 py-1 text-xs font-black uppercase shadow {{ $label['class'] }}">{{ $label['text'] }}</span>
+                                        <span
+                                            class="rounded-full px-3 py-1 text-xs font-black uppercase shadow {{ $label['class'] }}">{{ $label['text'] }}</span>
                                     @endforeach
                                 </div>
                             @endif
@@ -80,37 +83,49 @@
                         <div class="p-6 space-y-4">
                             <div class="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant">
                                 <span class="rounded-full bg-brand-pale px-3 py-1">{{ $product->category }}</span>
-                                <span class="rounded-full bg-slate-100 px-3 py-1">Talle: {{ $product->size ?? 'Sin talle' }}</span>
+                                 <span class="rounded-full bg-slate-100 px-3 py-1">Talle:
+                                    {{ $product->size ?? 'Sin talle' }}</span>
                             </div>
                             <div>
                                 <h3 class="text-2xl font-black text-primary">{{ $product->name }}</h3>
-                                <p class="mt-2 line-clamp-3 text-sm text-on-surface-variant">{{ $product->description }}</p>
+                                <p class="mt-2 line-clamp-3 text-sm text-on-surface-variant">
+                                    {{ $product->description }}</p>
                             </div>
 
                             @if ($product->gallery->count() > 1)
                                 <div class="grid grid-cols-4 gap-2" aria-label="Galería de {{ $product->name }}">
                                     @foreach ($product->gallery->take(4) as $image)
-                                        <a href="{{ $image }}" target="_blank" rel="noopener" class="block overflow-hidden rounded-xl border border-primary/10">
-                                            <img src="{{ $image }}" alt="Imagen de {{ $product->name }}" class="h-16 w-full object-cover transition-transform hover:scale-105">
+                                        <a href="{{ $image }}" target="_blank" rel="noopener"
+                                            class="block overflow-hidden rounded-xl border border-primary/10">
+                                            <img src="{{ $image }}" alt="Imagen de {{ $product->name }}"
+                                                class="h-16 w-full object-cover transition-transform hover:scale-105">
                                         </a>
                                     @endforeach
                                 </div>
                             @endif
 
                             <div class="flex items-center justify-between border-t border-primary/10 pt-4">
-                                <span class="text-2xl font-black text-on-surface">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
-                                <span class="text-sm font-black {{ $product->stock <= 3 ? 'text-amber-700' : 'text-green-700' }}">Stock: {{ $product->stock }}</span>
-                            </div>
+                                <span
+                                    class="text-2xl font-black text-on-surface">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
+                                <span
+                                    class="text-sm font-black {{ $product->stock <= 3 ? 'text-amber-700' : 'text-green-700' }}">Stock:
+                                    {{ $product->stock }}</span>
                             </div>
                             <div class="grid gap-2">
                                 <form method="POST" action="{{ route('cart.store', $product) }}" class="flex gap-2">
                                     @csrf
-                                    <input type="number" name="quantity" value="1" min="1" max="{{ $product->stock }}" class="w-20 rounded-xl border-primary/20 text-sm">
-                                    <button type="submit" class="flex-1 rounded-xl bg-slate-900 px-4 py-2 text-sm font-black text-white hover:bg-slate-700">Agregar al carrito</button>
+                                     <input type="number" name="quantity" value="1" min="1"
+                                        max="{{ $product->stock }}" class="w-20 rounded-xl border-primary/20 text-sm">
+                                    <button type="submit"
+                                        class="flex-1 rounded-xl bg-slate-900 px-4 py-2 text-sm font-black text-white hover:bg-slate-700">Agregar
+                                        al carrito</button>
                                 </form>
-                                <a href="{{ route('products.checkout.prepare', $product) }}" class="block w-full rounded-xl bg-sky-600 px-4 py-2.5 text-center text-sm font-black text-white transition-colors hover:bg-sky-700">Comprar con Mercado Pago</a>
-                                <p class="text-center text-xs font-semibold text-on-surface-variant">También podés elegir “Retiro en sede” antes de pagar.</p>
-                            </div> 
+                                <a href="{{ route('products.checkout.prepare', $product) }}"
+                                    class="block w-full rounded-xl bg-sky-600 px-4 py-2.5 text-center text-sm font-black text-white transition-colors hover:bg-sky-700">Comprar
+                                    con Mercado Pago</a>
+                                <p class="text-center text-xs font-semibold text-on-surface-variant">También podés
+                                    elegir “Retiro en sede” antes de pagar.</p>
+                            </div>
                         </div>
                     </article>
                 @empty

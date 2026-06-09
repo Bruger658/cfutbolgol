@@ -13,6 +13,7 @@ class ProductOrder extends Model
     protected $fillable = [
         'product_id',
         'user_id',
+        'checkout_group',
         'quantity',
         'unit_price',
         'total_price',
