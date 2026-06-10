@@ -151,7 +151,7 @@ class CartController extends Controller
     {
         $request->session()->forget(['cart', 'pending_cart_checkout']);
 
-        return redirect()->route('tienda')->with('status', 'Cancelaste la compra y vaciaste el carrito.');
+        return redirect()->route('tienda.index')->with('status', 'Cancelaste la compra y vaciaste el carrito.');
     }
 
 

@@ -141,7 +141,7 @@ it('adds every checked product to the cart with its selected quantity', function
 });
 
 it('requires at least one checked product', function () {
-    $this->from(route('tienda'))
+    $this->from(route('tienda.index'))
         ->post(route('cart.store-many'), [
             'selected_products' => [],
         ])
@@ -156,7 +156,7 @@ it('can cancel the purchase and clear the cart before payment', function () {
         'cart' => [$product->id => 2],
         'pending_cart_checkout' => 'checkout-reference',
     ])->delete(route('cart.clear'))
-        ->assertRedirect(route('tienda'))
+        ->assertRedirect(route('tienda.index'))
         ->assertSessionMissing('cart')
         ->assertSessionMissing('pending_cart_checkout')
         ->assertSessionHas('status', 'Cancelaste la compra y vaciaste el carrito.');

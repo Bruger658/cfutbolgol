@@ -59,7 +59,7 @@
                     <div class="flex items-end gap-2">
                          <button type="submit"
                             class="flex-1 rounded-xl bg-primary px-4 py-2.5 text-sm font-black text-on-primary hover:bg-sky-700">Filtrar</button>
-                        <a href="{{ route('tienda') }}"
+                        <a href="{{ route('tienda.index') }}"
                             class="rounded-xl border border-primary/20 px-4 py-2.5 text-sm font-black text-primary hover:bg-primary hover:text-white">Limpiar</a>
                     </div>
                 </form>

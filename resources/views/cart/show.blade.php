@@ -6,7 +6,7 @@
                 <p class="mt-2 text-sm text-on-surface-variant">Revisá las cantidades, elegí la forma de entrega y pagá
                     todo junto de forma segura.</p>
             </div>
-            <a href="{{ route('tienda') }}"
+            <a href="{{ route('tienda.index') }}"
                 class="rounded-xl border border-primary/20 px-4 py-3 text-center font-bold text-primary hover:bg-primary hover:text-white">Seguir
                 comprando</a>
         </div>        
@@ -27,7 +27,7 @@
                 <h2 class="mt-4 text-2xl font-black text-primary">Tu carrito está vacío</h2>
                 <p class="mt-2 text-sm text-on-surface-variant">Agregá productos desde la tienda para armar tu pedido.
                 </p>
-                <a href="{{ route('tienda') }}"
+                <a href="{{ route('tienda.index') }}"
                     class="mt-6 inline-flex rounded-xl bg-primary px-5 py-3 font-black text-on-primary">Ir a la
                     tienda</a>
             </div>
@@ -126,7 +126,7 @@
                         <p>Vas a realizar un único pago por todos los productos.</p>
                         <p>El stock se descuenta cuando Mercado Pago aprueba la operación.</p>                    
                     </div>
-                    <a href="{{ route('tienda') }}"
+                    <a href="{{ route('tienda.index') }}"
                         class="mt-4 block rounded-xl border border-primary/20 px-4 py-3 text-center font-black text-primary hover:bg-primary hover:text-white">Agregar
                         más productos</a>
                     <form method="POST" action="{{ route('cart.clear') }}" class="mt-3"
