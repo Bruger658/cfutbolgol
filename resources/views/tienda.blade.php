@@ -35,7 +35,7 @@
                     <p class="text-xs font-black uppercase tracking-[0.25em] text-secondary">Encontrá tu equipo</p>
                     <h2 class="text-3xl font-black uppercase tracking-tight text-primary">Filtros de tienda</h2>
                 </div>
-                <form method="GET" action="{{ route('tienda') }}" class="grid gap-3 sm:grid-cols-3 lg:min-w-[680px]">
+                 <form method="GET" action="{{ route('tienda.index') }}" class="grid gap-3 sm:grid-cols-3 lg:min-w-[680px]">
                     <label class="block text-sm font-bold text-on-surface">
                         Categoría
                         <select name="category" class="mt-1 w-full rounded-xl border-primary/20 text-sm">
@@ -59,7 +59,7 @@
                     <div class="flex items-end gap-2">
                          <button type="submit"
                             class="flex-1 rounded-xl bg-primary px-4 py-2.5 text-sm font-black text-on-primary hover:bg-sky-700">Filtrar</button>
-                        <a href="{{ route('tienda.index') }}"
+                       <a href="{{ route('tienda.index') }}"
                             class="rounded-xl border border-primary/20 px-4 py-2.5 text-sm font-black text-primary hover:bg-primary hover:text-white">Limpiar</a>
                     </div>
                 </form>

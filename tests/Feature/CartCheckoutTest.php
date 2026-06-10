@@ -140,12 +140,20 @@ it('adds every checked product to the cart with its selected quantity', function
         ->assertSee('Cancelar compra y vaciar carrito');
 });
 
+it('keeps the public store route separate from product administration', function () {
+    expect(route('tienda.index'))->toEndWith('/tienda')
+        ->and(route('products.index'))->toEndWith('/products');
+
+    $this->get(route('tienda.index'))->assertOk();
+    $this->get(route('products.index'))->assertRedirect(route('login'));
+});
+
 it('requires at least one checked product', function () {
     $this->from(route('tienda.index'))
         ->post(route('cart.store-many'), [
             'selected_products' => [],
         ])
-        ->assertRedirect(route('tienda'))
+        ->assertRedirect(route('tienda.index'))
         ->assertSessionHasErrors('selected_products');
 });
 

@@ -83,7 +83,7 @@
                         Ir a pagar con Mercado Pago
                     </a>
                 @endif
-                <a href="{{ route('tienda') }}" class="inline-flex justify-center rounded-xl bg-slate-200 px-4 py-3 text-slate-800 font-bold hover:bg-slate-300 transition-colors">
+                <a href="{{ route('tienda.index') }}" class="inline-flex justify-center rounded-xl bg-slate-200 px-4 py-3 text-slate-800 font-bold hover:bg-slate-300 transition-colors"
                     Volver a la tienda
                 </a>
             </div>
