@@ -441,10 +441,34 @@
 
         <!-- Tienda -->
         <section class="pt-10 pb-24 px-4 md:px-8 max-w-7xl mx-auto" id="tienda">
-            <div class="mb-8">
-                <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Tienda</h1>
-                <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
+             @php($homeCartCount = collect(session('cart', []))->sum())
+            <div class="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                    <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Tienda</h1>
+                    <div class="h-2 w-24 bg-secondary mt-2 rounded-full"></div>
+                </div>
+                <a href="{{ route('cart.show') }}"
+                    class="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-5 py-3 font-black text-white shadow-lg hover:bg-slate-700">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    Ver carrito
+                    @if ($homeCartCount > 0)
+                        <span class="rounded-full bg-white px-2 py-0.5 text-xs text-primary">{{ $homeCartCount }}</span>
+                    @endif
+                </a>
             </div>
+
+            @if (session('status'))
+                <div class="mb-6 rounded-2xl border border-green-200 bg-green-50 p-4 text-sm font-semibold text-green-700">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            @if ($errors->has('cart') || $errors->has('selected_products'))
+                <div class="mb-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm font-semibold text-red-700">
+                    {{ $errors->first('cart') ?: $errors->first('selected_products') }}
+                </div>
+            @endif
+
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @forelse ($featuredProducts ?? collect() as $product)
@@ -455,14 +479,14 @@
                         <div class="p-6 space-y-3">
                             <h2 class="text-2xl font-black text-primary">{{ $product->name }}</h2>
                             <p class="text-sm font-bold uppercase tracking-wider text-on-surface-variant">
-                               Talle: {{ $product->size ?: 'Único' }}
+                              Talle: {{ $product->size ?: 'Único' }}
                             </p>
                             <p class="text-sm text-on-surface-variant">{{ $product->description }}</p>
                             <div class="flex items-center justify-between pt-2">
                                 <span class="text-xl font-black text-on-surface">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
                                 <span class="text-sm font-bold text-on-surface-variant">Stock: {{ $product->stock }}</span>
                             </div>
-                            @include('products._checkout-actions', ['product' => $product])
+                            @include('products._cart-actions', ['product' => $product, 'context' => 'featured'])
                         </div>
                     </article>
                 @empty
@@ -478,115 +502,167 @@
                 </button>
             </div>
 
-                <div id="full-store-overlay" class="hidden fixed inset-0 z-50 bg-white/85 backdrop-blur-sm p-4 md:p-8 overflow-y-auto">
-                <div id="full-store-card" class="mx-auto my-8 w-full max-w-6xl bg-surface-container-lowest border border-primary/10 rounded-3xl p-6 md:p-8 shadow-2xl">
-                    <div class="flex items-center justify-between gap-4 mb-6">
-                        <h2 class="text-3xl font-black text-primary uppercase tracking-tight">Tienda completa</h2>
-                        <button id="close-full-store" type="button" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-200 text-slate-800 hover:bg-slate-300">Cerrar</button>
-                    </div>
+            <div id="full-store-overlay" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/60 p-4 backdrop-blur-sm md:p-8"
+                role="dialog" aria-modal="true" aria-labelledby="full-store-title">
+                <div id="full-store-card"
+                    class="mx-auto my-8 w-full max-w-6xl rounded-3xl border border-primary/10 bg-surface-container-lowest p-6 shadow-2xl md:p-8">
+                    <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                        <div>
+                            <h2 id="full-store-title" class="text-3xl font-black text-primary uppercase tracking-tight">Tienda completa</h2>
+                            <p class="mt-1 text-sm text-on-surface-variant">Seleccioná uno o varios productos y elegí la cantidad de cada uno.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="{{ route('cart.show') }}"
+                                class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-700">
+                                <span class="material-symbols-outlined text-lg">shopping_cart</span>
+                                Carrito ({{ $homeCartCount }})
+                            </a>
+                            <button id="close-full-store" type="button"
+                                class="rounded-xl bg-slate-200 px-4 py-2 text-sm font-bold text-slate-800 hover:bg-slate-300">Cerrar</button>
+                        </div>
+
+                </div>
+
+                <form id="modal-cart-form" method="POST" action="{{ route('cart.store-many') }}">
+                        @csrf
+                        <div id="store-products-grid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                            @forelse ($storeProducts ?? collect() as $product)
+                                <article data-modal-product-card
+                                    class="store-product overflow-hidden rounded-2xl border border-primary/10 bg-white shadow transition">
+                                    <div class="relative">
+                                        <img class="h-44 w-full object-cover"
+                                            src="{{ $product->image_url ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=80' }}"
+                                            alt="{{ $product->name }}">
+                                        <label class="absolute left-3 top-3 flex cursor-pointer items-center gap-2 rounded-full bg-white/95 px-3 py-2 text-xs font-black text-primary shadow">
+                                            <input data-modal-product-checkbox type="checkbox" name="selected_products[]"
+                                                value="{{ $product->id }}" class="rounded border-primary/30 text-primary">
+                                            Elegir
+                                        </label>
+                                    </div>
+                                    <div class="space-y-3 p-4">
+                                        <h3 class="text-lg font-black text-primary">{{ $product->name }}</h3>
+                                        <p class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Talle: {{ $product->size ?: 'Único' }}</p>
+                                        <p class="line-clamp-2 text-sm text-on-surface-variant">{{ $product->description }}</p>
+                                        <div class="flex items-center justify-between pt-1">
+                                            <span class="text-base font-black text-on-surface">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
+                                            <span class="text-xs font-bold text-on-surface-variant">Stock: {{ $product->stock }}</span>
+                                        </div>
+                                        <label class="flex items-center justify-between rounded-xl bg-brand-pale px-3 py-2 text-sm font-bold text-primary">
+                                            Cantidad
+                                            <input type="number" name="quantities[{{ $product->id }}]" value="1" min="1"
+                                                max="{{ $product->stock }}" class="w-20 rounded-lg border-primary/20 bg-white text-sm"
+                                                aria-label="Cantidad de {{ $product->name }}">
+                                        </label>
+                                    </div>
+                                </article>
+                            @empty
+                                <p class="text-on-surface-variant">No hay productos disponibles en este momento.</p>
+                            @endforelse
+                        </div>
 
 
-                <div id="store-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @forelse ($storeProducts ?? collect() as $product)
-                        <article class="store-product bg-white rounded-2xl overflow-hidden shadow border border-primary/10">
-                            <img class="w-full h-44 object-cover"
-                                src="{{ $product->image_url ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=80' }}"
-                                alt="{{ $product->name }}">
-                            <div class="p-4 space-y-2">
-                                <h3 class="text-lg font-black text-primary">{{ $product->name }}</h3>
-                                <p class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Talle: {{ $product->size ?: 'Único' }}</p>
-                                <p class="text-sm text-on-surface-variant line-clamp-2">{{ $product->description }}</p>
-                                <div class="flex items-center justify-between pt-1">
-                                    <span class="text-base font-black text-on-surface">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
-                                    <span class="text-xs font-bold text-on-surface-variant">Stock: {{ $product->stock }}</span>
-                                </div>
-                                @include('products._checkout-actions', ['product' => $product])
+                <div id="store-pagination" class="mt-6 flex flex-wrap items-center justify-center gap-2"></div>
+                        @if (($storeProducts ?? collect())->isNotEmpty())
+                            <div class="sticky bottom-3 mt-6 flex flex-col gap-3 rounded-2xl border border-primary/10 bg-white/95 p-4 shadow-xl backdrop-blur sm:flex-row sm:items-center sm:justify-between">
+                                <p class="text-sm font-bold text-on-surface-variant">
+                                    <span id="modal-selected-count">0</span> producto(s) seleccionado(s)
+                                </p>
+                                <button id="modal-add-selected" type="submit" disabled
+                                    class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-black text-white hover:bg-sky-700 disabled:cursor-not-allowed disabled:opacity-50">
+                                    <span class="material-symbols-outlined">add_shopping_cart</span>
+                                    Agregar seleccionados y ver carrito
+                                </button>
                             </div>
-                        </article>
-                    @empty
-                        <p class="text-on-surface-variant">No hay productos disponibles en este momento.</p>
-                    @endforelse
+                         @endif
+                    </form>
                 </div>
-
-                <div id="store-pagination" class="mt-6 flex items-center justify-center gap-2"></div>
-                </div>
-            </div>    
+                
         </section>
 
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-                const openBtn = document.getElementById('open-full-store');
-                const closeBtn = document.getElementById('close-full-store');
-                const storeOverlay = document.getElementById('full-store-overlay');
-                const storeCard = document.getElementById('full-store-card');
+                const openButton = document.getElementById('open-full-store');
+                const closeButton = document.getElementById('close-full-store');
+                const overlay = document.getElementById('full-store-overlay');
                 const pagination = document.getElementById('store-pagination');
                 const products = Array.from(document.querySelectorAll('.store-product'));
+                const checkboxes = Array.from(document.querySelectorAll('[data-modal-product-checkbox]'));
+                const selectedCount = document.getElementById('modal-selected-count');
+                const addSelectedButton = document.getElementById('modal-add-selected');
                 const productsPerPage = 12;
                 let currentPage = 1;
+
+                const refreshSelection = () => {
+                    const selected = checkboxes.filter((checkbox) => checkbox.checked);
+
+                    checkboxes.forEach((checkbox) => {
+                        const card = checkbox.closest('[data-modal-product-card]');
+                        card?.classList.toggle('ring-4', checkbox.checked);
+                        card?.classList.toggle('ring-sky-400', checkbox.checked);
+                    });
+
+                    if (selectedCount) selectedCount.textContent = String(selected.length);
+                    if (addSelectedButton) addSelectedButton.disabled = selected.length === 0;
+                };
 
                 const renderPage = (page) => {
                     const totalPages = Math.max(1, Math.ceil(products.length / productsPerPage));
                     currentPage = Math.min(Math.max(1, page), totalPages);
+                    const start = (currentPage - 1) * productsPerPage;
+                    const end = start + productsPerPage;
 
-                    products.forEach((product, index) => {
-                        const start = (currentPage - 1) * productsPerPage;
-                        const end = start + productsPerPage;
-                        product.classList.toggle('hidden', !(index >= start && index < end));
-                    });
+                    products.forEach((product, index) => product.classList.toggle('hidden', !(index >= start && index < end)));
 
-                    if (!pagination) return;
-                    pagination.innerHTML = '';
-
-                    const prev = document.createElement('button');
-                    prev.textContent = 'Anterior';
-                    prev.className = 'px-3 py-1.5 rounded-lg text-sm font-semibold bg-slate-200 text-slate-800 disabled:opacity-40';
-                    prev.disabled = currentPage === 1;
-                    prev.onclick = () => renderPage(currentPage - 1);
-                    pagination.appendChild(prev);
-
-                    for (let i = 1; i <= totalPages; i++) {
-                        const btn = document.createElement('button');
-                        btn.textContent = String(i);
-                        btn.className = `px-3 py-1.5 rounded-lg text-sm font-bold ${i === currentPage ? 'bg-primary text-white' : 'bg-slate-100 text-slate-700'}`;
-                        btn.onclick = () => renderPage(i);
-                        pagination.appendChild(btn);
+                    if (!pagination || totalPages <= 1) {
+                        if (pagination) pagination.innerHTML = '';
+                        return;
                     }
 
-                    const next = document.createElement('button');
-                    next.textContent = 'Siguiente';
-                    next.className = 'px-3 py-1.5 rounded-lg text-sm font-semibold bg-slate-200 disabled:opacity-40';
-                    next.disabled = currentPage === totalPages;
-                    next.onclick = () => renderPage(currentPage + 1);
-                    pagination.appendChild(next);
+                     pagination.innerHTML = '';
+                    const addPageButton = (label, page, active = false, disabled = false) => {
+                        const button = document.createElement('button');
+                        button.type = 'button';
+                        button.textContent = label;
+                        button.disabled = disabled;
+                        button.className = `rounded-lg px-3 py-1.5 text-sm font-bold disabled:opacity-40 ${active ? 'bg-primary text-white' : 'bg-slate-200 text-slate-800'}`;
+                        button.addEventListener('click', () => renderPage(page));
+                        pagination.appendChild(button);
+                    };
+
+                    addPageButton('Anterior', currentPage - 1, false, currentPage === 1);
+                    for (let pageNumber = 1; pageNumber <= totalPages; pageNumber += 1) {
+                        addPageButton(String(pageNumber), pageNumber, pageNumber === currentPage);
+                    }
+                    addPageButton('Siguiente', currentPage + 1, false, currentPage === totalPages);
                 };
 
-                openBtn?.addEventListener('click', () => {
-                   storeOverlay?.classList.remove('hidden');
+
+                    
+
+                const closeStore = () => {
+                    overlay?.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');     
+                };
+
+                openButton?.addEventListener('click', () => {
+                    overlay?.classList.remove('hidden');
                     document.body.classList.add('overflow-hidden');
-                    renderPage(1);
+                    renderPage(currentPage);
                 });
 
-                 storeOverlay?.addEventListener('click', (event) => {
-                    if (event.target === storeOverlay) {
-                        storeOverlay.classList.add('hidden');
-                        document.body.classList.remove('overflow-hidden');
-                    }
+
+                closeButton?.addEventListener('click', closeStore);
+                overlay?.addEventListener('click', (event) => {
+                    if (event.key === 'Escape' && overlay && !overlay.classList.contains('hidden')) closeStore();
                 });
 
                 document.addEventListener('keydown', (event) => {
-                    if (event.key === 'Escape' && storeOverlay && !storeOverlay.classList.contains('hidden')) {
-                        storeOverlay.classList.add('hidden');
-                        document.body.classList.remove('overflow-hidden');                      
-                    }
-                });
                
-
-                closeBtn?.addEventListener('click', () => {
-                    storeOverlay?.classList.add('hidden');
-
-                    document.body.classList.remove('overflow-hidden');
-                
+                    if (event.key === 'Escape' && overlay && !overlay.classList.contains('hidden')) closeStore();
                 });
+                checkboxes.forEach((checkbox) => checkbox.addEventListener('change', refreshSelection));
+                refreshSelection();
+                renderPage(1);
             });
         </script>
 

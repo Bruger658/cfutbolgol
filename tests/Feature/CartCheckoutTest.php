@@ -161,3 +161,32 @@ it('can cancel the purchase and clear the cart before payment', function () {
         ->assertSessionMissing('pending_cart_checkout')
         ->assertSessionHas('status', 'Cancelaste la compra y vaciaste el carrito.');
 });
+
+
+it('offers cart controls on featured products and multi-selection in the full store modal', function () {
+    $shirt = cartProduct();
+    $shorts = cartProduct([
+        'name' => 'Short CFG',
+        'price' => 9000,
+        'stock' => 5,
+    ]);
+
+    $this->withSession(['cart' => [$shirt->id => 2]])
+        ->get(route('index'))
+        ->assertOk()
+        ->assertSee('Ver carrito')
+        ->assertSee('Carrito (2)')
+        ->assertSee('Guardar')
+        ->assertSee('Tienda completa')
+        ->assertSee('name="selected_products[]"', false)
+        ->assertSee('value="'.$shirt->id.'"', false)
+        ->assertSee('value="'.$shorts->id.'"', false)
+        ->assertSee('Agregar seleccionados y ver carrito');
+});
+
+it('only exposes checkout creation through the cart', function () {
+    $product = cartProduct();
+
+    $this->get('/products/'.$product->id.'/checkout/prepare')->assertNotFound();
+    $this->post('/products/'.$product->id.'/checkout')->assertNotFound();
+});

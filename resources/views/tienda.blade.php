@@ -22,6 +22,7 @@
         @if (session('status'))
              <div class="mt-6 rounded-2xl border border-green-200 bg-green-50 p-4 text-sm font-semibold text-green-700">
                 {{ session('status') }}</div>
+        @endif        
         
         @if ($errors->any())
             <div class="mt-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm font-semibold text-red-700">
@@ -151,17 +152,7 @@
                                         max="{{ $product->stock }}" aria-label="Cantidad de {{ $product->name }}"
                                         class="w-20 rounded-xl border-primary/20 bg-white text-sm">
                                 </label>
-                                <form method="POST" action="{{ route('cart.store', $product) }}">
-                                    @csrf
-                                    <input type="hidden" name="quantity" value="1">
-                                    <button type="submit"
-                                        class="w-full rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-black text-white hover:bg-slate-700">
-                                        Agregar 1 al carrito
-                                    </button>
-                                </form>
-                                <a href="{{ route('products.checkout.prepare', $product) }}"
-                                    class="block w-full rounded-xl bg-sky-600 px-4 py-2.5 text-center text-sm font-black text-white transition-colors hover:bg-sky-700">Comprar
-                                    sólo este producto</a>
+                                @include('products._cart-actions', ['product' => $product, 'context' => 'store'])
                             </div>
                         </div>
                     </article>

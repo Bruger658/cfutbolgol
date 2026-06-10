@@ -21,10 +21,7 @@
                         <div class="flex items-center justify-between pt-2">
                             <span class="text-xl font-extrabold text-slate-900">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
                             <span class="text-sm {{ $product->stock > 0 ? 'text-green-700' : 'text-red-600' }}">Stock: {{ $product->stock }}</span>
-                        </div>
-                        {{-- <a href="{{ route('products.checkout.prepare', $product) }}" class="block w-full text-center text-sm px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700 transition-colors font-bold">
-                            Pagar con Mercado Pago
-                        </a> --}}
+                        </div>                       
 
                         <div class="flex items-center gap-2 pt-2">
                             <a href="{{ route('products.edit', $product) }}" class="text-sm px-3 py-1 rounded bg-green-600 text-white hover:bg-green-700 transition-colors">Editar</a>

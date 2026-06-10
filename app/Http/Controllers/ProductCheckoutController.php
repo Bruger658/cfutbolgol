@@ -15,42 +15,7 @@ use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class ProductCheckoutController extends Controller
-{
-    public function prepare(Product $product): View|RedirectResponse
-    {
-        if ($product->stock < 1) {
-            return redirect()->route('tienda')->withErrors([
-                'product' => 'El producto seleccionado no tiene stock disponible.',
-            ]);
-        }
-
-        return view('products.prepare-checkout', compact('product'));
-    }
-
-    public function store(Request $request, Product $product): RedirectResponse
-    {
-        $validated = $request->validate([
-            'quantity' => ['required', 'integer', 'min:1'],
-            'delivery_method' => ['nullable', 'in:shipping,pickup'],
-        ]);
-
-        if ($validated['quantity'] > $product->stock) {
-            return back()->withErrors(['quantity' => 'La cantidad supera el stock disponible.'])->withInput();
-        }       
-
-        $order = ProductOrder::create([
-            'product_id' => $product->id,
-            'user_id' => $request->user()?->id,
-            'quantity' => $validated['quantity'],
-            'unit_price' => $product->price,
-            'total_price' => (float) $product->price * $validated['quantity'],
-            'status' => 'pending',
-            'payment_provider' => 'mercado_pago',
-            'delivery_method' => $validated['delivery_method'] ?? 'shipping',
-        ]);
-
-       return $this->startCheckout($request, collect([$order]), (string) $order->id);
-    }
+{    
 
     public function storeCart(Request $request): RedirectResponse
     {
@@ -102,7 +67,7 @@ class ProductCheckoutController extends Controller
             })->values();
         });
 
-        return $this->startCheckout($request, $orders, $checkoutGroup, true);
+        return $this->startCheckout($request, $orders, $checkoutGroup);
     }
 
     public function show(ProductOrder $order): View
@@ -115,7 +80,7 @@ class ProductCheckoutController extends Controller
         $this->syncOrderFromReturn($request, $order);
 
           if ($order->fresh()->status === 'paid') {
-            $request->session()->forget('cart');
+            $request->session()->forget(['cart', 'pending_cart_checkout']);
         }
 
         return $this->checkoutView($order);
@@ -172,11 +137,7 @@ class ProductCheckoutController extends Controller
         }
 
        $order = ProductOrder::query()->where('checkout_group', $externalReference)->first();
-
-        if (! $order && ctype_digit((string) $externalReference)) {
-            $order = ProductOrder::find((int) $externalReference);
-        }
-
+     
         if (! $order) {
             return response()->json(['message' => 'Order not found.'], 404);
         }
@@ -186,7 +147,7 @@ class ProductCheckoutController extends Controller
         return response()->json(['message' => 'Order updated.']);
     }
 
-     private function startCheckout(Request $request, Collection $orders, string $externalReference, bool $fromCart = false): RedirectResponse
+      private function startCheckout(Request $request, Collection $orders, string $externalReference): RedirectResponse
     {
         $accessToken = config('services.mercado_pago.access_token');
 
@@ -237,9 +198,7 @@ class ProductCheckoutController extends Controller
             'checkout_url' => $checkoutUrl,
         ]));
 
-        if ($fromCart) {
-            $request->session()->put('pending_cart_checkout', $externalReference);
-        }
+        $request->session()->put('pending_cart_checkout', $externalReference);
 
         return redirect()->away($checkoutUrl);
     }

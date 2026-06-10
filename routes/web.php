@@ -22,7 +22,7 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::get('/tienda', [TiendaController::class, 'index'])->name('tienda');
+Route::get('/tienda', [TiendaController::class, 'index'])->name('tienda.index');
 Route::post('/inscripciones', [EnrollmentRequestController::class, 'store'])->name('enrollment-requests.store');
 Route::get('/carrito', [CartController::class, 'show'])->name('cart.show');
 Route::post('/carrito/productos', [CartController::class, 'storeMany'])->name('cart.store-many');
@@ -31,7 +31,6 @@ Route::post('/carrito/checkout', [ProductCheckoutController::class, 'storeCart']
 Route::post('/carrito/{product}', [CartController::class, 'store'])->name('cart.store');
 Route::patch('/carrito/{product}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/carrito/{product}', [CartController::class, 'destroy'])->name('cart.destroy');
-Route::get('products/{product}/checkout/prepare', [ProductCheckoutController::class, 'prepare'])->name('products.checkout.prepare');
 Route::get('/pagar-cuota', [MemberFeePaymentController::class, 'publicIndex'])->name('fees.public.index');
 Route::post('/pagar-cuota/{member}/mercado-pago', [MemberFeePaymentController::class, 'mercadoPagoStore'])->name('fees.mercado-pago.store');
 Route::get('/pagar-cuota/mercado-pago/{feePayment}/success', [MemberFeePaymentController::class, 'mercadoPagoSuccess'])->name('fees.mercado-pago.success');
@@ -39,7 +38,6 @@ Route::get('/pagar-cuota/mercado-pago/{feePayment}/failure', [MemberFeePaymentCo
 Route::get('/pagar-cuota/mercado-pago/{feePayment}/pending', [MemberFeePaymentController::class, 'mercadoPagoPending'])->name('fees.mercado-pago.pending');
 Route::post('/mercado-pago/cuotas/webhook', [MemberFeePaymentController::class, 'mercadoPagoWebhook'])->name('fees.mercado-pago.webhook');
 Route::post('/pagar-cuota/{member}', [MemberFeePaymentController::class, 'publicStore'])->name('fees.public.store');
-Route::post('products/{product}/checkout', [ProductCheckoutController::class, 'store'])->name('products.checkout.store');
 Route::get('products/checkout/{order}', [ProductCheckoutController::class, 'show'])->name('products.checkout.show');
 Route::get('products/checkout/{order}/success', [ProductCheckoutController::class, 'success'])->name('products.checkout.success');
 Route::get('products/checkout/{order}/failure', [ProductCheckoutController::class, 'failure'])->name('products.checkout.failure');
