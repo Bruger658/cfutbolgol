@@ -19,13 +19,13 @@
             </a>
         </div>
 
-        @if (session('status'))
-             <div class="mt-6 rounded-2xl border border-green-200 bg-green-50 p-4 text-sm font-semibold text-green-700">
+        @if (session('status'))             
+             <div data-auto-dismiss="5000" role="status" class="mt-6 rounded-2xl border border-green-200 bg-green-50 p-4 text-sm font-semibold text-green-700">
                 {{ session('status') }}</div>
         @endif        
         
         @if ($errors->any())
-            <div class="mt-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm font-semibold text-red-700">
+            <div data-auto-dismiss="5000" role="alert" class="mt-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm font-semibold text-red-700">
                 {{ $errors->first() }}</div>
         @endif
 

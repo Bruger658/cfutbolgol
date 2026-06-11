@@ -157,6 +157,28 @@ it('requires at least one checked product', function () {
         ->assertSessionHasErrors('selected_products');
 });
 
+it('keeps store and cart notifications visible for five seconds', function () {
+    $product = cartProduct();
+
+    $this->withSession(['status' => 'Producto agregado al carrito.'])
+        ->get(route('tienda.index'))
+        ->assertOk()
+        ->assertSee('data-auto-dismiss="5000"', false)
+        ->assertSee("document.querySelectorAll('[data-auto-dismiss]')", false);
+
+    $this->withSession(['status' => 'Producto agregado al carrito.'])
+        ->get(route('index'))
+        ->assertOk()
+        ->assertSee('data-auto-dismiss="5000"', false);
+
+    $this->withSession([
+        'cart' => [$product->id => 1],
+        'status' => 'Carrito actualizado.',
+    ])->get(route('cart.show'))
+        ->assertOk()
+        ->assertSee('data-auto-dismiss="5000"', false);
+});
+
 it('can cancel the purchase and clear the cart before payment', function () {
     $product = cartProduct();
 

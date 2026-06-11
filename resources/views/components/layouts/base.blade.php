@@ -148,6 +148,17 @@
 
 
         document.addEventListener('DOMContentLoaded', () => {
+
+            document.querySelectorAll('[data-auto-dismiss]').forEach((message) => {
+                const duration = Number(message.dataset.autoDismiss) || 5000;
+
+                window.setTimeout(() => {
+                    message.style.transition = 'opacity 300ms ease';
+                    message.style.opacity = '0';
+
+                    window.setTimeout(() => message.remove(), 300);
+                }, duration);
+            });
             // Gallery & Carousel Logic
             const modal = document.getElementById('lightbox-modal');
             const modalImg = document.getElementById('lightbox-img');
