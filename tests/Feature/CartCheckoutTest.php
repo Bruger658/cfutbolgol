@@ -148,6 +148,23 @@ it('keeps the public store route separate from product administration', function
     $this->get(route('products.index'))->assertRedirect(route('login'));
 });
 
+it('only shows bulk selection controls on the full store product cards', function () {
+    $product = cartProduct();
+
+    $this->get(route('tienda.index'))
+        ->assertOk()
+        ->assertSee('Tildar')
+        ->assertSee('Agregar seleccionados')
+        ->assertSee('name="selected_products[]"', false)
+        ->assertDontSee('Cantidad para el carrito')
+        ->assertDontSee('name="quantities['.$product->id.']"', false)
+        ->assertDontSee('Guardar');
+
+    $this->post(route('cart.store-many'), [
+        'selected_products' => [$product->id],
+    ])->assertSessionHas('cart.'.$product->id, 1);
+});
+
 it('requires at least one checked product', function () {
     $this->from(route('tienda.index'))
         ->post(route('cart.store-many'), [
@@ -155,6 +172,16 @@ it('requires at least one checked product', function () {
         ])
         ->assertRedirect(route('tienda.index'))
         ->assertSessionHasErrors('selected_products');
+});
+
+it('preserves the store scroll position when a product is saved', function () {
+    cartProduct();
+
+    $this->get(route('tienda.index'))
+        ->assertOk()
+        ->assertSee('data-preserve-scroll', false)
+        ->assertSee("sessionStorage.setItem(preservedScrollKey", false)
+        ->assertSee("window.scrollTo({", false);
 });
 
 it('keeps store and cart notifications visible for five seconds', function () {
@@ -207,6 +234,9 @@ it('offers cart controls on featured products and multi-selection in the full st
         ->assertSee('Ver carrito')
         ->assertSee('Carrito (2)')
         ->assertSee('Guardar')
+        ->assertSee('Ver todos los productos')
+        ->assertSee('href="'.route('tienda.index').'"', false)
+        ->assertSee('Vista rápida')
         ->assertSee('Tienda completa')
         ->assertSee('name="selected_products[]"', false)
         ->assertSee('value="'.$shirt->id.'"', false)

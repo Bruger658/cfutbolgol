@@ -407,12 +407,26 @@
                 @endforelse
             </div>
 
-            <div class="mt-8">
-                <button id="open-full-store" type="button"
-                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-bold uppercase tracking-wide">
-                    Ver tienda completa
-                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
-                </button>
+            <div class="mt-10 overflow-hidden rounded-3xl border border-primary/10 bg-primary p-6 text-on-primary shadow-xl sm:p-8">
+                <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                        <p class="text-xs font-black uppercase tracking-[0.25em] text-secondary">Catálogo completo</p>
+                        <h2 class="mt-2 text-2xl font-black uppercase tracking-tight sm:text-3xl">Encontrá todos nuestros productos</h2>
+                        <p class="mt-2 max-w-2xl text-sm text-white/80">Visitá la tienda completa para ver el catálogo, filtrar por categoría y talle, y elegir tus productos.</p>
+                    </div>
+                    <div class="flex shrink-0 flex-col gap-3 sm:items-stretch">
+                        <a href="{{ route('tienda.index') }}"
+                            class="inline-flex items-center justify-center gap-2 rounded-xl bg-secondary px-6 py-3 font-black uppercase tracking-wide text-slate-950 transition hover:bg-amber-300">
+                            Ver todos los productos
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </a>
+                        <button id="open-full-store" type="button"
+                            class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/40 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">
+                            Vista rápida
+                            <span class="material-symbols-outlined text-lg">open_in_new</span>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <div id="full-store-overlay" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/60 p-4 backdrop-blur-sm md:p-8"

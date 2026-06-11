@@ -1,5 +1,5 @@
 @if ($product->stock > 0)
-    <form method="POST" action="{{ route('cart.store', $product) }}" class="grid grid-cols-[96px_1fr] gap-2">
+    <form method="POST" action="{{ route('cart.store', $product) }}" data-preserve-scroll class="grid grid-cols-[96px_1fr] gap-2">
         @csrf
         <label class="sr-only" for="cart-quantity-{{ $context ?? 'product' }}-{{ $product->id }}">Cantidad de {{ $product->name }}</label>
         <input id="cart-quantity-{{ $context ?? 'product' }}-{{ $product->id }}" type="number" name="quantity" value="1"

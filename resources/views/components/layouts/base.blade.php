@@ -136,6 +136,23 @@
 
     <script>
 
+        const preservedScrollKey = 'cart-form-scroll-position';
+        const currentPage = `${window.location.pathname}${window.location.search}`;
+        let preservedScrollPosition = null;
+
+        try {
+            const storedPosition = JSON.parse(sessionStorage.getItem(preservedScrollKey));
+
+            if (storedPosition?.page === currentPage) {
+                preservedScrollPosition = storedPosition;
+                history.scrollRestoration = 'manual';
+            }
+
+            sessionStorage.removeItem(preservedScrollKey);
+        } catch {
+            // The cart still works when browser storage is unavailable.
+        }
+
         window.openMap = (venueName, address) => {
             const query = encodeURIComponent(address);
             const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${query}`;
@@ -148,6 +165,32 @@
 
 
         document.addEventListener('DOMContentLoaded', () => {
+
+            document.querySelectorAll('form[data-preserve-scroll]').forEach((form) => {
+                form.addEventListener('submit', () => {
+                    try {
+                        sessionStorage.setItem(preservedScrollKey, JSON.stringify({
+                            page: currentPage,
+                            left: window.scrollX,
+                            top: window.scrollY,
+                        }));
+                    } catch {
+                        // Submitting the form must not depend on browser storage.
+                    }
+                });
+            });
+
+            if (preservedScrollPosition) {
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        window.scrollTo({
+                            left: preservedScrollPosition.left,
+                            top: preservedScrollPosition.top,
+                            behavior: 'auto',
+                        });
+                    });
+                });
+            }
 
             document.querySelectorAll('[data-auto-dismiss]').forEach((message) => {
                 const duration = Number(message.dataset.autoDismiss) || 5000;

@@ -75,8 +75,8 @@
                 <div>
                     <p class="text-xs font-black uppercase tracking-[0.25em] text-secondary">Selección CFG</p>
                     <h2 class="text-3xl font-black uppercase tracking-tight text-primary">Productos destacados</h2>
-                    <p class="mt-2 text-sm text-on-surface-variant">Tildá uno o varios productos, elegí las cantidades y
-                        agregalos juntos.</p>
+                   <p class="mt-2 text-sm text-on-surface-variant">Tildá uno o varios productos y agregalos juntos al
+                        carrito.</p>
                 </div>
                 <button id="add-selected-products" form="bulk-cart-form" type="submit"
                     class="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3 font-black text-on-primary shadow-lg transition hover:bg-sky-700 disabled:cursor-not-allowed disabled:opacity-50">
@@ -142,18 +142,7 @@
                                 <span
                                     class="text-sm font-black {{ $product->stock <= 3 ? 'text-amber-700' : 'text-green-700' }}">Stock:
                                     {{ $product->stock }}</span>
-                            </div>
-                             <div class="grid gap-3">
-                                <label
-                                    class="flex items-center justify-between rounded-2xl border border-primary/10 bg-brand-pale px-4 py-3 text-sm font-black text-primary">
-                                    Cantidad para el carrito
-                                    <input form="bulk-cart-form" type="number" name="quantities[{{ $product->id }}]"
-                                        value="{{ old('quantities.' . $product->id, 1) }}" min="1"
-                                        max="{{ $product->stock }}" aria-label="Cantidad de {{ $product->name }}"
-                                        class="w-20 rounded-xl border-primary/20 bg-white text-sm">
-                                </label>
-                                @include('products._cart-actions', ['product' => $product, 'context' => 'store'])
-                            </div>
+                            </div>                           
                         </div>
                     </article>
                 @empty
