@@ -693,9 +693,7 @@
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="{{ route('index') }}#equipos">Equipos</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="{{ route('index') }}#staff">Staff</a>
-                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="{{ route('index') }}#staff-tecnico">Profes</a>            
+                    href="{{ route('index') }}#staff">Staff</a>                
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="{{ route('index') }}#noticias">Noticias</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
@@ -747,7 +745,7 @@
                         <li><a class="text-slate-500 hover:text-blue-700 underline-offset-4 hover:underline text-sm transition-all"
                                 href="{{ route('index') }}#equipos">Equipos</a></li>
                         <li><a class="text-slate-500 hover:text-blue-700 underline-offset-4 hover:underline text-sm transition-all"
-                                href="{{ route('index') }}#staff-tecnico">Profes</a></li>
+                               href="{{ route('index') }}#staff">Staff</a></li>
                         <li><a class="text-slate-500 hover:text-blue-700 underline-offset-4 hover:underline text-sm transition-all"
                                 href="{{ route('index') }}#calendario">Calendario</a></li>
                     </ul>
