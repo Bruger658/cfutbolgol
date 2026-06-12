@@ -617,7 +617,7 @@
                             <div
                                 class="w-full max-w-[260px] rounded-3xl bg-white/90 p-6 shadow-2xl shadow-brand-blue/10">
                                 <img alt="Logo Centro Fútbol Gol" class="mx-auto w-full max-w-[180px] object-contain"
-                                    src="/images/logo-cfg.svg" />
+                                    src="/images/cfg.jpg" />
                             </div>
                             <p class="mt-8 text-2xl font-black leading-tight text-brand-blue">El primer paso para ser
                                 profesional comienza aquí.</p>
