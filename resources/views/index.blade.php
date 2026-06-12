@@ -415,16 +415,17 @@
                         <p class="mt-2 max-w-2xl text-sm text-white/80">Visitá la tienda completa para ver el catálogo, filtrar por categoría y talle, y elegir tus productos.</p>
                     </div>
                     <div class="flex shrink-0 flex-col gap-3 sm:items-stretch">
-                        <a href="{{ route('tienda.index') }}"
-                            class="inline-flex items-center justify-center gap-2 rounded-xl bg-secondary px-6 py-3 font-black uppercase tracking-wide text-slate-950 transition hover:bg-amber-300">
-                            Ver todos los productos
-                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
-                        </a>
+                        
                         <button id="open-full-store" type="button"
-                            class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/40 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">
-                            Vista rápida
+                            class="inline-flex items-center justify-center gap-2 rounded-xl bg-secondary px-6 py-3 font-black uppercase tracking-wide text-slate-950 transition hover:bg-amber-300">
+                            Ver tienda completa
                             <span class="material-symbols-outlined text-lg">open_in_new</span>
                         </button>
+                        <a href="{{ route('tienda.index') }}"
+                            class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/40 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">
+                            Ir a la página de productos
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </a>
                     </div>
                 </div>
             </div>
