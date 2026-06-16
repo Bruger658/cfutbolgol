@@ -738,7 +738,8 @@
     <nav class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md border-b border-surface-variant shadow-sm">
         <div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
             <div class="flex items-center gap-3">
-                <span class="material-symbols-outlined text-primary text-3xl">sports_soccer</span>
+                <img src="{{ asset('images/cfg.jpg') }}" alt="Escudo de Centro Fútbol Gol"
+                    class="h-10 w-auto object-contain" />
                 <span class="text-xl font-black text-primary uppercase tracking-tighter">Centro Fútbol Gol</span>
             </div>
             <div class="hidden lg:flex items-center gap-8">
