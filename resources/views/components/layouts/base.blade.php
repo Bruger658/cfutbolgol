@@ -737,10 +737,11 @@
     <!-- TopNavBar -->
     <nav class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md border-b border-surface-variant shadow-sm">
         <div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-4">
                 <img src="{{ asset('images/cfg.jpg') }}" alt="Escudo de Centro Fútbol Gol"
-                    class="h-10 w-auto object-contain" />
-                <span class="text-xl font-black text-primary uppercase tracking-tighter">Centro Fútbol Gol</span>
+                      class="h-16 w-auto object-contain md:h-20" />
+                <span
+                    class="rounded-sm bg-[#0750a5] px-3 py-1.5 font-[Arial,Helvetica,sans-serif] text-lg font-bold leading-none text-white shadow-sm ring-1 ring-white/80 md:text-xl">Centro Fútbol Gol</span>
             </div>
             <div class="hidden lg:flex items-center gap-8">
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
@@ -748,9 +749,15 @@
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="{{ route('index') }}#equipos">Equipos</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="{{ route('index') }}#staff">Staff</a>                
+                    href="{{ route('index') }}#calendario">Calendario</a>    
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
+                    href="{{ route('index') }}#staff">Staff</a> 
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
+                    href="{{ route('index') }}#galeria">Galeria</a>                   
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="{{ route('index') }}#noticias">Noticias</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
+                    href="{{ route('index') }}#tienda">Tienda</a>    
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="{{ route('index') }}#inscripcion">Inscripción</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
