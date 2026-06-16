@@ -37,7 +37,9 @@
                         "surface-variant": "#dfe3eb",
                         "on-surface-variant": "#43474e",
                         "outline": "#73777f",
-                        "brand-pale": "#f0f9ff"
+                        "brand-pale": "#f0f9ff",
+                        "brand-logo-bg": "#efe8df",
+                        "brand-logo-blue": "#0750a5"
 
                         
                     },
@@ -363,10 +365,6 @@
                     if (e.target === modal) closeModal();
                 });
             }            --}}
-
-
-
-
            
 
             // News Modal Logic
@@ -607,17 +605,9 @@
                 <h3 class="text-3xl md:text-4xl font-black text-on-surface mb-6 leading-tight" id="news-modal-title">
                 </h3>
                 <div class="text-on-surface-variant text-lg leading-relaxed space-y-4" id="news-modal-content"></div>
-                <div
-                    class="mt-10 pt-8 border-t border-surface-variant flex flex-wrap justify-between items-center gap-4">
-                    <button
-                        class="px-8 py-3 bg-primary text-on-primary font-bold rounded-xl shadow-lg hover:shadow-primary/20 transition-all">Contactar
-                        por esta noticia</button>
-                    <div class="flex gap-4">
-                        <span
-                            class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">share</span>
-                        <span
-                            class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">bookmark</span>
-                    </div>
+                    <div class="mt-10 pt-8 border-t border-surface-variant">
+                    <a href="{{ route('index') }}"
+                        class="inline-flex items-center justify-center px-8 py-3 bg-primary text-on-primary font-bold rounded-xl shadow-lg hover:shadow-primary/20 transition-all">Volver a la página principal</a>
                 </div>
             </div>
         </div>
@@ -735,14 +725,13 @@
 
 
     <!-- TopNavBar -->
-    <nav class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md border-b border-surface-variant shadow-sm">
+    <nav class="fixed top-0 w-full z-50 bg-brand-logo-bg/95 backdrop-blur-md border-b border-brand-logo-blue/20 shadow-sm">
         <div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
             <div class="flex items-center gap-4">
                 <img src="{{ asset('images/cfg.jpg') }}" alt="Escudo de Centro Fútbol Gol"
                       class="h-16 w-auto object-contain md:h-20" />
                 <span
-                    class="rounded-sm bg-[#0750a5] px-3 py-1.5 font-[Arial,Helvetica,sans-serif] text-lg font-bold leading-none text-white shadow-sm ring-1 ring-white/80 md:text-xl">Centro Fútbol Gol</span>
-            </div>
+                    class="rounded-sm bg-brand-logo-blue px-3 py-1.5 font-[Arial,Helvetica,sans-serif] text-lg font-bold leading-none text-white shadow-sm ring-1 ring-white/80 md:text-xl">Centro Fútbol Gol</span>
             <div class="hidden lg:flex items-center gap-8">
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="{{ route('index') }}#historia">Historia</a>
