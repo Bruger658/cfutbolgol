@@ -129,8 +129,7 @@
                     <a href="{{ route('tienda.index') }}"
                         class="mt-4 block rounded-xl border border-primary/20 px-4 py-3 text-center font-black text-primary hover:bg-primary hover:text-white">Agregar
                         más productos</a>
-                    <form method="POST" action="{{ route('cart.clear') }}" class="mt-3"
-                        onsubmit="return confirm('¿Querés cancelar esta compra y vaciar todo el carrito?')">
+                    <form method="POST" action="{{ route('cart.clear') }}" class="mt-3" data-cart-clear-form>
                         @csrf
                         @method('DELETE')
                         <button type="submit"
@@ -140,6 +139,86 @@
                     </form>
                 </aside>    
             </div>
+
+            <div id="cart-clear-modal"
+                class="fixed inset-0 z-[60] hidden items-center justify-center bg-slate-950/60 px-4 backdrop-blur-sm"
+                role="dialog" aria-modal="true" aria-labelledby="cart-clear-modal-title">
+                <div class="w-full max-w-md rounded-3xl border border-primary/10 bg-white p-6 shadow-2xl">
+                    <div class="flex items-start gap-4">
+                        <span
+                            class="material-symbols-outlined rounded-2xl bg-red-50 p-3 text-3xl text-red-600">remove_shopping_cart</span>
+                        <div>
+                            <h2 id="cart-clear-modal-title" class="text-xl font-black text-primary">Cancelar compra</h2>
+                            <p class="mt-2 text-sm leading-6 text-on-surface-variant">¿Querés cancelar esta compra y
+                                vaciar todo el carrito?</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+                        <button type="button" data-cart-clear-cancel
+                            class="rounded-xl border border-primary/20 px-4 py-3 text-sm font-black text-primary hover:bg-primary hover:text-white">
+                            Seguir comprando
+                        </button>
+                        <button type="button" data-cart-clear-confirm
+                            class="rounded-xl bg-red-600 px-4 py-3 text-sm font-black text-white shadow-lg shadow-red-600/20 hover:bg-red-700">
+                            Sí, vaciar carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const clearForm = document.querySelector('[data-cart-clear-form]');
+                    const modal = document.querySelector('#cart-clear-modal');
+                    const cancelButton = document.querySelector('[data-cart-clear-cancel]');
+                    const confirmButton = document.querySelector('[data-cart-clear-confirm]');
+
+                    if (!clearForm || !modal || !cancelButton || !confirmButton) {
+                        return;
+                    }
+
+                    const openModal = () => {
+                        modal.classList.remove('hidden');
+                        modal.classList.add('flex');
+                        confirmButton.focus();
+                    };
+
+                    const closeModal = () => {
+                        modal.classList.add('hidden');
+                        modal.classList.remove('flex');
+                    };
+
+                    clearForm.addEventListener('submit', (event) => {
+                        if (clearForm.dataset.skipCartClearConfirm === 'true') {
+                            clearForm.dataset.skipCartClearConfirm = 'false';
+                            return;
+                        }
+
+                        event.preventDefault();
+                        openModal();
+                    });
+
+                    cancelButton.addEventListener('click', closeModal);
+
+                    modal.addEventListener('click', (event) => {
+                        if (event.target === modal) {
+                            closeModal();
+                        }
+                    });
+
+                    document.addEventListener('keydown', (event) => {
+                        if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                            closeModal();
+                        }
+                    });
+
+                    confirmButton.addEventListener('click', () => {
+                        clearForm.dataset.skipCartClearConfirm = 'true';
+                        clearForm.requestSubmit();
+                        closeModal();
+                    });
+                });
+            </script>
         @endif
     </main>
 </x-layouts.base>
