@@ -38,7 +38,7 @@
                         "on-surface-variant": "#43474e",
                         "outline": "#73777f",
                         "brand-pale": "#f0f9ff",
-                        "brand-logo-bg": "#efe8df",
+                        "brand-logo-bg": "#f2ebe3",
                         "brand-logo-blue": "#0750a5"
 
                         
@@ -731,7 +731,7 @@
                 <img src="{{ asset('images/cfg.jpg') }}" alt="Escudo de Centro Fútbol Gol"
                       class="h-16 w-auto object-contain md:h-20" />
                 <span
-                    class="rounded-sm bg-brand-logo-blue px-3 py-1.5 font-[Arial,Helvetica,sans-serif] text-lg font-bold leading-none text-white shadow-sm ring-1 ring-white/80 md:text-xl">Centro Fútbol Gol</span>
+                     class="rounded-sm bg-brand-logo-bg px-3 py-1.5 font-[Arial,Helvetica,sans-serif] text-lg font-bold leading-none text-brand-logo-blue shadow-sm ring-1 ring-brand-logo-blue/20 md:text-xl">Centro Fútbol Gol</span>
             <div class="hidden lg:flex items-center gap-8">
                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
                     href="{{ route('index') }}#historia">Historia</a>
