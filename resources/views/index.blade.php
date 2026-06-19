@@ -389,6 +389,7 @@
                         <img class="w-full h-52 object-cover"
                             src="{{ $product->image_url ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=80' }}"
                             alt="{{ $product->name }}">
+
                         <div class="p-6 space-y-3">
                             <h2 class="text-2xl font-black text-primary">{{ $product->name }}</h2>
                             <p class="text-sm font-bold uppercase tracking-wider text-on-surface-variant">
@@ -412,187 +413,17 @@
                     <div>
                         <p class="text-xs font-black uppercase tracking-[0.25em] text-secondary">Catálogo completo</p>
                         <h2 class="mt-2 text-2xl font-black uppercase tracking-tight sm:text-3xl">Encontrá todos nuestros productos</h2>
-                        <p class="mt-2 max-w-2xl text-sm text-white/80">Visitá la tienda completa para ver el catálogo, filtrar por categoría y talle, y elegir tus productos.</p>
+                         <p class="mt-2 max-w-2xl text-sm text-white/80">Visitá la página de productos para ver el catálogo, filtrar por categoría y talle, y elegir tus productos.</p>
                     </div>
-                    <div class="flex shrink-0 flex-col gap-3 sm:items-stretch">
-                        
-                        <button id="open-full-store" type="button"
-                            class="inline-flex items-center justify-center gap-2 rounded-xl bg-secondary px-6 py-3 font-black uppercase tracking-wide text-slate-950 transition hover:bg-amber-300">
-                            Ver tienda completa
-                            <span class="material-symbols-outlined text-lg">open_in_new</span>
-                        </button>
-                        <a href="{{ route('tienda.index') }}"
-                            class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/40 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">
-                            Ir a la página de productos
-                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
-                        </a>
-                    </div>
+                    <a href="{{ route('tienda.index') }}"
+                        class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-white/40 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10 sm:self-center">
+                        Ir a la página de productos
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                    </a>
                 </div>
-            </div>
-
-            <div id="full-store-overlay" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/60 p-4 backdrop-blur-sm md:p-8"
-                role="dialog" aria-modal="true" aria-labelledby="full-store-title">
-                <div id="full-store-card"
-                    class="mx-auto my-8 w-full max-w-6xl rounded-3xl border border-primary/10 bg-surface-container-lowest p-6 shadow-2xl md:p-8">
-                    <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                        <div>
-                            <h2 id="full-store-title" class="text-3xl font-black text-primary uppercase tracking-tight">Tienda completa</h2>
-                            <p class="mt-1 text-sm text-on-surface-variant">Seleccioná uno o varios productos y elegí la cantidad de cada uno.</p>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <a href="{{ route('cart.show') }}"
-                                class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-700">
-                                <span class="material-symbols-outlined text-lg">shopping_cart</span>
-                                Carrito ({{ $homeCartCount }})
-                            </a>
-                            <button id="close-full-store" type="button"
-                                class="rounded-xl bg-slate-200 px-4 py-2 text-sm font-bold text-slate-800 hover:bg-slate-300">Cerrar</button>
-                        </div>
-
-                </div>
-
-                <form id="modal-cart-form" method="POST" action="{{ route('cart.store-many') }}">
-                        @csrf
-                        <div id="store-products-grid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                            @forelse ($storeProducts ?? collect() as $product)
-                                <article data-modal-product-card
-                                    class="store-product overflow-hidden rounded-2xl border border-primary/10 bg-white shadow transition">
-                                    <div class="relative">
-                                        <img class="h-44 w-full object-cover"
-                                            src="{{ $product->image_url ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=80' }}"
-                                            alt="{{ $product->name }}">
-                                        <label class="absolute left-3 top-3 flex cursor-pointer items-center gap-2 rounded-full bg-white/95 px-3 py-2 text-xs font-black text-primary shadow">
-                                            <input data-modal-product-checkbox type="checkbox" name="selected_products[]"
-                                                value="{{ $product->id }}" class="rounded border-primary/30 text-primary">
-                                            Elegir
-                                        </label>
-                                    </div>
-                                    <div class="space-y-3 p-4">
-                                        <h3 class="text-lg font-black text-primary">{{ $product->name }}</h3>
-                                        <p class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Talle: {{ $product->size ?: 'Único' }}</p>
-                                        <p class="line-clamp-2 text-sm text-on-surface-variant">{{ $product->description }}</p>
-                                        <div class="flex items-center justify-between pt-1">
-                                            <span class="text-base font-black text-on-surface">${{ number_format((float) $product->price, 2, ',', '.') }}</span>
-                                            <span class="text-xs font-bold text-on-surface-variant">Stock: {{ $product->stock }}</span>
-                                        </div>
-                                        <label class="flex items-center justify-between rounded-xl bg-brand-pale px-3 py-2 text-sm font-bold text-primary">
-                                            Cantidad
-                                            <input type="number" name="quantities[{{ $product->id }}]" value="1" min="1"
-                                                max="{{ $product->stock }}" class="w-20 rounded-lg border-primary/20 bg-white text-sm"
-                                                aria-label="Cantidad de {{ $product->name }}">
-                                        </label>
-                                    </div>
-                                </article>
-                            @empty
-                                <p class="text-on-surface-variant">No hay productos disponibles en este momento.</p>
-                            @endforelse
-                        </div>
-
-
-                <div id="store-pagination" class="mt-6 flex flex-wrap items-center justify-center gap-2"></div>
-                        @if (($storeProducts ?? collect())->isNotEmpty())
-                            <div class="sticky bottom-3 mt-6 flex flex-col gap-3 rounded-2xl border border-primary/10 bg-white/95 p-4 shadow-xl backdrop-blur sm:flex-row sm:items-center sm:justify-between">
-                                <p class="text-sm font-bold text-on-surface-variant">
-                                    <span id="modal-selected-count">0</span> producto(s) seleccionado(s)
-                                </p>
-                                <button id="modal-add-selected" type="submit" disabled
-                                    class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-black text-white hover:bg-sky-700 disabled:cursor-not-allowed disabled:opacity-50">
-                                    <span class="material-symbols-outlined">add_shopping_cart</span>
-                                    Agregar seleccionados y ver carrito
-                                </button>
-                            </div>
-                         @endif
-                    </form>
-                </div>
-                
+            </div>   
         </section>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const openButton = document.getElementById('open-full-store');
-                const closeButton = document.getElementById('close-full-store');
-                const overlay = document.getElementById('full-store-overlay');
-                const pagination = document.getElementById('store-pagination');
-                const products = Array.from(document.querySelectorAll('.store-product'));
-                const checkboxes = Array.from(document.querySelectorAll('[data-modal-product-checkbox]'));
-                const selectedCount = document.getElementById('modal-selected-count');
-                const addSelectedButton = document.getElementById('modal-add-selected');
-                const productsPerPage = 12;
-                let currentPage = 1;
-
-                const refreshSelection = () => {
-                    const selected = checkboxes.filter((checkbox) => checkbox.checked);
-
-                    checkboxes.forEach((checkbox) => {
-                        const card = checkbox.closest('[data-modal-product-card]');
-                        card?.classList.toggle('ring-4', checkbox.checked);
-                        card?.classList.toggle('ring-sky-400', checkbox.checked);
-                    });
-
-                    if (selectedCount) selectedCount.textContent = String(selected.length);
-                    if (addSelectedButton) addSelectedButton.disabled = selected.length === 0;
-                };
-
-                const renderPage = (page) => {
-                    const totalPages = Math.max(1, Math.ceil(products.length / productsPerPage));
-                    currentPage = Math.min(Math.max(1, page), totalPages);
-                    const start = (currentPage - 1) * productsPerPage;
-                    const end = start + productsPerPage;
-
-                    products.forEach((product, index) => product.classList.toggle('hidden', !(index >= start && index < end)));
-
-                    if (!pagination || totalPages <= 1) {
-                        if (pagination) pagination.innerHTML = '';
-                        return;
-                    }
-
-                     pagination.innerHTML = '';
-                    const addPageButton = (label, page, active = false, disabled = false) => {
-                        const button = document.createElement('button');
-                        button.type = 'button';
-                        button.textContent = label;
-                        button.disabled = disabled;
-                        button.className = `rounded-lg px-3 py-1.5 text-sm font-bold disabled:opacity-40 ${active ? 'bg-primary text-white' : 'bg-slate-200 text-slate-800'}`;
-                        button.addEventListener('click', () => renderPage(page));
-                        pagination.appendChild(button);
-                    };
-
-                    addPageButton('Anterior', currentPage - 1, false, currentPage === 1);
-                    for (let pageNumber = 1; pageNumber <= totalPages; pageNumber += 1) {
-                        addPageButton(String(pageNumber), pageNumber, pageNumber === currentPage);
-                    }
-                    addPageButton('Siguiente', currentPage + 1, false, currentPage === totalPages);
-                };
-
-
-                    
-
-                const closeStore = () => {
-                    overlay?.classList.add('hidden');
-                    document.body.classList.remove('overflow-hidden');     
-                };
-
-                openButton?.addEventListener('click', () => {
-                    overlay?.classList.remove('hidden');
-                    document.body.classList.add('overflow-hidden');
-                    renderPage(currentPage);
-                });
-
-
-                closeButton?.addEventListener('click', closeStore);
-                overlay?.addEventListener('click', (event) => {
-                    if (event.key === 'Escape' && overlay && !overlay.classList.contains('hidden')) closeStore();
-                });
-
-                document.addEventListener('keydown', (event) => {
-               
-                    if (event.key === 'Escape' && overlay && !overlay.classList.contains('hidden')) closeStore();
-                });
-                checkboxes.forEach((checkbox) => checkbox.addEventListener('change', refreshSelection));
-                refreshSelection();
-                renderPage(1);
-            });
-        </script>
+        
 
         <!-- Formulario -->
         <section class="py-16 bg-brand-pale pt-20 pb-32 px-4 md:px-8 max-w-7xl mx-auto" id="inscripcion">

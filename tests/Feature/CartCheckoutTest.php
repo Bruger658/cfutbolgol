@@ -220,29 +220,22 @@ it('can cancel the purchase and clear the cart before payment', function () {
 });
 
 
-it('offers cart controls on featured products and multi-selection in the full store modal', function () {
-    $shirt = cartProduct();
-    $shorts = cartProduct([
-        'name' => 'Short CFG',
-        'price' => 9000,
-        'stock' => 5,
-    ]);
+it('offers cart controls on featured products and links to the products page', function () {
+    $shirt = cartProduct();    
 
     $this->withSession(['cart' => [$shirt->id => 2]])
         ->get(route('index'))
         ->assertOk()
         ->assertSee('Ver carrito')
-        ->assertSee('Carrito (2)')
-        ->assertSee('Guardar')
-        ->assertSee('Ver tienda completa')
-        ->assertSee('id="open-full-store"', false)
+        ->assertSee('Guardar')        
         ->assertSee('Ir a la página de productos')
         ->assertSee('href="'.route('tienda.index').'"', false)
-        ->assertSee('Tienda completa')
-        ->assertSee('name="selected_products[]"', false)
-        ->assertSee('value="'.$shirt->id.'"', false)
-        ->assertSee('value="'.$shorts->id.'"', false)
-        ->assertSee('Agregar seleccionados y ver carrito');
+        ->assertDontSee('Ver tienda completa')
+        ->assertDontSee('id="open-full-store"', false)
+        ->assertDontSee('Tienda completa')
+        ->assertDontSee('name="selected_products[]"', false)
+        ->assertDontSee('Agregar seleccionados y ver carrito');
+        
 });
 
 it('only exposes checkout creation through the cart', function () {

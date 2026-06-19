@@ -1,5 +1,5 @@
 <x-layouts.base>
-    <main class="pt-24 pb-20 px-4 md:px-8 max-w-5xl mx-auto">
+     <main class="pt-36 pb-20 px-4 md:pt-40 md:px-8 max-w-5xl mx-auto">
         <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
                 <h1 class="text-4xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Carrito de compras</h1>
