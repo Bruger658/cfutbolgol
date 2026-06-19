@@ -6,20 +6,20 @@
 
     <div>
         <label class="block text-sm font-medium mb-1">Categoría</label>
-        <select name="category" class="w-full rounded border px-3 py-2" required>
+         <select name="category" class="w-full rounded border px-3 py-2 bg-primary text-on-primary" style="background-color:#0b1730;color:#ffffff;border-color:#94a3b8;" required>
             @php
                 $categories = ['Indumentaria de partido', 'Entrenamiento', 'Buzo y pantalón largo', 'Camperas y camperones', 'Medias', 'Canilleras'];
             @endphp
             @foreach ($categories as $category)
-                <option value="{{ $category }}" @selected(old('category', $product->category) === $category)>{{ $category }}</option>
+                <option value="{{ $category }}" style="background-color:#0b1730;color:#ffffff;" @selected(old('category', $product->category) === $category)>{{ $category }}</option>
             @endforeach
         </select>
     </div>
 
    <div>
         <label class="block text-sm font-medium mb-1">Talle</label>
-        <select name="size" class="w-full rounded border px-3 py-2" required>
-            <option value="" disabled @selected(! old('size', $product->size ?? null))>Elegir talle</option>
+         <select name="size" class="w-full rounded border px-3 py-2 bg-primary text-on-primary" style="background-color:#0b1730;color:#ffffff;border-color:#94a3b8;" required>
+            <option value="" disabled style="background-color:#0b1730;color:#ffffff;" @selected(! old('size', $product->size ?? null))>Elegir talle</option>
             @php
                 $sizes = ['8', '10', '12', '14', '16', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
             @endphp

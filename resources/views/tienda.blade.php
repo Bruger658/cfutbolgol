@@ -1,5 +1,5 @@
 <x-layouts.base>
-    <main class="pt-20 pb-24 px-4 md:px-8 max-w-7xl mx-auto">
+    <main class="pt-36 pb-24 px-4 md:px-8 max-w-7xl mx-auto">
         <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
                 <h1 class="text-5xl font-black font-lexend tracking-tighter text-primary uppercase leading-none">Tienda

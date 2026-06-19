@@ -5,9 +5,7 @@
             <a href="{{ route('products.create') }}" class="px-4 py-2 rounded bg-blue-600 text-white">Cargar producto</a>
         </div>
 
-        @if (session('status'))
-            <div class="p-3 rounded border border-green-300 bg-green-50 text-green-700">{{ session('status') }}</div>
-        @endif
+       
 
         <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             @forelse($products as $product)
