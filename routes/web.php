@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:access-dashboard'])
     ->name('dashboard');
 
 Route::get('/tienda', [TiendaController::class, 'index'])->name('tienda.index');
@@ -55,25 +55,39 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/appearance', [Settings\AppearanceController::class, 'edit'])->name('settings.appearance.edit');
     Route::put('settings/appearance', [Settings\AppearanceController::class, 'update'])->name('settings.appearance.update');
 
-    Route::resource('gallery-items', GalleryItemController::class)->except(['show']);
+    Route::middleware('can:manage-content')->group(function () {
+        Route::resource('gallery-items', GalleryItemController::class)->except(['show']);
+        Route::resource('publications', PublicationController::class)->except(['show']);
+        Route::get('noticias', [PublicationController::class, 'index'])->name('noticias.index');
+        Route::resource('fixtures', FixtureController::class)->except(['show']);
+        Route::resource('events', EventController::class)->except(['show']);
+        Route::patch('events/{event}/toggle', [EventController::class, 'toggle'])->name('events.toggle');
+        Route::get('fixture', [FixtureController::class, 'index'])->name('fixture');
+    });
 
     
-    Route::resource('publications', PublicationController::class)->except(['show']);
-    Route::get('noticias', [PublicationController::class, 'index'])->name('noticias.index');
-   
-      
-    Route::resource('fixtures', FixtureController::class)->except(['show']);
-    Route::resource('events', EventController::class)->except(['show']);
-    Route::resource('staff', StaffController::class)->except(['show']);
-    Route::resource('enrollment-requests', EnrollmentRequestController::class)->only(['index', 'update', 'destroy']);
-    Route::patch('events/{event}/toggle', [EventController::class, 'toggle'])->name('events.toggle');
-    Route::get('members-export/excel', [MemberController::class, 'exportExcel'])->name('members.export.excel');
-    Route::get('members-export/pdf', [MemberController::class, 'exportPdf'])->name('members.export.pdf');
-    Route::get('members/fee-payments', [MemberFeePaymentController::class, 'index'])->name('members.fee-payments.index');
-    Route::post('members/{member}/fee-payments', [MemberFeePaymentController::class, 'store'])->name('members.fee-payments.store');
-    Route::resource('members', MemberController::class)->except(['show']);
-    Route::get('fixture', [FixtureController::class, 'index'])->name('fixture');
-    Route::resource('products', ProductController::class)->except(['show']);    
+    Route::middleware('can:manage-staff')->group(function () {
+        Route::resource('staff', StaffController::class)->except(['show']);
+    });
+
+    Route::middleware('can:manage-enrollments')->group(function () {
+        Route::resource('enrollment-requests', EnrollmentRequestController::class)->only(['index', 'update', 'destroy']);
+    });
+
+    Route::middleware('can:manage-members')->group(function () {
+        Route::get('members-export/excel', [MemberController::class, 'exportExcel'])->name('members.export.excel');
+        Route::get('members-export/pdf', [MemberController::class, 'exportPdf'])->name('members.export.pdf');
+        Route::resource('members', MemberController::class)->except(['show']);
+    });
+
+    Route::middleware('can:manage-fees')->group(function () {
+        Route::get('members/fee-payments', [MemberFeePaymentController::class, 'index'])->name('members.fee-payments.index');
+        Route::post('members/{member}/fee-payments', [MemberFeePaymentController::class, 'store'])->name('members.fee-payments.store');
+    });
+
+    Route::middleware('can:manage-store')->group(function () {
+        Route::resource('products', ProductController::class)->except(['show']);
+    });  
 });
 
 

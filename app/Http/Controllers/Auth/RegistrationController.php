@@ -33,6 +33,8 @@ class RegistrationController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect($user->hasPermission('access-dashboard')
+            ? route('dashboard', absolute: false)
+            : route('index', absolute: false));
     }
 }

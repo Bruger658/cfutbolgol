@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Support\UserRole;
 use Illuminate\Support\Str;
 
 class User extends Authenticatable
@@ -21,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
         'theme_preference',
     ];
 
@@ -50,6 +52,25 @@ class User extends Authenticatable
     /**
      * Get the user's initials
      */
+
+    public function hasRole(string ...$roles): bool
+    {
+        return in_array($this->role, $roles, true);
+    }
+
+    public function hasPermission(string $permission): bool
+    {
+        $roles = UserRole::PERMISSIONS[$permission] ?? [];
+
+        return $this->hasRole(UserRole::ADMIN) || in_array($this->role, $roles, true);
+    }
+
+    public function roleLabel(): string
+    {
+        return UserRole::LABELS[$this->role] ?? ucfirst((string) $this->role);
+    }
+
+    
     public function initials(): string
     {
         return Str::of($this->name)
