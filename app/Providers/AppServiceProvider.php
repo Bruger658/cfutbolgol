@@ -22,7 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-      foreach (array_keys(UserRole::PERMISSIONS) as $permission) {
+        foreach (array_keys(UserRole::PERMISSIONS) as $permission) {
             Gate::define($permission, fn (User $user): bool => $user->hasPermission($permission));  
+        }
     }
 }

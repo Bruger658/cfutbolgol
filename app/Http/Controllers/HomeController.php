@@ -8,6 +8,8 @@ use App\Models\GalleryItems;
 use App\Models\Product;
 use App\Models\Publication;
 use App\Models\Staff;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -15,40 +17,53 @@ class HomeController extends Controller
     public function index(): View
     {
         return view('index', [
-            'galleryItems' => GalleryItems::query()
+            'galleryItems' => $this->safeCollection(fn () => GalleryItems::query()
                 ->where('is_active', true)
-                ->latest()
-                ->get(),
-            'publications' => Publication::query()
+                ->latest() 
+                ->get()),
+            'publications' => $this->safeCollection(fn () => Publication::query()               
                 ->where('is_active', true)
                 ->latest('published_at')
                 ->take(6)
-                ->get(),
-            'fixtures' => Fixture::query()
+                ->get()),
+            'fixtures' => $this->safeCollection(fn () => Fixture::query()
                 ->where('is_active', true)
                 ->orderBy('fixture_date')
                 ->orderBy('match_time')
                 ->take(4)
-                ->get(),   
-            'events' => Event::query()
-                ->where('is_completed', false)
+                ->get()),
+            'events' => $this->safeCollection(fn () => Event::query()
+                ->where('is_completed', false)                
                 ->orderBy('starts_at')
                 ->take(8)
-                ->get(),
-            'featuredProducts' => Product::query()
+                ->get()),
+            'featuredProducts' => $this->safeCollection(fn () => Product::query()
                 ->where('stock', '>', 0)
                 ->latest()
                 ->take(3)
-                ->get(),
-            'storeProducts' => Product::query()
+                ->get()),
+            'storeProducts' => $this->safeCollection(fn () => Product::query()
                 ->where('stock', '>', 0)
                 ->latest()
-                ->get(),
-            'staffMembers' => Staff::query()
+                ->get()),
+            'staffMembers' => $this->safeCollection(fn () => Staff::query()
                 ->where('is_active', true)
                 ->orderBy('display_order')
                 ->orderBy('name')
-                ->get(),    
+                ->get()),    
         ]);
+    }
+
+    /**
+     * Keep the public home page available while a fresh local database is
+     * being created or before migrations have been run.
+     */
+    private function safeCollection(callable $query): Collection
+    {
+        try {
+            return $query();
+        } catch (QueryException) {
+            return collect();
+        }
     }
 }

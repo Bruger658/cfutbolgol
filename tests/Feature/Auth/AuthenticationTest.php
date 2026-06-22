@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Support\UserRole;
 
 test('login screen can be rendered', function () {
     $response = $this->get('/login');
@@ -19,6 +20,21 @@ test('users can authenticate using the login screen', function () {
     $this->assertAuthenticated();
     $response->assertRedirect(route('dashboard', absolute: false));
 });
+
+test('users without dashboard permission are redirected home after login', function () {
+    $user = User::factory()->create(['role' => UserRole::SOCIO]);
+
+    $this->get('/dashboard')->assertRedirect('/login');
+
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    $this->assertAuthenticated();
+    $response->assertRedirect(route('index', absolute: false));
+});
+
 
 test('users can not authenticate with invalid password', function () {
     $user = User::factory()->create();

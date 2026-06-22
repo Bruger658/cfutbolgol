@@ -40,6 +40,12 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
+        if (! $request->user()->hasPermission('access-dashboard')) {
+            $request->session()->forget('url.intended');
+
+            return redirect()->route('index');
+        }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
