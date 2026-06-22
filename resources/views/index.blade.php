@@ -386,9 +386,12 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @forelse ($featuredProducts ?? collect() as $product)
                     <article class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-lg border border-primary/10">
-                        <img class="w-full h-52 object-cover"
-                            src="{{ $product->image_url ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=80' }}"
-                            alt="{{ $product->name }}">
+                        <div class="group relative h-52 overflow-visible bg-white">
+                            <img class="relative z-0 h-full w-full object-cover transition-all duration-300 ease-out group-hover:z-20 group-hover:scale-105 group-hover:rounded-2xl group-hover:object-contain group-hover:shadow-2xl"
+                                src="{{ $product->image_url ?: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=80' }}"
+                                alt="{{ $product->name }}">
+                        </div>
+
 
                         <div class="p-6 space-y-3">
                             <h2 class="text-2xl font-black text-primary">{{ $product->name }}</h2>
