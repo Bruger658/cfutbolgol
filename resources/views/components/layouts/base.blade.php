@@ -204,6 +204,24 @@
                     window.setTimeout(() => message.remove(), 300);
                 }, duration);
             });
+
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
+
+            mobileMenuToggle?.addEventListener('click', () => {
+                const isOpen = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+
+                mobileMenu?.classList.toggle('hidden', isOpen);
+                mobileMenuToggle.setAttribute('aria-expanded', String(!isOpen));
+            });
+
+            mobileMenu?.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuToggle?.setAttribute('aria-expanded', 'false');
+                });
+            });
+
             // Gallery & Carousel Logic
             const modal = document.getElementById('lightbox-modal');
             const modalImg = document.getElementById('lightbox-img');
@@ -726,40 +744,44 @@
 
     <!-- TopNavBar -->
     <nav class="fixed top-0 w-full z-50 bg-brand-logo-bg/95 backdrop-blur-md border-b border-brand-logo-blue/20 shadow-sm">
-        <div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
-            <div class="flex items-center gap-4">
+        <div class="flex items-center justify-between gap-4 px-4 py-3 max-w-screen-2xl mx-auto sm:px-6 xl:py-4">
+            <a class="flex shrink-0 items-center gap-3" href="{{ route('index') }}" aria-label="Inicio Centro Fútbol Gol">
                 <img src="{{ asset('images/cfg.jpg') }}" alt="Escudo de Centro Fútbol Gol"
-                      class="h-16 w-auto object-contain md:h-20" />
+                    class="h-14 w-auto object-contain sm:h-16 xl:h-[4.5rem] 2xl:h-20" />
                 <span
-                     class="rounded-sm bg-brand-logo-bg px-3 py-1.5 font-[Arial,Helvetica,sans-serif] text-lg font-bold leading-none text-brand-logo-blue shadow-sm ring-1 ring-brand-logo-blue/20 md:text-xl">Centro Fútbol Gol</span>
-            <div class="hidden lg:flex items-center gap-8">
-                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="{{ route('index') }}#historia">Historia</a>
-                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="{{ route('index') }}#equipos">Equipos</a>
-                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="{{ route('index') }}#calendario">Calendario</a>    
-                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="{{ route('index') }}#staff">Staff</a> 
-                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="{{ route('index') }}#galeria">Galeria</a>                   
-                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="{{ route('index') }}#noticias">Noticias</a>
-                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="{{ route('index') }}#tienda">Tienda</a>    
-                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="{{ route('index') }}#inscripcion">Inscripción</a>
-                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold text-sm tracking-tight uppercase"
-                    href="{{ route('index') }}#sedes">Sedes</a>
-                <a class="inline-flex items-center rounded-full bg-primary px-4 py-2 text-on-primary shadow-lg shadow-primary/20 hover:bg-blue-700 transition-colors font-black text-sm tracking-tight uppercase"
-                    href="{{ route('fees.public.index') }}">Pagar cuota</a>
-            </div>
-            <div class="flex items-center gap-4">
-                
-                    
-                <button class="lg:hidden text-on-surface">
-                    <span class="material-symbols-outlined">menu</span>
-                </button>
+                    class="whitespace-nowrap rounded-sm bg-brand-logo-bg px-2.5 py-1.5 font-[Arial,Helvetica,sans-serif] text-base font-bold leading-none text-brand-logo-blue shadow-sm ring-1 ring-brand-logo-blue/20 sm:text-lg 2xl:px-3 2xl:text-xl">Centro Fútbol Gol</span>
+            </a>
+
+            <div class="hidden flex-1 items-center justify-end gap-3 xl:flex 2xl:gap-8">
+                <a class="whitespace-nowrap text-on-surface-variant hover:text-primary transition-colors font-bold text-xs tracking-tight uppercase 2xl:text-sm" href="{{ route('index') }}#historia">Historia</a>
+                <a class="whitespace-nowrap text-on-surface-variant hover:text-primary transition-colors font-bold text-xs tracking-tight uppercase 2xl:text-sm" href="{{ route('index') }}#equipos">Equipos</a>
+                <a class="whitespace-nowrap text-on-surface-variant hover:text-primary transition-colors font-bold text-xs tracking-tight uppercase 2xl:text-sm" href="{{ route('index') }}#calendario">Calendario</a>
+                <a class="whitespace-nowrap text-on-surface-variant hover:text-primary transition-colors font-bold text-xs tracking-tight uppercase 2xl:text-sm" href="{{ route('index') }}#staff">Staff</a>
+                <a class="whitespace-nowrap text-on-surface-variant hover:text-primary transition-colors font-bold text-xs tracking-tight uppercase 2xl:text-sm" href="{{ route('index') }}#galeria">Galería</a>
+                <a class="whitespace-nowrap text-on-surface-variant hover:text-primary transition-colors font-bold text-xs tracking-tight uppercase 2xl:text-sm" href="{{ route('index') }}#noticias">Noticias</a>
+                <a class="whitespace-nowrap text-on-surface-variant hover:text-primary transition-colors font-bold text-xs tracking-tight uppercase 2xl:text-sm" href="{{ route('index') }}#tienda">Tienda</a>
+                <a class="whitespace-nowrap text-on-surface-variant hover:text-primary transition-colors font-bold text-xs tracking-tight uppercase 2xl:text-sm" href="{{ route('index') }}#inscripcion">Inscripción</a>
+                <a class="whitespace-nowrap text-on-surface-variant hover:text-primary transition-colors font-bold text-xs tracking-tight uppercase 2xl:text-sm" href="{{ route('index') }}#sedes">Sedes</a>
+                <a class="inline-flex items-center whitespace-nowrap rounded-full bg-primary px-4 py-2 text-on-primary shadow-lg shadow-primary/20 hover:bg-blue-700 transition-colors font-black text-xs tracking-tight uppercase 2xl:text-sm" href="{{ route('fees.public.index') }}">Pagar cuota</a>
+            </div>     
+            
+            <button class="inline-flex h-11 w-11 items-center justify-center rounded-full text-on-surface ring-1 ring-brand-logo-blue/20 xl:hidden" type="button" data-mobile-menu-toggle aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menú de navegación">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+
+        <div class="hidden border-t border-brand-logo-blue/10 bg-brand-logo-bg px-4 pb-4 shadow-lg xl:hidden" id="mobile-menu">
+            <div class="grid gap-2 pt-3 text-sm font-bold uppercase tracking-tight text-on-surface-variant sm:grid-cols-2">
+                <a class="rounded-lg px-3 py-2 hover:bg-white/60 hover:text-primary" href="{{ route('index') }}#historia">Historia</a>
+                <a class="rounded-lg px-3 py-2 hover:bg-white/60 hover:text-primary" href="{{ route('index') }}#equipos">Equipos</a>
+                <a class="rounded-lg px-3 py-2 hover:bg-white/60 hover:text-primary" href="{{ route('index') }}#calendario">Calendario</a>
+                <a class="rounded-lg px-3 py-2 hover:bg-white/60 hover:text-primary" href="{{ route('index') }}#staff">Staff</a>
+                <a class="rounded-lg px-3 py-2 hover:bg-white/60 hover:text-primary" href="{{ route('index') }}#galeria">Galería</a>
+                <a class="rounded-lg px-3 py-2 hover:bg-white/60 hover:text-primary" href="{{ route('index') }}#noticias">Noticias</a>
+                <a class="rounded-lg px-3 py-2 hover:bg-white/60 hover:text-primary" href="{{ route('index') }}#tienda">Tienda</a>
+                <a class="rounded-lg px-3 py-2 hover:bg-white/60 hover:text-primary" href="{{ route('index') }}#inscripcion">Inscripción</a>
+                <a class="rounded-lg px-3 py-2 hover:bg-white/60 hover:text-primary" href="{{ route('index') }}#sedes">Sedes</a>
+                <a class="rounded-full bg-primary px-4 py-3 text-center font-black text-on-primary shadow-lg shadow-primary/20 hover:bg-blue-700 sm:col-span-2" href="{{ route('fees.public.index') }}">Pagar cuota</a>
             </div>
         </div>
     </nav>
