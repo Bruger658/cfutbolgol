@@ -38,6 +38,12 @@
                              <x-layouts.sidebar-link href="{{ route('products.index') }}" icon='fas-shirt'
                                 :active="request()->routeIs('products*')">Tienda</x-layouts.sidebar-link>
 
+                            @can('manage-roles')
+                                <x-layouts.sidebar-link href="{{ route('roles.index') }}" icon='fas-user-shield'
+                                    :active="request()->routeIs('roles*')">Roles</x-layouts.sidebar-link>
+                                <x-layouts.sidebar-link href="{{ route('permissions.index') }}" icon='fas-key'
+                                    :active="request()->routeIs('permissions*')">Permisos</x-layouts.sidebar-link>
+                            @endcan
                                
                         </ul>
                     </nav>

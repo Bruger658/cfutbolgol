@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Support\UserRole;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
 class User extends Authenticatable
@@ -23,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'role_id',
         'theme_preference',
     ];
 
@@ -53,21 +55,39 @@ class User extends Authenticatable
      * Get the user's initials
      */
 
+     public function roleModel(): BelongsTo
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
     public function hasRole(string ...$roles): bool
     {
-        return in_array($this->role, $roles, true);
+        $currentRole = $this->roleModel?->slug ?? $this->role;
+
+        return in_array($currentRole, $roles, true);
     }
 
     public function hasPermission(string $permission): bool
     {
+
+         if ($this->hasRole(UserRole::ADMIN)) {
+            return true;
+        }
+
+        if ($this->roleModel) {
+            $this->roleModel->loadMissing('permissions');
+
+            return $this->roleModel->hasPermission($permission);
+        }
+
         $roles = UserRole::PERMISSIONS[$permission] ?? [];
 
-        return $this->hasRole(UserRole::ADMIN) || in_array($this->role, $roles, true);
+       return in_array($this->role, $roles, true);
     }
 
     public function roleLabel(): string
     {
-        return UserRole::LABELS[$this->role] ?? ucfirst((string) $this->role);
+        return $this->roleModel?->name ?? UserRole::LABELS[$this->role] ?? ucfirst((string) $this->role);
     }
 
     

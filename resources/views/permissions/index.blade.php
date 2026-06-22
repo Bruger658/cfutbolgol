@@ -1,0 +1,8 @@
+<x-layouts.app :title="__('Permisos')">
+    <div class="mx-auto max-w-6xl p-6">
+        <div class="mb-6 flex items-center justify-between gap-4"><div><h1 class="text-2xl font-semibold">Permisos</h1><p class="text-on-surface-variant">Administra las acciones disponibles para asignar a roles.</p></div><a href="{{ route('permissions.create') }}" class="rounded bg-blue-600 px-4 py-2 text-white">Nuevo permiso</a></div>
+        @if(session('status'))<div class="mb-4 rounded border border-green-200 bg-green-50 px-4 py-3 text-green-700">{{ session('status') }}</div>@endif
+        <table class="min-w-full divide-y divide-gray-200"><thead><tr><th class="px-4 py-2 text-left">Nombre</th><th class="px-4 py-2 text-left">Slug</th><th class="px-4 py-2 text-left">Roles</th><th class="px-4 py-2 text-left">Acciones</th></tr></thead><tbody class="divide-y divide-gray-100">@forelse($permissions as $permission)<tr><td class="px-4 py-2 font-semibold">{{ $permission->name }}</td><td class="px-4 py-2">{{ $permission->slug }}</td><td class="px-4 py-2">{{ $permission->roles_count }}</td><td class="px-4 py-2"><div class="flex gap-3"><a class="text-blue-600" href="{{ route('permissions.edit', $permission) }}">Editar</a><form action="{{ route('permissions.destroy', $permission) }}" method="POST" data-confirm-delete data-confirm-message="¿Seguro que deseas borrar este permiso?">@csrf @method('DELETE')<button class="text-red-600">Borrar</button></form></div></td></tr>@empty<tr><td colspan="4" class="px-4 py-6 text-center text-gray-500">No hay permisos cargados.</td></tr>@endforelse</tbody></table>
+        <div class="mt-4">{{ $permissions->links() }}</div>
+    </div>
+</x-layouts.app>

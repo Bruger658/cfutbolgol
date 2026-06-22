@@ -9,7 +9,9 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MemberFeePaymentController;
 use App\Http\Controllers\ProductCheckoutController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\Settings;
 use App\Http\Controllers\StaffController;
@@ -87,6 +89,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware('can:manage-store')->group(function () {
         Route::resource('products', ProductController::class)->except(['show']);
+
+    });
+
+    Route::middleware('can:manage-roles')->group(function () {
+        Route::resource('roles', RoleController::class)->except(['show']);
+        Route::resource('permissions', PermissionController::class)->except(['show']);    
     });  
 });
 

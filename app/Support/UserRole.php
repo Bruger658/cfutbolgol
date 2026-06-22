@@ -25,7 +25,7 @@ final class UserRole
         'manage-members' => [self::ADMIN, self::COORDINADOR, self::TESORERO],
         'manage-fees' => [self::ADMIN, self::TESORERO],
         'manage-enrollments' => [self::ADMIN, self::COORDINADOR],
-        'manage-staff' => [self::ADMIN, self::COORDINADOR],
+        'manage-roles' => [self::ADMIN],
     ];
 
     public static function values(): array

@@ -1,0 +1,9 @@
+<div class="space-y-5">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div><label class="block text-sm font-medium" for="name">Nombre</label><input id="name" name="name" class="mt-1 w-full rounded border p-2" value="{{ old('name', $role->name) }}" required>@error('name')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror</div>
+        <div><label class="block text-sm font-medium" for="slug">Slug</label><input id="slug" name="slug" class="mt-1 w-full rounded border p-2" value="{{ old('slug', $role->slug) }}" placeholder="ej: coordinador">@error('slug')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror</div>
+    </div>
+    <div><label class="block text-sm font-medium" for="description">Descripción</label><textarea id="description" name="description" rows="3" class="mt-1 w-full rounded border p-2">{{ old('description', $role->description) }}</textarea>@error('description')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror</div>
+    <div><p class="mb-2 text-sm font-medium">Permisos</p><div class="grid grid-cols-1 gap-2 md:grid-cols-2">@foreach($permissions as $permission)<label class="flex items-start gap-2 rounded border p-3"><input type="checkbox" name="permissions[]" value="{{ $permission->id }}" class="mt-1" @checked(in_array($permission->id, old('permissions', $selectedPermissions), true))><span><span class="font-medium">{{ $permission->name }}</span><span class="block text-xs text-on-surface-variant">{{ $permission->slug }}</span></span></label>@endforeach</div>@error('permissions')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror</div>
+    <div class="flex gap-3"><button class="rounded bg-blue-600 px-4 py-2 text-white">Guardar</button><a href="{{ route('roles.index') }}" class="text-sm text-on-surface-variant hover:text-on-surface">Cancelar</a></div>
+</div>
