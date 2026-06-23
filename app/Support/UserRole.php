@@ -26,6 +26,7 @@ final class UserRole
         'manage-fees' => [self::ADMIN, self::TESORERO],
         'manage-enrollments' => [self::ADMIN, self::COORDINADOR],
         'manage-roles' => [self::ADMIN],
+        'manage-users' => [self::ADMIN],
     ];
 
      public const PERMISSION_LABELS = [
@@ -36,6 +37,7 @@ final class UserRole
         'manage-fees' => 'Gestionar cuotas',
         'manage-enrollments' => 'Gestionar inscripciones',
         'manage-roles' => 'Gestionar roles',
+        'manage-users' => 'Gestionar usuarios',
     ];
 
     public static function values(): array

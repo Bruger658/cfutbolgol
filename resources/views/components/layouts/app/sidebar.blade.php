@@ -35,8 +35,13 @@
                             <x-layouts.sidebar-link href="{{ route('enrollment-requests.index') }}" icon='fas-clipboard-list'
                                 :active="request()->routeIs('enrollment-requests*')">Inscripciones</x-layouts.sidebar-link>
                                 
-                             <x-layouts.sidebar-link href="{{ route('products.index') }}" icon='fas-shirt'
+                            <x-layouts.sidebar-link href="{{ route('products.index') }}" icon='fas-shirt'
                                 :active="request()->routeIs('products*')">Tienda</x-layouts.sidebar-link>
+
+                            @can('manage-users')
+                                <x-layouts.sidebar-link href="{{ route('users.index') }}" icon='fas-user-plus'
+                                    :active="request()->routeIs('users*')">Usuarios</x-layouts.sidebar-link>
+                            @endcan
 
                             @can('manage-roles')
                                 <x-layouts.sidebar-link href="{{ route('roles.index') }}" icon='fas-user-shield'

@@ -70,6 +70,9 @@ class User extends Authenticatable
 
     public function hasPermission(string $permission): bool
     {
+        if ($permission === 'manage-users') {
+            return $this->hasRole(UserRole::ADMIN);
+        }
 
          if ($this->hasRole(UserRole::ADMIN)) {
             return true;
