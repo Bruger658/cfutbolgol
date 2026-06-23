@@ -28,6 +28,16 @@ final class UserRole
         'manage-roles' => [self::ADMIN],
     ];
 
+     public const PERMISSION_LABELS = [
+        'access-dashboard' => 'Acceder al panel',
+        'manage-content' => 'Gestionar contenido',
+        'manage-store' => 'Gestionar tienda',
+        'manage-members' => 'Gestionar socios',
+        'manage-fees' => 'Gestionar cuotas',
+        'manage-enrollments' => 'Gestionar inscripciones',
+        'manage-roles' => 'Gestionar roles',
+    ];
+
     public static function values(): array
     {
         return array_keys(self::LABELS);

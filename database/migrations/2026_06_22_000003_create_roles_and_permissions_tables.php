@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
 
 return new class extends Migration
 {
@@ -55,7 +54,7 @@ return new class extends Migration
         $permissionIds = [];
         foreach (array_keys(UserRole::PERMISSIONS) as $slug) {
             $permissionIds[$slug] = DB::table('permissions')->insertGetId([
-                'name' => Str::headline(str_replace('-', ' ', $slug)),
+                'name' => UserRole::PERMISSION_LABELS[$slug],
                 'slug' => $slug,
                 'description' => 'Permiso del panel administrativo.',
                 'created_at' => $now,
