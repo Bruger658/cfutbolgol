@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Role;
 use App\Models\User;
 use App\Support\UserRole;
 
@@ -38,6 +39,23 @@ it('allows treasurers to manage store and fees without content permissions', fun
         ->get(route('publications.index'))
         ->assertForbidden();
 });
+
+it('keeps built-in role permissions when the role has no synced database permissions', function () {
+    $role = Role::where('slug', UserRole::COORDINADOR)->firstOrFail();
+    $role->permissions()->detach();
+
+    $coordinator = User::factory()->create([
+        'role' => UserRole::SOCIO,
+        'role_id' => $role->id,
+    ]);
+
+    expect($coordinator->hasPermission('access-dashboard'))->toBeTrue();
+
+    $this->actingAs($coordinator)
+        ->get(route('dashboard'))
+        ->assertOk();
+});
+
 
 it('creates public registrations as socios without administration permissions', function () {
     $this->post(route('register'), [

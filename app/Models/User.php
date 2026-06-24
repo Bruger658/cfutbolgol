@@ -70,11 +70,14 @@ class User extends Authenticatable
 
     public function hasPermission(string $permission): bool
     {
-        if ($permission === 'manage-users') {
-            return $this->hasRole(UserRole::ADMIN);
+        if ($this->hasRole(UserRole::ADMIN)) {
+            return true;
         }
 
-         if ($this->hasRole(UserRole::ADMIN)) {
+        $roles = UserRole::PERMISSIONS[$permission] ?? [];
+        $currentRole = $this->roleModel?->slug ?? $this->role;
+
+        if (in_array($currentRole, $roles, true)) {
             return true;
         }
 
@@ -84,9 +87,7 @@ class User extends Authenticatable
             return $this->roleModel->hasPermission($permission);
         }
 
-        $roles = UserRole::PERMISSIONS[$permission] ?? [];
-
-       return in_array($this->role, $roles, true);
+        return false;
     }
 
     public function roleLabel(): string
