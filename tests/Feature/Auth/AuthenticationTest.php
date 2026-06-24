@@ -9,6 +9,15 @@ test('login screen can be rendered', function () {
     $response->assertStatus(200);
 });
 
+test('authenticated users can render the login screen', function () {
+    $user = User::factory()->create(['role' => UserRole::SOCIO]);
+
+    $response = $this->actingAs($user)->get('/login');
+
+    $response->assertStatus(200);
+    $response->assertViewIs('auth.login');
+});
+
 test('users can authenticate using the login screen', function () {
     $user = User::factory()->create();
 
