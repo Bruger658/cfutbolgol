@@ -17,7 +17,7 @@ it('blocks socios from the internal dashboard and administration routes', functi
 
     $this->actingAs($socio)
         ->get(route('dashboard'))
-        ->assertForbidden();
+        ->assertRedirect(route('index', absolute: false));
 
     $this->actingAs($socio)
         ->get(route('products.index'))

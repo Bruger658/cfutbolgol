@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('dashboard', DashboardController::class)
-    ->middleware(['auth', 'verified', 'can:access-dashboard'])
+    ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
 Route::get('/tienda', [TiendaController::class, 'index'])->name('tienda.index');

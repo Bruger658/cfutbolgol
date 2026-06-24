@@ -10,11 +10,16 @@ use App\Models\MemberFeePayment;
 use App\Models\ProductOrder;
 use App\Models\Publication;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class DashboardController extends Controller
 {
-    public function __invoke(): View
+    public function __invoke(): View|RedirectResponse
     {
+        if (! request()->user()->hasPermission('access-dashboard')) {
+            return redirect()->route('index');
+        }
+        
         return view('dashboard', [
             'stats' => [
                 'activeMembers' => Member::query()->count(),
