@@ -14,10 +14,10 @@
 
     <div>
         <label class="block text-sm font-medium" for="role_id">Rol</label>
-        <select id="role_id" name="role_id" class="mt-1 w-full rounded border p-2" required>
-            <option value="">Seleccionar rol</option>
+        <select id="role_id" name="role_id" class="mt-1 w-full rounded border p-2 bg-primary text-on-primary" style="background-color:#0b1730;color:#ffffff;border-color:#94a3b8;" required>
+            <option value="" style="background-color:#0b1730;color:#ffffff;">Seleccionar rol</option>
             @foreach($roles as $role)
-                <option value="{{ $role->id }}" @selected((int) old('role_id', $user->role_id) === $role->id)>{{ $role->name }}</option>
+                 <option value="{{ $role->id }}" style="background-color:#0b1730;color:#ffffff;" @selected((int) old('role_id', $user->role_id) === $role->id)>{{ $role->name }}</option>
             @endforeach
         </select>
         @error('role_id')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
