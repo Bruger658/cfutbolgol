@@ -9,7 +9,15 @@
         </div>
 
         @if(session('status'))
-            <div class="mb-4 rounded border border-green-200 bg-green-50 px-4 py-3 text-green-700">{{ session('status') }}</div>
+             <div
+                x-data="{ showStatusMessage: true }"
+                x-init="setTimeout(() => showStatusMessage = false, 5000)"
+                x-show="showStatusMessage"
+                x-transition:leave="transition ease-in duration-300"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+                class="mb-4 rounded border border-green-200 bg-green-50 px-4 py-3 text-green-700"
+            >{{ session('status') }}</div>
         @endif
 
         <table class="min-w-full divide-y divide-gray-200">
