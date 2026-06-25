@@ -18,6 +18,20 @@ test('authenticated users can render the login screen', function () {
     $response->assertViewIs('auth.login');
 });
 
+test('backend url redirects guests to the login screen', function () {
+    $response = $this->get('/backend');
+
+    $response->assertRedirect(route('login', absolute: false));
+});
+
+test('backend url redirects authenticated users to the dashboard', function () {
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)->get('/backend');
+
+    $response->assertRedirect(route('dashboard', absolute: false));
+});
+
 test('users can authenticate using the login screen', function () {
     $user = User::factory()->create();
 

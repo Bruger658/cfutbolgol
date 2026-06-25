@@ -763,6 +763,18 @@
                 <a class="whitespace-nowrap text-on-surface-variant hover:text-primary transition-colors font-bold text-xs tracking-tight uppercase 2xl:text-sm" href="{{ route('index') }}#inscripcion">Inscripción</a>
                 <a class="whitespace-nowrap text-on-surface-variant hover:text-primary transition-colors font-bold text-xs tracking-tight uppercase 2xl:text-sm" href="{{ route('index') }}#sedes">Sedes</a>
                 <a class="inline-flex items-center whitespace-nowrap rounded-full bg-primary px-4 py-2 text-on-primary shadow-lg shadow-primary/20 hover:bg-blue-700 transition-colors font-black text-xs tracking-tight uppercase 2xl:text-sm" href="{{ route('fees.public.index') }}">Pagar cuota</a>
+                @auth
+                    @can('access-dashboard')
+                        <a class="inline-flex items-center whitespace-nowrap rounded-full border border-primary px-4 py-2 text-primary transition-colors hover:bg-primary hover:text-on-primary font-black text-xs tracking-tight uppercase 2xl:text-sm" href="{{ route('dashboard') }}">Panel</a>
+                    @else
+                        <form method="POST" action="{{ route('logout') }}" class="inline-flex">
+                            @csrf
+                            <button type="submit" class="inline-flex items-center whitespace-nowrap rounded-full border border-primary px-4 py-2 text-primary transition-colors hover:bg-primary hover:text-on-primary font-black text-xs tracking-tight uppercase 2xl:text-sm">Salir</button>
+                        </form>
+                    @endcan
+                @else
+                    <a class="inline-flex items-center whitespace-nowrap rounded-full border border-primary px-4 py-2 text-primary transition-colors hover:bg-primary hover:text-on-primary font-black text-xs tracking-tight uppercase 2xl:text-sm" href="{{ route('login') }}">Ingresar</a>
+                @endauth
             </div>     
             
             <button class="inline-flex h-11 w-11 items-center justify-center rounded-full text-on-surface ring-1 ring-brand-logo-blue/20 xl:hidden" type="button" data-mobile-menu-toggle aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menú de navegación">
@@ -782,6 +794,20 @@
                 <a class="rounded-lg px-3 py-2 hover:bg-white/60 hover:text-primary" href="{{ route('index') }}#inscripcion">Inscripción</a>
                 <a class="rounded-lg px-3 py-2 hover:bg-white/60 hover:text-primary" href="{{ route('index') }}#sedes">Sedes</a>
                 <a class="rounded-full bg-primary px-4 py-3 text-center font-black text-on-primary shadow-lg shadow-primary/20 hover:bg-blue-700 sm:col-span-2" href="{{ route('fees.public.index') }}">Pagar cuota</a>
+            
+             @auth
+                    @can('access-dashboard')
+                        <a class="rounded-full border border-primary px-4 py-3 text-center font-black text-primary hover:bg-primary hover:text-on-primary sm:col-span-2" href="{{ route('dashboard') }}">Panel</a>
+                    @else
+                        <form method="POST" action="{{ route('logout') }}" class="sm:col-span-2">
+                            @csrf
+                            <button type="submit" class="w-full rounded-full border border-primary px-4 py-3 text-center font-black text-primary hover:bg-primary hover:text-on-primary">Salir</button>
+                        </form>
+                    @endcan
+                @else
+                    <a class="rounded-full border border-primary px-4 py-3 text-center font-black text-primary hover:bg-primary hover:text-on-primary sm:col-span-2" href="{{ route('login') }}">Ingresar</a>
+                @endauth
+                
             </div>
         </div>
     </nav>
